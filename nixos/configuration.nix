@@ -89,7 +89,7 @@
     systemPackages = with pkgs; [
       git helix yazi zellij eza kitty
       wireshark nmap
-      kmonad obs-studio gimp
+      kmonad obs-studio gimp virt-manager
     ];
     variables = {
       EDITOR = "hx";

@@ -11,7 +11,7 @@
       # x86_64-linux system
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit args; };
-        modules = [ ./configuration.nix ];
+        modules = [ ./nixos/configuration.nix ];
       };
     };
   };
