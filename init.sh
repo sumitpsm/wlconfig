@@ -2,30 +2,42 @@
 
 # initializing repository path
 if [ -d "$1" ]; then
-  DIRPATH="$1"
+  DIRROOT="$1"
 else
-  DIRPATH=$(pwd)
+  DIRROOT=$(pwd)
 fi
 
 # checking for flake.nix
-if ! [ -f "$DIRPATH/flake.nix" ]; then
-  echo "Error: flake.nix not found in $DIRPATH"
+if ! [ -f "$DIRROOT/flake.nix" ]; then
+  echo "Error: flake.nix not found in $DIRROOT"
   exit 1
 fi
 
 # fetching current user home path
-USRHOME=$(echo $DIRPATH | cut -d / -f1,2,3)
+USRHOME=$(echo $DIRROOT | cut -d / -f1,2,3)
 
-# linking configs for the current user
-ln -s $DIRPATH/.config/ssh/config      $USRHOME/.ssh/config
-ln -s $DIRPATH/.config/helix           $USRHOME/.config/helix
-ln -s $DIRPATH/.config/yazi            $USRHOME/.config/yazi
-ln -s $DIRPATH/.config/zellij          $USRHOME/.config/zellij
-ln -s $DIRPATH/.config/kitty           $USRHOME/.config/kitty
+# function for linking configs for the current user
+function check_symlink() {
+  TARGET_ENTRY_PATH="$DIRROOT/$1";
+  SYMLINK_ENTRY="$USRHOME/$2";
+
+  if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
+    mv $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak"
+    ln -s $TARGET_ENTRY_PATH   $SYMLINK_ENTRY
+    echo "[+] SymLink created: $SYMLINK_ENTRY"
+  else
+    echo "[-] SymLink already present: $SYMLINK_ENTRY"
+  fi
+}
+
+check_symlink ".config/ssh/config" ".ssh/config"
+check_symlink ".config/helix"      ".config/helix"
+check_symlink ".config/yazi"       ".config/yazi"
+check_symlink ".config/zellij"     ".config/zellij"
+check_symlink ".config/kitty"      ".config/kitty"
+check_symlink "scripts"            ".local/scripts"
 
 # linking configs for the root user
-ln -s $USRHOME/.config/helix           /root/.config/helix
-ln -s $USRHOME/.config/yazi            /root/.config/yazi
-ln -s $USRHOME/.config/zellij          /root/.config/zellij
-ln -s $USRHOME/.config/kitty           /root/.config/kitty
-
+# check_root_symlink ".config/helix"   "/root/.config/helix"
+# check_root_symlink ".config/yazi"    "/root/.config/yazi"
+# check_root_symlink ".config/zellij"  "/root/.config/zellij"

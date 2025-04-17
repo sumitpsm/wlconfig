@@ -1,10 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -90,7 +89,7 @@
     systemPackages = with pkgs; [
       git helix yazi zellij eza kitty
       wireshark nmap
-      kmonad
+      kmonad obs-studio gimp
     ];
     variables = {
       EDITOR = "hx";
@@ -100,7 +99,7 @@
 
   programs = {
     nano.enable = false;
-    firefox.enable = true;
+    firefox.enable = false;
     bash = {
       shellAliases = {
         c = "clear";
@@ -110,9 +109,7 @@
         lf = "yazi";
         tmux = "zellij";
         icat = "kitty +kitten icat";
-
-        ascii = "cat /home/sumit/dev/main/sysconf/scripts/ascii";
-        todo = "hx /home/sumit/dev/alt/todo";
+        todo = "hx /home/sumit/dev/todo";
       };
     };
   };

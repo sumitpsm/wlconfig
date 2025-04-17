@@ -5,13 +5,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }@attrs:
+  outputs = { self, nixpkgs, ... } @args:
   {
     nixosConfigurations = {
       # x86_64-linux system
       nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = attrs;
+        specialArgs = { inherit args; };
         modules = [ ./configuration.nix ];
       };
     };

@@ -1,8 +1,10 @@
 ## Install instructions
+#### Step 1
 ```
   git clone https://github.com/sumit-ftr/sysconf.git
 ```
 
+#### Step 2
 ```
   cd sysconf
   sudo ./init.sh
