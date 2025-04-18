@@ -56,3 +56,13 @@ function check_symlink() {
 check_root_symlink ".config/helix"   "/root/.config/helix"
 check_root_symlink ".config/yazi"    "/root/.config/yazi"
 check_root_symlink ".config/zellij"  "/root/.config/zellij"
+
+# installing rust components
+if [ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep "rustup" | cut -d - -f2) == "rustup" ]; then
+  if [ $(rustup toolchain list | grep "stable" | cut -d - -f1) == "stable" ]; then
+    rustup update
+  else
+    rustup toolchain install stable
+    rustup component add rust-analyzer
+  fi
+fi

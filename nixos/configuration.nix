@@ -87,9 +87,9 @@
 
   environment = {
     systemPackages = with pkgs; [
-      git helix yazi zellij eza kitty
-      wireshark nmap
-      kmonad obs-studio gimp virt-manager
+      git helix yazi zellij eza rustup pkg-config openssl
+      kitty obs-studio gimp virt-manager
+      kmonad wireshark nmap
     ];
     variables = {
       EDITOR = "hx";
@@ -110,6 +110,7 @@
         tmux = "zellij";
         icat = "kitty +kitten icat";
         todo = "hx /home/sumit/dev/todo";
+        kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";
       };
     };
   };
