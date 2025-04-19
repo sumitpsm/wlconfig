@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 # initializing repository path
-if [ -d "$1" ]; then
-  DIRROOT="$1"
-else
-  DIRROOT=$(pwd)
-fi
+DIRROOT=$(pwd)
 
 # checking for flake.nix
 if ! [ -f "$DIRROOT/flake.nix" ]; then

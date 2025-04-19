@@ -88,7 +88,7 @@
   environment = {
     systemPackages = with pkgs; [
       git helix yazi zellij eza rustup pkg-config openssl
-      kitty obs-studio gimp virt-manager
+      kitty brave obs-studio gimp virt-manager
       kmonad wireshark nmap
     ];
     variables = {
@@ -108,6 +108,7 @@
         tree = "eza -aT --group-directories-first --icons";
         lf = "yazi";
         tmux = "zellij";
+        gip = "nix-store -q --requisites /run/current-system ~/.nix-profile | grep";
         icat = "kitty +kitten icat";
         todo = "hx /home/sumit/dev/todo";
         kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";

@@ -1,17 +1,32 @@
-## Install instructions
-#### Step 1
+## Install Instructions
 ```
-  git clone https://github.com/sumit-ftr/nixos-config.git
+  nix-shell -p git
 ```
-
-#### Step 2
+```
+  git clone --depth=1 https://github.com/sumit-ftr/nixos-config.git
+```
 ```
   cd nixos-config
-  sudo ./init.sh
+```
+```
+  sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
+```
+```
+  sudo nano /nixos/configuration.nix
+```
+```
+  git add .
+```
+```
   sudo nixos-rebuild switch --flake .
 ```
-or
+```
+  sudo ./init.sh
+```
+
+<!---
 ```
   sudo ./nixos-config/init.sh <path/to/dir>
   sudo nixos-rebuild switch --flake <path/to/dir>
 ```
+-->
