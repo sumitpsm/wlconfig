@@ -9,20 +9,13 @@
   cd nixos-config
 ```
 ```
-  sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
-```
-```
   sudo nano /nixos/configuration.nix
 ```
 ```
-  git add .
+  sudo ./run.sh -i
 ```
-```
-  sudo ./init.sh
-```
-```
-  sudo nixos-rebuild switch --flake .
-```
-```
-  sudo ./post-update.sh
-```
+
+## Update Instructions
+> If you move the repository to some other path run `sudo ./init.sh` to recreate symlinks to your config
+
+> Note: No need to run `sudo nixos-rebuild switch --flake .` everytime. Instead use `sudo ./run.sh`, it will do all the necessary things for you
