@@ -9,7 +9,7 @@
   cd nixos-config
 ```
 ```
-  sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
+  sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
 ```
 ```
   sudo nano /nixos/configuration.nix
@@ -18,15 +18,11 @@
   git add .
 ```
 ```
+  sudo ./init.sh
+```
+```
   sudo nixos-rebuild switch --flake .
 ```
 ```
-  sudo ./init.sh
+  sudo ./post-update.sh
 ```
-
-<!---
-```
-  sudo ./nixos-config/init.sh <path/to/dir>
-  sudo nixos-rebuild switch --flake <path/to/dir>
-```
--->
