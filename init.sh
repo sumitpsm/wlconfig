@@ -17,10 +17,13 @@ function check_symlink() {
   TARGET_ENTRY_PATH="$DIRROOT/$1";
   SYMLINK_ENTRY="$USRHOME/$2";
 
+  if [ -d $SYMLINK_ENTRY ]; then
+    mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak"
+  fi
+
   if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
-    mv $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak"
-    ln -s $TARGET_ENTRY_PATH   $SYMLINK_ENTRY
-    echo "[+] SymLink created: $SYMLINK_ENTRY"
+    echo -n "[+] SymLink created: "
+    ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
     echo "[-] SymLink already present: $SYMLINK_ENTRY"
   fi

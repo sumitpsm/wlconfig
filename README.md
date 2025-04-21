@@ -9,7 +9,7 @@
   cd nixos-config
 ```
 ```
-  sudo nano /nixos/configuration.nix
+  nano /nixos/configuration.nix
 ```
 ```
   sudo ./run.sh -i
