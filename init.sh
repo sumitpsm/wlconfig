@@ -4,7 +4,7 @@
 DIRROOT=$(pwd)
 
 # checking for flake.nix
-if ! [ -f "$DIRROOT/flake.nix" ]; then
+if ! [[ -f "$DIRROOT/flake.nix" ]]; then
   echo "Error: flake.nix not found in $DIRROOT"
   exit 1
 fi
@@ -17,7 +17,7 @@ function check_symlink() {
   TARGET_ENTRY_PATH="$DIRROOT/$1";
   SYMLINK_ENTRY="$USRHOME/$2";
 
-  if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
+  if ! [[ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
     mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak"
     echo -n "[+] SymLink created: "
     ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
@@ -40,7 +40,7 @@ function check_root_symlink() {
   TARGET_ENTRY_PATH="$USRHOME/$1";
   SYMLINK_ENTRY="/root/$2";
 
-  if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
+  if ! [[ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
     mv $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak"
     ln -s $TARGET_ENTRY_PATH   $SYMLINK_ENTRY
     echo "[+] SymLink created: $SYMLINK_ENTRY"
