@@ -17,11 +17,8 @@ function check_symlink() {
   TARGET_ENTRY_PATH="$DIRROOT/$1";
   SYMLINK_ENTRY="$USRHOME/$2";
 
-  if [ -d $SYMLINK_ENTRY ]; then
-    mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak"
-  fi
-
   if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
+    mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak"
     echo -n "[+] SymLink created: "
     ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
@@ -34,12 +31,13 @@ check_symlink ".config/ssh/config" ".ssh/config"
 check_symlink ".config/helix"      ".config/helix"
 check_symlink ".config/yazi"       ".config/yazi"
 check_symlink ".config/zellij"     ".config/zellij"
+check_symlink ".config/hypr"       ".config/hypr"
 check_symlink ".config/kitty"      ".config/kitty"
 check_symlink "scripts"            ".local/scripts"
 
-# function for linking configs for the current user
-function check_symlink() {
-  TARGET_ENTRY_PATH="$DIRROOT/$1";
+# function for linking configs for the root user
+function check_root_symlink() {
+  TARGET_ENTRY_PATH="$USRHOME/$1";
   SYMLINK_ENTRY="/root/$2";
 
   if ! [ $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]; then
@@ -52,9 +50,9 @@ function check_symlink() {
 }
 
 # linking configs for the root user
-check_root_symlink ".config/helix"   "/root/.config/helix"
-check_root_symlink ".config/yazi"    "/root/.config/yazi"
-check_root_symlink ".config/zellij"  "/root/.config/zellij"
+check_root_symlink ".config/helix"   ".config/helix"
+check_root_symlink ".config/yazi"    ".config/yazi"
+check_root_symlink ".config/zellij"  ".config/zellij"
 
 # initializing hardware config
 sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
