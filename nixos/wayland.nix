@@ -27,7 +27,7 @@
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # media-session.enable = true;
   };
 
   environment = {
@@ -45,6 +45,7 @@
       # screen-shotting-tool & color-picker
 
       kitty brave obs-studio gimp virt-manager
+      # gnome-characters gnome-calculator
       # nautilus loupe mpv zathura
       wireshark
 
@@ -57,7 +58,10 @@
 
   programs = {
     firefox.enable = false;
-    # hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
     bash.shellAliases = {
       icat = "kitty +kitten icat";
       kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";

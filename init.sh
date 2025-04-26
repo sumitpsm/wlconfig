@@ -53,6 +53,3 @@ function check_root_symlink() {
 check_root_symlink ".config/helix"   ".config/helix"
 check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/zellij"  ".config/zellij"
-
-# initializing hardware config
-sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix

@@ -3,7 +3,7 @@
 {
   imports = [ 
     ./hardware-configuration.nix
-    ./wayland-configuration.nix
+    ./wayland.nix
   ];
 
   # Bootloader.

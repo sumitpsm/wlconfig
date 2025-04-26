@@ -7,11 +7,19 @@ DIRROOT=$(pwd)
 if [[ $IS_INIT = "-i" ]]; then
   if [ -f "$DIRROOT/init.sh" ]; then
     sudo ./init.sh
+  else
+    echo "./init.sh not found"
+    exit 1
   fi
 fi
 
-# checking for flake.nix and rebuilding
+# checking for flake.nix
 if [[ -f "$DIRROOT/flake.nix" ]]; then
+  # checking for hardware configuration
+  if ! [[ -f "./nixos/hardware-configuration.nix" ]]; then
+    sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
+  fi
+  # rebuilding nixos configuration
   git add . 2>/dev/null
   sudo nixos-rebuild switch --flake .
   git add . 2>/dev/null
@@ -29,3 +37,4 @@ if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rust
     rustup component add rust-analyzer
   fi
 fi
+
