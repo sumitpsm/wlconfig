@@ -1,2 +1,3 @@
 ./.config/helix/runtime
+./nixos/hardware-configuration.nix
 ./flake.lock

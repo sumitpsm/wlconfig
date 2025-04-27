@@ -17,11 +17,11 @@ fi
 if [[ -f "$DIRROOT/flake.nix" ]]; then
   # checking for hardware configuration
   if ! [[ -f "./nixos/hardware-configuration.nix" ]]; then
-    sudo nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config > ./nixos/hardware-configuration.nix
   fi
   # rebuilding nixos configuration
   git add . 2>/dev/null
-  sudo nixos-rebuild switch --flake .
+  nixos-rebuild switch --flake .
   git add . 2>/dev/null
 else
   echo "Error: flake.nix not found in $DIRROOT"
