@@ -35,9 +35,10 @@
       kmonad # keyboard mapper
       libnotify # notification client
       wl-clipboard # clipboard manager
-      # hypridle # idling utility
-
+      brightnessctl
+      hypridle # idling utility
       # hyprcursor
+
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
       # imagemagick swww # wallpaper manager
       # wallust

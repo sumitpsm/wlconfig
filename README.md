@@ -9,6 +9,9 @@
   cd nixos-config
 ```
 ```
+  sudo chown -R $USERNAME:users .
+```
+```
   nano /nixos/configuration.nix
 ```
 ```
