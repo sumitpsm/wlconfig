@@ -8,7 +8,9 @@
   outputs = { self, nixpkgs, ... } @inputs:
   {
     # x86_64-linux systems
-    nixosConfigurations = nixpkgs.lib.genAttrs [ "nixos" "testconf" ] (hostname: nixpkgs.lib.nixosSystem {
+    nixosConfigurations = nixpkgs.lib.genAttrs
+    [ "nixos" "testconf" ] # <-- add hosts
+    (hostname: nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./nixos/configuration.nix

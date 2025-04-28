@@ -11,19 +11,11 @@
 ```
   nixos-generate-config --show-hardware-config > ./nixos/hardware/<HOSTNAME>.nix
 ```
-#### Add the hostname to `flake.nix` by:
+> Add the hostname to `flake.nix` by:
 ```
   nano flake.nix
 ```
-```
-  git add .
-```
-```
-  sudo nixos-rebuild-switch --flake .#<HOSTNAME>
-```
-> Optional: You can commit the changes by `git commit -m "message"`
-
-## Rebuild Instructions
+> Below instructions are also used to rebuild nixos system eachtime
 ```
   git add .
 ```
