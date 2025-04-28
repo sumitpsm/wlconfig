@@ -3,22 +3,36 @@
   nix-shell -p git
 ```
 ```
-  git clone --depth=1 https://github.com/sumit-ftr/nixos-config.git
+  git clone https://github.com/sumit-ftr/nixos-config.git
 ```
 ```
   cd nixos-config
 ```
 ```
-  sudo chown -R $USERNAME:users .
+  nixos-generate-config --show-hardware-config > ./nixos/hardware/<HOSTNAME>.nix
+```
+#### Add the hostname to `flake.nix` by:
+```
+  nano flake.nix
 ```
 ```
-  nano /nixos/configuration.nix
+  git add .
 ```
 ```
-  sudo ./run.sh -i
+  sudo nixos-rebuild-switch --flake .#<HOSTNAME>
 ```
+> Optional: You can commit the changes by `git commit -m "message"`
 
-## Update Instructions
+## Rebuild Instructions
+```
+  git add .
+```
+```
+  sudo nixos-rebuild-switch --flake .#<HOSTNAME>
+```
+> Optional: You can commit the changes by `git commit -m "message"`
+
+## Note:
 > If you move the repository to some other path run `sudo ./init.sh` to recreate symlinks to your config
 
-> Note: No need to run `sudo nixos-rebuild switch --flake .` everytime. Instead use `sudo ./run.sh`, it will do all the necessary things for you
+> Sometimes nixos doesn't allow to rebuild from configuration flake due to ownership problems. To get around this use: `sudo chown -r <USERNAME>:users .`

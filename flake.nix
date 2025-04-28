@@ -1,18 +1,19 @@
 {
-  description = "My nixos configuration";
+  description = "Nixos configuration flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... } @args:
+  outputs = { self, nixpkgs, ... } @inputs:
   {
-    nixosConfigurations = {
-      # x86_64-linux system
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit args; };
-        modules = [ ./nixos/configuration.nix ];
-      };
-    };
+    # x86_64-linux systems
+    nixosConfigurations = nixpkgs.lib.genAttrs [ "nixos" "testconf" ] (hostname: nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./nixos/configuration.nix
+          ./nixos/hardware/${hostname}.nix { networking.hostName = hostname; }
+        ];
+    });
   };
 }

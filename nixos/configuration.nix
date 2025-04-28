@@ -2,7 +2,6 @@
 
 {
   imports = [ 
-    ./hardware-configuration.nix
     ./wayland.nix
   ];
 
@@ -10,15 +9,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true; # networking
 
   time.timeZone = "Asia/Kolkata"; # time zone
 
@@ -48,10 +45,10 @@
 
   nix = {
     # automatic cleanup
-    gc.automatic = true;
-    gc.dates = "weekly";
-    gc.options = "--delete-older-than 7d";
-    settings.auto-optimise-store = true;
+    # gc.automatic = true;
+    # gc.dates = "weekly";
+    # gc.options = "--delete-older-than 7d";
+    # settings.auto-optimise-store = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
