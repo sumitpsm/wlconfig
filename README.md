@@ -11,20 +11,18 @@
 ```
   nixos-generate-config --show-hardware-config > ./nixos/hardware/<HOSTNAME>.nix
 ```
-> Add the hostname to `flake.nix` by:
-```
-  nano flake.nix
-```
-> Below instructions are also used to rebuild nixos system eachtime
+> Add the hostname to `flake.nix` by doing nano flake.nix
+
+> Below instructions are used to install and rebuild nixos system
 ```
   git add .
 ```
 ```
-  sudo nixos-rebuild-switch --flake .#<HOSTNAME>
+  sudo nixos-rebuild switch --flake .#<HOSTNAME>
 ```
 > Optional: You can commit the changes by `git commit -m "message"`
 
 ## Note:
-> If you move the repository to some other path run `sudo ./init.sh` to recreate symlinks to your config
+> Moving Configuration: Copy the directory to your preferred path. Run `sudo ./init.sh` to recreate symlinks to your config. Then you can delete the original directory.
 
 > Sometimes nixos doesn't allow to rebuild from configuration flake due to ownership problems. To get around this use: `sudo chown -r <USERNAME>:users .`

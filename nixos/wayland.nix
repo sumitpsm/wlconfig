@@ -32,7 +32,6 @@
 
   environment = {
     systemPackages = with pkgs; [
-      gnumake
       kmonad # keyboard mapper
       libnotify # notification client
       wl-clipboard # clipboard manager
