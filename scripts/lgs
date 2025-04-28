@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# This command can be used to check if any repository present in
-# a specific directory are modified or not. To use this command
-# cd into that specific directory and run this script
+# This command checks for git repositories present in the current working directory
 
 CWD=$(pwd)
 DIRS=$(/usr/bin/ls -l | grep "^d" | cut -b 46-) #| sed "s/^/'/g; s/$/'/g")
