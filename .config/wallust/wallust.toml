@@ -43,4 +43,4 @@ hypr.template = 'colors-hypr.conf'
 hypr.target = '~/.config/hypr/themes/colors.conf'
 
 kitty.template = 'colors-kitty.conf'
-kitty.template = '~/.config/kitty/themes/colors.conf'
+kitty.template = '~/.config/kitty/themes/.colors.conf'
