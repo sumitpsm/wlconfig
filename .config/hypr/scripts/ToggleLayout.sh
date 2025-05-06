@@ -2,7 +2,7 @@
 
 # Script for changing Hyprland Layouts (Master or Dwindle) on the fly
 
-notif="$HOME/.config/hypr/icons/layout.png"
+notif="$HOME/.config/hypr/scripts/layout.png"
 
 LAYOUT=$(hyprctl -j getoption general:layout | jq '.str' | sed 's/"//g')
 

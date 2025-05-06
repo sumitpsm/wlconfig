@@ -1,3 +1,4 @@
 ./.config/helix/runtime
-./.config/hypr/rules_default
+./.config/hypr/themes/colors.conf
+./.config/kitty/themes/colors.conf
 ./flake.lock

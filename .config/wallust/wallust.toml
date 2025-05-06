@@ -1,0 +1,46 @@
+
+alpha = 100
+
+# How the image is parsed, in order to get the colors:
+# full - resized - wal - thumb - fastresize - kmeans
+backend = "kmeans"
+
+# Ensures a "readable contrast". Should only be enabled
+# when you notice an unreadable contrast frequently
+# happening with your images. The reference color for
+# the contrast is the background color.
+check_contrast = false
+
+# What color space to use to produce and select the most prominent colors:
+# lab - labmixed - lch - lchmixed
+color_space = "labmixed"
+
+# Fallback Generator: This field chooses a method
+# to use when the gathered colors aren't enough:
+# interpolation - complementary
+fallback_generator = "interpolation"
+
+# All filters will fill 16 colors (from color0 to color15), 16 color
+# variations are the 'ilusion' of more colors by opaquing color1 to color5.
+# Palletes: ansidark - dark - harddark - light - softdark - softdark
+# Pallete Variations: ^ - 16 - comp - comp16
+pallete = "dark16"
+
+# Color saturation, usually something higher than 50 increases the
+# saturation and below decreases it (on a scheme with strong and vivid colors).
+# saturation = 100 (default: disabled)
+
+# Difference between similar colors, used by the colorspace:
+#  1          Not perceptible by human eyes.
+#  1 - 2      Perceptible through close observation.
+#  2 - 10     Perceptible at a glance.
+#  11 - 49    Colors are more similar than opposite
+#  100        Colors are exact opposite
+threshold = 11
+
+[templates]
+hypr.template = 'colors-hypr.conf'
+hypr.target = '~/.config/hypr/themes/colors.conf'
+
+kitty.template = 'colors-kitty.conf'
+kitty.template = '~/.config/kitty/themes/colors.conf'

@@ -36,19 +36,18 @@
       libnotify # notification client
       wl-clipboard # clipboard manager
       brightnessctl
+      swww # wallpaper
       hypridle # idling utility
-      # hyprcursor
+      imagemagick wallust # theme
 
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
-      # imagemagick swww # wallpaper manager
-      # wallust
       # screen-locking-utility
       # screen-shotting-tool & color-picker
+      # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
 
       kitty brave obs-studio gimp virt-manager
-      # gnome-characters gnome-calculator
-      # nautilus loupe mpv zathura
-      wireshark
+      nautilus loupe mpv zathura
+      wireshark gnome-characters
 
       # pipes cmatrix
     ];
@@ -68,6 +67,8 @@
       kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";
     };
   };
+
+  services.hypridle.enable = true;
 
   # xdg.portal = {
   #   enable = true;

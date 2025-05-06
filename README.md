@@ -16,7 +16,7 @@
   nano flake.nix
 ```
 ```
-  sudo ./init.sh
+  ./init.sh
 ```
 > Below instructions are used to install and rebuild nixos system
 ```
@@ -28,6 +28,6 @@
 > Optional: You can commit the changes by `git commit -m "message"`
 
 ## Note:
-> Moving Configuration: Copy the directory to your preferred path. Run `sudo ./init.sh` to recreate symlinks to your config. Then you can delete the original directory.
+> Moving Configuration: Copy the directory to your preferred path. Run `./init.sh` to recreate symlinks to your config. Then you can delete the original directory.
 
 > Sometimes nixos doesn't allow to rebuild from configuration flake due to ownership problems. To get around this use: `sudo chown -r <USERNAME>:users .`
