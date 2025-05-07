@@ -18,7 +18,7 @@ color_space = "labmixed"
 # Fallback Generator: This field chooses a method
 # to use when the gathered colors aren't enough:
 # interpolation - complementary
-fallback_generator = "interpolation"
+fallback_generator = "interpolate"
 
 # All filters will fill 16 colors (from color0 to color15), 16 color
 # variations are the 'ilusion' of more colors by opaquing color1 to color5.
@@ -40,7 +40,7 @@ threshold = 11
 
 [templates]
 hypr.template = 'colors-hypr.conf'
-hypr.target = '~/.config/hypr/themes/colors.conf'
+hypr.target = '~/.config/hypr/themes/.colors.conf'
 
 kitty.template = 'colors-kitty.conf'
-kitty.template = '~/.config/kitty/themes/.colors.conf'
+kitty.target = '~/.config/kitty/themes/.colors.conf'
