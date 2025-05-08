@@ -39,16 +39,16 @@
   users.users.sumit = {
     isNormalUser = true;
     description = "SumitModak";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [];
   };
 
   nix = {
     # automatic cleanup
-    # gc.automatic = true;
-    # gc.dates = "weekly";
-    # gc.options = "--delete-older-than 7d";
-    # settings.auto-optimise-store = true;
+    gc.automatic = true;
+    gc.dates = "monthly";
+    gc.options = "--delete-older-than 30d";
+    settings.auto-optimise-store = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
@@ -56,7 +56,7 @@
     systemPackages = with pkgs; [
       git helix yazi zellij eza
       rustup pkg-config openssl
-      ripgrep jq
+      ripgrep jq unzip
       curl nmap
     ];
     variables = {
@@ -82,6 +82,9 @@
     };
     nano.enable = false;
   };
+
+  virtualisation.libvirtd.enable = true;
+  # virtualisation.spiceUSBRedirection.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

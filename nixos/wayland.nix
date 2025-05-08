@@ -40,14 +40,15 @@
       hypridle # idling utility
       imagemagick wallust # theme
 
+      # screen-locking-utility [hyprlock]
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
-      # screen-locking-utility
       # screen-shotting-tool & color-picker
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
 
-      kitty brave obs-studio gimp virt-manager
+      kitty brave obs-studio gimp handbrake gnome-characters
       nautilus loupe mpv zathura
-      wireshark gnome-characters
+      virt-manager wireshark
+      # calls dia gnome-boxes gnome-maps
 
       # pipes cmatrix
     ];
