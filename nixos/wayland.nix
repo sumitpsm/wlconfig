@@ -23,7 +23,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    #jack.enable = true;
+    # jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -33,13 +33,14 @@
   environment = {
     systemPackages = with pkgs; [
       kmonad # keyboard mapper
-      libnotify # notification client
       wl-clipboard # clipboard manager
       brightnessctl
       swww # wallpaper
       hypridle # idling utility
       imagemagick wallust # theme
 
+      libnotify # notification client
+      # pavucontrol, playerctl
       # screen-locking-utility [hyprlock]
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
       # screen-shotting-tool & color-picker
@@ -47,8 +48,9 @@
 
       kitty brave obs-studio gimp handbrake gnome-characters
       nautilus loupe mpv zathura
-      virt-manager wireshark
-      # calls dia gnome-boxes gnome-maps
+      wireshark
+      gnome-boxes virt-manager
+      # calls gnome-maps
 
       # pipes cmatrix
     ];

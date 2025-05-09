@@ -9,7 +9,7 @@ if [ ! -f $FILE ]; then
 fi
 
 swww img "$FILE" $EFFECT
-wallust run -I "$FILE"
+wallust run -s "$FILE"
 
 # # Get current focused monitor
 # CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
