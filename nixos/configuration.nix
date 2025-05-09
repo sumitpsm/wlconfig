@@ -55,7 +55,7 @@
   environment = {
     systemPackages = with pkgs; [
       git helix yazi zellij eza
-      rustup pkg-config openssl
+      rustup gcc pkg-config openssl
       ripgrep jq unzip
       curl nmap
     ];
@@ -63,6 +63,9 @@
       EDITOR = "hx";
       VISUAL = "hx";
       RUST_BACKTRACE = 1;
+    };
+    sessionVariables = {
+      PATH = [ "$PATH" "$HOME/.local/scripts" "$HOME/.cargo/bin" ];
     };
   };
 

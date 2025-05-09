@@ -39,8 +39,8 @@ pallete = "dark16"
 threshold = 11
 
 [templates]
-hypr.template = 'colors-hypr.conf'
-hypr.target = '~/.config/hypr/themes/.colors.conf'
+hypr.template = 'pallete-hypr.conf'
+hypr.target = '~/.config/hypr/themes/.pallete.conf'
 
-kitty.template = 'colors-kitty.conf'
-kitty.target = '~/.config/kitty/themes/.colors.conf'
+kitty.template = 'pallete-kitty.conf'
+kitty.target = '~/.config/kitty/themes/.pallete.conf'
