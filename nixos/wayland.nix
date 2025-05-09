@@ -48,8 +48,7 @@
 
       kitty brave obs-studio gimp handbrake gnome-characters
       nautilus loupe mpv zathura
-      wireshark
-      gnome-boxes virt-manager
+      gnome-boxes wireshark
       # calls gnome-maps
 
       # pipes cmatrix
