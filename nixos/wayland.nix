@@ -1,10 +1,19 @@
 { config, pkgs, ... }:
 
+let
+  BibataHyprCursorTheme = builtins.fetchTarball {
+    url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Right.tar.xz";
+    hash = "";
+  };
+in
 {
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;
-    # displayManager.gdm.enable = true;
+    # enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    }
     # desktopManager.gnome.enable = true;
     # Configure keymap in X11
     xkb = {
@@ -39,6 +48,14 @@
       hypridle # idling utility
       imagemagick wallust # theme
 
+      # hyprcursor-themes
+      (pkgs.runCommand "Bibata-Original-Classic-Right" {} ''
+        mkdir -p $HOME/.local/share/icons
+        ln -s ${BibataHyprCursorTheme} $HOME/.local/share/icons/Bibata-Original-Classic-Right
+      '')
+
+      # gtk-themes
+
       libnotify # notification client
       # pavucontrol, playerctl
       # screen-locking-utility [hyprlock]
@@ -47,7 +64,7 @@
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
 
       kitty brave obs-studio gimp handbrake gnome-characters
-      nautilus loupe mpv zathura
+      nautilus loupe mpv papers
       gnome-boxes wireshark
       # calls gnome-maps
 
@@ -63,6 +80,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
     };
     bash.shellAliases = {
       icat = "kitty +kitten icat";

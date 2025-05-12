@@ -26,15 +26,21 @@ function check_symlink() {
   fi
 }
 
+mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
+
 # linking configs for the current user
-check_symlink ".config/ssh/config" ".ssh/config"
+check_symlink "scripts"            ".local/scripts"
+check_symlink ".config/ssh_config" ".ssh/config"
+check_symlink ".config/.gitconfig" ".gitconfig"
+
 check_symlink ".config/helix"      ".config/helix"
 check_symlink ".config/yazi"       ".config/yazi"
 check_symlink ".config/zellij"     ".config/zellij"
 check_symlink ".config/hypr"       ".config/hypr"
 check_symlink ".config/kitty"      ".config/kitty"
 check_symlink ".config/wallust"    ".config/wallust"
-check_symlink "scripts"            ".local/scripts"
+check_symlink ".config/gtk-3.0"    ".config/gtk-3.0"
+check_symlink ".config/gtk-4.0"    ".config/gtk-4.0"
 
 # function for linking configs for the root user
 function check_root_symlink() {
@@ -61,6 +67,7 @@ if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rust
     rustup update
   else
     rustup toolchain install stable
+    rustup default stable
     rustup component add rust-analyzer
   fi
 fi
