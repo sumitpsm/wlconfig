@@ -63,10 +63,10 @@ in
       # screen-shotting-tool & color-picker
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
 
-      kitty brave obs-studio gimp handbrake gnome-characters
+      kitty brave obs-studio gimp gnome-characters
       nautilus loupe mpv papers
       gnome-boxes wireshark
-      # calls gnome-maps
+      # calls gnome-maps handbrake gnome-clocks
 
       # pipes cmatrix
     ];

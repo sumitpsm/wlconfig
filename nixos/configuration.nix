@@ -47,7 +47,7 @@
     # automatic cleanup
     gc.automatic = true;
     gc.dates = "monthly";
-    gc.options = "--delete-older-than 30d";
+    gc.options = "--delete-older-than 14d";
     settings.auto-optimise-store = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
@@ -79,7 +79,6 @@
         tree = "eza -aT --group-directories-first --icons";
         lf = "yazi";
         tmux = "zellij";
-        gp = "nix-store -q --requisites /run/current-system ~/.nix-profile | grep";
         todo = "hx /home/sumit/dev/todo";
       };
     };

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# The purpose of this script is to link all the configs
+# provided in this repository to its original place in
+# the system. The functionality of this script is not
+# bounded to nixos, it can run on any linux system.
+
 # initializing repository path
 DIRROOT=$(pwd)
 
@@ -55,6 +60,8 @@ function check_root_symlink() {
     echo "[-] SymLink already present: $SYMLINK_ENTRY"
   fi
 }
+
+sudo mkdir -p /root/.config
 
 # linking configs for the root user
 check_root_symlink ".config/helix"   ".config/helix"
