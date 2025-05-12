@@ -3,6 +3,7 @@
 {
   imports = [ 
     ./wayland.nix
+    ./programs.nix
   ];
 
   # Bootloader.

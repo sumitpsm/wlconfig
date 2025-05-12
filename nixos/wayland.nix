@@ -3,7 +3,7 @@
 let
   BibataHyprCursorTheme = builtins.fetchTarball {
     url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Right.tar.xz";
-    hash = "";
+    sha256 = "0g8b619f07659z4jy7xzxf8m7c6bl68fm1abcaii15sxsz11n7i4";
   };
 in
 {
@@ -13,7 +13,7 @@ in
     displayManager.gdm = {
       enable = true;
       wayland = true;
-    }
+    };
     # desktopManager.gnome.enable = true;
     # Configure keymap in X11
     xkb = {
@@ -62,29 +62,14 @@ in
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
       # screen-shotting-tool & color-picker
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
-
-      kitty brave obs-studio gimp gnome-characters
-      nautilus loupe mpv papers
-      gnome-boxes wireshark
-      # calls gnome-maps handbrake gnome-clocks
-
-      # pipes cmatrix
     ];
-    variables = {
-      TERMINAL = "kitty";
-    };
   };
 
   programs = {
-    firefox.enable = false;
     hyprland = {
       enable = true;
       xwayland.enable = true;
       withUWSM = true;
-    };
-    bash.shellAliases = {
-      icat = "kitty +kitten icat";
-      kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";
     };
   };
 
