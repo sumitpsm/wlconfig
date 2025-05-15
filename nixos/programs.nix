@@ -3,12 +3,15 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      kitty brave obs-studio gimp gnome-characters
-      nautilus loupe mpv papers
+      kitty brave obs-studio gimp
       gnome-boxes wireshark
+      gnome-characters gnome-calculator
       # calls gnome-maps handbrake gnome-clocks
 
+      nautilus loupe mpv papers
+
       # pipes cmatrix
+      # burpsuite
     ];
     variables = {
       TERMINAL = "kitty";
