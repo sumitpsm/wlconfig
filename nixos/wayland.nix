@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
-# let
-#   BibataHyprCursorTheme = builtins.fetchTarball {
-#     url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Right.tar.xz";
-#     sha256 = "0g8b619f07659z4jy7xzxf8m7c6bl68fm1abcaii15sxsz11n7i4";
-#   };
-# in
+let
+  NotwaitaBlackCursorTheme = builtins.fetchTarball {
+    url = "https://github.com/ful1e5/notwaita-cursor/releases/download/v1.0.0-alpha1/Notwaita-Black.tar.xz";
+    sha256 = "0byiix6pda7ibjpc1an1lrnm19prjmqx1q72ipx5q7dijw5z9fk4";
+  };
+in
 {
   # Sound
   services.pulseaudio.enable = false;
@@ -40,10 +40,10 @@
       imagemagick wallust # theme
 
       # hyprcursor-themes
-      # (pkgs.runCommand "Bibata-Original-Classic-Right" {} ''
-      #   mkdir -p $HOME/.local/share/icons
-      #   ln -s ${BibataHyprCursorTheme} $HOME/.local/share/icons/Bibata-Original-Classic-Right
-      # '')
+      (pkgs.runCommand "Notwaita-Black" {} ''
+        mkdir -p $out/share/icons
+        ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
+      '')
 
       # gtk-themes
 
@@ -56,6 +56,7 @@
     ];
   };
 
+  # Restores terminal sequence colors
   environment.etc."bash.bashrc".text = ''
   [ -f ~/.cache/wallust/sequences ] && (cat ~/.cache/wallust/sequences &)
   '';
