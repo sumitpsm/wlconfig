@@ -1,30 +1,13 @@
 { config, pkgs, ... }:
 
-let
-  BibataHyprCursorTheme = builtins.fetchTarball {
-    url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Right.tar.xz";
-    sha256 = "0g8b619f07659z4jy7xzxf8m7c6bl68fm1abcaii15sxsz11n7i4";
-  };
-in
+# let
+#   BibataHyprCursorTheme = builtins.fetchTarball {
+#     url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Right.tar.xz";
+#     sha256 = "0g8b619f07659z4jy7xzxf8m7c6bl68fm1abcaii15sxsz11n7i4";
+#   };
+# in
 {
-  # Enable the X11 windowing system.
-  services.xserver = {
-    # enable = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
-    # desktopManager.gnome.enable = true;
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    # Enable touchpad support (enabled default in most desktopManager).
-    # libinput.enable = true;
-  };
-
-  # Enable sound with pipewire.
+  # Sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -39,6 +22,14 @@ in
     # media-session.enable = true;
   };
 
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      withUWSM = true;
+    };
+  };
+
   environment = {
     systemPackages = with pkgs; [
       kmonad # keyboard mapper
@@ -49,10 +40,10 @@ in
       imagemagick wallust # theme
 
       # hyprcursor-themes
-      (pkgs.runCommand "Bibata-Original-Classic-Right" {} ''
-        mkdir -p $HOME/.local/share/icons
-        ln -s ${BibataHyprCursorTheme} $HOME/.local/share/icons/Bibata-Original-Classic-Right
-      '')
+      # (pkgs.runCommand "Bibata-Original-Classic-Right" {} ''
+      #   mkdir -p $HOME/.local/share/icons
+      #   ln -s ${BibataHyprCursorTheme} $HOME/.local/share/icons/Bibata-Original-Classic-Right
+      # '')
 
       # gtk-themes
 
@@ -65,15 +56,22 @@ in
     ];
   };
 
-  programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
-    };
-  };
+  environment.etc."bash.bashrc".text = ''
+  [ -f ~/.cache/wallust/sequences ] && (cat ~/.cache/wallust/sequences &)
+  '';
 
   services.hypridle.enable = true;
+
+  services.xserver = {
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+  };
 
   # xdg.portal = {
   #   enable = true;
