@@ -46,6 +46,8 @@ in
       '')
 
       # gtk-themes
+      andromeda-gtk-theme
+      nordzy-icon-theme
 
       libnotify # notification client
       # pavucontrol, playerctl
