@@ -15,7 +15,7 @@ if [[ $RAINBOW_BORDERS_STATE == "disabled" ]]; then
     # hyprctl keyword general:col.inactive_border $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) 270deg
     echo "enabled" > $RAINBOW_BORDERS_FILE
 else
-    DEFAULT_BORDER_COLOR="$(cat $HOME/.config/hypr/themes/.pallete.conf | grep color10 | awk -F'[()]' '{print $2}')"
+    DEFAULT_BORDER_COLOR="$(cat $HOME/.config/hypr/themes/.palette.conf | grep color10 | awk -F'[()]' '{print $2}')"
     hyprctl keyword general:col.active_border "0xff$DEFAULT_BORDER_COLOR"
     echo "disabled" > $RAINBOW_BORDERS_FILE
 fi
