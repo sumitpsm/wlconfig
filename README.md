@@ -18,18 +18,14 @@
 ```
   ./init.sh
 ```
-> Below instructions are used to install and rebuild nixos system
-```
-  git add .
-```
+> This command is also used to rebuild your nixos system
 ```
   sudo nixos-rebuild switch --flake .#<HOSTNAME>
 ```
-> Optional: You can commit the changes by `git commit -m "message"`
 
 ## Note:
-> For updating package versions you have to update `flake.lock` file. To do that run: `nix flake update`.
+> For updating package versions you have to update `flake.lock` file. To do that run: `nix flake update`. Then stage the `flake.lock` file using `git add -u`.
 
-> Moving Configuration: Copy the directory to your preferred path. Run `./init.sh` to recreate symlinks to your config. Then you can delete the original directory.
+> Moving Configuration: Copy this repository to your preferred path. Run `./init.sh` to recreate symlinks to your config. Then you can delete the original repository.
 
-> Sometimes nixos doesn't allow to rebuild from configuration flake due to ownership problems. To get around this use: `sudo chown -R <USERNAME>:users .`
+> Sometimes nixos doesn't allows user to rebuild from configuration flake due to ownership problems. To get around this run: `sudo chown -R <USERNAME>:users .`
