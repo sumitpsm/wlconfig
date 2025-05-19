@@ -70,11 +70,6 @@ in
     ];
   };
 
-  # Restores terminal sequence colors
-  # environment.etc."bash.bashrc".text = ''
-  # [ -f ~/.cache/wallust/sequences ] && (cat ~/.cache/wallust/sequences &)
-  # '';
-
   services.hypridle.enable = true;
 
   services.xserver = {

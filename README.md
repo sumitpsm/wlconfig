@@ -24,8 +24,8 @@
 ```
 
 ## Note:
-> For updating package versions you have to update `flake.lock` file. To do that run: `nix flake update`. Then stage the `flake.lock` file using `git add -u`.
+> For updating package versions you have to update `flake.lock` file. To do that, run: `nix flake update`. Then stage the `flake.lock` file using `git add -u`.
 
-> Moving Configuration: Copy this repository to your preferred path. Run `./init.sh` to recreate symlinks to your config. Then you can delete the original repository.
+> **Moving Configuration**: Copy this flake to your preferred path. Run `./init.sh` to recreate symlinks to your config. Then you can delete the original flake.
 
-> Sometimes nixos doesn't allows user to rebuild from configuration flake due to ownership problems. To get around this run: `sudo chown -R <USERNAME>:users .`
+> Sometimes nixos doesn't allows user to rebuild from your configuration flake due to ownership problems. To get around this, run: `sudo chown -R <USERNAME>:users .`

@@ -56,7 +56,7 @@
   environment = {
     systemPackages = with pkgs; [
       helix yazi zellij git
-      eza fzf zoxide fd ripgrep
+      eza fzf fd ripgrep
       jq unzip
       rustup gcc pkg-config openssl
       curl nmap
@@ -79,11 +79,15 @@
         ls = "eza -al --group-directories-first --icons";
         la = "eza -a --group-directories-first --icons";
         tree = "eza -aT --group-directories-first --icons";
-        cd = "zoxide";
         lf = "yazi";
         tmux = "zellij";
         todo = "hx /home/sumit/dev/todo";
       };
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      flags = [ "--cmd cd" ];
     };
     nano.enable = false;
   };
