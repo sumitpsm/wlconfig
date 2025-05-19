@@ -55,9 +55,10 @@
 
   environment = {
     systemPackages = with pkgs; [
-      git helix yazi zellij eza
+      helix yazi zellij git
+      eza fzf zoxide fd ripgrep
+      jq unzip
       rustup gcc pkg-config openssl
-      ripgrep jq unzip
       curl nmap
     ];
     variables = {
@@ -78,6 +79,7 @@
         ls = "eza -al --group-directories-first --icons";
         la = "eza -a --group-directories-first --icons";
         tree = "eza -aT --group-directories-first --icons";
+        cd = "zoxide";
         lf = "yazi";
         tmux = "zellij";
         todo = "hx /home/sumit/dev/todo";

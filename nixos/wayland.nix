@@ -91,8 +91,5 @@ in
   # xdg.portal = {
   #   enable = true;
   #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  #   # xdg-open
-  #   # xdg-user-dirs
-  #   # xdg-utils
   # };
 }

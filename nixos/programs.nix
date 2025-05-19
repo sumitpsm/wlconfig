@@ -3,15 +3,25 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      kitty brave obs-studio gimp
-      gnome-boxes wireshark
-      gnome-characters gnome-calculator
-      # calls gnome-maps handbrake gnome-clocks
+      kitty # terminal emulator
+      brave # web browser
+      obs-studio # screen recorder
+      gimp # image editor
+      gnome-characters # character menu
+      gnome-calculator # calculator
+      gnome-boxes # virtual machine manager
+      wireshark # network protocol analyzer
+      # calls gnome-clocks
 
       nautilus loupe mpv papers
 
       # pipes cmatrix
       # burpsuite
+      # discord
+      # youtube-music spotify
+      # libreoffice wps
+      # handbrake
+      # gnome-maps
     ];
     variables = {
       TERMINAL = "kitty";

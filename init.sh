@@ -5,12 +5,19 @@
 # the system. The functionality of this script is not
 # bounded to nixos, it can run on any linux system.
 
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
+NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
+INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
+WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+
 # initializing repository path
 DIRROOT=$(pwd)
 
 # checking for flake.nix
 if ! [[ -f "$DIRROOT/flake.nix" ]]; then
-  echo "[ERROR] flake.nix not found in $DIRROOT"
+  echo "$ERROR flake.nix not found in $DIRROOT"
   exit 1
 fi
 
@@ -24,10 +31,10 @@ function check_symlink() {
 
   if [[ ! $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
     mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
-    echo -n "[WARN] SymLink created: "
+    echo -n "$WARN SymLink created: "
     ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
-    echo "[INFO] SymLink already present: $SYMLINK_ENTRY"
+    echo "$INFO SymLink already present: $SYMLINK_ENTRY"
   fi
 }
 
@@ -54,10 +61,10 @@ function check_root_symlink() {
 
   if [[ ! $(sudo readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
     sudo mv $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak" 2>/dev/null
-    echo -n "[WARN] SymLink created: "
+    echo -n "$WARN SymLink created: "
     sudo ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
-    echo "[INFO] SymLink already present: $SYMLINK_ENTRY"
+    echo "$INFO SymLink already present: $SYMLINK_ENTRY"
   fi
 }
 
