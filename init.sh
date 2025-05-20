@@ -5,12 +5,10 @@
 # the system. The functionality of this script is not
 # bounded to nixos, it can run on any linux system.
 
-OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
-NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+WARN="$(tput setaf 3)[WARN]$(tput sgr0)"
 INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
-WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
-CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
 
 # initializing repository path
 DIRROOT=$(pwd)
@@ -30,8 +28,9 @@ function check_symlink() {
   SYMLINK_ENTRY="$USRHOME/$2";
 
   if [[ ! $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
+    echo -n "$WARN Backup created: "
     mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
-    echo -n "$WARN SymLink created: "
+    echo -n "$OK SymLink created: "
     ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
     echo "$INFO SymLink already present: $SYMLINK_ENTRY"
@@ -42,17 +41,17 @@ mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
 
 # linking configs for the current user
 check_symlink "scripts"            ".local/scripts"
-check_symlink ".config/ssh_config" ".ssh/config"
-check_symlink ".config/.gitconfig" ".gitconfig"
+check_symlink "config/ssh_config"  ".ssh/config"
+check_symlink "config/.gitconfig"  ".gitconfig"
 
-check_symlink ".config/helix"      ".config/helix"
-check_symlink ".config/yazi"       ".config/yazi"
-check_symlink ".config/zellij"     ".config/zellij"
-check_symlink ".config/hypr"       ".config/hypr"
-check_symlink ".config/kitty"      ".config/kitty"
-check_symlink ".config/wallust"    ".config/wallust"
-check_symlink ".config/gtk-3.0"    ".config/gtk-3.0"
-check_symlink ".config/gtk-4.0"    ".config/gtk-4.0"
+check_symlink "config/helix"       ".config/helix"
+check_symlink "config/yazi"        ".config/yazi"
+check_symlink "config/zellij"      ".config/zellij"
+check_symlink "config/hypr"        ".config/hypr"
+check_symlink "config/kitty"       ".config/kitty"
+check_symlink "config/wallust"     ".config/wallust"
+check_symlink "config/gtk-3.0"     ".config/gtk-3.0"
+check_symlink "config/gtk-4.0"     ".config/gtk-4.0"
 
 # function for linking configs for the root user
 function check_root_symlink() {
@@ -60,8 +59,9 @@ function check_root_symlink() {
   SYMLINK_ENTRY="/root/$2";
 
   if [[ ! $(sudo readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
-    sudo mv $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak" 2>/dev/null
-    echo -n "$WARN SymLink created: "
+    echo -n "$WARN Backup created: "
+    sudo mv -v $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak" 2>/dev/null
+    echo -n "$OK SymLink created: "
     sudo ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
     echo "$INFO SymLink already present: $SYMLINK_ENTRY"
@@ -76,12 +76,12 @@ check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/zellij"  ".config/zellij"
 
 # installing latest rust components
-if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rustup | cut -d - -f2) = "rustup" ]]; then
-  if [[ $(rustup toolchain list | grep stable | cut -d - -f1) = "stable" ]]; then
-    rustup update
-  else
-    rustup toolchain install stable
-    rustup default stable
-    rustup component add rust-analyzer
-  fi
-fi
+# if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rustup | cut -d - -f2) = "rustup" ]]; then
+#   if [[ $(rustup toolchain list | grep stable | cut -d - -f1) = "stable" ]]; then
+#     rustup update
+#   else
+#     rustup toolchain install stable
+#     rustup default stable
+#     rustup component add rust-analyzer
+#   fi
+# fi
