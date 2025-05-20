@@ -7,7 +7,6 @@
       brave # web browser
       obs-studio # screen recorder
       gimp # image editor
-      gnome-characters # character menu
       gnome-calculator # calculator
       gnome-boxes # virtual machine manager
       wireshark # network protocol analyzer
@@ -22,6 +21,7 @@
       # libreoffice wps
       # handbrake
       # gnome-maps
+      # steam
     ];
     variables = {
       TERMINAL = "kitty";

@@ -20,22 +20,20 @@
 
   time.timeZone = "Asia/Kolkata"; # time zone
 
-  i18n.defaultLocale = "en_IN"; # internationalisation properties
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_IN";
-    LC_IDENTIFICATION = "en_IN";
-    LC_MEASUREMENT = "en_IN";
-    LC_MONETARY = "en_IN";
-    LC_NAME = "en_IN";
-    LC_NUMERIC = "en_IN";
-    LC_PAPER = "en_IN";
-    LC_TELEPHONE = "en_IN";
-    LC_TIME = "en_IN";
+  i18n = {
+    defaultLocale = "en_IN"; # internationalisation properties
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_IN";
+      LC_IDENTIFICATION = "en_IN";
+      LC_MEASUREMENT = "en_IN";
+      LC_MONETARY = "en_IN";
+      LC_NAME = "en_IN";
+      LC_NUMERIC = "en_IN";
+      LC_PAPER = "en_IN";
+      LC_TELEPHONE = "en_IN";
+      LC_TIME = "en_IN";
+    };
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   users.users.sumit = {
     isNormalUser = true;
@@ -44,26 +42,17 @@
     packages = with pkgs; [];
   };
 
-  nix = {
-    # automatic cleanup
-    gc.automatic = true;
-    gc.dates = "monthly";
-    gc.options = "--delete-older-than 14d";
-    settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
-
   environment = {
     systemPackages = with pkgs; [
-      helix yazi zellij git
-      eza fzf fd ripgrep
-      jq unzip
+      helix yazi zellij fzf
+      eza fd ripgrep jq unzip
       rustup gcc pkg-config openssl
-      curl nmap
+      git curl nmap
     ];
     variables = {
       EDITOR = "hx";
       VISUAL = "hx";
+      SUDO_EDITOR = "hx";
       RUST_BACKTRACE = 1;
     };
     sessionVariables = {
@@ -73,7 +62,6 @@
 
   programs = {
     bash = {
-      completion.enable = true;
       shellAliases = {
         c = "clear";
         ls = "eza -al --group-directories-first --icons";
@@ -92,8 +80,19 @@
     nano.enable = false;
   };
 
+  security.polkit.enable = true;
+
   virtualisation.libvirtd.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;
+
+  nix = {
+    # automatic cleanup
+    gc.automatic = true;
+    gc.dates = "monthly";
+    gc.options = "--delete-older-than 14d";
+    settings.auto-optimise-store = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -103,22 +102,11 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
-
+  system.stateVersion = "24.11";
 }

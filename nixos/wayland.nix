@@ -24,13 +24,11 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # media-session.enable = true; # use the example session manager (no others are packaged yet so this is enabled by default)
     # jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # media-session.enable = true;
   };
 
+  # wayland compositor
   programs = {
     hyprland = {
       enable = true;
@@ -46,7 +44,8 @@ in
       brightnessctl
       swww # wallpaper
       hypridle # idling utility
-      imagemagick wallust # theme
+      wallust # theme
+      polkit_gnome # polkit agent
 
       # hyprcursor-themes
       (pkgs.runCommand "Notwaita-Black" {} ''
@@ -62,13 +61,34 @@ in
       ffmpeg ytdlp-github
 
       libnotify # notification client
+      gnome-characters # character menu
       # pavucontrol, playerctl
       # screen-locking-utility [hyprlock]
       # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
       # screen-shotting-tool & color-picker
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
+      # imagemagick
     ];
   };
+
+  # systemd = {
+  #   user.services.polkit-gnome-authentication-agent-1 = {
+  #     description = "polkit-gnome-authentication-agent-1";
+  #     wantedBy = [ "graphical-session.target" ];
+  #     wants = [ "graphical-session.target" ];
+  #     after = [ "graphical-session.target" ];
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #       Restart = "on-failure";
+  #       RestartSec = 1;
+  #       TimeoutStopSec = 10;
+  #     };
+  #   };
+  #   extraConfig = ''
+  #     DefaultTimeoutStopSec=10s
+  #   '';
+  # };
 
   services.hypridle.enable = true;
 

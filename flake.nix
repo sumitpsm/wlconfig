@@ -11,11 +11,11 @@
     nixosConfigurations = nixpkgs.lib.genAttrs
     [ "nixos" "testconf" ] # <-- add hosts
     (hostname: nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./nixos/configuration.nix
-          ./nixos/hardware/${hostname}.nix { networking.hostName = hostname; }
-        ];
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./nixos/configuration.nix
+        ./nixos/hardware/${hostname}.nix { networking.hostName = hostname; }
+      ];
     });
   };
 }
