@@ -45,7 +45,6 @@
   };
 
   programs = {
-    firefox.enable = false;
     bash.shellAliases = {
       icat = "kitty +kitten icat";
       kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";

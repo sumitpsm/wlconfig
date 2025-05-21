@@ -4,6 +4,7 @@
   imports = [ 
     ./tty.nix
     ./wayland.nix
+    ./sound.nix
     ./programs.nix
   ];
 

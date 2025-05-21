@@ -16,19 +16,7 @@ let
   });
 in
 {
-  # Sound
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # media-session.enable = true; # use the example session manager (no others are packaged yet so this is enabled by default)
-    # jack.enable = true;
-  };
-
-  # wayland compositor
+  # Wayland Compositor
   programs = {
     hyprland = {
       enable = true;
@@ -85,13 +73,22 @@ in
     };
   };
 
+  # Enabling session idling
   services.hypridle.enable = true;
 
-  services.xserver = {
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
+  # TUI login manager
+  services.greetd = {
+    enable = true;
+    vt = 3;
+    settings = {
+      default_session = {
+        user = "sumit";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      };
     };
+  };
+
+  services.xserver = {
     xkb = {
       layout = "us";
       variant = "";

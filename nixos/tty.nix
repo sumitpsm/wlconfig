@@ -42,7 +42,7 @@
 
   # adds the sshd.service to path without enabling it
   services.openssh.enable = true;
-  systemd.services.sshd.wantedBy = lib.mkForce [ ];
+  systemd.services.sshd.wantedBy = lib.mkForce [];
 
   # enables the polkit service
   security.polkit.enable = true;
@@ -50,13 +50,15 @@
   virtualisation.libvirtd.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  networking.networkmanager.enable = true; # networking
+  networking = {
+    networkmanager.enable = true;
+    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -65,4 +67,8 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 }
