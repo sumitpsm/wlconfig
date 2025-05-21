@@ -10,8 +10,6 @@ keymap = [
     { on = "]",         run = "tab_switch 1 --relative",     desc = "Switch to the next tab" },
     { on = "{",         run = "tab_swap -1",                 desc = "Swap current tab with previous tab" },
     { on = "}",         run = "tab_swap 1",                  desc = "Swap current tab with next tab" },
-    { on = "w",         run = "tasks_show",                  desc = "Show task manager" },
-    #{ on = "",         run = "tab_close",                   desc = "" },
 
   	# Navigation
     { on = "e",                run = "leave",                desc = "Go back to the parent directory" },
@@ -91,8 +89,9 @@ keymap = [
     { on = [ "<space>", "r" ], run = "sort natural --reverse",                           desc = "Sort reverse" },
     { on = [ "<space>", "R" ], run = "sort random --reverse=no",                         desc = "Sort randomly" },
 
-    { on = "$",     run = "shell --interactive",                                         desc = "Run a shell command" },
-    { on = "W",     run = 'shell --orphan "$HOME/.local/scripts/theme-set $0"',          desc = "Sets theme" },
+    { on = "w",         run = "tasks_show",                                              desc = "Show task manager" },
+    { on = "$",         run = "shell --interactive",                                     desc = "Run a shell command" },
+    { on = "W",         run = 'shell --orphan "$HOME/.local/scripts/theme-set $0"',      desc = "Sets theme" },
     # { on = "", run = "cd --interactive", desc = "" },
     # { on = "", run = "reveal", desc = "" },
     # { on = "", run = "toggle", desc = "" },

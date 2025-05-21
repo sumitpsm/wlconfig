@@ -10,18 +10,34 @@
       gnome-calculator # calculator
       gnome-boxes # virtual machine manager
       wireshark # network protocol analyzer
-      # calls gnome-clocks
 
-      nautilus loupe mpv papers
-
+      nautilus # dolphin thunar
+      mpv
+      loupe # eog
+      papers
+      # duf baobab ncdu
+      # btop htop gnome-system-monitor
+      # fastfetch inxi neofetch
+      # lshw cpu-x
       # pipes cmatrix
+      # greetd.tuigreet
+      # amfora
+      # appimage-run
+      # socat
+      # usbutils
+      # v4l-utils
+      # gh
+      # nwg-displays
+      # handbrake
+      # gnome-maps
+      # steam
+      # calls
+      # lm_sensors
+      # gnome-clocks
       # burpsuite
       # discord
       # youtube-music spotify
       # libreoffice wps
-      # handbrake
-      # gnome-maps
-      # steam
     ];
     variables = {
       TERMINAL = "kitty";

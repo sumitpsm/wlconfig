@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ 
@@ -48,6 +48,7 @@
       eza fd ripgrep jq unzip
       rustup gcc pkg-config openssl
       git curl nmap
+      cht-sh
     ];
     variables = {
       EDITOR = "hx";
@@ -80,6 +81,11 @@
     nano.enable = false;
   };
 
+  # adds the sshd.service to path without enabling it
+  services.openssh.enable = true;
+  systemd.services.sshd.wantedBy = lib.mkForce [ ];
+
+  # enables the polkit service
   security.polkit.enable = true;
 
   virtualisation.libvirtd.enable = true;
