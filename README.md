@@ -1,28 +1,28 @@
 ## Install Instructions
-```
+```sh
   nix-shell -p git
 ```
-```
+```sh
   git clone https://github.com/sumit-ftr/nixos-config.git
 ```
-```
+```sh
   cd nixos-config
 ```
-```
+```sh
   nixos-generate-config --show-hardware-config > ./nixos/hardware/<HOSTNAME>.nix
 ```
 > Add the hostname to `flake.nix` by doing
-```
+```sh
   nano flake.nix
 ```
-```
+```sh
   ./init.sh
 ```
-```
+```sh
   git add .
 ```
 > This command is also used to rebuild your nixos system
-```
+```sh
   sudo nixos-rebuild switch --flake .#<HOSTNAME>
 ```
 
