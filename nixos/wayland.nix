@@ -16,12 +16,54 @@ let
   });
 in
 {
-  # Wayland Compositor
+  # TUI login manager (greetd.tuigreet)
+  services.greetd = {
+    enable = true;
+    vt = 1;
+    settings = {
+      default_session = {
+        user = "sumit";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      };
+    };
+  };
+
+  # Wayland Compositor (hyprland)
   programs = {
     hyprland = {
       enable = true;
       xwayland.enable = true;
       withUWSM = true;
+    };
+  };
+
+  # Enabling session idling (hypridle)
+  systemd.user.services.hypridle = {
+    description = "Hyprland's idle daemon";
+    documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.hypridle}/bin/hypridle";
+      Restart = "on-failure";
+      ConditionEnvironment = "WAYLAND_DISPLAY";
+    };
+  };
+
+  # Enabling polkit agent (polkit-gnome-authentication-agent-1)
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "PolicyKit Gnome Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 
@@ -31,9 +73,7 @@ in
       wl-clipboard # clipboard manager
       brightnessctl
       swww # wallpaper
-      hypridle # idling utility
       wallust # theme
-      polkit_gnome # polkit agent
 
       # hyprcursor-themes
       (pkgs.runCommand "Notwaita-Black" {} ''
@@ -57,35 +97,6 @@ in
       # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
       # imagemagick
     ];
-  };
-
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
-  };
-
-  # Enabling session idling
-  services.hypridle.enable = true;
-
-  # TUI login manager
-  services.greetd = {
-    enable = true;
-    vt = 3;
-    settings = {
-      default_session = {
-        user = "sumit";
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      };
-    };
   };
 
   services.xserver = {
