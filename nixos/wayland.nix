@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  TuiGreetTheme = "border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
+  TuiGreetTheme = "\"border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red\"";
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
     url = "https://github.com/ful1e5/notwaita-cursor/releases/download/v1.0.0-alpha1/Notwaita-Black.tar.xz";
     sha256 = "0byiix6pda7ibjpc1an1lrnm19prjmqx1q72ipx5q7dijw5z9fk4";
@@ -24,6 +24,18 @@ in
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
+  };
+
+  # Enabling sound
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # media-session.enable = true; # use the example session manager (no others are packaged yet so this is enabled by default)
+    # jack.enable = true;
   };
 
   # Enabling session idling (hypridle)
@@ -111,11 +123,5 @@ in
     variables = {
       TERMINAL = "kitty";
     };
-  };
-
-  # Keyboard layout configuration
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 }

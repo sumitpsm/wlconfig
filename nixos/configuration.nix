@@ -2,13 +2,14 @@
 
 {
   imports = [ 
+    ./boot.nix
     ./tty.nix
     ./wayland.nix
-    ./sound.nix
     ./programs.nix
   ];
 
-  time.timeZone = "Asia/Kolkata"; # time zone
+  # Time Zone
+  time.timeZone = "Asia/Kolkata";
 
   i18n = {
     defaultLocale = "en_IN"; # internationalisation properties
@@ -41,9 +42,11 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Keyboard layout configuration
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

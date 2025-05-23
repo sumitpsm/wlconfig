@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Script for toggling Rainbow Borders on fly
+
 function random_hex() {
     random_hex=("0xff$(openssl rand -hex 3)")
     echo $random_hex

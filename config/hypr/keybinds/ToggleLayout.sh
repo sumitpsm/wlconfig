@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script for changing Hyprland Layouts (Master or Dwindle) on the fly
+# Script for changing Hyprland Layouts (Master or Dwindle) on fly
 
 notif="$HOME/.config/hypr/scripts/layout.png"
 

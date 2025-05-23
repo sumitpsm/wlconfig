@@ -14,7 +14,8 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./nixos/configuration.nix
-        ./nixos/hardware/${hostname}.nix { networking.hostName = hostname; }
+        ./hosts/${hostname}/packages.nix
+        ./hosts/${hostname}/hardware.nix { networking.hostName = hostname; }
       ];
     });
   };

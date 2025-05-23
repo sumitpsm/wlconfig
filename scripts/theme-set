@@ -3,7 +3,7 @@
 FILE="$@"
 
 FPS=30
-TYPE=$(echo -e "any\nany\nany\nfade" | shuf -n1)
+TYPE=$(echo -e "any\nany\nany\nany\nfade" | shuf -n1)
 DURATION=1.5
 BEZIER=".43,1.19,1,.4"
 
