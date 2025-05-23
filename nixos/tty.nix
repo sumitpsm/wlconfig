@@ -3,7 +3,7 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix yazi zellij fzf
+      helix yazi zellij fzf btop
       eza fd ripgrep jq unzip
       rustup gcc pkg-config openssl
       git curl nmap
@@ -26,7 +26,7 @@
         c = "clear";
         ls = "eza -al --group-directories-first --icons";
         la = "eza -a --group-directories-first --icons";
-        tree = "eza -aT --group-directories-first --icons";
+        tree = "eza -aT --group-directories-first --icons --git-ignore";
         lf = "yazi";
         tmux = "zellij";
         todo = "hx /home/sumit/dev/todo";

@@ -1,40 +1,29 @@
 { config, pkgs, ... }:
 
 let
+  TuiGreetTheme = "border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
     url = "https://github.com/ful1e5/notwaita-cursor/releases/download/v1.0.0-alpha1/Notwaita-Black.tar.xz";
     sha256 = "0byiix6pda7ibjpc1an1lrnm19prjmqx1q72ipx5q7dijw5z9fk4";
   };
-  ytdlp-github = pkgs.yt-dlp.overrideAttrs (oldAttrs: {
-    version = "2025.04.30";
-    src = pkgs.fetchFromGitHub {
-      owner = "yt-dlp";
-      repo = "yt-dlp";
-      rev = "2025.04.30";
-      sha256 = "sha256-vsMWzZu+kxlxYT5Cq+diNApzE3Cg22Hg0j9eDKLowWI=";
-    };
-  });
 in
 {
   # TUI login manager (greetd.tuigreet)
   services.greetd = {
     enable = true;
-    vt = 1;
+    vt = 3;
     settings = {
       default_session = {
-        user = "sumit";
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --theme ${TuiGreetTheme} --cmd Hyprland";
       };
     };
   };
 
   # Wayland Compositor (hyprland)
-  programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
-    };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    withUWSM = true;
   };
 
   # Enabling session idling (hypridle)
@@ -67,47 +56,66 @@ in
     };
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      kmonad # keyboard mapper
-      wl-clipboard # clipboard manager
-      brightnessctl
-      swww # wallpaper
-      wallust # theme
+  environment.systemPackages = with pkgs; [
+    kmonad # keyboard mapper
+    kitty # terminal emulator
+    wl-clipboard # clipboard
+    brightnessctl
+    swww # wallpaper
+    wallust # theme generator
 
-      # hyprcursor-themes
-      (pkgs.runCommand "Notwaita-Black" {} ''
-        mkdir -p $out/share/icons
-        ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
-      '')
+    # themes
+    gnome-themes-extra
+    adwaita-qt
+    adwaita-icon-theme
+    (pkgs.runCommand "Notwaita-Black" {} ''
+      mkdir -p $out/share/icons
+      ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
+    '') # hyprcursor theme
 
-      # gtk-themes
-      andromeda-gtk-theme
-      # nordzy-icon-theme
+    libnotify # notification client
+    gnome-characters # character menu
+    # pavucontrol, playerctl
+    # screen-locking-utility [hyprlock]
+    # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
+    # screen-shotting-tool & color-picker
+    # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
+    # imagemagick
+  ];
 
-      # yt-dlp
-      ffmpeg ytdlp-github
-
-      libnotify # notification client
-      gnome-characters # character menu
-      # pavucontrol, playerctl
-      # screen-locking-utility [hyprlock]
-      # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
-      # screen-shotting-tool & color-picker
-      # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
-      # imagemagick
-    ];
-  };
-
-  services.xserver = {
-    xkb = {
-      layout = "us";
-      variant = "";
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = [ "hyprland" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        };
+      };
     };
   };
 
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
+  systemd.user.services."xdg-document-portal".enable = false;
+  systemd.user.services."xdg-permission-store".enable = false;
+
+  environment = {
+    sessionVariables = {
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland"; 
+    };
+    variables = {
+      TERMINAL = "kitty";
+    };
+  };
+
+  # Keyboard layout configuration
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
 }
