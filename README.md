@@ -8,20 +8,18 @@
 ```sh
   cd nixos-config
 ```
+> Add host by doing:
 ```sh
-  nixos-generate-config --show-hardware-config > ./nixos/hardware/<HOSTNAME>.nix
+  ./host add <HOSTNAME>
 ```
-> Add the hostname to `flake.nix` by doing
-```sh
-  nano flake.nix
-```
+> Link your configs by doing:
 ```sh
   ./init.sh
 ```
+> These commands are also used to rebuild your nixos system
 ```sh
   git add .
 ```
-> This command is also used to rebuild your nixos system
 ```sh
   sudo nixos-rebuild switch --flake .#<HOSTNAME>
 ```

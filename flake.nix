@@ -9,7 +9,10 @@
   {
     # x86_64-linux systems
     nixosConfigurations = nixpkgs.lib.genAttrs
-    [ "nixos" "testconf" ] # <-- add hosts
+    [
+      "nixos"
+      "testconf"
+    ] # do not change this manually
     (hostname: nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [

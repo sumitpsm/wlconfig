@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+
+ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+WARN="$(tput setaf 3)[WARN]$(tput sgr0)"
+INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
+RESET="$(tput sgr0)"
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+BLUE="$(tput setaf 4)"
+
+
+function cmd_usage () {
+  echo -e "\nUsage:$BLUE ./host$YELLOW <subcommand>\n$BLUE"
+  echo "./host$GREEN list$RESET                                    Lists all present hostnames$BLUE"
+  echo "./host$GREEN add$RED <hostname>$YELLOW \"description\"$RESET            Adds the specified hostname$BLUE"
+  echo "./host$GREEN remove$RED <hostname>$RESET                       Removes the specified hostname$BLUE"
+  echo "./host$GREEN rename$RED <old_hostname> <new_hostname>$RESET    Renames the old hostname to new hostname"
+  exit 1
+}
+
+function generate_flake_nix () {
+  local upper=$(head -n12 flake.nix)
+  local lower=$(tail -n11 flake.nix)
+  printf "$upper\n$host_list\n$lower\n" > $FLAKE_ROOT
+}
+
+###############################################################
+##! adds host to the flake
+function host_add () {
+  local hostname=$2
+  local description=$(echo $@ | cut -d' ' -f3-128)
+
+  # check if hostname present inside flake.nix
+  if echo "$host_list" | grep -qF "$hostname"; then
+    # hostname found
+    echo "${RED}error:$RESET hostname $RED$hostname$RESET is already present."
+    exit 1
+  else
+    # adding hostname
+    host_list="$host_list\n      \"$hostname\" # $description"
+    generate_flake_nix
+    echo "$INFO $RED$hostname$RESET added to flake.nix"
+  fi
+
+  # adding entry to the ./hosts directory
+  mkdir -p "./hosts/$hostname"
+  nixos-generate-config --show-hardware-config > "./hosts/$hostname/hardware.nix"
+  echo "$INFO created $GREEN./hosts/$hostname/hardware.nix"
+  cat << EndOfMessage > "./hosts/$hostname/packages.nix"
+{ config, pkgs, ... }:
+
+{
+  imports = [
+  ];
+  environment.systemPackages = with pkgs; [
+  ];
+}
+EndOfMessage
+  echo "$INFO created $GREEN./hosts/$hostname/packages.nix"
+}
+
+###############################################################
+##! removes host from the flake
+function host_remove () {
+  local hostname=$1
+
+  # check if hostname present inside flake.nix
+  if echo "$host_list" | grep -qF "$hostname"; then
+    # removing hostname
+    host_list=$(echo "$host_list" | sed "/\"$hostname\"/d")
+    generate_flake_nix
+    echo "$INFO $RED$hostname$RESET removed from flake.nix"
+  else
+    # hostname not found
+    echo "${RED}error:$RESET hostname $RED$hostname$RESET is not present."
+    exit 1
+  fi
+
+  # removing entry from the ./hosts directory
+  rm -rf "./hosts/$hostname"
+  echo "$INFO removed host $RED$hostname$RESET"
+}
+
+###############################################################
+##! renames the given host in the flake
+function host_rename () {
+  local hostname_old=$1
+  local hostname_new=$2
+
+  # check if hostname present inside flake.nix
+  if echo "$host_list" | grep -qF "$hostname_old"; then
+    # rename old hostname to new hostname
+    host_list=$(echo "$host_list" | sed "s/\"$hostname_old\"/\"$hostname_new\"/g")
+    generate_flake_nix
+    echo "$INFO $RED$hostname_old$RESET renamed $RED$hostname_new$RESET to flake.nix"
+  else
+    # hostname not found
+    echo "${RED}error:$RESET hostname $RED$hostname_old$RESET is not present."
+    exit 1
+  fi
+
+  # moving entry in the ./hosts directory
+  mv "./hosts/$hostname_old" "./hosts/$hostname_new"
+  echo "$INFO rename host $RED$hostname_old$RESET to $RED$hostname_new$RESET"
+}
+
+###############################################################
+##! checking for flake.nix
+FLAKE_ROOT="$(pwd)/flake.nix"
+if ! [[ -f $FLAKE_ROOT ]]; then
+  echo "$ERROR flake.nix not found in $DIRROOT"
+  exit 1
+fi
+
+SUBCOMMAND="$1"
+host_list=$(awk 'NR>12 {print}' $FLAKE_ROOT | head -n -11)
+# host_list=$(sed -n '13,$p' $FLAKE_ROOT | head -n -11)
+
+if [[ $SUBCOMMAND == "add" ]]; then
+  [ -z "$2" ] && cmd_usage
+  host_add $@
+
+elif [[ $SUBCOMMAND == "remove" ]]; then
+  [ -z "$2" ] && cmd_usage
+  host_remove $2
+
+elif [[ $SUBCOMMAND == "rename" ]]; then
+  [ -z "$2" ] || [ -z "$3" ] && cmd_usage
+  host_rename $2 $3
+
+elif [[ $SUBCOMMAND == "list" ]]; then
+  printf "\n$(echo "$host_list" | cut -b 7-128)\n"
+
+else
+  cmd_usage
+fi

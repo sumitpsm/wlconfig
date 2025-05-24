@@ -31,8 +31,10 @@ in
     # btop htop gnome-system-monitor
     # fastfetch inxi neofetch
     # lshw cpu-x
+    # firefox torbrowser
+    # audacity
+    # handbrake
     # pipes cmatrix
-    # greetd.tuigreet
     # amfora
     # appimage-run
     # socat
@@ -40,7 +42,6 @@ in
     # v4l-utils
     # gh
     # nwg-displays
-    # handbrake
     # gnome-maps
     # steam
     # calls

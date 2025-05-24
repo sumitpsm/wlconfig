@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  TuiGreetTheme = "\"border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red\"";
+  TuiGreetTheme = "\"border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=grey;input=red\"";
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
     url = "https://github.com/ful1e5/notwaita-cursor/releases/download/v1.0.0-alpha1/Notwaita-Black.tar.xz";
     sha256 = "0byiix6pda7ibjpc1an1lrnm19prjmqx1q72ipx5q7dijw5z9fk4";
@@ -26,6 +26,24 @@ in
     withUWSM = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "hyprland" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+    };
+  };
+
+  systemd.user.services."xdg-document-portal".enable = false;
+  systemd.user.services."xdg-permission-store".enable = false;
+
   # Enabling sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -38,36 +56,6 @@ in
     # jack.enable = true;
   };
 
-  # Enabling session idling (hypridle)
-  systemd.user.services.hypridle = {
-    description = "Hyprland's idle daemon";
-    documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.hypridle}/bin/hypridle";
-      Restart = "on-failure";
-      ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-  };
-
-  # Enabling polkit agent (polkit-gnome-authentication-agent-1)
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-    description = "PolicyKit Gnome Authentication Agent";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     kmonad # keyboard mapper
     kitty # terminal emulator
@@ -75,6 +63,8 @@ in
     brightnessctl
     swww # wallpaper
     wallust # theme generator
+    hypridle # idling daemon
+    polkit_gnome # polkit agent
 
     # themes
     gnome-themes-extra
@@ -94,34 +84,4 @@ in
     # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
     # imagemagick
   ];
-
-  xdg = {
-    portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-      ];
-      config = {
-        common = {
-          default = [ "hyprland" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-        };
-      };
-    };
-  };
-
-  systemd.user.services."xdg-document-portal".enable = false;
-  systemd.user.services."xdg-permission-store".enable = false;
-
-  environment = {
-    sessionVariables = {
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "Hyprland"; 
-    };
-    variables = {
-      TERMINAL = "kitty";
-    };
-  };
 }
