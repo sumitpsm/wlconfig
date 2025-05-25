@@ -108,10 +108,10 @@ keymap = [
     { on = "<Esc>",       run = "escape",                    desc = "Go back the normal mode, or cancel input" },
 
     # Mode
-    { on = "h", run = "insert",                              desc = "Enter insert mode" },
-    { on = "n", run = "insert --append",                     desc = "Enter append mode" },
-    { on = "H", run = [ "move -999", "insert" ],             desc = "Move to the BOL, and enter insert mode" },
-    { on = "N", run = [ "move 999", "insert --append" ],     desc = "Move to the EOL, and enter append mode" },
+    { on = "n", run = "insert",                              desc = "Enter insert mode" },
+    { on = "h", run = "insert --append",                     desc = "Enter append mode" },
+    { on = "N", run = [ "move -999", "insert" ],             desc = "Move to the BOL, and enter insert mode" },
+    { on = "H", run = [ "move 999", "insert --append" ],     desc = "Move to the EOL, and enter append mode" },
     { on = "v", run = "visual",                              desc = "Enter visual mode" },
     { on = "%", run = [ "move -999", "visual", "move 999" ], desc = "Enter visual mode and select all" },
 

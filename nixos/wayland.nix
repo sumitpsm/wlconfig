@@ -17,6 +17,34 @@ in
     withUWSM = true;
   };
 
+  # Enabling sound
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # media-session.enable = true; # use the example session manager (no others are packaged yet so this is enabled by default)
+    # jack.enable = true;
+  };
+
+  # Enabling session idling (hypridle)
+  systemd.user.services.hypridle = {
+    enable = true;
+    description = "Hyprland's idle daemon";
+    documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.hypridle}/bin/hypridle";
+      Restart = "on-failure";
+      # ConditionEnvironment = "WAYLAND_DISPLAY";
+    };
+  };
+
   xdg.portal = {
     enable = true;
     wlr.enable = false;
@@ -32,20 +60,24 @@ in
     };
   };
 
+  # Enabling polkit agent (polkit-gnome-authentication-agent-1)
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    enable = true;
+    description = "PolicyKit Gnome Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
   systemd.user.services."xdg-document-portal".enable = false;
   systemd.user.services."xdg-permission-store".enable = false;
-
-  # Enabling sound
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # media-session.enable = true; # use the example session manager (no others are packaged yet so this is enabled by default)
-    # jack.enable = true;
-  };
 
   environment.systemPackages = with pkgs; [
     kmonad # keyboard mapper

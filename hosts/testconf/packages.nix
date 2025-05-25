@@ -4,6 +4,7 @@
   imports = [
   ];
   environment.systemPackages = with pkgs; [
+    hyprlock
     grim
     slurp
     fuzzel
@@ -13,6 +14,7 @@
     libsForQt5.qt5ct
     nushell
     yad
+    cpu-x
 
     # games
     ninvaders
