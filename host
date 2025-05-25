@@ -22,7 +22,7 @@ function cmd_usage () {
 
 function generate_flake_nix () {
   local upper=$(head -n12 flake.nix)
-  local lower=$(tail -n11 flake.nix)
+  local lower=$(tail -n10 flake.nix)
   printf "$upper\n$host_list\n$lower\n" > $FLAKE_ROOT
 }
 
@@ -46,14 +46,26 @@ function host_add () {
 
   # adding entry to the ./hosts directory
   mkdir -p "./hosts/$hostname"
-  nixos-generate-config --show-hardware-config > "./hosts/$hostname/hardware.nix"
-  echo "$INFO created $GREEN./hosts/$hostname/hardware.nix"
+  # creating default.nix
   cat << EndOfMessage > "./hosts/$hostname/packages.nix"
 { config, pkgs, ... }:
 
 {
   imports = [
+    ./hardware.nix
+    ./packages.nix
   ];
+}
+EndOfMessage
+  echo "$INFO created $GREEN./hosts/$hostname/default.nix"
+  # creating hardware.nix
+  nixos-generate-config --show-hardware-config > "./hosts/$hostname/hardware.nix"
+  echo "$INFO created $GREEN./hosts/$hostname/hardware.nix"
+  # creating packages.nix
+  cat << EndOfMessage > "./hosts/$hostname/packages.nix"
+{ config, pkgs, ... }:
+
+{
   environment.systemPackages = with pkgs; [
   ];
 }
@@ -115,7 +127,7 @@ if ! [[ -f $FLAKE_ROOT ]]; then
 fi
 
 SUBCOMMAND="$1"
-host_list=$(awk 'NR>12 {print}' $FLAKE_ROOT | head -n -11)
+host_list=$(awk 'NR>12 {print}' $FLAKE_ROOT | head -n -10)
 # host_list=$(sed -n '13,$p' $FLAKE_ROOT | head -n -11)
 
 if [[ $SUBCOMMAND == "add" ]]; then
