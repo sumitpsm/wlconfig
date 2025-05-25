@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+  ];
   environment.systemPackages = with pkgs; [
     grim
     slurp

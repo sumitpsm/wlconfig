@@ -1,23 +1,14 @@
 { config, pkgs, ... }:
 
 let
-  TuiGreetTheme = "\"border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=grey;input=red\"";
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
     url = "https://github.com/ful1e5/notwaita-cursor/releases/download/v1.0.0-alpha1/Notwaita-Black.tar.xz";
     sha256 = "0byiix6pda7ibjpc1an1lrnm19prjmqx1q72ipx5q7dijw5z9fk4";
   };
 in
 {
-  # TUI login manager (greetd.tuigreet)
-  services.greetd = {
-    enable = true;
-    vt = 3;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --theme ${TuiGreetTheme} --cmd Hyprland";
-      };
-    };
-  };
+  # Display Manager
+  services.xserver.displayManager.gdm.enable = true;
 
   # Wayland Compositor (hyprland)
   programs.hyprland = {

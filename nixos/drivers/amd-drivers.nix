@@ -1,9 +1,5 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
+{ lib, pkgs, config, ... }:
+
 with lib;
 let
   cfg = config.drivers.amdgpu;
