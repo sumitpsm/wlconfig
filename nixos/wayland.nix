@@ -9,7 +9,6 @@ in
 {
   # Display Manager
   services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
 
   # Wayland Compositor (hyprland)
   programs.hyprland = {
