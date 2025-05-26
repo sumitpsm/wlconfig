@@ -1,33 +1,37 @@
-{ lib, pkgs, config, ... }:
+{ config, pkgs, ... }:
 
-with lib;
-let
-  cfg = config.drivers.nvidia-prime;
-in
 {
-  options.drivers.nvidia-prime = {
-    enable = mkEnableOption "Enable Nvidia Prime Hybrid GPU Offload";
-    intelBusID = mkOption {
-      type = types.str;
-      default = "PCI:1:0:0";
+  # Optimus PRIME Option A: Offload Mode
+  hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
     };
-    nvidiaBusID = mkOption {
-      type = types.str;
-      default = "PCI:0:2:0";
-    };
+    # Make sure to use the correct Bus ID values for your system!
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:14:0:0";
+    # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
   };
 
-  config = mkIf cfg.enable {
-    hardware.nvidia = {
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        # Make sure to use the correct Bus ID values for your system!
-        intelBusId = "${cfg.intelBusID}";
-        nvidiaBusId = "${cfg.nvidiaBusID}";
-      };
-    };
+  # Optimus PRIME Option B: Sync Mode
+  hardware.nvidia.prime = {
+    sync.enable = true;
+
+    # Make sure to use the correct Bus ID values for your system!
+    nvidiaBusId = "PCI:14:0:0";
+    intelBusId = "PCI:0:2:0";
+    # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+  };
+
+  # Optimus Option C: Reverse Sync Mode (Experimental)
+  hardware.nvidia.prime = {
+    reverseSync.enable = true;
+    # Enable if using an external GPU
+    allowExternalGpu = false;
+
+    # Make sure to use the correct Bus ID values for your system!
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:14:0:0";
+    # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
   };
 }

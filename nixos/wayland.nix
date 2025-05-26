@@ -9,6 +9,7 @@ in
 {
   # Display Manager
   services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Wayland Compositor (hyprland)
   programs.hyprland = {
@@ -97,14 +98,5 @@ in
       mkdir -p $out/share/icons
       ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
     '') # hyprcursor theme
-
-    libnotify # notification client
-    gnome-characters # character menu
-    # pavucontrol, playerctl
-    # screen-locking-utility [hyprlock]
-    # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
-    # screen-shotting-tool & color-picker
-    # waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp
-    # imagemagick
   ];
 }

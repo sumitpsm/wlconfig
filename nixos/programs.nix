@@ -21,41 +21,6 @@ in
     wireshark # network protocol analyzer
 
     # yt-dlp
-    ffmpeg ytdlp-github
-
-    nautilus # dolphin thunar
-    mpv
-    loupe # eog
-    papers
-    # duf baobab ncdu
-    # btop htop gnome-system-monitor
-    # fastfetch inxi neofetch
-    # lshw cpu-x
-    # firefox torbrowser
-    # audacity
-    # handbrake
-    # pipes cmatrix
-    # amfora
-    # appimage-run
-    # socat
-    # usbutils
-    # v4l-utils
-    # gh
-    # nwg-displays
-    # gnome-maps
-    # steam
-    # calls
-    # lm_sensors
-    # gnome-clocks
-    # burpsuite
-    # discord
-    # youtube-music spotify
-    # libreoffice wps
+    ffmpeg-full ytdlp-github
   ];
-
-  programs = {
-    bash.shellAliases = {
-      kmap = "sudo kmonad ~/dev/colemak-sumit.kbd";
-    };
-  };
 }
