@@ -29,7 +29,7 @@
         tree = "eza -aT --group-directories-first --icons --git-ignore";
         lf = "yazi";
         tmux = "zellij";
-        btop = "btop --force-utf"
+        btop = "btop --force-utf";
         todo = "hx /home/sumit/dev/todo";
       };
     };

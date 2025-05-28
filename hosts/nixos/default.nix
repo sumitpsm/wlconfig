@@ -6,4 +6,9 @@
     ./packages.nix
     ./../../nixos/drivers/amd-drivers.nix
   ];
+  programs = {
+    bash.shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake .#nixos";
+    };
+  };
 }

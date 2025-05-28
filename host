@@ -47,7 +47,7 @@ function host_add () {
   # adding entry to the ./hosts directory
   mkdir -p "./hosts/$hostname"
   # creating default.nix
-  cat << EndOfMessage > "./hosts/$hostname/packages.nix"
+  cat << EndOfMessage > "./hosts/$hostname/default.nix"
 { config, pkgs, ... }:
 
 {
@@ -55,6 +55,11 @@ function host_add () {
     ./hardware.nix
     ./packages.nix
   ];
+  programs = {
+    bash.shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake .#${hostname}";
+    };
+  };
 }
 EndOfMessage
   echo "$INFO created $GREEN./hosts/$hostname/default.nix"
@@ -116,6 +121,20 @@ function host_rename () {
 
   # moving entry in the ./hosts directory
   mv "./hosts/$hostname_old" "./hosts/$hostname_new"
+  cat << EndOfMessage > "./hosts/$hostname_new/default.nix"
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware.nix
+    ./packages.nix
+  ];
+  programs = {
+    bash.shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake .#${hostname_new}";
+    };
+  };
+}
   echo "$INFO rename host $RED$hostname_old$RESET to $RED$hostname_new$RESET"
 }
 

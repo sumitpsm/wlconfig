@@ -42,5 +42,5 @@ threshold = 11
 hypr.template = 'palette-hypr.conf'
 hypr.target = '~/.config/hypr/themes/.palette.conf'
 
-kitty.template = 'palette-kitty.conf'
-kitty.target = '~/.config/kitty/dark-theme.auto.conf'
+# kitty.template = 'palette-kitty.conf'
+# kitty.target = '~/.config/kitty/dark-theme.auto.conf'

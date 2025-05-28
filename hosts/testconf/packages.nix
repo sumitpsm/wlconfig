@@ -2,8 +2,8 @@
 
 {
   # services.xserver.desktopManager.gnome.enable = true;
+  programs.hyprlock.enable = true;
   environment.systemPackages = with pkgs; [
-    hyprlock
     grim
     slurp
     fuzzel
@@ -12,16 +12,18 @@
     gnome-characters
     libnotify
 
-    nautilus # dolphin thunar
+    gnome-disk-utility gparted
+    nautilus kdePackages.dolphin xfce.thunar
     mpv
     loupe # eog
     papers
+    nushell
+    termusic ytermusic rmpc ncmpcpp cmus
+    gitui
+    cpu-x
     nwg-look
     libsForQt5.qt5ct
     yad
-    nushell
-    cpu-x
-    gitui
 
     # games
     ninvaders
@@ -40,8 +42,10 @@
     cmatrix
     pipes
     pipes-rs
+    figlet
+    cowsay
 
-    # duf baobab ncdu
+    # duf baobab ncdu 
     # htop gnome-system-monitor
     # fastfetch inxi neofetch
     # pipes cmatrix
