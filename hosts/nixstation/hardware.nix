@@ -9,12 +9,12 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a208a82b-f573-480a-b126-46729366a49e";
+    { device = "/dev/disk/by-uuid/ecbbf8a2-6f5e-4bb5-a4ab-5dd4f126f7d9";
       fsType = "ext4";
     };
 

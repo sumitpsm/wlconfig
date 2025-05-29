@@ -8,7 +8,7 @@
   ];
   programs = {
     bash.shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake .#testconf";
+      rebuild = "sudo nixos-rebuild switch --flake .#nixstation";
     };
   };
   # This value determines the NixOS release from which the default
@@ -17,5 +17,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

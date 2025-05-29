@@ -11,7 +11,7 @@
     nixosConfigurations = nixpkgs.lib.genAttrs
     [
       "nixos"
-      "testconf"
+      "nixstation" # 
     ] # do not change this manually
     (hostname: nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };

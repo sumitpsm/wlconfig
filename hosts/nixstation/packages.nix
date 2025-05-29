@@ -12,44 +12,24 @@
     gnome-characters
     libnotify
 
+    gh rsync
     nushell fish
-    termusic rmpc ncmpcpp cmus
     gitui lazygit
+    termusic rmpc ncmpcpp cmus
     # [fetch] // fastfetch, inxi, neofetch, freshfetch,
     # [system-monitor] // htop, gnome-system-monitor,
     # [file-manager] // kdePackages.dolphin, xfce.thunar,
-    # [disk-manager] // gparted, kdePackages.partitionmanager,
+    # [disk-manager] // gparted, kdePackages.partitionmanager, mmtui,
     # [browser] // firefox, chromium, torbrowser, *opera,
-    duf baobab ncdu mmtui
+    # [theme-picker] // nwg-look, libsForQt5.qt5ct,
+    duf baobab ncdu
     metasploit mtr
     mpv celluloid kdePackages.dragon
     loupe eog
     papers
     parabolic
     ytermusic
-    nwg-look libsForQt5.qt5ct
     yad
-
-    # games
-    ninvaders
-    nsnake
-    bastet
-    greed
-    nethack
-    cataclysm-dda
-    shattered-pixel-dungeon
-    _2048-cli
-    blightmud
-
-    nbsdgames
-    gnome-chess
-
-    # terminal
-    cmatrix
-    pipes
-    pipes-rs
-    figlet
-    cowsay
 
     # lshw cpu-x
     # audacity
@@ -69,5 +49,8 @@
     # discord
     # youtube-music spotify
     # libreoffice wps
+
+    # terminal
+    cmatrix pipes pipes-rs figlet cowsay
   ];
 }
