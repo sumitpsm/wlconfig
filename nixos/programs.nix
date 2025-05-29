@@ -19,7 +19,9 @@ in
     gnome-calculator # calculator
     gnome-boxes # virtual machine manager
     wireshark # network protocol analyzer
-
+    nautilus # file manager
+    gnome-disk-utility # disk manager
+    
     # yt-dlp
     ffmpeg-full ytdlp-github
   ];

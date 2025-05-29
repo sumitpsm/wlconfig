@@ -60,6 +60,7 @@ function host_add () {
       rebuild = "sudo nixos-rebuild switch --flake .#${hostname}";
     };
   };
+  system.stateVersion = "25.05";
 }
 EndOfMessage
   echo "$INFO created $GREEN./hosts/$hostname/default.nix"
@@ -112,7 +113,7 @@ function host_rename () {
     # rename old hostname to new hostname
     host_list=$(echo "$host_list" | sed "s/\"$hostname_old\"/\"$hostname_new\"/g")
     generate_flake_nix
-    echo "$INFO $RED$hostname_old$RESET renamed $RED$hostname_new$RESET to flake.nix"
+    echo "$INFO $RED$hostname_old$RESET renamed to $RED$hostname_new$RESET in flake.nix"
   else
     # hostname not found
     echo "${RED}error:$RESET hostname $RED$hostname_old$RESET is not present."
@@ -121,21 +122,8 @@ function host_rename () {
 
   # moving entry in the ./hosts directory
   mv "./hosts/$hostname_old" "./hosts/$hostname_new"
-  cat << EndOfMessage > "./hosts/$hostname_new/default.nix"
-{ config, pkgs, ... }:
-
-{
-  imports = [
-    ./hardware.nix
-    ./packages.nix
-  ];
-  programs = {
-    bash.shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake .#${hostname_new}";
-    };
-  };
-}
-  echo "$INFO rename host $RED$hostname_old$RESET to $RED$hostname_new$RESET"
+  sed -i "s/\.#\w\+\"/.#$hostname_new\"/g" "./hosts/$hostname_new/default.nix"
+  echo "$INFO moved host from $RED$hostname_old$RESET to $RED$hostname_new$RESET"
 }
 
 ###############################################################

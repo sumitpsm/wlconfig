@@ -30,7 +30,7 @@
         lf = "yazi";
         tmux = "zellij";
         btop = "btop --force-utf";
-        todo = "hx /home/sumit/dev/todo";
+        todo = "hx /home/sumit/dev/todo /home/sumit/dev/projects";
       };
     };
     zoxide = {

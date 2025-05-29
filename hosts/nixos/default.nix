@@ -11,4 +11,5 @@
       rebuild = "sudo nixos-rebuild switch --flake .#nixos";
     };
   };
+  system.stateVersion = "24.11";
 }

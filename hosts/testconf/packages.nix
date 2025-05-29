@@ -2,8 +2,8 @@
 
 {
   # services.xserver.desktopManager.gnome.enable = true;
-  programs.hyprlock.enable = true;
   environment.systemPackages = with pkgs; [
+    hyprlock
     grim
     slurp
     fuzzel
@@ -12,17 +12,22 @@
     gnome-characters
     libnotify
 
-    gnome-disk-utility gparted
-    nautilus kdePackages.dolphin xfce.thunar
-    mpv
-    loupe # eog
+    nushell fish
+    termusic rmpc ncmpcpp cmus
+    gitui lazygit
+    # [fetch] // fastfetch, inxi, neofetch, freshfetch,
+    # [system-monitor] // htop, gnome-system-monitor,
+    # [file-manager] // kdePackages.dolphin, xfce.thunar,
+    # [disk-manager] // gparted, kdePackages.partitionmanager,
+    # [browser] // firefox, chromium, torbrowser, *opera,
+    duf baobab ncdu mmtui
+    metasploit mtr
+    mpv celluloid kdePackages.dragon
+    loupe eog
     papers
-    nushell
-    termusic ytermusic rmpc ncmpcpp cmus
-    gitui
-    cpu-x
-    nwg-look
-    libsForQt5.qt5ct
+    parabolic
+    ytermusic
+    nwg-look libsForQt5.qt5ct
     yad
 
     # games
@@ -37,6 +42,7 @@
     blightmud
 
     nbsdgames
+    gnome-chess
 
     # terminal
     cmatrix
@@ -45,12 +51,7 @@
     figlet
     cowsay
 
-    # duf baobab ncdu 
-    # htop gnome-system-monitor
-    # fastfetch inxi neofetch
-    # pipes cmatrix
     # lshw cpu-x
-    # firefox torbrowser
     # audacity
     # handbrake
     # amfora
