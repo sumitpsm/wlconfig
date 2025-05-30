@@ -2,6 +2,6 @@ Host main
 Hostname github.com
 IdentityFile ~/.ssh/sumit
 
-Host alt
+Host test
 Hostname github.com
 IdentityFile ~/.ssh/sumit-modak
