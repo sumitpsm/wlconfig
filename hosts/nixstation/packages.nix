@@ -11,11 +11,12 @@
     pavucontrol
     gnome-characters
     libnotify
+    handbrake
 
     gh rsync
     nushell fish
     gitui lazygit
-    termusic rmpc ncmpcpp cmus
+    # [music-player] // termusic rmpc ncmpcpp cmus
     # [fetch] // fastfetch, inxi, neofetch, freshfetch,
     # [system-monitor] // htop, gnome-system-monitor,
     # [file-manager] // kdePackages.dolphin, xfce.thunar,
@@ -24,7 +25,7 @@
     # [theme-picker] // nwg-look, libsForQt5.qt5ct,
     duf baobab ncdu
     metasploit mtr
-    mpv celluloid kdePackages.dragon
+    mpv # celluloid kdePackages.dragon
     loupe eog
     papers
     parabolic
@@ -33,12 +34,10 @@
 
     # lshw cpu-x
     # audacity
-    # handbrake
     # amfora
     # appimage-run usbutils
     # socat
     # v4l-utils
-    # gh
     # nwg-displays
     # gnome-maps
     # steam
@@ -53,4 +52,9 @@
     # terminal
     cmatrix pipes pipes-rs figlet cowsay
   ];
+  programs = {
+    bash.shellAliases = {
+      kmap = "eval $(sudo kmonad ~/dev/colemaxx.kbd)";
+    };
+  };
 }

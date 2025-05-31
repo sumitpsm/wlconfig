@@ -9,13 +9,14 @@ BEZIER=".43,1.19,1,.4"
 
 EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-if [ ! -f $FILE ]; then
+if [ -f $FILE ]; then
+  wallust run -s "$FILE" &
+  swww img "$FILE" $EFFECT
+else
   echo "$FILE doesn't exist"
   exit 1
 fi
 
-wallust run -s "$FILE" &
-swww img "$FILE" $EFFECT
 
 # # Get current focused monitor
 # CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')

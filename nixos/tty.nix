@@ -5,7 +5,6 @@
     systemPackages = with pkgs; [
       helix yazi zellij fzf btop
       eza fd ripgrep jq unzip
-      rustup gcc pkg-config openssl
       git curl nmap
       cht-sh
     ];
@@ -13,10 +12,9 @@
       EDITOR = "hx";
       VISUAL = "hx";
       SUDO_EDITOR = "hx";
-      RUST_BACKTRACE = 1;
     };
     sessionVariables = {
-      PATH = [ "$PATH" "$HOME/.local/scripts" "$HOME/.cargo/bin" ];
+      PATH = [ "$PATH" "$HOME/.local/scripts" ];
     };
   };
 

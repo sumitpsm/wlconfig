@@ -7,6 +7,7 @@
     ./sound.nix
     ./foreigndevices.nix
     ./wayland.nix
+    ./rust.nix
     ./programs.nix
   ];
 
