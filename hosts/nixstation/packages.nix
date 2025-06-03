@@ -13,10 +13,8 @@
     libnotify
     handbrake
 
-    gh rsync
     nushell fish
-    gitui lazygit
-    # [music-player] // termusic rmpc ncmpcpp cmus
+    # [music-player] // termusic rmpc ncmpcpp cmus kew
     # [fetch] // fastfetch, inxi, neofetch, freshfetch,
     # [system-monitor] // htop, gnome-system-monitor,
     # [file-manager] // kdePackages.dolphin, xfce.thunar,
@@ -31,6 +29,7 @@
     parabolic
     ytermusic
     yad
+    gh
 
     # lshw cpu-x
     # audacity

@@ -41,14 +41,7 @@
     packages = with pkgs; [];
   };
 
-  nix = {
-    # automatic cleanup
-    gc.automatic = true;
-    gc.dates = "monthly";
-    gc.options = "--delete-older-than 14d";
-    settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Keyboard layout configuration
   services.xserver.xkb = {

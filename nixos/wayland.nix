@@ -86,4 +86,19 @@ in
       ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
     '') # hyprcursor theme
   ];
+
+  programs.dconf = {
+    enable = true;
+    profiles.user.databases = [{
+      settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          gtk-theme = "Adwaita-dark";
+          icon-theme = "Adwaita";
+          cursor-theme = "Notwaita-Black";
+          cursor-size = "24";
+        };
+      };
+    }];
+  };
 }

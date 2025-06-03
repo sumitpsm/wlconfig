@@ -7,17 +7,18 @@ function random_hex() {
     echo $random_hex
 }
 
-RAINBOW_BORDERS_FILE="$HOME/.cache/hyprland/.rainbow_borders"
+mkdir -p "$HOME/.local/state/hyprland"
+RAINBOW_BORDERS_FILE="$HOME/.local/state/hyprland/.rainbow_borders"
 RAINBOW_BORDERS_STATE=$(cat $RAINBOW_BORDERS_FILE 2>/dev/null)
 
 if [[ $RAINBOW_BORDERS_STATE == "disabled" ]]; then
-    # rainbow colors only for active window
-    hyprctl keyword general:col.active_border $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex)  270deg
-    # rainbow colors for inactive window (uncomment to take effect)
-    # hyprctl keyword general:col.inactive_border $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) 270deg
     echo "enabled" > $RAINBOW_BORDERS_FILE
+    # rainbow colors only for active window (use inactive_border for inactive windows)
+    # while true; do
+        hyprctl keyword general:col.active_border $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) $(random_hex) 270deg
+    # done 1>/dev/null
 else
-    DEFAULT_BORDER_COLOR="$(cat $HOME/.config/hypr/themes/.palette.conf | grep color10 | awk -F'[()]' '{print $2}')"
+    DEFAULT_BORDER_COLOR="$(cat $HOME/.config/hypr/themes/.palette.conf | grep color8 | awk -F'[()]' '{print $2}')"
     hyprctl keyword general:col.active_border "0xff$DEFAULT_BORDER_COLOR"
     echo "disabled" > $RAINBOW_BORDERS_FILE
 fi

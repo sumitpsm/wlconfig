@@ -90,8 +90,8 @@ U = "redo"
 # find & selection
 s = "search"
 S = [ "search_selection", "search" ]
-g = "search_prev" # goto_prev_match
-G = "search_next" # goto_next_match
+g = "search_next" # goto_next_match
+G = "search_prev" # goto_prev_match
 F = "find_prev_char" # find_char_backward
 f = "find_next_char" # find_char_forward
 T = "till_prev_char" # till_char_backward
@@ -236,8 +236,8 @@ U = "redo"
 # find & selection
 s = "search"
 S = [ "search_selection", "search" ]
-g = "search_prev" # goto_prev_match
-G = "search_next" # goto_next_match
+g = "search_next" # goto_next_match
+G = "search_prev" # goto_prev_match
 F = "extend_prev_char" # find_char_backward
 f = "extend_next_char" # find_char_forward
 T = "extend_till_prev_char" # till_char_backward

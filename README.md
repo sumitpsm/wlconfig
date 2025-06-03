@@ -12,16 +12,15 @@
 ```sh
   ./host add <HOSTNAME>
 ```
-> Link your configs by doing:
-```sh
-  ./init.sh
-```
-> These commands are also used to rebuild your nixos system
 ```sh
   git add .
 ```
 ```sh
   sudo nixos-rebuild switch --flake .#<HOSTNAME>
+```
+> Link your configs by doing:
+```sh
+  ./init.sh
 ```
 
 ## Note:

@@ -3,7 +3,7 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix yazi zellij fzf btop
+      helix yazi zellij gitui btop fzf
       eza fd ripgrep jq unzip
       git curl nmap
       cht-sh
