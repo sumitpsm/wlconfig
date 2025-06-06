@@ -3,10 +3,10 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix yazi zellij gitui btop fzf
-      eza fd ripgrep jq unzip
-      git curl nmap
-      cht-sh
+      helix yazi zellij gitui btop
+      eza fd ripgrep unzip
+      git curl nmap jq
+      nixd cht-sh
     ];
     variables = {
       EDITOR = "hx";

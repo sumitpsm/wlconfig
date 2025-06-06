@@ -27,10 +27,11 @@
     loupe eog
     papers
     parabolic
-    ytermusic
+    fzf
     yad
     gh
 
+    # ytermusic
     # lshw cpu-x
     # audacity
     # amfora
