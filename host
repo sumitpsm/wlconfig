@@ -61,6 +61,17 @@ function host_add () {
     };
   };
   system.stateVersion = "25.05";
+
+  # custom options
+  user = {
+    name = "sumit";
+    description = "SumitModak";
+    timeZone = "Asia/Kolkata";
+    locale = "en_IN";
+    kbdLayout = "us";
+  };
+  autoCleanup.enable = false;
+  printing.enable = false;
 }
 EndOfMessage
   echo "$INFO created $GREEN./hosts/$hostname/default.nix"

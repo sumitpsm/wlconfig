@@ -28,8 +28,11 @@ function check_symlink() {
   SYMLINK_ENTRY="$USRHOME/$2";
 
   if [[ ! $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
-    echo -n "$WARN Backup created: "
-    mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
+    # checking if the entry is not a symlink
+    if [[ ! -h $SYMLINK_ENTRY ]]; then
+      echo -n "$WARN Backup created: "
+      mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
+    fi
     echo -n "$OK SymLink created: "
     ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else
@@ -60,8 +63,11 @@ function check_root_symlink() {
   SYMLINK_ENTRY="/root/$2";
 
   if [[ ! $(sudo readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
-    echo -n "$WARN Backup created: "
-    sudo mv -v $SYMLINK_ENTRY          "${SYMLINK_ENTRY}.bak" 2>/dev/null
+    # checking if the entry is not a symlink
+    if [[ ! -h $SYMLINK_ENTRY ]]; then
+      echo -n "$WARN Backup created: "
+      mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
+    fi
     echo -n "$OK SymLink created: "
     sudo ln -sv $TARGET_ENTRY_PATH   $SYMLINK_ENTRY 2>/dev/null
   else

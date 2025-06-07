@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   environment = {
     systemPackages = with pkgs; [
       helix yazi zellij gitui btop
@@ -24,6 +26,7 @@
         c = "clear";
         ls = "eza -al --group-directories-first --icons";
         la = "eza -a --group-directories-first --icons";
+        lt = "eza -alT --group-directories-first --icons --git-ignore";
         tree = "eza -aT --group-directories-first --icons --git-ignore";
         lf = "yazi";
         tmux = "zellij";
