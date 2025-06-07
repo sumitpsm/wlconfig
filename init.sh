@@ -47,6 +47,7 @@ check_symlink "config/.gitconfig"  ".gitconfig"
 check_symlink "config/helix"       ".config/helix"
 check_symlink "config/yazi"        ".config/yazi"
 check_symlink "config/zellij"      ".config/zellij"
+check_symlink "config/btop"        ".config/btop"
 check_symlink "config/hypr"        ".config/hypr"
 check_symlink "config/kitty"       ".config/kitty"
 check_symlink "config/wallust"     ".config/wallust"
@@ -74,6 +75,7 @@ sudo mkdir -p /root/.config
 check_root_symlink ".config/helix"   ".config/helix"
 check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/zellij"  ".config/zellij"
+check_root_symlink "config/btop"     ".config/btop"
 
 # installing latest rust components
 # if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rustup | cut -d - -f2) = "rustup" ]]; then

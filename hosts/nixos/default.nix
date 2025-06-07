@@ -4,7 +4,7 @@
   imports = [
     ./hardware.nix
     ./packages.nix
-    ./../../nixos/drivers/amd-drivers.nix
+    ./../../modules/drivers/amd-drivers.nix
   ];
   programs = {
     bash.shellAliases = {

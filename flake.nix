@@ -11,12 +11,12 @@
     nixosConfigurations = nixpkgs.lib.genAttrs
     [
       "nixos"
-      "nixstation" # 
+      "nixstation"
     ] # do not change this manually
     (hostname: nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./nixos/configuration.nix
+        ./modules/configuration.nix
         ./hosts/${hostname} { networking.hostName = hostname; }
       ];
     });
