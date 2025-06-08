@@ -1,70 +1,112 @@
-# Author: SumitModak <sumit.modak.code@gmail.com>
+# UI
+"ui.background"                   = { bg = "base00" }
+# "ui.background.seperator"         =
+"ui.cursor"                       = { fg = "base04", modifiers = ["reversed"] }
+# "ui.cursor.normal"                =
+# "ui.cursor.insert"                =
+# "ui.cursor.select"                =
+"ui.cursor.match"                 = { fg = "light_yellow", modifiers = ["underlined"] }
+"ui.cursor.primary"               = { fg = "base05", modifiers = ["reversed"] }
+# "ui.cursor.primary.normal"        =
+# "ui.cursor.primary.insert"        =
+# "ui.cursor.primary.select"        =
+# "ui.debug.breakpoint"             =
+# "ui.debug.active"                 =
+"ui.gutter"                       = { bg = "base00" }
+# "ui.gutter.selected"              =
+"ui.linenr"                       = { fg = "base03", bg = "base00" }
+"ui.linenr.selected"              = { fg = "base05", bg = "base00", modifiers = ["bold"] }
+"ui.statusline"                   = { fg = "base04", bg = "base01" }
+# "ui.statusline.inactive"          = 
+# "ui.statusline.normal"            = 
+# "ui.statusline.insert"            = 
+# "ui.statusline.select"            =
+# "ui.statusline.seperator"         =
+"ui.bufferline"                   = { fg = "base04", bg = "base00" }
+"ui.bufferline.active"            = { fg = "base06", bg = "base01" }
+# "ui.bufferline.background"        =
+"ui.popup"                        = { bg = "base01" }
+# "ui.popup.info"                   =
+# "ui.picker.header"                =
+# "ui.picker.header.column"         =
+# "ui.picker.header.column.active"  =
+"ui.window"                       = { bg = "base01" }
+"ui.help"                         = { fg = "base06", bg = "base01" }
+"ui.text"                         = "base05"
+"ui.text.focus"                   = "base05"
+# "ui.text.inactive"                =
+# "ui.text.info"                    =
+# "ui.text.directory"               =
+"ui.virtual.whitespace"           = "base03"
+# "ui.virtual.indent-guide"         = 
+# "ui.virtual.inlay-hint"           = 
+# "ui.virtual.inlay-hint.parameter" = 
+# "ui.virtual.inlay-hint.type"      = 
+# "ui.virtual.wrap"                 = 
+# "ui.virtual.jump-label"           = 
+"ui.menu"                         = { fg = "base05", bg = "base01" }
+"ui.menu.selected"                = { fg = "base01", bg = "base04" }
+# "ui.menu.scroll"                  = 
+"ui.selection"                    = { bg = "base02" }
+# "ui.selection.primary"            = 
+# "ui.highlight"                    = 
+# "ui.highlight.frameline"          = 
+# "ui.cursorline.primary"           = 
+# "ui.cursorline.secondary"         = 
+# "ui.cursorcolumn.primary"         = 
+# "ui.cursorcolumn.secondary"       = 
+"warning"                         = "dark_orange"
+"error"                           = "dark_red"
+"info"                            = "light_blue"
+"hint"                            = "base03"
+"diagnostic"                      = { modifiers = ["underlined"] }
+# "diagnostic.hint"                 = 
+# "diagnostic.info"                 = 
+# "diagnostic.warning"              = 
+# "diagnostic.error"                = 
+# "diagnostic.necessary"            = 
+# "diagnostic.deprecated"           = 
+# "tabstop"                         =
 
-"ui.background" = { bg = "base00" }
-"ui.gutter" = { bg = "base00" }
-"ui.virtual.whitespace" = "base03"
-"ui.menu" = { fg = "base05", bg = "base01" }
-"ui.menu.selected" = { fg = "base01", bg = "base04" }
-"ui.linenr" = { fg = "base03", bg = "base00" }
-"ui.popup" = { bg = "base01" }
-"ui.window" = { bg = "base01" }
-"ui.linenr.selected" = { fg = "base05", bg = "base00", modifiers = ["bold"] }
-"ui.selection" = { bg = "base02" }
-"ui.statusline" = { fg = "base04", bg = "base01" }
-"ui.cursor" = { fg = "base04", modifiers = ["reversed"] }
-"ui.cursor.primary" = { fg = "base05", modifiers = ["reversed"] }
-"ui.cursor.match" = { fg = "light_yellow", modifiers = ["underlined"] }
-"ui.text" = "base05"
-"ui.text.focus" = "base05"
-"ui.bufferline" = { fg = "base04", bg = "base00" }
-"ui.bufferline.active" = { fg = "base06", bg = "base01" }
-"ui.help" = { fg = "base06", bg = "base01" }
+# MARKUP
+"markup.heading"                  = "light_blue"
+"markup.list"                     = "dark_red"
+"markup.bold"                     = { fg = "light_yellow", modifiers = ["bold"] }
+"markup.italic"                   = { fg = "light_magenta", modifiers = ["italic"] }
+"markup.strikethrough"            = { modifiers = ["crossed_out"] }
+"markup.link.url"                 = { fg = "dark_orange", modifiers = ["underlined"] }
+"markup.link.text"                = "dark_red"
+"markup.quote"                    = "light_cyan"
+"markup.raw"                      = "dark_green"
 
-"operator" = "base05"
-"comment" = "base03"
-"comment.block.documentation" = "grayish_blue"
-"string" = "dark_green"
-"constant" = "dark_orange"
-"constant.builtin" = "dark_orange"
-"constant.numeric" = "dark_orange"
-"constant.character.escape" = "dark_red"
-"keyword" = "light_magenta"
-"type.builtin" = "light_magenta"
-"type" = "light_yellow"
-"type.enum.variant" = "dark_green"
-"variable.other.member" = "dark_green"
-"variable" = "dark_red"
-"variable.builtin" = "deep_red"
-"function" = "light_blue"
-"constructor" = "light_blue"
-"function.macro" = "deep_blue"
-"keyword.directive" = "deep_blue"
-"namespace" = "deep_blue"
-"tag" = "dark_red"
-"attribute" = "dark_orange"
-"special" = "light_blue"
-"label" = "light_magenta"
-
-"markup.heading" = "light_blue"
-"markup.list" = "dark_red"
-"markup.bold" = { fg = "light_yellow", modifiers = ["bold"] }
-"markup.italic" = { fg = "light_magenta", modifiers = ["italic"] }
-"markup.strikethrough" = { modifiers = ["crossed_out"] }
-"markup.link.url" = { fg = "dark_orange", modifiers = ["underlined"] }
-"markup.link.text" = "dark_red"
-"markup.quote" = "light_cyan"
-"markup.raw" = "dark_green"
-
-"diff.plus" = "dark_green"
-"diff.delta" = "dark_orange"
-"diff.minus" = "dark_red"
-
-"diagnostic" = { modifiers = ["underlined"] }
-"info" = "light_blue"
-"hint" = "base03"
-"debug" = "base03"
-"warning" = "dark_orange"
-"error" = "dark_red"
+# SYNTAX
+"operator"                        = "base05"
+"comment"                         = "base03"
+"comment.block.documentation"     = "grayish_blue"
+"string"                          = "dark_green"
+"constant"                        = "dark_orange"
+"constant.builtin"                = "dark_orange"
+"constant.numeric"                = "dark_orange"
+"constant.character.escape"       = "dark_red"
+"keyword"                         = "light_magenta"
+"type.builtin"                    = "light_magenta"
+"type"                            = "light_yellow"
+"type.enum.variant"               = "dark_green"
+"variable.other.member"           = "dark_green"
+"variable"                        = "dark_red"
+"variable.builtin"                = "deep_red"
+"function"                        = "light_blue"
+"constructor"                     = "light_blue"
+"function.macro"                  = "deep_blue"
+"keyword.directive"               = "deep_blue"
+"namespace"                       = "deep_blue"
+"tag"                             = "dark_red"
+"attribute"                       = "dark_orange"
+"special"                         = "light_blue"
+"label"                           = "light_magenta"
+"diff.plus"                       = "dark_green"
+"diff.delta"                      = "dark_orange"
+"diff.minus"                      = "dark_red"
 
 [palette]
 base00 = "#080808" # Default Background

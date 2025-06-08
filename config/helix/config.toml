@@ -1,17 +1,5 @@
 # theme = "base24"
-theme = "dark_plus_modified"
-
-# "amberwood", "autumn_night", "ayu_dark", "ayu_evolve", "catppuccin_frappe",
-# "catppuccin_macchiato", "catppuccin_mocha", "everblush", "fleet_dark",
-# "github_dark", "github_dark_colorblind", "github_dark_dimmed",
-# "github_dark_high_contrast", "github_dark_tritanopia", "gruvbox",
-# "gruvbox_dark_hard", "jellybeans", "kanagawa", "kaolin-valley-dark",
-# "material_deep_ocean", "mellow", "monokai", "monokai_aqua", "monokai_pro",
-# "monokai_pro_machine", "monokai_pro_octagon", "monokai_pro_ristretto",
-# "monokai_pro_spectrum", "new_moon", "nightfox", "nord-night", "nord",
-# "onedark", "papercolor-dark", "penumbra+", "pop-dark", "rasmus", "snazzy",
-# "solarized_dark", "sonokai", "tokyonight", "varua", "vim_dark_high_contrast",
-# "zed_onedark"
+theme = "dark_plus_plus"
 
 [editor]
 line-number = "relative"
@@ -127,6 +115,7 @@ space.q = ":quit"
 space.Q = ":quit!"
 space.l = ":lsp-restart"
 space.o = ":reload-all"
+space.O = ":config-reload"
 space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
@@ -273,6 +262,7 @@ space.q = ":quit"
 space.Q = ":quit!"
 space.l = ":lsp-restart"
 space.o = ":reload-all"
+space.O = ":config-reload"
 space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
@@ -316,53 +306,3 @@ space.A-c = "no_op"
 "C-d" = "no_op"
 "C-u" = "no_op"
 "C-w" = "no_op"
-
-# "earlier"
-# "later"
-# "goto_prev_diag"
-# "goto_prev_function"
-# "goto_prev_parameter"
-# "goto_prev_class"
-# "goto_prev_comment"
-# "goto_prev_test"
-# "goto_prev_paragraph"
-# "select_prev_sibling"
-# "goto_next_diag"
-# "goto_next_function"
-# "goto_next_parameter"
-# "goto_next_class"
-# "goto_next_comment"
-# "goto_next_test"
-# "goto_next_paragraph"
-# "select_next_sibling"
-# "buffer_picker"
-# "goto_last_accessed_file"
-# "goto_last_modified_file"
-# "half_page_up"
-# "goto_window_center"
-# "half_page_down"
-#  = "goto_first_diag"
-#  = "goto_last_diag"
-#  = "decrement"
-#  = "increment"
-#  = "select_register"
-#  = "split_selection"
-# "shrink_selection"
-# "expand_selection"
-# "" = "jump_backward"
-# "" = "jump_forward"
-# "" = "save_selection"
-# "rotate_selection_contents_backward"
-# "rotate_selection_contents_forward"
-# "goto_line_start"
-# "file_picker"
-# "shell_pipe" # replace output
-# "shell_insert_output" # pastes new output
-# "page_up"
-# "page_down"
-# "last_picker"
-# "command_palette"
-# "join_selections"
-# "move_next_word_start"
-# "move_next_long_word_start"
-# ":config-reload"

@@ -8,7 +8,6 @@
     slurp
     fuzzel
     ashell
-    pavucontrol
     gnome-characters
     libnotify
 
