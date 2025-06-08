@@ -71,7 +71,6 @@ in
     kmonad # keyboard mapper
     kitty # terminal emulator
     wl-clipboard # clipboard
-    brightnessctl
     swww # wallpaper
     wallust # theme generator
     hypridle # idling daemon

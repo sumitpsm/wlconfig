@@ -7,11 +7,10 @@
     ./tty.nix
     ./rust.nix
     ./sound.nix
-    ./foreigndevices.nix
+    ./usb.nix
     ./wayland.nix
     ./programs.nix
 
-    ./services/auto-cleanup.nix
-    ./services/printing.nix
+    ./services
   ];
 }

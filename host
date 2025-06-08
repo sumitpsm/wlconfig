@@ -48,7 +48,7 @@ function host_add () {
   mkdir -p "./hosts/$hostname"
   # creating default.nix
   cat << EndOfMessage > "./hosts/$hostname/default.nix"
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -70,8 +70,10 @@ function host_add () {
     locale = "en_IN";
     kbdLayout = "us";
   };
-  autoCleanup.enable = false;
+  laptop.enable = false;
   printing.enable = false;
+  steam.enable = false;
+  autoCleanup.enable = false;
 }
 EndOfMessage
   echo "$INFO created $GREEN./hosts/$hostname/default.nix"
@@ -80,7 +82,7 @@ EndOfMessage
   echo "$INFO created $GREEN./hosts/$hostname/hardware.nix"
   # creating packages.nix
   cat << EndOfMessage > "./hosts/$hostname/packages.nix"
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # services.xserver.desktopManager.gnome.enable = true;

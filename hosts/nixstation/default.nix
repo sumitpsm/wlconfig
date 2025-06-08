@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -13,7 +13,7 @@
   };
   system.stateVersion = "25.05";
 
-  # custom options
+  # [CUSTOM OPTIONS]
   # user = {
   #   name = "sumit";
   #   description = "SumitModak";
@@ -21,6 +21,8 @@
   #   locale = "en_IN";
   #   kbdLayout = "us";
   # };
-  # autoCleanup.enable = false;
+  # laptop.enable = false;
   # printing.enable = false;
+  # steam.enable = false;
+  # autoCleanup.enable = false;
 }
