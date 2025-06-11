@@ -23,6 +23,5 @@
   # };
   # laptop.enable = false;
   # printing.enable = false;
-  # steam.enable = false;
   # autoCleanup.enable = false;
 }

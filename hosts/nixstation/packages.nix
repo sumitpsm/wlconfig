@@ -39,7 +39,6 @@
     # v4l-utils
     # nwg-displays
     # gnome-maps
-    # steam
     # calls
     # lm_sensors
     # gnome-clocks
