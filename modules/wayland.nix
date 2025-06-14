@@ -8,7 +8,7 @@ let
 in
 {
   # Display Manager
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Wayland Compositor (hyprland)
   programs.hyprland = {
@@ -28,6 +28,21 @@ in
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.hypridle}/bin/hypridle";
+      Restart = "on-failure";
+      # ConditionEnvironment = "WAYLAND_DISPLAY";
+    };
+  };
+
+  # Enabling session idling (hypridle)
+  systemd.user.services."swww-daemon" = {
+    enable = true;
+    description = "Wallpaper daemon";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.swww}/bin/swww-daemon";
       Restart = "on-failure";
       # ConditionEnvironment = "WAYLAND_DISPLAY";
     };

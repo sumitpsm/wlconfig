@@ -10,22 +10,9 @@ BEZIER=".43,1.19,1,.4"
 EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
 if [ -f $FILE ]; then
-  wallust run -s "$FILE" &
   swww img "$FILE" $EFFECT
+  wallust run -s "$FILE"
 else
   echo "$FILE doesn't exist"
   exit 1
 fi
-
-
-# # Get current focused monitor
-# CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-# 
-# # Construct the full path to the cache file
-# CACHE_FILE="$HOME/.cache/swww/$CURRENT_MONITOR"
-# 
-# # Check if the cache file exists for the current monitor output
-# if [ -f "$CACHE_FILE" ]; then
-#   # Get the wallpaper path from the cache file
-#   WALLPAPER_PATH=$(grep -v 'Lanczos3' "$CACHE_FILE" | head -n 1)
-# fi
