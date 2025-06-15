@@ -30,7 +30,7 @@ if [ -z "$1" ]; then
   # SSHPROFILE="$(git config get --local remote.origin.url | cut -d'@' -f2 | cut -d':' -f1)"
   if [[ $SSHPROFILE == "main" ]]; then
   	set_mail $MAINEMAIL
-  elif [[ $SSHPROFILE != "test" ]]; then
+  elif [[ $SSHPROFILE == "test" ]]; then
   	set_mail $TESTEMAIL
   else
   	echo "${ERROR} Remote \`origin\` didn't match with ssh profiles"

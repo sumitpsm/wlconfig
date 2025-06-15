@@ -46,10 +46,12 @@ keybinds clear-defaults=true {
         bind "Ctrl r" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
         // Shifting Focus
-        bind "Ctrl e" { MoveFocusOrTab "Left"; }
+        bind "Ctrl e" { MoveFocus "Left"; }
         bind "Ctrl i" { MoveFocus "Down"; }
         bind "Ctrl y" { MoveFocus "Up"; }
-        bind "Ctrl o" { MoveFocusOrTab "Right"; }
+        bind "Ctrl o" { MoveFocus "Right"; }
+        bind "Ctrl n" { MoveFocusOrTab "Left"; }
+        bind "Ctrl h" { MoveFocusOrTab "Right"; }
 
         // Session Manager
         bind "Ctrl w" {
@@ -101,10 +103,10 @@ keybinds clear-defaults=true {
 
     //! Resize Mode
     shared_except "resize" "locked" {
-        bind "Ctrl n" { SwitchToMode "Resize"; }
+        bind "Ctrl r" { SwitchToMode "Resize"; }
     }
     resize {
-        bind "Ctrl n" { SwitchToMode "Normal"; }
+        bind "Ctrl r" { SwitchToMode "Normal"; }
 
         bind "e" { Resize "Increase Left"; }
         bind "i" { Resize "Increase Down"; }

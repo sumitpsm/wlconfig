@@ -25,15 +25,8 @@ Z = ":write!"
 v = "select_mode"
 "@" = "record_macro"
 "!" = "replay_macro"
-"[" = ":buffer-previous"
-"]" = ":buffer-next"
-
-n = [ "collapse_selection", "insert_mode" ]
-N = [ "add_newline_above", "move_visual_line_up" ]
-space.n = "open_above"
-h = [ "move_char_right", "insert_mode" ]
-H = [ "add_newline_below", "move_visual_line_down" ]
-space.h = "open_below"
+N = ":buffer-previous"
+H = ":buffer-next"
 
 # movement
 y = "move_visual_line_up"
@@ -56,11 +49,11 @@ C = "yank_to_clipboard" # copy to clipboard
 p = "paste_before" # paste
 P = "paste_clipboard_before" # paste from clipboard
 d = "delete_selection_noyank" # delete selection
-x = "delete_selection" # cut
-X = [ "yank_to_clipboard", "delete_selection_noyank" ] # cut to clipboard
+x = "delete_selection" # delete and copy selection
+X = [ "yank_to_clipboard", "delete_selection_noyank" ] # delete and copy selection to clipboard
+R = "replace_with_yanked" # delete selection and paste (replace)
+A = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
 r = "replace" # replace character
-R = "replace_with_yanked" # replace
-A = "replace_selections_with_clipboard" # replace with clipboard
 a = [ "delete_selection_noyank", "insert_mode" ] # delete selection & insert
 "backspace" = [ "move_char_left", "delete_selection_noyank" ]
 u = "undo"
@@ -75,18 +68,23 @@ U = "redo"
 "~" = "switch_case"
 "<" = "switch_to_lowercase"
 
-# find & selection
-s = "search"
-S = [ "search_selection", "search" ]
-g = "search_next" # goto_next_match
-G = "search_prev" # goto_prev_match
-F = "find_prev_char" # find_char_backward
-f = "find_next_char" # find_char_forward
-T = "till_prev_char" # till_char_backward
-t = "find_till_char" # till_char_forward
+n = [ "collapse_selection", "insert_mode" ]
+space.n = "open_above"
+h = [ "move_char_right", "insert_mode" ]
+space.h = "open_below"
 
-m = "select_textobject_inner" # match inner
-M = "select_textobject_around" # match outer
+# find & selection
+s = "file_picker" # Fd Search
+S = "global_search" # Ripgrep Search
+f = "search"
+F = [ "search_selection", "search" ]
+M = "search_prev" # goto_prev_match
+m = "search_next" # goto_next_match
+G = "extend_prev_char" # goto_prev_char
+g = "extend_next_char" # goto_next_char
+T = "extend_till_prev_char" # till_prev_char
+t = "extend_till_char" # till_next_char
+
 k = "copy_selection_on_next_line" # add cursor and selection below
 K = "copy_selection_on_prev_line" # add cursor and selection above
 j = "join_selections_space"
@@ -107,10 +105,9 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
 
-"{" = "goto_prev_change"
-"}" = "goto_next_change"
-space."{" = "goto_first_change"
-space."}" = "goto_last_change"
+space.y = "goto_file_start"
+space.i = "goto_file_end"
+space."." = "goto_last_modification"
 space.q = ":quit"
 space.Q = ":quit!"
 space.l = ":lsp-restart"
@@ -121,12 +118,6 @@ space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
 space.M = "align_view_middle"
-space.f = "file_picker_in_current_directory"
-space.F = "goto_file"
-space."/" = "global_search"
-space.y = "goto_file_start"
-space.i = "goto_file_end"
-space."." = "goto_last_modification"
 space.c = "toggle_comments"
 space.C = "toggle_block_comments"
 space.p = "hover" ## Show documentation for item under cursor in a popup (LSP)
@@ -141,10 +132,12 @@ space.R = "select_references_to_symbol_under_cursor" ## Select symbol references
 space.a = "code_action" ## Apply code action (LSP)
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
-# space."=" = "format_selection" ## Format selection (currently nonfunctional/disabled) (LSP)
+# space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
 # space.g	## Debug (experimental)
 # space.w	## Enter window mode
 
+space.f = "no_op"
+space.F = "no_op"
 space.j = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
@@ -152,6 +145,7 @@ space.k = "no_op"
 space.Y = "no_op"
 space.P = "no_op"
 space.A-c = "no_op"
+space."/" = "no_op"
 "C-i" = "no_op"
 "C-o" = "no_op"
 "C-s" = "no_op"
@@ -173,15 +167,8 @@ Z = ":write!"
 v = "normal_mode"
 "@" = "record_macro"
 "!" = "replay_macro"
-"[" = ":buffer-previous"
-"]" = ":buffer-next"
-
-n = [ "collapse_selection", "insert_mode" ]
-N = [ "add_newline_above", "move_visual_line_up" ]
-space.n = "open_above"
-h = [ "move_char_right", "insert_mode" ]
-H = [ "add_newline_below", "move_visual_line_down" ]
-space.h = "open_below"
+N = ":buffer-previous"
+H = ":buffer-next"
 
 # movement
 y = "extend_visual_line_up"
@@ -204,11 +191,11 @@ C = "yank_to_clipboard" # copy to clipboard
 p = "paste_before" # paste
 P = "paste_clipboard_before" # paste from clipboard
 d = "delete_selection_noyank" # delete selection
-x = "delete_selection" # cut
-X = [ "yank_to_clipboard", "delete_selection_noyank" ] # cut to clipboard
+x = "delete_selection" # delete and copy selection
+X = [ "yank_to_clipboard", "delete_selection_noyank" ] # delete and copy selection to clipboard
+R = "replace_with_yanked" # delete selection and paste (replace)
+A = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
 r = "replace" # replace character
-R = "replace_with_yanked" # replace
-A = "replace_selections_with_clipboard" # replace with clipboard
 a = [ "delete_selection_noyank", "insert_mode" ] # delete selection & insert
 "backspace" = [ "move_char_left", "delete_selection_noyank" ]
 u = "undo"
@@ -223,18 +210,23 @@ U = "redo"
 "~" = "switch_case"
 "<" = "switch_to_lowercase"
 
-# find & selection
-s = "search"
-S = [ "search_selection", "search" ]
-g = "search_next" # goto_next_match
-G = "search_prev" # goto_prev_match
-F = "extend_prev_char" # find_char_backward
-f = "extend_next_char" # find_char_forward
-T = "extend_till_prev_char" # till_char_backward
-t = "extend_till_char" # till_char_forward
+space.n = "open_above"
+space.h = "open_below"
 
-m = "select_textobject_inner" # match inner
-M = "select_textobject_around" # match outer
+# find & selection
+s = "file_picker" # Fd Search
+S = "global_search" # Ripgrep Search
+f = "search" # find
+F = [ "search_selection", "search" ]
+M = "search_prev" # goto_prev_match
+m = "search_next" # goto_next_match
+G = "extend_prev_char" # goto_prev_char
+g = "extend_next_char" # goto_next_char
+T = "extend_till_prev_char" # till_prev_char
+t = "extend_till_char" # till_next_char
+
+n = [ "normal_mode", "select_textobject_inner" ] # match inner
+h = [ "normal_mode", "select_textobject_around" ] # match outer
 k = "copy_selection_on_next_line" # add cursor and selection below
 K = "copy_selection_on_prev_line" # add cursor and selection above
 j = "join_selections_space"
@@ -255,10 +247,9 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
 
-"{" = "goto_prev_change"
-"}" = "goto_next_change"
-space."{" = "goto_first_change"
-space."}" = "goto_last_change"
+space.y = "goto_file_start"
+space.i = "goto_file_end"
+space."." = "goto_last_modification"
 space.q = ":quit"
 space.Q = ":quit!"
 space.l = ":lsp-restart"
@@ -269,12 +260,6 @@ space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
 space.M = "align_view_middle"
-space.f = "file_picker_in_current_directory"
-space.F = "goto_file"
-space."/" = "global_search"
-space.y = "goto_file_start"
-space.i = "goto_file_end"
-space."." = "goto_last_modification"
 space.c = "toggle_comments"
 space.C = "toggle_block_comments"
 space.p = "hover" ## Show documentation for item under cursor in a popup (LSP)
@@ -289,10 +274,12 @@ space.R = "select_references_to_symbol_under_cursor" ## Select symbol references
 space.a = "code_action" ## Apply code action (LSP)
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
-# space."=" = "format_selection" ## Format selection (currently nonfunctional/disabled) (LSP)
+# space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
 # space.g	## Debug (experimental)
 # space.w	## Enter window mode
 
+space.f = "no_op"
+space.F = "no_op"
 space.j = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
@@ -300,6 +287,7 @@ space.k = "no_op"
 space.Y = "no_op"
 space.P = "no_op"
 space.A-c = "no_op"
+space."/" = "no_op"
 "C-i" = "no_op"
 "C-o" = "no_op"
 "C-s" = "no_op"
