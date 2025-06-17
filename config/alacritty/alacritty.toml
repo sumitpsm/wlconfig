@@ -1,0 +1,46 @@
+[general]
+working_directory = "None"
+import = [
+  # "./themes/catppuccin-frappe.toml",
+  # "./themes/catppuccin-latte.toml",
+  # "./themes/catppuccin-macchiato.toml",
+  "./themes/catppuccin-mocha.toml",
+  "./dark-theme.toml"
+]
+
+[window]
+padding = { x = 4, y = 0 }
+decorations = "None"
+opacity = 0.9
+blur = true
+title = "Alacritty"
+dynamic_title = true
+decorations_theme_variant = "None"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+normal = { family = "Monospace", style = "Regular" }
+bold = { style = "Bold" }
+italic = { style = "Italic" }
+bold_italic = { style = "Bold Italic" }
+size = 15
+offset = { x = 0, y = 0 }
+# glyph_offset = { x = <integer>, y = <integer> }
+builtin_box_drawing = true
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style.shape = "Block"
+style.blinking = "Off"
+thickness = 0.1
+
+[terminal]
+# shell = "/run/current-system/sw/bin/bash"
+
+[mouse]
+hide_when_typing = false

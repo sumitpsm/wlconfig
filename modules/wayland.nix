@@ -33,7 +33,7 @@ in
     };
   };
 
-  # Enabling session idling (hypridle)
+  # Enabling wallpaper daemon (swww-daemon)
   systemd.user.services."swww-daemon" = {
     enable = true;
     description = "Wallpaper daemon";
@@ -84,7 +84,8 @@ in
 
   environment.systemPackages = with pkgs; [
     kmonad # keyboard mapper
-    kitty # terminal emulator
+    alacritty kitty # terminal emulators
+    libsixel # terminal graphics library
     wl-clipboard # clipboard
     swww # wallpaper
     wallust # theme generator

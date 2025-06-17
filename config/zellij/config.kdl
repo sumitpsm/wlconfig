@@ -10,7 +10,7 @@ scroll_back_editor "/run/current-system/sw/bin/hx"
 styled_underlines true
 session_serialization true
 pane_viewport_serialization true
-scrollback_lines_to_serialize 0
+scrollback_lines_to_serialize 40
 serialization_interval 1024 // seconds
 disable_session_metadata false
 stacked_resize true
@@ -46,12 +46,12 @@ keybinds clear-defaults=true {
         bind "Ctrl r" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
         // Shifting Focus
-        bind "Ctrl e" { MoveFocus "Left"; }
-        bind "Ctrl i" { MoveFocus "Down"; }
         bind "Ctrl y" { MoveFocus "Up"; }
-        bind "Ctrl o" { MoveFocus "Right"; }
-        bind "Ctrl n" { MoveFocusOrTab "Left"; }
-        bind "Ctrl h" { MoveFocusOrTab "Right"; }
+        bind "Ctrl n" { MoveFocus "Left"; }
+        bind "Ctrl i" { MoveFocus "Down"; }
+        bind "Ctrl h" { MoveFocus "Right"; }
+        bind "Ctrl e" { MoveFocusOrTab "Left"; }
+        bind "Ctrl o" { MoveFocusOrTab "Right"; }
 
         // Session Manager
         bind "Ctrl w" {

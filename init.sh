@@ -28,8 +28,10 @@ function check_symlink() {
   SYMLINK_ENTRY="$USRHOME/$2";
 
   if [[ ! $(readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
-    # checking if the entry is not a symlink
-    if [[ ! -h $SYMLINK_ENTRY ]]; then
+    # (-e) for checking if the entry exists
+    # (-h) for checking if the entry is a symlink
+    # create backup if the entry exists and it's not a symlink
+    if [[ -e $SYMLINK_ENTRY && ! -h $SYMLINK_ENTRY ]]; then
       echo -n "$WARN Backup created: "
       mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
     fi
@@ -52,6 +54,7 @@ check_symlink "config/yazi"        ".config/yazi"
 check_symlink "config/zellij"      ".config/zellij"
 check_symlink "config/btop"        ".config/btop"
 check_symlink "config/hypr"        ".config/hypr"
+check_symlink "config/alacritty"   ".config/alacritty"
 check_symlink "config/kitty"       ".config/kitty"
 check_symlink "config/wallust"     ".config/wallust"
 check_symlink "config/gtk-3.0"     ".config/gtk-3.0"
@@ -63,8 +66,10 @@ function check_root_symlink() {
   SYMLINK_ENTRY="/root/$2";
 
   if [[ ! $(sudo readlink $SYMLINK_ENTRY) == $TARGET_ENTRY_PATH ]]; then
-    # checking if the entry is not a symlink
-    if [[ ! -h $SYMLINK_ENTRY ]]; then
+    # (-e) for checking if the entry exists
+    # (-h) for checking if the entry is a symlink
+    # create backup if the entry exists and it's not a symlink
+    if [[ -e $SYMLINK_ENTRY && ! -h $SYMLINK_ENTRY ]]; then
       echo -n "$WARN Backup created: "
       mv -v $SYMLINK_ENTRY        "${SYMLINK_ENTRY}.bak" 2>/dev/null
     fi
@@ -82,6 +87,13 @@ check_root_symlink ".config/helix"   ".config/helix"
 check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/zellij"  ".config/zellij"
 check_root_symlink "config/btop"     ".config/btop"
+
+# download wallpapers
+read -n1 -rep "Would you like to download wallpapers [y/n]? " INPUT
+if [[ $INPUT == "y" || $INPUT == "Y" ]]; then
+  mkdir -p ~/media/wallpapers
+  git clone --depth=1 https://github.com/sumit-modak/wallpapers.git ~/media/wallpapers
+fi
 
 # installing latest rust components
 # if [[ $(nix-store -q --requisites /run/current-system ~/.nix-profile | grep rustup | cut -d - -f2) = "rustup" ]]; then
