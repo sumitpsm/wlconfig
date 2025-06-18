@@ -13,7 +13,7 @@ in
   # Wayland Compositor (hyprland)
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    xwayland.enable = false;
     withUWSM = true;
   };
 
@@ -85,7 +85,7 @@ in
   environment.systemPackages = with pkgs; [
     kmonad # keyboard mapper
     alacritty kitty # terminal emulators
-    libsixel # terminal graphics library
+    chafa timg # terminal graphics library
     wl-clipboard # clipboard
     swww # wallpaper
     wallust # theme generator

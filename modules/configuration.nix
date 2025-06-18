@@ -11,6 +11,7 @@
     ./wayland.nix
     ./programs.nix
 
+    ./fonts.nix
     ./services
   ];
 }

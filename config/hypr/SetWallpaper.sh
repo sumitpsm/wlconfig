@@ -10,5 +10,6 @@ CACHE_FILE="$HOME/.cache/swww/$CURRENT_MONITOR"
 if [ -f "$CACHE_FILE" ]; then
   # Get the wallpaper path from the cache file
   WALLPAPER_PATH=$(grep -v 'Lanczos3' "$CACHE_FILE" | head -n 1)
+  sleep 1
   swww img "$WALLPAPER_PATH"
 fi

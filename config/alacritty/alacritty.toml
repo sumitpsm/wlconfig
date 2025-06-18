@@ -1,12 +1,6 @@
 [general]
 working_directory = "None"
-import = [
-  # "./themes/catppuccin-frappe.toml",
-  # "./themes/catppuccin-latte.toml",
-  # "./themes/catppuccin-macchiato.toml",
-  "./themes/catppuccin-mocha.toml",
-  "./dark-theme.toml"
-]
+import = [ "./default-dark.toml" ]
 
 [window]
 padding = { x = 4, y = 0 }
@@ -22,7 +16,7 @@ history = 10000
 multiplier = 3
 
 [font]
-normal = { family = "Monospace", style = "Regular" }
+normal = { family = "Dejavu Sans Mono", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
@@ -37,10 +31,38 @@ save_to_clipboard = true
 [cursor]
 style.shape = "Block"
 style.blinking = "Off"
-thickness = 0.1
+thickness = 0.20
 
 [terminal]
 # shell = "/run/current-system/sw/bin/bash"
 
 [mouse]
 hide_when_typing = false
+
+[keyboard]
+bindings = [
+  # { key = "Escape",            mode = "~Search",    action = "ToggleViMode"},
+  { key = "Y",                 mode = "Vi|~Search", action = "Up"},
+  { key = "E",                 mode = "Vi|~Search", action = "Left"},
+  { key = "I",                 mode = "Vi|~Search", action = "Down"},
+  { key = "O",                 mode = "Vi|~Search", action = "Right"},
+  { key = "Y", mods = "Shift", mode = "Vi|~Search", action = "ScrollHalfPageUp"},
+  { key = "E", mods = "Shift", mode = "Vi|~Search", action = "First"},
+  { key = "I", mods = "Shift", mode = "Vi|~Search", action = "ScrollHalfPageDown"},
+  { key = "O", mods = "Shift", mode = "Vi|~Search", action = "Last"},
+  { key = "F",                 mode = "Vi|~Search", action = "SearchForward"},
+  { key = "M",                 mode = "Vi|~Search", action = "SearchNext"},
+  { key = "M", mods = "Shift", mode = "Vi|~Search", action = "SearchPrevious"},
+  { key = "B",                 mode = "Vi|~Search", action = "SemanticLeft"},
+  { key = "W",                 mode = "Vi|~Search", action = "SemanticRightEnd"},
+  { key = "B", mods = "Shift", mode = "Vi|~Search", action = "WordLeft"},
+  { key = "W", mods = "Shift", mode = "Vi|~Search", action = "WordRightEnd"},
+  { key = "V",                 mode = "Vi|~Search", action = "ToggleNormalSelection"},
+  { key = "V", mods = "Shift", mode = "Vi|~Search", action = "Bracket"},
+  { key = "G",                 mode = "Vi|~Search", action = "InlineSearchForward"},
+  { key = "G", mods = "Shift", mode = "Vi|~Search", action = "InlineSearchBackward"},
+  { key = "T",                 mode = "Vi|~Search", action = "InlineSearchForwardShort"},
+  { key = "T", mods = "Shift", mode = "Vi|~Search", action = "InlineSearchBackwardShort"},
+  { key = "C", mods = "Shift", mode = "Vi|~Search", action = "Copy"},
+  { key = "P", mods = "Shift", mode = "Vi|~Search", action = "Paste"},
+]

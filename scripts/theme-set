@@ -2,16 +2,21 @@
 
 FILE="$@"
 
-FPS=30
-TYPE=$(echo -e "any\nany\nany\nany\nfade" | shuf -n1)
-DURATION=1.5
-BEZIER=".43,1.19,1,.4"
+function set_theme() {
+  FPS=30
+  TYPE=$(echo -e "any\nany\nany\nany\nfade" | shuf -n1)
+  DURATION=1.5
+  BEZIER=".43,1.19,1,.4"
+  EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
+  swww img "$1" $EFFECT
+  wallust run -s "$1"
+}
 
 if [ -f $FILE ]; then
-  swww img "$FILE" $EFFECT
-  wallust run -s "$FILE"
+  set_theme "$1"
+elif [[ $FILE == "--random" || $FILE == "-r" ]]; then
+  set_theme "$(fd ".*\.(png|jpg|jpeg|webp|gif)" ~/media/wallpapers/ | shuf -n1)"
 else
   echo "$FILE doesn't exist"
   exit 1
