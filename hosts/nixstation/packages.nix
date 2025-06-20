@@ -13,42 +13,58 @@
     handbrake
 
     nushell fish
+    # coreutils, busybox, toybox, moreutils
+    xh
+    procs
+    mtr
+    lshw
+    dig dogdns
+    tcpdump
+    dhcpdump
+    tshark
+    termshark
+    lsof
+    ipcalc
+    metasploit
+    # (vmstat, iostat, ifstat, netstat)
+    # wormhole
+    # *burpsuite
+
+    # [system-monitor] // htop bpytop glances iotop dool
+    # [system-monitor-gui] // gnome-system-monitor cpu-x
+    # [disk-usage] // dua duf baobab ncdu dust
+    # [screensaver] // cmatrix pipes pipes-rs figlet cowsay asciinema asciinema-agg
+    # [fetch] // fastfetch inxi neofetch freshfetch
     # [music-player] // termusic rmpc ncmpcpp cmus kew
-    # [fetch] // fastfetch, inxi, neofetch, freshfetch,
-    # [system-monitor] // htop, gnome-system-monitor,
-    # [file-manager] // kdePackages.dolphin, xfce.thunar,
-    # [disk-manager] // gparted, kdePackages.partitionmanager, mmtui,
-    # [browser] // firefox, chromium, torbrowser, *opera,
-    # [theme-picker] // nwg-look, libsForQt5.qt5ct,
-    duf baobab ncdu
-    metasploit mtr
+    # [web-music-client] // ytermusic ncspot yui-music youtube-tui
+    # [file-manager] // kdePackages.dolphin xfce.thunar
+    # [disk-manager] // gparted kdePackages.partitionmanager mmtui
+    # [browser] // firefox chromium torbrowser *opera
+    # [theme-picker] // nwg-look libsForQt5.qt5ct
+    # [video-editor] // kdePackages.kdenlive openshot-qt flowblade shotcut audacity *lightworks *davinci-resolve
+    # [document] // libreoffice *wps
+    # [misc] // youtube-music *discord *spotify parabolic
+
     mpv # celluloid kdePackages.dragon
     loupe eog
     papers
-    parabolic
     fzf
     yad
     gh
+    wiki-tui
+    cht-sh
+    mprocs
+    presenterm
+    calls
 
-    # ytermusic
-    # lshw cpu-x
-    # audacity
     # amfora
     # appimage-run usbutils
     # socat
     # v4l-utils
     # nwg-displays
-    # gnome-maps
-    # calls
     # lm_sensors
+    # gnome-maps
     # gnome-clocks
-    # burpsuite
-    # discord
-    # youtube-music spotify
-    # libreoffice wps
-
-    # terminal
-    cmatrix pipes pipes-rs figlet cowsay
   ];
   programs = {
     bash.shellAliases = {

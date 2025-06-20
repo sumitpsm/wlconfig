@@ -10,7 +10,7 @@ function set_theme() {
   EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
   swww img "$1" $EFFECT
-  wallust run -s "$1"
+  # wallust run -s "$1"
 }
 
 if [ -f $FILE ]; then

@@ -68,7 +68,7 @@ keybinds clear-defaults=true {
     }
     renametab {
         bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
     }
 
     //! Pane Mode
@@ -103,10 +103,10 @@ keybinds clear-defaults=true {
 
     //! Resize Mode
     shared_except "resize" "locked" {
-        bind "Ctrl r" { SwitchToMode "Resize"; }
+        bind "Ctrl x" { SwitchToMode "Resize"; }
     }
     resize {
-        bind "Ctrl r" { SwitchToMode "Normal"; }
+        bind "Ctrl x" { SwitchToMode "Normal"; }
 
         bind "e" { Resize "Increase Left"; }
         bind "i" { Resize "Increase Down"; }

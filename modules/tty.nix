@@ -8,13 +8,12 @@
       helix yazi zellij gitui btop
       eza fd ripgrep unzip
       git curl nmap jq
-      nixd cht-sh
+      nixd
     ];
     variables = {
       EDITOR = "hx";
       VISUAL = "hx";
       SUDO_EDITOR = "hx";
-      _ZO_FZF_OPTS="--scheme=path --bind 'ctrl-equal:reload(zoxide edit increment {2..}),ctrl-minus:reload(zoxide edit decrement {2..}),ctrl-x:reload(zoxide edit delete {2..}),enter:reload(zoxide edit reload),esc:abort,tab:down,btab:up'";
     };
     sessionVariables = {
       PATH = [ "$PATH" "$HOME/.local/scripts" ];

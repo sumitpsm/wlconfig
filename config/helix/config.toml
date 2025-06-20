@@ -13,6 +13,9 @@ select = "hidden"
   
 [editor.statusline]
 right = ["diagnostics", "selections", "position", "file-encoding"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
 
 [editor.lsp]
 enable = true
@@ -85,25 +88,29 @@ g = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
 
+j = "copy_selection_on_prev_line" # add cursor and selection above
+J = [ "add_newline_above", "move_visual_line_up" ]
 k = "copy_selection_on_next_line" # add cursor and selection below
-K = "copy_selection_on_prev_line" # add cursor and selection above
-j = "join_selections_space"
-J = [ "move_visual_line_up", "join_selections_space" ]
+K = [ "add_newline_below", "move_visual_line_down" ]
 l = "extend_line_below"
 L = [ "extend_line_up", "extend_to_line_bounds" ]
 "%" = "select_all"
 "/" = "select_regex"
-"," = "collapse_selection"
+"," = "join_selections_space"
 ";" = "split_selection_on_newline"
 # "." = repeat_last_insert
 # ":" = command_mode
-"'" = "flip_selections"
-"\"" = "keep_primary_selection"
+"'" = "collapse_selection"
+"\"" = "flip_selections"
+"_" = "keep_primary_selection"
 "minus" = "remove_primary_selection"
-"_" = "trim_selections"
-"&" = "align_selections"
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
+"&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
+"{" = "expand_selection"
+"}" = "shrink_selection"
+# merge_selections
+# merge_consecutive_selections
 
 space.y = "goto_file_start"
 space.i = "goto_file_end"
@@ -135,8 +142,21 @@ space.a = "code_action" ## Apply code action (LSP)
 # space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
 # space.g	## Debug (experimental)
 # space.w	## Enter window mode
+space.f = [
+  ':sh rm -f /tmp/files2open',
+  ':set mouse false',
+  ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/files2open',
+  ':redraw',
+  ':set mouse true',
+  ':open /tmp/files2open',
+  'select_all',
+  'split_selection_on_newline',
+  'goto_file',
+  ':buffer-close! /tmp/files2open',
+]
 
-space.f = "no_op"
+"[".space = "no_op"
+"]".space = "no_op"
 space.F = "no_op"
 space.j = "no_op"
 space."?" = "no_op"
@@ -227,25 +247,27 @@ t = "extend_till_char" # till_next_char
 
 n = [ "normal_mode", "select_textobject_inner" ] # match inner
 h = [ "normal_mode", "select_textobject_around" ] # match outer
+j = "copy_selection_on_prev_line" # add cursor and selection above
+J = [ "add_newline_above", "move_visual_line_up" ]
 k = "copy_selection_on_next_line" # add cursor and selection below
-K = "copy_selection_on_prev_line" # add cursor and selection above
-j = "join_selections_space"
-J = [ "move_visual_line_up", "join_selections_space" ]
+K = [ "add_newline_below", "move_visual_line_down" ]
 l = "extend_line_below"
 L = [ "extend_line_up", "extend_to_line_bounds" ]
 "%" = "select_all"
 "/" = "select_regex"
-"," = "collapse_selection"
+"," = "join_selections_space"
 ";" = "split_selection_on_newline"
 # "." = repeat_last_insert
 # ":" = command_mode
-"'" = "flip_selections"
-"\"" = "keep_primary_selection"
+"'" = "collapse_selection"
+"\"" = "flip_selections"
+"_" = "keep_primary_selection"
 "minus" = "remove_primary_selection"
-"_" = "trim_selections"
-"&" = "align_selections"
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
+"&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
+"{" = "expand_selection"
+"}" = "shrink_selection"
 
 space.y = "goto_file_start"
 space.i = "goto_file_end"
@@ -277,8 +299,21 @@ space.a = "code_action" ## Apply code action (LSP)
 # space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
 # space.g	## Debug (experimental)
 # space.w	## Enter window mode
+space.f = [
+  ':sh rm -f /tmp/files2open',
+  ':set mouse false',
+  ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/files2open',
+  ':redraw',
+  ':set mouse true',
+  ':open /tmp/files2open',
+  'select_all',
+  'split_selection_on_newline',
+  'goto_file',
+  ':buffer-close! /tmp/files2open',
+]
 
-space.f = "no_op"
+"[".space = "no_op"
+"]".space = "no_op"
 space.F = "no_op"
 space.j = "no_op"
 space."?" = "no_op"
