@@ -12,24 +12,6 @@
     libnotify
     handbrake
 
-    nushell fish
-    # coreutils, busybox, toybox, moreutils
-    xh
-    procs
-    mtr
-    lshw
-    dig dogdns
-    tcpdump
-    dhcpdump
-    tshark
-    termshark
-    lsof
-    ipcalc
-    metasploit
-    # (vmstat, iostat, ifstat, netstat)
-    # wormhole
-    # *burpsuite
-
     # [system-monitor] // htop bpytop glances iotop dool
     # [system-monitor-gui] // gnome-system-monitor cpu-x
     # [disk-usage] // dua duf baobab ncdu dust

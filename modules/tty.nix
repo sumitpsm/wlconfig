@@ -7,7 +7,7 @@
     systemPackages = with pkgs; [
       helix yazi zellij gitui btop
       eza fd ripgrep unzip
-      git curl nmap jq
+      git curl jq
       nixd
     ];
     variables = {

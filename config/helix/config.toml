@@ -20,6 +20,9 @@ mode.select = "SELECT"
 [editor.lsp]
 enable = true
 
+[editor.file-picker]
+hidden = false
+
 [keys.normal]
 q = ":buffer-close"
 Q = ":buffer-close!"

@@ -11,5 +11,5 @@ if [ -f "$CACHE_FILE" ]; then
   # Get the wallpaper path from the cache file
   WALLPAPER_PATH=$(grep -v 'Lanczos3' "$CACHE_FILE" | head -n 1)
   sleep 1
-  swww img "$WALLPAPER_PATH"
+  swww img "$WALLPAPER_PATH" --transition-type fade --transition-duration 2
 fi

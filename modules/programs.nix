@@ -18,7 +18,6 @@ in
     gimp # image editor
     gnome-calculator # calculator
     gnome-boxes # virtual machine manager
-    wireshark # network protocol analyzer
     nautilus # file manager
     gnome-disk-utility # disk manager
     
