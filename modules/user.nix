@@ -49,8 +49,6 @@ in
       extraGroups = [
         "networkmanager" # for networking
         "wheel" # for sudo privileges
-        "libvirtd" # for virtualization
-        "adbusers" # for debugging android devices
       ];
       packages = with pkgs; [];
     };

@@ -9,7 +9,7 @@ copy_on_select true
 scroll_back_editor "/run/current-system/sw/bin/hx"
 styled_underlines true
 session_serialization true
-pane_viewport_serialization true
+pane_viewport_serialization false
 scrollback_lines_to_serialize 40
 serialization_interval 1024 // seconds
 disable_session_metadata false
@@ -79,7 +79,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { SwitchToMode "Normal"; }
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
-        bind "N" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "Space" { TogglePaneEmbedOrFloating; }
         bind "t" { NextSwapLayout; }
         bind "T" { TogglePaneFrames; SwitchToMode "Normal"; }

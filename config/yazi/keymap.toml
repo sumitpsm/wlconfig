@@ -48,7 +48,7 @@ keymap = [
     { on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
     #{ on = "",         run = "hardlink",                    desc = "Hardlink yanked files" },
     { on = "d",         run = "remove",                      desc = "Trash selected files" },
-    { on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
+    #{ on = "D",        run = "remove --permanently",        desc = "Permanently delete selected files" },
     { on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
 
     # Search, Find and Filter

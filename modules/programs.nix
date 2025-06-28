@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   ytdlp-github = pkgs.yt-dlp.overrideAttrs (oldAttrs: {
@@ -22,6 +22,6 @@ in
     gnome-disk-utility # disk manager
     
     # yt-dlp
-    ffmpeg-full ytdlp-github
+    ffmpeg-full ytdlp-github # parabolic // for GUI
   ];
 }

@@ -25,7 +25,7 @@
     # [theme-picker] // nwg-look libsForQt5.qt5ct
     # [video-editor] // kdePackages.kdenlive openshot-qt flowblade shotcut audacity *lightworks *davinci-resolve
     # [document] // libreoffice *wps
-    # [misc] // youtube-music *discord *spotify parabolic
+    # [misc] // youtube-music *discord *spotify
 
     mpv # celluloid kdePackages.dragon
     loupe eog

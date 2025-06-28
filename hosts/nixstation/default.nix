@@ -4,7 +4,7 @@
   imports = [
     ./hardware.nix
     ./packages.nix
-    # ./network.nix
+    # ./offsec
     ./../../modules/drivers/amd-drivers.nix
   ];
   programs = {

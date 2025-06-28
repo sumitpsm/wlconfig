@@ -3,12 +3,18 @@
 {
   environment.systemPackages = with pkgs; [
     nushell fish # powershell
-    # coreutils, busybox, toybox, moreutils
+    # coreutils, busybox, toybox, moreutils, iproute2, util-linux, procps, nettools, inetutils, sysstat
+    arp-scan arp-scan-rs
+    nmap # unicornscan
+
+    # DNS
+    dig dogdns dnsenum dnsmap dnsrecon dnstracer fierce # dqy
+
+    thc-ipv6
     xh
     procs
     mtr
     lshw
-    dig dogdns
     termshark
     lsof
     ipcalc
@@ -32,27 +38,10 @@
     # v1+v2+v3, SOCKS5, SSH (v1 and v2), SSHKEY, Subversion,
     # Teamspeak (TS2), Telnet, VMware-Auth, VNC and XMPP.
 
-    nmap
-    # Nmap is a utility for network exploration or security auditing.
-    # It supports ping scanning (determine which hosts are up), many
-    # port scanning techniques, version detection (determine service
-    # protocols and application versions listening behind ports), and
-    # TCP/IP fingerprinting (remote host OS or device identification).
-    # Nmap also offers flexible target and port specification,
-    # decoy/stealth scanning, sunRPC scanning, and more. Most Unix and
-    # Windows platforms are supported in both GUI and commandline
-    # modes. Several popular handheld devices are also supported,
-    # including the Sharp Zaurus and the iPAQ.
-
     metasploit
     # The Metasploit Framework is an open source platform that
     # supports vulnerability research, exploit development, and the
     # creation of custom security tools.
-
-    wireshark tshark
-    # Wireshark is a network “sniffer” - a tool that captures and
-    # analyzes packets off the wire. Wireshark can decode too many
-    # protocols to list here.
 
     gobuster
     # Gobuster is useful for pentesters, ethical hackers and forensics
@@ -96,13 +85,6 @@
     # different. It also identifies version numbers, email addresses,
     # account IDs, web framework modules, SQL errors, and more.
 
-    wifite2
-    # Wifite is a tool to audit WEP or WPA encrypted wireless 
-    # networks. It uses aircrack-ng, pyrit, reaver, tshark tools to 
-    # perform the audit. 
-    # This tool is customizable to be automated with only a few 
-    # arguments and can be trusted to run without supervision. 
-
     sqlmap
     # sqlmap goal is to detect and take advantage of SQL injection 
     # vulnerabilities in web applications. Once it detects one or more 
@@ -113,20 +95,6 @@
     # databases, dump entire or user’s specific DBMS tables/columns, 
     # run his own SQL statement, read specific files on the file 
     # system and more. 
-
-    airgorah ######## aircrack-ng ######## [not found]
-    # aircrack-ng is an 802.11a/b/g WEP/WPA cracking program that can 
-    # recover a 40-bit, 104-bit, 256-bit or 512-bit WEP key once 
-    # enough encrypted packets have been gathered. Also it can attack 
-    # WPA1/2 networks with some advanced methods or simply by brute 
-    # force.
-    # It implements the standard FMS attack along with some 
-    # optimizations, thus making the attack much faster compared to 
-    # other WEP cracking tools. It can also fully use a multiprocessor 
-    # system to its full power in order to speed up the cracking 
-    # process. 
-    # aircrack-ng is a fork of aircrack, as that project has been 
-    # stopped by the upstream maintainer. 
 
     hashcat
     # Hashcat supports five unique modes of attack for over 300 
@@ -185,12 +153,6 @@
     # features as commercial digital forensics tools for the analysis 
     # of Windows and UNIX file systems (NTFS, FAT, FFS, EXT2FS, and 
     # EXT3FS). 
-
-    theharvester
-    # The package contains a tool for gathering subdomain names, 
-    # e-mail addresses, virtual hosts, open ports/ banners, and 
-    # employee names from different public sources (search engines, 
-    # pgp key servers). 
 
     sherlock
     # Sherlock relies on the site’s designers providing a unique URL 
@@ -362,16 +324,6 @@
     # ettercap-graphical or ettercap-text-only for the actual 
     # GUI-enabled or text-only ettercap executable, respectively. 
 
-    tcpdump
-    # This program allows you to dump the traffic on a network. 
-    # tcpdump is able to examine IPv4, ICMPv4, IPv6, ICMPv6, UDP, TCP, 
-    # SNMP, AFS BGP, RIP, PIM, DVMRP, IGMP, SMB, OSPF, NFS and many 
-    # other packet types. 
-    # It can be used to print out the headers of packets on a network 
-    # interface, filter packets that match a certain expression. You 
-    # can use this tool to track down network problems, to detect 
-    # attacks or to monitor network activities. 
-
     bloodhound
     # This package contains BloodHound Community Edition, a single 
     # page Javascript web application. 
@@ -487,12 +439,6 @@
     # built-in types look at the data structures of a given file 
     # format allowing for a more reliable and faster recovery. 
 
-    dmitry
-    # Run a domain whois lookup (w), an IP whois lookup (i), retrieve 
-    # Netcraft info (n), search for subdomains (s), search for email 
-    # addresses (e), do a TCP port scan (p), and save the output to 
-    # example.txt (o) for the domain example.com 
-
     commix
     # This package contains Commix (short for [comm]and [i]njection 
     # e[x]ploiter). It has a simple environment and it can be used, 
@@ -548,13 +494,6 @@
     # NetExec is the continuation of CrackMapExec, which was 
     # maintained by mpgn over the years, but discontinued upon 
     # mpgn’s retirement. 
-
-    ######## fern-wifi-cracker ######## [not found]
-    # This package contains a Wireless security auditing and attack 
-    # software program written using the Python Programming Language 
-    # and the Python Qt GUI library, the program is able to crack and 
-    # recover WEP/WPA/WPS keys and also run other network based 
-    # attacks on wireless or ethernet based networks. 
 
     ######## dvwa ######## [not found]
     # This package contains a PHP/MySQL web application that is damn 
@@ -644,14 +583,6 @@
     # want to exploit, use the Metasploit Framework. If you want to 
     # Social Engineer, use the Social Engineer Toolkit. 
 
-    reaverwps reaverwps-t6x
-    # Reaver performs a brute force attack against an access point’s 
-    # Wi-Fi Protected Setup pin number. Once the WPS pin is found, the 
-    # WPA PSK can be recovered and alternately the AP’s wireless 
-    # settings can be reconfigured. This package also provides the 
-    # Wash executable, an utility for identifying WPS enabled access 
-    # points. See documentation in /usr/share/doc/reaver/README.WASH. 
-
     ######## pompem ######## [not found]
     # Find exploit with a system of advanced search, designed to 
     # automate the search for Exploits and Vulnerability in the most 
@@ -734,15 +665,6 @@
     # investigation will always be needed to assure the security of 
     # your system. 
 
-    bully
-    # Bully is a new implementation of the WPS brute force attack, 
-    # written in C. It is conceptually identical to other programs, in 
-    # that it exploits the (now well known) design flaw in the WPS 
-    # specification. It has several advantages over the original 
-    # reaver code. These include fewer dependencies, improved memory 
-    # and cpu performance, correct handling of endianness, and a more 
-    # robust set of options. 
-
     arping
     # The arping utility sends ARP and/or ICMP requests to the 
     # specified host and displays the replies. The host may be 
@@ -764,27 +686,12 @@
     # Inter-Switch Link Protocol (ISL).
     # VLAN Trunking Protocol (VTP).
 
-    ######## wifipumpkin3 ######## [not found]
-    # This package contains a powerful framework for rogue access 
-    # point attack, written in Python, that allow and offer to 
-    # security researchers, red teamers and reverse engineers to mount 
-    # a wireless network to conduct a man-in-the-middle attack. 
-
     subfinder
     # This package contains a subdomain discovery tool that discovers 
     # valid subdomains for websites by using passive online sources. 
     # It has a simple modular architecture and is optimized for speed. 
     # subfinder is built for doing one thing only - passive subdomain 
     # enumeration, and it does that very well. 
-
-    ######## sparrow-wifi ######## [not found]
-    # This package contains a graphical Wi-Fi analyzer for Linux. It 
-    # provides a more comprehensive GUI-based replacement for tools 
-    # like inSSIDer and linssid that runs specifically on Linux. In 
-    # its most comprehensive use cases, sparrow-wifi integrates Wi-Fi, 
-    # software-defined radio (hackrf), advanced bluetooth tools 
-    # (traditional and Ubertooth), traditional GPS (via gpsd), and 
-    # drone/rover GPS via mavlink in one solution. 
 
     medusa
     # Medusa is intended to be a speedy, massively parallel, modular, 
@@ -824,23 +731,6 @@
     # Samba tools smbclient, rpclient, net and nmblookup. The samba 
     # package is therefore a dependency. 
 
-    dnsenum
-    # Dnsenum is a multithreaded perl script to enumerate DNS 
-    # information of a domain and to discover non-contiguous ip 
-    # blocks. The main purpose of Dnsenum is to gather as much 
-    # information as possible about a domain. The program currently 
-    # performs the following operations: 
-    # Get the host’s addresses (A record).
-    # Get the namservers (threaded).
-    # Get the MX record (threaded).
-    # Perform axfr queries on nameservers and get BIND versions(threaded).
-    # Get extra names and subdomains via google scraping (google query = “allinurl: -www site:domain”).
-    # Brute force subdomains from file, can also perform recursion on subdomain that have NS records (all threaded).
-    # Calculate C class domain network ranges and perform whois queries on them (threaded).
-    # Perform reverse lookups on netranges (C class or/and whois netranges) (threaded).
-    # Write to domain_ips.txt file ip-blocks.
-    # This program is useful for pentesters, ethical hackers and forensics experts. It also can be used for security tests.
-
     capstone
     # Capstone is a lightweight multi-platform, multi-architecture 
     # disassembly framework. 
@@ -878,15 +768,6 @@
     # Complex and powerful rules can be created by using binary 
     # strings with wild-cards, case-insensitive text strings, special 
     # operators, regular expressions and many other features. 
-
-    ######## wifiphisher ######## [not found]
-    # This package contains a security tool that mounts automated 
-    # phishing attacks against Wi-Fi networks in order to obtain 
-    # secret passphrases or other credentials. It is a social 
-    # engineering attack that unlike other methods it does not include 
-    # any brute forcing. It is an easy way for obtaining credentials 
-    # from captive portals and third party login pages or WPA/WPA2 
-    # secret passphrases. 
 
     testdisk
     # TestDisk checks the partition and boot sectors of your disks. It 
@@ -1043,24 +924,6 @@
     # insights for SRE analysts who seek a better understanding of 
     # potential vulnerabilities in networks and systems. 
 
-    dnstracer
-    # dnstracer determines where a given Domain Name Server (DNS) gets 
-    # its information from for a given hostname, and follows the chain 
-    # of DNS servers back to the authoritative answer. 
-
-    dnsrecon fierce
-    # DNSRecon is a Python script that provides the ability to perform:
-    # Check all NS Records for Zone Transfers.
-    # Enumerate General DNS Records for a given Domain (MX, SOA, NS, A, AAAA, SPF and TXT).
-    # Perform common SRV Record Enumeration.
-    # Top Level Domain (TLD) Expansion.
-    # Check for Wildcard Resolution.
-    # Brute Force subdomain and host A and AAAA records given a domain and a wordlist.
-    # Perform a PTR Record lookup for a given IP Range or CIDR.
-    # Check a DNS Server Cached records for A, AAAA and CNAME
-    # Records provided a list of host records in a text file to check.
-    # Enumerate Hosts and Subdomains using Google
-
     ######## dnscat2 ######## [not found]
     # This tool is designed to create an encrypted command-and-control 
     # (C&C) channel over the DNS protocol, which is an effective 
@@ -1107,10 +970,6 @@
     # WebDAV (Web-based Distributed Authoring and Versioning) is a set 
     # of extensions to the HTTP protocol which allow users to 
     # collaboratively edit and manage files on remote web servers. 
-
-    airgeddon
-    # airgeddon is a menu driven 3rd party tools wrapper to audit 
-    # wireless networks with many features. 
 
     ######## zaproxy ######## [notfound]
     # The OWASP Zed Attack Proxy (ZAP) is an easy to use integrated 
