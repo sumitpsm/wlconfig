@@ -13,11 +13,22 @@ function set_theme() {
   # wallust run -s "$1"
 }
 
-if [ -f $FILE ]; then
+if [[ -f $FILE ]]; then
   set_theme "$1"
 elif [[ $FILE == "--random" || $FILE == "-r" ]]; then
   set_theme "$(fd ".*\.(png|jpg|jpeg|webp|gif)" ~/media/wallpapers/ | shuf -n1)"
 else
-  echo "$FILE doesn't exist"
-  exit 1
+  # Get current focused monitor
+  CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
+
+  # Construct the full path to the cache file
+  CACHE_FILE="$HOME/.cache/swww/$CURRENT_MONITOR"
+
+  # Check if the cache file exists for the current monitor output
+  if [ -f "$CACHE_FILE" ]; then
+    # Get the wallpaper path from the cache file
+    WALLPAPER_PATH=$(grep -v 'Lanczos3' "$CACHE_FILE" | head -n 1)
+    sleep 1
+    swww img "$WALLPAPER_PATH" --transition-type fade --transition-duration 2
+  fi
 fi
