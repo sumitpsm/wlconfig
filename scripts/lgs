@@ -4,7 +4,7 @@
 # current working directory and lists their git status
 
 CWD=$(pwd)
-DIRS=$(/usr/bin/env ls -l | grep "^d" | cut -b 45-) #| sed "s/^/'/g; s/$/'/g")
+DIRS=$(/usr/bin/env ls -l | grep "^d" | awk '{print $9}') #| sed "s/^/'/g; s/$/'/g")
 
 for DIR in $DIRS
 do
