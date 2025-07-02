@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment = {
@@ -29,7 +29,9 @@
         lf = "yazi";
         tmux = "zellij";
         btop = "btop --force-utf";
-        todo = "hx /home/${config.user.name}/gen/todo/*";
+        todo = "hx ~/gen/todo/*";
+        trash = "rm -rfv ~/.local/share/Trash";
+        template = "cat ~/dev/main/cses-problem-set/template.rs | wl-copy";
       };
     };
     zoxide = {

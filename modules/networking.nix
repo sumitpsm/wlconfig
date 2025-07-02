@@ -2,8 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    traceroute curl
-    wireshark tshark tcpdump
+    traceroute
+    curl
+    wireshark tcpdump # termshark // for TUI
   ];
 
   # wireshark configuration

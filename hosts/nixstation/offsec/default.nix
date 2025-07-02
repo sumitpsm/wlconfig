@@ -5,17 +5,12 @@
     nushell fish # powershell
     # coreutils, busybox, toybox, moreutils, iproute2, util-linux, procps, nettools, inetutils, sysstat
     arp-scan arp-scan-rs
-    nmap # unicornscan
-
-    # DNS
-    dig dogdns dnsenum dnsmap dnsrecon dnstracer fierce # dqy
 
     thc-ipv6
     xh
     procs
     mtr
     lshw
-    termshark
     lsof
     ipcalc
     # (vmstat, iostat, ifstat, netstat)
@@ -43,47 +38,12 @@
     # supports vulnerability research, exploit development, and the
     # creation of custom security tools.
 
-    gobuster
-    # Gobuster is useful for pentesters, ethical hackers and forensics
-    # experts. It also can be used for security tests.Gobuster is a
-    # tool used to brute-force: URIs (directories and files) in web
-    # sites, DNS subdomains (with wildcard support), Virtual Host
-    # names on target web servers, Open Amazon S3 buckets, Open Google
-    # Cloud buckets and TFTP servers.
-    # Gobuster is useful for pentesters, ethical hackers and forensics
-    # experts. It also can be used for security tests.
-
-    dirb
-    # DIRB is a Web Content Scanner. It looks for existing (and/or
-    # hidden) Web Objects. It basically works by launching a
-    # dictionary based attack against a web server and analyzing the
-    # responses.
-    # DIRB comes with a set of preconfigured attack wordlists for easy
-    # usage but you can use your custom wordlists. Also DIRB sometimes
-    # can be used as a classic CGI scanner, but remember that it is a
-    # content scanner not a vulnerability scanner.
-    # DIRB’s main purpose is to help in professional web application
-    # auditing. Specially in security related testing. It covers some
-    # holes not covered by classic web vulnerability scanners. DIRB
-    # looks for specific web objects that other generic CGI scanners
-    # can’t look for. It doesn’t search vulnerabilities nor does
-    # it look for web contents that can be vulnerable.
-
     cowpatty
     # If you are auditing WPA-PSK or WPA2-PSK networks, you can use
     # this tool to identify weak passphrases that were used to
     # generate the PMK. Supply a libpcap capture file that includes
     # the 4-way handshake, a dictionary file of passphrases to guess
     # with, and the SSID for the network.
-
-    whatweb
-    # WhatWeb identifies websites. It recognises web technologies
-    # including content management systems (CMS), blogging platforms,
-    # statistic/analytics packages, JavaScript libraries, web servers,
-    # and embedded devices.
-    # WhatWeb has over 900 plugins, each to recognise something
-    # different. It also identifies version numbers, email addresses,
-    # account IDs, web framework modules, SQL errors, and more.
 
     sqlmap
     # sqlmap goal is to detect and take advantage of SQL injection 
@@ -139,13 +99,6 @@
     # Toggle-Case attack
     # PRINCE attack
 
-    ######## maltego ######## [unfree]
-    # Maltego is an open source intelligence and forensics 
-    # application. It will offer you timous mining and gathering of 
-    # information as well as the representation of this information in 
-    # a easy to understand format. 
-    # This package replaces previous packages matlegoce and casefile.
-
     autospy
     # The Autopsy Forensic Browser is a graphical interface to the 
     # command line digital forensic analysis tools in The Sleuth Kit. 
@@ -184,18 +137,6 @@
     # techniques with state-of-the-art automation, to make your work 
     # faster, more effective, and more fun. 
 
-    hping
-    # hping3 is a network tool able to send custom ICMP/UDP/TCP 
-    # packets and to display target replies like ping does with ICMP 
-    # replies. It handles fragmentation and arbitrary packet body and 
-    # size, and can be used to transfer files under supported 
-    # protocols. Using hping3, you can test firewall rules, perform 
-    # (spoofed) port scanning, test network performance using 
-    # different protocols, do path MTU discovery, perform 
-    # traceroute-like actions under different protocols, fingerprint 
-    # remote operating systems, audit TCP/IP stacks, etc. hping3 is 
-    # scriptable using the Tcl language. 
-
     snort
     # Snort is a libpcap-based packet sniffer/logger which can be used 
     # as a lightweight network intrusion detection system. It features 
@@ -218,10 +159,6 @@
     # SSL support (through libnet-ssleay-perl)
     # Proxy support (with authentication)
     # Cookies support
-
-     ######## wpscan ######## [unfree]
-    # WPScan scans remote WordPress installations to find security 
-    # issues. 
 
     responder
     # Specify the IP address to redirect to (-i 192.168.1.202), 
@@ -253,23 +190,6 @@
     # launching directed command modules and further attacks against 
     # the system from within the browser context. 
 
-    dirbuster
-    # DirBuster is a multi threaded java application designed to brute 
-    # force directories and files names on web/application servers. 
-    # Often is the case now of what looks like a web server in a state 
-    # of default installation is actually not, and has pages and 
-    # applications hidden within. DirBuster attempts to find these. 
-    # However tools of this nature are often as only good as the 
-    # directory and file list they come with. A different approach was 
-    # taken to generating this. The list was generated from scratch, 
-    # by crawling the Internet and collecting the directory and files 
-    # that are actually used by developers! DirBuster comes a total of 
-    # 9 different lists, this makes DirBuster extremely effective at 
-    # finding those hidden files and directories. And if that was not 
-    # enough DirBuster also has the option to perform a pure brute 
-    # force, which leaves the hidden directories and files nowhere to 
-    # hide. 
-
     crunch
     # Crunch is a wordlist generator where you can specify a standard 
     # character set or any set of characters to be used in generating 
@@ -289,21 +209,6 @@
     # variety of protocols including TCP, DNS, HTTP, File, etc. With 
     # powerful and flexible templating, all kinds of security checks 
     # can be modelled with Nuclei. 
-
-    netdiscover
-    # Netdiscover is an active/passive address reconnaissance tool, 
-    # mainly developed for those wireless networks without dhcp 
-    # server, when you are wardriving. It can be also used on 
-    # hub/switched networks. 
-    # Built on top of libnet and libpcap, it can passively detect 
-    # online hosts, or search for them, by actively sending ARP 
-    # requests. 
-    # Netdiscover can also be used to inspect your network ARP 
-    # traffic, or find network addresses using auto scan mode, which 
-    # will scan for common local networks. 
-    # Netdiscover uses the OUI table to show the vendor of the each 
-    # MAC address discovered and is very useful for security checks or 
-    # in pentests. 
 
     ettercap
     # Ettercap supports active and passive dissection of many 
@@ -422,13 +327,6 @@
     # clone the database(s), and much more… Whenever relevant, 
     # sqlsus will mimic a MySQL console output. 
 
-    ######## legion ######## [not found]
-    # This package contains an open source, easy-to-use, 
-    # super-extensible and semi-automated network penetration testing 
-    # tool that aids in discovery, reconnaissance and exploitation of 
-    # information systems. 
-    # Legion is a fork of SECFORCE’s Sparta.
-
     foremost
     # Foremost is a forensic program to recover lost files based on 
     # their headers, footers, and internal data structures. 
@@ -467,26 +365,6 @@
     # pre 2007, Office 2007 and PDF formats. 
     # CeWL is useful in security tests and forensics investigations. 
     # CeWL is pronounced “cool”. 
-
-    amass
-    # This package contains a tool to help information security 
-    # professionals perform network mapping of attack surfaces and 
-    # perform external asset discovery using open source information 
-    # gathering and active reconnaissance techniques. 
-    # Information Gathering Techniques Used: - DNS: Basic enumeration, 
-    # Brute forcing (upon request), Reverse DNS sweeping, Subdomain 
-    # name alterations/permutations, Zone transfers (upon request) - 
-    # Scraping: Ask, Baidu, Bing, DNSDumpster, DNSTable, Dogpile, 
-    # Exalead, Google, HackerOne, IPv4Info, Netcraft, PTRArchive, 
-    # Riddler, SiteDossier, ViewDNS, Yahoo - Certificates: Active 
-    # pulls (upon request), Censys, CertSpotter, Crtsh, Entrust, 
-    # GoogleCT - APIs: AlienVault, BinaryEdge, BufferOver, CIRCL, 
-    # CommonCrawl, DNSDB, HackerTarget, Mnemonic, NetworksDB, 
-    # PassiveTotal, RADb, Robtex, SecurityTrails, ShadowServer, 
-    # Shodan, Spyse (CertDB & FindSubdomains), Sublist3rAPI, 
-    # TeamCymru, ThreatCrowd, Twitter, Umbrella, URLScan, VirusTotal - 
-    # Web Archives: ArchiveIt, ArchiveToday, Arquivo, LoCArchive, 
-    # OpenUKArchive, UKGovArchive, Wayback 
 
     netexec
     # NetExec (AKA nxc) is a network service exploitation tool that 
@@ -537,18 +415,6 @@
     # exposes the advanced post- exploitation features in the 
     # framework. 
 
-    ######## spiderfoot ######## [not found]
-    # This package contains an open source intelligence (OSINT) 
-    # automation tool. Its goal is to automate the process of 
-    # gathering intelligence about a given target, which may be an IP 
-    # address, domain name, hostname, network subnet, ASN, e-mail 
-    # address or person’s name. 
-    # SpiderFoot can be used offensively, i.e. as part of a black-box 
-    # penetration test to gather information about the target, or 
-    # defensively to identify what information you or your 
-    # organisation are freely providing for attackers to use against 
-    # you. 
-
     socat
     # Socat (for SOcket CAT) establishes two bidirectional byte 
     # streams and transfers data between them. Data channels may be 
@@ -567,21 +433,6 @@
     ######## sara ######## [not found]
     # This package contains an autonomous RouterOS configuration 
     # analyzer for finding security issues on MikroTik hardware. 
-
-    recon-ng
-    # Recon-ng is a full-featured Web Reconnaissance framework written 
-    # in Python. Complete with independent modules, database 
-    # interaction, built in convenience functions, interactive help, 
-    # and command completion, Recon-ng provides a powerful environment 
-    # in which open source web-based reconnaissance can be conducted 
-    # quickly and thoroughly. 
-    # Recon-ng has a look and feel similar to the Metasploit 
-    # Framework, reducing the learning curve for leveraging the 
-    # framework. However, it is quite different. Recon-ng is not 
-    # intended to compete with existing frameworks, as it is designed 
-    # exclusively for web-based open source reconnaissance. If you 
-    # want to exploit, use the Metasploit Framework. If you want to 
-    # Social Engineer, use the Social Engineer Toolkit. 
 
     ######## pompem ######## [not found]
     # Find exploit with a system of advanced search, designed to 
@@ -604,23 +455,9 @@
     # WPA TKIP Denial-of-Service.
     # WDS Confusion - Shuts down large scale multi-AP installations.
 
-    masscan
-    # MASSCAN is TCP port scanner which transmits SYN packets 
-    # asynchronously and produces results similar to nmap, the most 
-    # famous port scanner. Internally, it operates more like scanrand, 
-    # unicornscan, and ZMap, using asynchronous transmission. It’s a 
-    # flexible utility that allows arbitrary address and port ranges. 
-
     hash-identifier
     # Software to identify the different types of hashes used to 
     # encrypt data and especially passwords. 
-
-    ffuf
-    # ffuf is a fast web fuzzer written in Go that allows typical 
-    # directory discovery, virtual host discovery (without DNS 
-    # records) and GET and POST parameter fuzzing. 
-    # This program is useful for pentesters, ethical hackers and 
-    # forensics experts. It also can be used for security tests. 
 
     evil-winrm
     # This package contains the ultimate WinRM shell for 
@@ -665,11 +502,6 @@
     # investigation will always be needed to assure the security of 
     # your system. 
 
-    arping
-    # The arping utility sends ARP and/or ICMP requests to the 
-    # specified host and displays the replies. The host may be 
-    # specified by its hostname, its IP address, or its MAC address. 
-
     yersinia
     # Yersinia is a framework for performing layer 2 attacks. It is 
     # designed to take advantage of some weakeness in different 
@@ -685,13 +517,6 @@
     # 802.1x.
     # Inter-Switch Link Protocol (ISL).
     # VLAN Trunking Protocol (VTP).
-
-    subfinder
-    # This package contains a subdomain discovery tool that discovers 
-    # valid subdomains for websites by using passive online sources. 
-    # It has a simple modular architecture and is optimized for speed. 
-    # subfinder is built for doing one thing only - passive subdomain 
-    # enumeration, and it does that very well. 
 
     medusa
     # Medusa is intended to be a speedy, massively parallel, modular, 
@@ -709,9 +534,6 @@
     # .mod file. This means that no modifications are necessary to the 
     # core application in order to extend the supported list of 
     # services for brute-forcing. 
-
-    lbd
-    # Checks if a given domain uses load-balancing.
 
     villain ######## hoaxshell ######## [not found]
     # Hoaxshell is a Windows reverse shell payload generator and 
@@ -979,5 +801,12 @@
     # security experience and as such is ideal for developers and 
     # functional testers who are new to penetration testing as well as 
     # being a useful addition to an experienced pen testers toolbox. 
+
+    ######## davtest ######## [not found]
+    # DAVTest tests WebDAV enabled servers by uploading test
+    # executable files, and then (optionally) uploading files which
+    # allow for command execution or other actions directly on the
+    # target. It is meant for penetration testers to quickly and
+    # easily determine if enabled DAV services are exploitable. 
   ];
 }
