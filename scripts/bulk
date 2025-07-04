@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+# This is script to bulk rename, copy, move or delete files.
+# It uses fzf to find files. For rename it uses the $EDITOR.
+# Controls: [Tab to MoveDown, Shift+Tab to MoveUp, Ctrl+N to Select]
+
+list="eza -l --group-directories-first --icons"
+
+function boilerplate() {
+  command=$1
+  path=$2
+  subcommand=$3
+  count=$(echo "$selected" | wc -l)
+  if [[ ! -z $1 ]]; then
+    $list "${files[@]}"
+    read -n1 -rep "Would you like to $subcommand all $count selected files [y/n]? " INPUT
+    if [[ $INPUT == "y" || $INPUT == "Y" ]]; then
+      $command "${files[@]}" $path
+    fi
+  else
+    echo "error: output path not found"
+  fi
+}
+
+function select_files() {
+  selected=$(fzf --multi --reverse --bind "ctrl-n:toggle+down,tab:down,shift-tab:up" --preview="bat -p --color=always {}")
+
+  # checking if selection is empty
+  if [[ -z "$selected" ]]; then
+    exit
+  fi
+
+  # rearranging files (doesn't required in rename)
+  while IFS= read -r file; do
+      files+=("$file")
+  done <<< "$selected"
+}
+
+##! handling subcommands
+if [[ $1 == "r" ]]; then
+  select_files
+  tempfile="/tmp/tempfile"
+
+  # converting old filenames into an array
+  readarray -t files < <(echo "$selected")
+
+  # extract basenames and write to output file
+  for file in "${files[@]}"; do
+    basename "$file" >> $tempfile
+  done
+
+  # opening editor with list of files to rename
+  $EDITOR $tempfile
+
+  # converting new filenames into an array
+  readarray -t new_names < $tempfile
+
+  # check if the number of selected files matches the number of new names
+  if [ ${#files[@]} -ne ${#new_names[@]} ]; then
+      echo "error: number of selected files (${#files[@]}) does not match number of new names (${#new_names[@]})"
+      rm $tempfile
+      exit 1
+  fi
+
+  $list "${files[@]}"
+  read -n1 -rep "Would you like to rename selected files [y/n]? " INPUT
+  if [[ $INPUT == "y" || $INPUT == "Y" ]]; then
+    for ((i=0; i<${#files[@]}; i++)); do
+      old_file="${files[$i]}"
+      new_name="${new_names[$i]}"
+
+      # skip empty new names
+      if [ -z "$new_name" ]; then
+        echo "warning: empty new name for file '$old_file'. Skipping."
+        continue
+      fi
+
+      # get the directory of the old file
+      dir=$(dirname "$old_file")
+
+      # construct the full path for the new file
+      new_file="$dir/$new_name"
+
+      # check if the new file path already exists
+      if [ -e "$new_file" ]; then
+        echo "warning: file '$new_file' already exists. Skipping."
+        continue
+      fi
+
+      # perform the rename
+      mv -v "$old_file" "$new_file" 2>/dev/null
+    done
+  fi
+
+  # removing the tempfile
+  rm $tempfile
+
+elif [[ $1 == "c" && -n "$2" ]]; then
+  select_files
+  boilerplate cp $2 "copy"
+
+elif [[ $1 == "m" && -n "$2" ]]; then
+  select_files
+  boilerplate mv $2 "move"
+
+elif [[ $1 == "d" ]]; then
+  select_files
+  boilerplate mv ~/.local/share/Trash/files "delete"
+
+else
+  echo "error: subcommand not found"
+  echo "Usage: bulk r"
+  echo "Usage: bulk c [path]"
+  echo "Usage: bulk m [path]"
+  echo "Usage: bulk d"
+  exit 1
+fi
