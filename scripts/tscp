@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# tscp stands for terminal sequence color palette
+# This script prints the current terminal sequence
+# color palette in terminal
+
+echo
+for i in {0..16}; do
+    printf "\033[38;5;${i}m%-4s \033[0m" "████"
+    [ $((($i + 1) % 8)) -eq 0 ] && echo
+done

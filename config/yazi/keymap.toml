@@ -90,7 +90,7 @@ keymap = [
 
     { on = "w",         run = "tasks_show",                                              desc = "Show task manager" },
     { on = "$",         run = "shell --interactive",                                     desc = "Run a shell command" },
-    { on = "W",         run = 'shell --orphan "$HOME/.local/scripts/theme-set $0"',      desc = "Sets theme" },
+    { on = "W",         run = 'shell --orphan "$HOME/.local/scripts/wset $0"',           desc = "Sets wallpaper" },
     # { on = "", run = "cd --interactive", desc = "" },
     # { on = "", run = "reveal", desc = "" },
     # { on = "", run = "toggle", desc = "" },

@@ -2,7 +2,9 @@
 
 # This command checks for git repositories present in the
 # current working directory and lists their git status
+# You can also pass the directory path as argument.
 
+[ ! -z "$1" ] && cd $1
 CWD=$(pwd)
 DIRS=$(/usr/bin/env ls -l | grep "^d" | awk '{print $9}') #| sed "s/^/'/g; s/$/'/g")
 

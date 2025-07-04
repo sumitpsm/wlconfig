@@ -143,7 +143,7 @@ space.a = "code_action" ## Apply code action (LSP)
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
 # space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
-# space.g	## Debug (experimental)
+# space.G	## Debug (experimental)
 # space.w	## Enter window mode
 space.f = [
   ':sh rm -f /tmp/files2open',
@@ -162,6 +162,7 @@ space.f = [
 "]".space = "no_op"
 space.F = "no_op"
 space.j = "no_op"
+space.g = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
 space.k = "no_op"
@@ -300,7 +301,7 @@ space.a = "code_action" ## Apply code action (LSP)
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
 # space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
-# space.g	## Debug (experimental)
+# space.G	## Debug (experimental)
 # space.w	## Enter window mode
 space.f = [
   ':sh rm -f /tmp/files2open',
@@ -319,6 +320,7 @@ space.f = [
 "]".space = "no_op"
 space.F = "no_op"
 space.j = "no_op"
+space.g = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
 space.k = "no_op"

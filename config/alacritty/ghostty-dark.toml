@@ -1,0 +1,59 @@
+[colors.primary]
+background = "#000000"          # Dark navy/gray background, common in Ghostty-like themes
+foreground = "#d8d8d8"          # Light grayish-blue foreground for readability
+dim_foreground = "#737aa2"      # Dimmed version of foreground for subtle text
+bright_foreground = "None"      # No bright foreground, as per example
+
+[colors.search]
+matches = { foreground = "#1a1b26", background = "#f7768e" }  # Reddish highlight for matches
+focused_match = { foreground = "#1a1b26", background = "#ff9e64" }  # Orange for focused matches
+
+[colors.hints]
+start = { foreground = "#1a1b26", background = "#ff9e64" }  # Orange for hint start
+end = { foreground = "#1a1b26", background = "#f7768e" }    # Red for hint end
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#1a1b26"          # Dark background for contrast
+background = "#c0caf5"          # Light foreground for footer bar
+
+[colors.selection]
+text = "CellBackground"         # Inverts text to background
+background = "CellForeground"   # Inverts background to foreground
+
+[colors.normal]
+black = "#15161e"               # Darker black for normal
+red = "#f7768e"                 # Vibrant red
+green = "#9ece6a"               # Muted green
+yellow = "#e0af68"              # Warm yellow
+blue = "#7aa2f7"                # Soft blue
+magenta = "#bb9af7"             # Light purple
+cyan = "#7dcfff"                # Bright cyan
+white = "#a9b1d6"               # Off-white
+
+[colors.bright]
+black = "#414868"               # Lighter gray for bright black
+red = "#ff7a93"                 # Brighter red
+green = "#b1e08f"               # Brighter green
+yellow = "#f7c67f"              # Brighter yellow
+blue = "#8db0fa"                # Brighter blue
+magenta = "#cfa1ff"             # Brighter purple
+cyan = "#89ddff"                # Brighter cyan
+white = "#c0caf5"               # Brighter white
+
+[colors.dim]
+black = "#0f1015"               # Darkest black for dim
+red = "#a6505e"                 # Dimmed red
+green = "#6b8e45"               # Dimmed green
+yellow = "#9c7a46"              # Dimmed yellow
+blue = "#526ca6"                # Dimmed blue
+magenta = "#7c66a6"             # Dimmed purple
+cyan = "#568ca6"                # Dimmed cyan
+white = "#737aa2"               # Dimmed white
+
+[colors]
+transparent_background_colors = false
+draw_bold_text_with_bright_colors = true

@@ -30,7 +30,6 @@
     mpv # celluloid kdePackages.dragon
     loupe eog
     papers
-    fzf
     yad
     gh
     wiki-tui
@@ -50,7 +49,7 @@
   ];
   programs = {
     bash.shellAliases = {
-      kmap = "eval $(sudo kmonad ~/dev/colemaxx.kbd)";
+      kmap = "eval $(sudo kmonad -linfo ~/dev/colemaxx.kbd)";
     };
   };
 }

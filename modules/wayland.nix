@@ -88,7 +88,7 @@ in
     chafa timg # terminal graphics library
     wl-clipboard # clipboard
     swww # wallpaper
-    wallust # theme generator
+    # wallust # theme generator
     hypridle # idling daemon
     polkit_gnome # polkit agent
 

@@ -3,9 +3,9 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix yazi zellij gitui btop
+      helix fzf zellij gitui btop
       eza fd ripgrep unzip
-      git jq
+      git jq yazi bat
       nixd vscode-langservers-extracted
     ];
     variables = {
