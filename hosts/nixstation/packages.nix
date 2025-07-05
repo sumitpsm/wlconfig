@@ -4,21 +4,23 @@
   # services.xserver.desktopManager.gnome.enable = true;
   environment.systemPackages = with pkgs; [
     hyprlock
-    grim
-    slurp
     fuzzel
     ashell
     gnome-characters
     libnotify
     handbrake
 
-    # [system-monitor] // htop bpytop glances iotop dool
+    # [shell] // zsh xonsh elvish ion fish powershell
+    # [terminal-multiplexer] // mprocs tmux
+    # [system-monitor] // htop bpytop glances iotop dool zenith
     # [system-monitor-gui] // gnome-system-monitor cpu-x
     # [disk-usage] // dua duf baobab ncdu dust
-    # [screensaver] // cmatrix pipes pipes-rs figlet cowsay asciinema asciinema-agg
+    # [screensaver] // cmatrix pipes pipes-rs figlet cowsay
     # [fetch] // fastfetch inxi neofetch freshfetch
     # [music-player] // termusic rmpc ncmpcpp cmus kew
     # [web-music-client] // ytermusic ncspot yui-music youtube-tui
+    # [documentation] // wiki-tui cht-sh
+    # [theme-generator] // wallust pywal pywal16
     # [file-manager] // kdePackages.dolphin xfce.thunar
     # [disk-manager] // gparted kdePackages.partitionmanager mmtui
     # [browser] // firefox chromium torbrowser *opera
@@ -30,17 +32,11 @@
     mpv # celluloid kdePackages.dragon
     loupe eog
     papers
-    yad
-    gh
-    wiki-tui
-    cht-sh
-    mprocs
-    presenterm
-    calls
+    yad zenity
+    chafa timg # terminal graphics library
 
     # amfora
     # appimage-run usbutils
-    # socat
     # v4l-utils
     # nwg-displays
     # lm_sensors

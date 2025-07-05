@@ -23,7 +23,7 @@ function boilerplate() {
 }
 
 function select_files() {
-  selected=$(fzf --multi --reverse --bind "ctrl-n:toggle+down,tab:down,shift-tab:up" --preview="bat -p --color=always {}")
+  selected=$(fzf --multi --preview="bat -p --color=always {}")
 
   # checking if selection is empty
   if [[ -z "$selected" ]]; then

@@ -2,7 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    nushell fish # powershell
     # coreutils, busybox, toybox, moreutils, iproute2, util-linux, procps, nettools, inetutils, sysstat
     arp-scan arp-scan-rs
 

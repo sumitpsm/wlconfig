@@ -4,8 +4,6 @@
   # services.xserver.desktopManager.gnome.enable = true;
   environment.systemPackages = with pkgs; [
     hyprlock
-    grim
-    slurp
     fuzzel
     ashell
     gnome-characters
@@ -16,7 +14,6 @@
     # volume control [pavucontrol, playerctl]
     # screen-locking-utility [hyprlock]
     # ags/eww # widget system [statusbar, application-launcher, calender, notifications]
-    # screen-shotting-tool & color-picker
     # [waybar, rofi, swaynotificationcenter, networkmanagerapplet, wlogout, swappy, grim/slurp]
     # imagemagick
   ];

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
@@ -85,12 +85,11 @@ in
   environment.systemPackages = with pkgs; [
     kmonad # keyboard mapper
     alacritty kitty # terminal emulators
-    chafa timg # terminal graphics library
     wl-clipboard # clipboard
     swww # wallpaper
-    # wallust # theme generator
     hypridle # idling daemon
     polkit_gnome # polkit agent
+    grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
 
     # themes
     gnome-themes-extra

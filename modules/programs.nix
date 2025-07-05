@@ -24,4 +24,5 @@ in
     # yt-dlp
     ffmpeg-full ytdlp-github # parabolic // for GUI
   ];
+  # programs.calls.enable = true;
 }
