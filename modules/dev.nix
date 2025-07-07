@@ -3,16 +3,16 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix zellij gitui btop
+      helix zellij btop git
       eza fd ripgrep jq unzip
-      git fzf bat yazi # gh
+      fzf bat yazi # gh
       nixd vscode-langservers-extracted
 
       # extras
+      nushell
       presenterm
       asciinema
       asciinema-agg 
-      nushell
     ];
     variables = {
       EDITOR = "hx";
@@ -25,6 +25,10 @@
       PATH = [ "$PATH" "$HOME/.local/scripts" ];
     };
   };
+
+  environment.etc."bash.bashrc".text = ''
+    source "$(fzf --bash)"
+  '';
 
   programs = {
     bash = {
@@ -39,6 +43,7 @@
         todo = "hx ~/gen/todo/*";
         trash = "rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*";
         template = "cat ~/dev/main/cses-problem-set/template.rs | wl-copy";
+        lf = "yazi";
       };
     };
     zoxide = {
@@ -46,6 +51,7 @@
       enableBashIntegration = true;
       flags = [ "--cmd cd" ];
     };
+    fzf.fuzzyCompletion = true;
     nano.enable = false;
   };
 }

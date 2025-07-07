@@ -12,12 +12,13 @@
 
     # [shell] // zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux
-    # [system-monitor] // htop bpytop glances iotop dool zenith
+    # [system-monitor] // htop bpytop glances iotop dool zenith sysstat
     # [system-monitor-gui] // gnome-system-monitor cpu-x
-    # [disk-usage] // dua duf baobab ncdu dust
+    # [disk-usage] // dua duf baobab ncdu dust dysk
     # [screensaver] // cmatrix pipes pipes-rs figlet cowsay
     # [fetch] // fastfetch inxi neofetch freshfetch
     # [music-player] // termusic rmpc ncmpcpp cmus kew
+    # [git-tuis] // lazygit gitui tig ungit
     # [web-music-client] // ytermusic ncspot yui-music youtube-tui
     # [documentation] // wiki-tui cht-sh
     # [theme-generator] // wallust pywal pywal16

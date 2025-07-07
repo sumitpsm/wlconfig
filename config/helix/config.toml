@@ -47,7 +47,6 @@ w = "move_next_word_end"
 W = "move_next_long_word_end"
 b = "move_prev_word_start"
 B = "move_prev_long_word_start"
-V = "match_brackets"
 
 # text-manipulation
 c = "yank" # copy
@@ -78,16 +77,20 @@ n = [ "collapse_selection", "insert_mode" ]
 space.n = "open_above"
 h = [ "move_char_right", "insert_mode" ]
 space.h = "open_below"
+D = "select_register"
+V = "match_brackets"
+"{" = "expand_selection"
+"}" = "shrink_selection"
 
 # find & selection
-s = "file_picker" # Fd Search
-S = "global_search" # Ripgrep Search
-f = "search"
-F = [ "search_selection", "search" ]
+g = "file_picker" # Fd Search
+G = "global_search" # Ripgrep Search
+s = "search"
+S = [ "search_selection", "search" ]
 M = "search_prev" # goto_prev_match
 m = "search_next" # goto_next_match
-G = "extend_prev_char" # goto_prev_char
-g = "extend_next_char" # goto_next_char
+F = "extend_prev_char" # goto_prev_char
+f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
 
@@ -110,8 +113,6 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
-"{" = "expand_selection"
-"}" = "shrink_selection"
 # merge_selections
 # merge_consecutive_selections
 
@@ -207,7 +208,6 @@ w = "extend_next_word_end"
 W = "extend_next_long_word_end"
 b = "extend_prev_word_start"
 B = "extend_prev_long_word_start"
-V = "match_brackets"
 
 # text-manipulation
 c = "yank" # copy
@@ -236,16 +236,20 @@ U = "redo"
 
 space.n = "open_above"
 space.h = "open_below"
+D = "select_register"
+V = "match_brackets"
+"{" = "expand_selection"
+"}" = "shrink_selection"
 
 # find & selection
-s = "file_picker" # Fd Search
-S = "global_search" # Ripgrep Search
-f = "search" # find
-F = [ "search_selection", "search" ]
+g = "file_picker" # Fd Search
+G = "global_search" # Ripgrep Search
+s = "search"
+S = [ "search_selection", "search" ]
 M = "search_prev" # goto_prev_match
 m = "search_next" # goto_next_match
-G = "extend_prev_char" # goto_prev_char
-g = "extend_next_char" # goto_next_char
+F = "extend_prev_char" # goto_prev_char
+f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
 
@@ -270,8 +274,6 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 "(" = "rotate_selections_backward"
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
-"{" = "expand_selection"
-"}" = "shrink_selection"
 
 space.y = "goto_file_start"
 space.i = "goto_file_end"
