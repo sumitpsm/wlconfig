@@ -18,8 +18,10 @@
       EDITOR = "hx";
       VISUAL = "hx";
       SUDO_EDITOR = "hx";
-      FZF_DEFAULT_COMMAND = "fd --type f --hidden --follow --exclude .git";
+      FZF_DEFAULT_COMMAND = "fd -ai --type f --hidden --ignore --exclude .git";
       FZF_DEFAULT_OPTS = "--reverse --bind 'ctrl-n:toggle+down,tab:down,shift-tab:up'";
+      HISTSIZE = 10000;      # Number of commands to keep in memory
+      HISTFILESIZE = 100000; # Number of lines to keep in the history file
     };
     sessionVariables = {
       PATH = [ "$PATH" "$HOME/.local/scripts" ];

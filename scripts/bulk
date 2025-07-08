@@ -1,117 +1,169 @@
 #!/usr/bin/env bash
 
-# This is script to bulk rename, copy, move or delete files.
-# It uses fzf to find files. For rename it uses the $EDITOR.
+# Bulk file operations script: rename, copy, move, or delete entries using fzf for selection
+# Dependencies: fzf, fd, eza, bat
 # Controls: [Tab to MoveDown, Shift+Tab to MoveUp, Ctrl+N to Select]
 
-list="eza -l --group-directories-first --icons"
+# Configuration
+LIST_CMD="eza -al --group-directories-first --icons --color=always"
+TRASH_DIR="${HOME}/.local/share/Trash/files"
+TEMPFILE="/tmp/bulk_rename_$$"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+function print_error() { echo -e "${RED}Error: $1${NC}" >&2; }
+function print_warning() { echo -e "${YELLOW}Warning: $1${NC}" >&2; }
+function print_success() { echo -e "${GREEN}$1${NC}"; }
+
+function select_entries() {
+  local depth=${MAX_DEPTH:-1}
+  local cmd=(fd --hidden -ai --ignore --exclude .git)
+  [[ "${RECURSIVE:-false}" == true ]] && depth=999
+  cmd+=("--max-depth" "$depth")
+  
+  selected=$(("${cmd[@]}" --type d .; "${cmd[@]}" --type f --type l .) | fzf --multi \
+    --preview 'if [ -d {} ]; then '"$LIST_CMD"' {}; else bat --color=always {}; fi' \
+    --header "Select entry (Tab:Down, Shift+Tab:Up, Ctrl+N:Select)")
+  
+  if [[ -z "$selected" ]]; then
+    print_warning "No entry selected"
+    exit 0
+  fi
+  
+  readarray -t entry < <(echo "$selected")
+}
+
+function check_output_path() {
+  local path=$1
+
+  if [[ -z "$path" ]]; then
+    print_error "Output path not specified"
+    exit 1
+  fi
+  
+  if [[ ! -d "$path" ]]; then
+    print_error "Directory '$path' does not exist"
+    exit 1
+  fi
+}
 
 function boilerplate() {
-  command=$1
-  path=$2
-  subcommand=$3
-  count=$(echo "$selected" | wc -l)
-  if [[ ! -z $1 ]]; then
-    $list "${files[@]}"
-    read -n1 -rep "Would you like to $subcommand all $count selected files [y/n]? " INPUT
-    if [[ $INPUT == "y" || $INPUT == "Y" ]]; then
-      $command "${files[@]}" $path
-    fi
+  local command=$1
+  local path=$2
+  local command_name=$3
+  
+  $LIST_CMD "${entry[@]}"
+  read -n1 -rep "Would you like to $command_name ${#entry[@]} selected entries? [y/n] " INPUT
+  
+  if [[ "$INPUT" =~ ^[Yy]$ ]]; then
+    $command "${entry[@]}" "$path" 2>/dev/null && print_success "$command_name completed successfully"
   else
-    echo "error: output path not found"
+    print_warning "$command_name cancelled"
   fi
 }
 
-function select_files() {
-  selected=$(fzf --multi --preview="bat -p --color=always {}")
-
-  # checking if selection is empty
-  if [[ -z "$selected" ]]; then
-    exit
-  fi
-
-  # rearranging files (doesn't required in rename)
-  while IFS= read -r file; do
-      files+=("$file")
-  done <<< "$selected"
-}
-
-##! handling subcommands
-if [[ $1 == "r" ]]; then
-  select_files
-  tempfile="/tmp/tempfile"
-
-  # converting old filenames into an array
-  readarray -t files < <(echo "$selected")
-
-  # extract basenames and write to output file
-  for file in "${files[@]}"; do
-    basename "$file" >> $tempfile
+function rename_entries() {
+  # Write basenames to temp file
+  : > "$TEMPFILE"
+  for file in "${entry[@]}"; do
+    basename "$file" >> "$TEMPFILE"
   done
-
-  # opening editor with list of files to rename
-  $EDITOR $tempfile
-
-  # converting new filenames into an array
-  readarray -t new_names < $tempfile
-
-  # check if the number of selected files matches the number of new names
-  if [ ${#files[@]} -ne ${#new_names[@]} ]; then
-      echo "error: number of selected files (${#files[@]}) does not match number of new names (${#new_names[@]})"
-      rm $tempfile
-      exit 1
+  
+  # Open editor for renaming
+  ${EDITOR:-nano} "$TEMPFILE"
+  
+  # Read new names
+  readarray -t new_names < "$TEMPFILE"
+  
+  # Validate number of names
+  if [[ ${#entry[@]} -ne ${#new_names[@]} ]]; then
+    print_error "Number of selected entries (${#entry[@]}) does not match number of new names (${#new_names[@]})"
+    rm -f "$TEMPFILE"
+    exit 1
   fi
-
-  $list "${files[@]}"
-  read -n1 -rep "Would you like to rename selected files [y/n]? " INPUT
-  if [[ $INPUT == "y" || $INPUT == "Y" ]]; then
-    for ((i=0; i<${#files[@]}; i++)); do
-      old_file="${files[$i]}"
+  
+  for ((i=0; i<${#entry[@]}; i++)); do
+    printf "%s -> %s\n" "${entry[i]}" "${new_names[i]}"
+  done
+  
+  read -n1 -rep "Would you like to rename ${#entry[@]} selected entries? [y/n] " INPUT
+  if [[ "$INPUT" =~ ^[Yy]$ ]]; then
+    for ((i=0; i<${#entry[@]}; i++)); do
+      old_file="${entry[$i]}"
       new_name="${new_names[$i]}"
-
-      # skip empty new names
-      if [ -z "$new_name" ]; then
-        echo "warning: empty new name for file '$old_file'. Skipping."
+      
+      # Skip empty names
+      if [[ -z "$new_name" ]]; then
+        print_warning "Empty new name for file '$old_file'. Skipping."
         continue
       fi
-
-      # get the directory of the old file
-      dir=$(dirname "$old_file")
-
-      # construct the full path for the new file
-      new_file="$dir/$new_name"
-
-      # check if the new file path already exists
-      if [ -e "$new_file" ]; then
-        echo "warning: file '$new_file' already exists. Skipping."
+      
+      # Construct new path
+      new_file="$(dirname "$old_file")/$new_name"
+      
+      # Check if new file already exists
+      if [[ -e "$new_file" ]]; then
+        print_warning "File '$new_file' already exists. Skipping."
         continue
       fi
-
-      # perform the rename
-      mv -v "$old_file" "$new_file" 2>/dev/null
+      
+      mv "$old_file" "$new_file" 2>/dev/null && print_success "Renamed: $old_file -> $new_file"
     done
+  else
+    print_warning "Rename cancelled"
   fi
+  
+  rm -f "$TEMPFILE"
+}
 
-  # removing the tempfile
-  rm $tempfile
-
-elif [[ $1 == "c" && -n "$2" ]]; then
-  select_files
-  boilerplate cp $2 "copy"
-
-elif [[ $1 == "m" && -n "$2" ]]; then
-  select_files
-  boilerplate mv $2 "move"
-
-elif [[ $1 == "d" ]]; then
-  select_files
-  boilerplate mv ~/.local/share/Trash/files "delete"
-
-else
-  echo "error: subcommand not found"
-  echo "Usage: bulk r"
-  echo "Usage: bulk c [path]"
-  echo "Usage: bulk m [path]"
-  echo "Usage: bulk d"
+function usage() {
+  echo "Usage: $(basename "$0") <command> [path]"
+  echo "Commands:"
+  echo "  <r|R>          Bulk rename entries"
+  echo "  <c|C> <path>   Copy entries to path"
+  echo "  <m|M> <path>   Move entries to path"
+  echo "  <d|D>          Move entries to trash"
   exit 1
+}
+
+##! Main
+
+# Check if subcommand is provided
+if [[ -z "${1-}" ]]; then
+  print_error "No subcommand provided"
+  usage
 fi
+
+# Handle subcommands
+case "$1" in
+  r|R)
+    [[ "$1" == "R" ]] && RECURSIVE=true
+    select_entries
+    rename_entries
+    ;;
+  c|C)
+    [[ "$1" == "C" ]] && RECURSIVE=true
+    check_output_path "$2"
+    select_entries
+    boilerplate "cp -r" "$2" "copy"
+    ;;
+  m|M)
+    [[ "$1" == "M" ]] && RECURSIVE=true
+    check_output_path "$2"
+    select_entries
+    boilerplate mv "$2" "move"
+    ;;
+  d|D)
+    [[ "$1" == "D" ]] && RECURSIVE=true
+    select_entries
+    boilerplate mv "$TRASH_DIR" "delete"
+    ;;
+  *)
+    print_error "Invalid subcommand"
+    usage
+    ;;
+esac
