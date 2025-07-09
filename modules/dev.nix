@@ -3,9 +3,9 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      helix zellij btop git
+      helix zellij git
       eza fd ripgrep jq unzip
-      fzf fzf-git-sh bat yazi # gh
+      yazi fzf bat btop # gh
       nixd vscode-langservers-extracted
 
       # extras
@@ -31,7 +31,6 @@
 
   environment.etc."bash.bashrc".text = ''
     source "$(fzf --bash)"
-    source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
   '';
 
   programs = {

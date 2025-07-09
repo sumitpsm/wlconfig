@@ -21,7 +21,7 @@ function cmd_usage () {
 }
 
 function generate_flake_nix () {
-  local upper=$(head -n12 flake.nix)
+  local upper=$(head -n16 flake.nix)
   local lower=$(tail -n10 flake.nix)
   printf "$upper\n$host_list\n$lower\n" > $FLAKE_ROOT
 }
@@ -147,8 +147,8 @@ if ! [[ -f $FLAKE_ROOT ]]; then
 fi
 
 SUBCOMMAND="$1"
-host_list=$(awk 'NR>12 {print}' $FLAKE_ROOT | head -n -10)
-# host_list=$(sed -n '13,$p' $FLAKE_ROOT | head -n -11)
+host_list=$(awk 'NR>16 {print}' $FLAKE_ROOT | head -n -10)
+# host_list=$(sed -n '16,$p' $FLAKE_ROOT | head -n -10)
 
 if [[ $SUBCOMMAND == "add" ]]; then
   [ -z "$2" ] && cmd_usage
