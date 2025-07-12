@@ -101,6 +101,15 @@ in
     '') # hyprcursor theme
   ];
 
+  environment.variables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    HYPRCURSOR_THEME = "Notwaita-Black";
+    HYPRCURSOR_SIZE = "24";
+    TERMINAL = "alacritty";
+  };
+
   programs.dconf = {
     enable = true;
     profiles.user.databases = [{
