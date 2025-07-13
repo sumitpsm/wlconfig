@@ -35,6 +35,7 @@ if [ -z "$1" ]; then
   else
   	echo "${ERROR} Remote \`origin\` didn't match with ssh profiles"
   fi
+  git config --local user.name "Sumit Modak"
 
 elif [[ "$1" == "main" ]]; then
   git config --global user.email $MAINEMAIL

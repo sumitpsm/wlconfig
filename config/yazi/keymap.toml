@@ -83,10 +83,10 @@ keymap = [
     { on = [ "<space>", "r" ], run = "sort natural --reverse",                           desc = "Sort reverse" },
     { on = [ "<space>", "R" ], run = "sort random --reverse=no",                         desc = "Sort randomly" },
 
-    { on = [ "<space", "/" ],  run = "copy path",                                        desc = "Copy the file path" },
-    { on = [ "<space", "d" ],  run = "copy dirname",                                     desc = "Copy the directory path" },
-    { on = [ "<space", "f" ],  run = "copy filename",                                    desc = "Copy the filename" },
-    { on = [ "<space", "." ],  run = "copy name_without_ext",                            desc = "Copy the filename without extension" },
+    { on = [ "<space>", "/" ],  run = "copy path",                                        desc = "Copy the file path" },
+    { on = [ "<space>", "d" ],  run = "copy dirname",                                     desc = "Copy the directory path" },
+    { on = [ "<space>", "f" ],  run = "copy filename",                                    desc = "Copy the filename" },
+    { on = [ "<space>", "." ],  run = "copy name_without_ext",                            desc = "Copy the filename without extension" },
 
     { on = "w",         run = "tasks_show",                                              desc = "Show task manager" },
     { on = "$",         run = "shell --interactive",                                     desc = "Run a shell command" },

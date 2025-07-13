@@ -11,7 +11,7 @@ styled_underlines true
 session_serialization true
 pane_viewport_serialization false
 scrollback_lines_to_serialize 40
-serialization_interval 1024 // seconds
+serialization_interval 1024 // seconds ~ 17 minutes
 disable_session_metadata false
 stacked_resize true
 show_startup_tips true
@@ -121,10 +121,10 @@ keybinds clear-defaults=true {
     }
 
     //! Search Mode
-    shared_except "search" "locked" {
-        bind "Ctrl s" { SwitchToMode "Search"; }
+    shared_except "scroll" "locked" {
+        bind "Ctrl s" { SwitchToMode "scroll"; }
     }
-    search {
+    scroll {
         bind "Ctrl s" { SwitchToMode "Normal"; }
 
         bind "Y" { HalfPageScrollUp; }
@@ -140,7 +140,7 @@ keybinds clear-defaults=true {
     }
     entersearch {
         bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
-        bind "Enter" { SwitchToMode "Search"; }
+        bind "Enter" { SwitchToMode "Scroll"; }
     }
 
     //! TMUX Mode (unchanged)
