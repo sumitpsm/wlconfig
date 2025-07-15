@@ -83,13 +83,10 @@ in
   systemd.user.services."xdg-permission-store".enable = false;
 
   environment.systemPackages = with pkgs; [
-    kmonad # keyboard mapper
-    alacritty kitty # terminal emulators
     wl-clipboard # clipboard
     swww # wallpaper
     hypridle # idling daemon
     polkit_gnome # polkit agent
-    grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
 
     # themes
     gnome-themes-extra

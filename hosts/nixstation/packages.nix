@@ -46,7 +46,7 @@
   ];
   programs = {
     bash.shellAliases = {
-      kmap = "eval $(sudo kmonad -linfo ~/dev/colemaxx.kbd)";
+      kmap = "eval $(sudo kmonad -linfo ~/dev/colemaxx.kbd > .kmonad.log)";
     };
   };
 }

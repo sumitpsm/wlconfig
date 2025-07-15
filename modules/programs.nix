@@ -13,6 +13,8 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    alacritty kitty # terminal emulators
+    kmonad # keyboard mapper
     brave # web browser
     obs-studio # screen recorder
     gimp # image editor
@@ -20,6 +22,7 @@ in
     gnome-boxes # virtual machine manager
     nautilus # file manager
     gnome-disk-utility # disk manager
+    grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
     
     # yt-dlp
     ffmpeg-full ytdlp-github # parabolic // for GUI

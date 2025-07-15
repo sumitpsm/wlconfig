@@ -5,4 +5,6 @@
 file="$1"
 basenameNoExt=$(basename "$file" | sed "s/\.rs//g")
 
-rustc $file && ./$basenameNoExt; rm ./$basenameNoExt 2> /dev/null
+mkdir -p ~/.cache/rs
+rustc $file -o ~/.cache/rs/$basenameNoExt && ~/.cache/rs/$basenameNoExt
+rm ~/.cache/rs/$basenameNoExt 2> /dev/null
