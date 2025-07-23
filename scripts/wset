@@ -3,7 +3,7 @@
 FILE="$@"
 
 function set_theme() {
-  FPS=30
+  FPS=60
   TYPE=$(echo -e "any\nany\nany\nany\nfade" | shuf -n1)
   DURATION=1.5
   BEZIER=".43,1.19,1,.4"
@@ -14,8 +14,8 @@ function set_theme() {
 }
 
 if [[ -f $FILE ]]; then
-  set_theme "$1"
-elif [[ $FILE == "--random" || $FILE == "-r" ]]; then
+  set_theme "$FILE"
+elif [[ $FILE == "-r" ]]; then
   set_theme "$(fd ".*\.(png|jpg|jpeg|webp|gif)" ~/media/wallpapers/ | shuf -n1)"
 else
   # Get current focused monitor
