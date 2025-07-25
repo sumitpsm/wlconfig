@@ -43,22 +43,22 @@ function check_symlink() {
 }
 
 mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
+mkdir -p $HOME/.local/share/nushell/
 
 # linking configs for the current user
 check_symlink "scripts"            ".local/scripts"
 check_symlink "config/ssh_config"  ".ssh/config"
 check_symlink "config/.gitconfig"  ".gitconfig"
 
+check_symlink "config/nushell"     ".config/nushell"
 check_symlink "config/helix"       ".config/helix"
-check_symlink "config/yazi"        ".config/yazi"
 check_symlink "config/zellij"      ".config/zellij"
+check_symlink "config/yazi"        ".config/yazi"
 check_symlink "config/btop"        ".config/btop"
 check_symlink "config/hypr"        ".config/hypr"
 check_symlink "config/alacritty"   ".config/alacritty"
 check_symlink "config/kitty"       ".config/kitty"
-check_symlink "config/wallust"     ".config/wallust"
 check_symlink "config/gtk-3.0"     ".config/gtk-3.0"
-check_symlink "config/gtk-4.0"     ".config/gtk-4.0"
 
 # function for linking configs for the root user
 function check_root_symlink() {
@@ -83,9 +83,10 @@ function check_root_symlink() {
 sudo mkdir -p /root/.config
 
 # linking configs for the root user
+check_root_symlink ".config/nushell" ".config/nushell"
 check_root_symlink ".config/helix"   ".config/helix"
-check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/zellij"  ".config/zellij"
+check_root_symlink ".config/yazi"    ".config/yazi"
 check_root_symlink ".config/btop"    ".config/btop"
 
 # download wallpapers

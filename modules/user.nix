@@ -50,7 +50,8 @@ in
         "networkmanager" # for networking
         "wheel" # for sudo privileges
       ];
-      packages = with pkgs; [];
+      shell = pkgs.nushell;
+      packages = [];
     };
     services.xserver.xkb = {
       layout = "${cfg.kbdLayout}";
