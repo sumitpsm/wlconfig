@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # services.xserver.desktopManager.gnome.enable = true;
   environment.systemPackages = with pkgs; [
     hyprlock
     fuzzel
@@ -44,9 +43,4 @@
     # gnome-maps
     # gnome-clocks
   ];
-  programs = {
-    bash.shellAliases = {
-      kmap = "eval $(sudo kmonad -linfo ~/dev/colemaxx.kbd > .kmonad.log)";
-    };
-  };
 }

@@ -22,5 +22,7 @@ alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias template = open ~/dev/main/cses-problem-set/template.rs | wl-copy
 alias lf = yazi
 alias btop = btop --force-utf
+alias kmap = sudo kmonad -linfo ~/dev/colemaxx.kbd | save ~/.kmonad.log
 
-source ($nu.data-dir | path join .zoxide.nu)
+source ($nu.data-dir | path join zoxide.nu)
+source ($nu.data-dir | path join starship.nu)

@@ -1,0 +1,24 @@
+add_newline = true
+format = "$hostname$directory$git_branch$git_status$username"
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style):"
+
+[directory]
+truncation_length = 8
+truncation_symbol = ""
+truncate_to_repo = false
+style = "bold green"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "on ([$symbol$branch]($style)) "
+
+[username]
+style_root = "bold red"
+style_user = "bold yellow"
+show_always = true
+format = "[$user]($style) "
+aliases = { "root" = "#", "sumit" = "✖" }

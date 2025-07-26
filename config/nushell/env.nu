@@ -9,4 +9,5 @@
 #
 # Also see `help config env` for more options.
 
-zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join .zoxide.nu)
+zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join zoxide.nu)
+starship init nu | save -f ($nu.data-dir | path join starship.nu)
