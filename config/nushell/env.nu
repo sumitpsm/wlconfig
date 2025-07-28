@@ -9,5 +9,13 @@
 #
 # Also see `help config env` for more options.
 
-zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join zoxide.nu)
-starship init nu | save -f ($nu.data-dir | path join starship.nu)
+$env.config.show_banner = false
+$env.config.table.mode = "rounded"
+$env.config.buffer_editor = "hx"
+$env.config.edit_mode = "vi"
+
+$env.PATH = $env.PATH | append $"($env.HOME)/.local/scripts"
+$env.EDITOR = "hx"
+$env.VISUAL = "hx"
+$env.SUDO_EDITOR = "hx"
+$env._ZO_DOCTOR = 0

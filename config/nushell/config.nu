@@ -6,11 +6,6 @@
 #
 # See `help config nu` for more options
 
-$env.config.show_banner = false
-$env.config.table.mode = "rounded"
-$env.config.buffer_editor = "hx"
-$env.config.edit_mode = "vi"
-
 alias c = clear
 alias l = eza -al --group-directories-first --icons
 alias la = eza -a --group-directories-first --icons
@@ -19,10 +14,16 @@ alias tree = eza -aT --group-directories-first --icons --git-ignore
 alias tmux = zellij
 alias todo = hx ~/gen/todo/*
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
-alias template = open ~/dev/main/cses-problem-set/template.rs | wl-copy
+alias template = wl-copy ^(open ~/dev/main/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
-alias kmap = sudo kmonad -linfo ~/dev/colemaxx.kbd | save ~/.kmonad.log
 
+def kmap [] {
+  sudo kmonad -linfo ~/dev/colemaxx.kbd | save -f ~/.kmonad.log
+}
+
+zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join zoxide.nu)
 source ($nu.data-dir | path join zoxide.nu)
+
+starship init nu | save -f ($nu.data-dir | path join starship.nu)
 source ($nu.data-dir | path join starship.nu)

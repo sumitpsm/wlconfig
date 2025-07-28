@@ -16,7 +16,7 @@ function set_theme() {
 if [[ -f $FILE ]]; then
   set_theme "$FILE"
 elif [[ $FILE == "-r" ]]; then
-  set_theme "$(fd ".*\.(png|jpg|jpeg|webp|gif)" ~/media/wallpapers/ | shuf -n1)"
+  set_theme "$(find ~/media/wallpapers/ -type f -regex ".*\.\(png\|jpg\|jpeg\|webp\|gif\)" | shuf -n1)"
 else
   # Get current focused monitor
   CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')

@@ -17,8 +17,8 @@ style = "bold purple"
 format = "on ([$symbol$branch]($style)) "
 
 [username]
-style_root = "bold red"
-style_user = "bold yellow"
+style_root = "red"
+style_user = "cyan"
 show_always = true
 format = "[$user]($style) "
-aliases = { "root" = "#", "sumit" = "✖" }
+aliases = { "root" = "#", "sumit" = "$" }

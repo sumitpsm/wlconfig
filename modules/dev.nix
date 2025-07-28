@@ -12,13 +12,7 @@
       asciinema asciinema-agg presenterm
     ];
     variables = {};
-    sessionVariables = {
-      PATH = [ "$PATH" "$HOME/.local/scripts" ];
-      EDITOR = "hx";
-      VISUAL = "hx";
-      SUDO_EDITOR = "hx";
-      _ZO_DOCTOR = 0;
-    };
+    sessionVariables = {};
   };
 
   programs.nano.enable = false;
