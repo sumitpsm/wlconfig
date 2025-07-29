@@ -43,10 +43,10 @@ Y = [ "goto_window_top", "move_visual_line_up", "align_view_center" ]
 E = "goto_first_nonwhitespace"
 I = [ "goto_window_bottom", "move_visual_line_down", "align_view_center" ]
 O = "goto_line_end"
-w = "move_next_word_end"
-W = "move_next_long_word_end"
-b = "move_prev_word_start"
-B = "move_prev_long_word_start"
+w = "move_next_word_start"
+W = "move_next_long_word_start"
+b = "move_prev_word_end"
+B = "move_prev_long_word_end"
 
 # text-manipulation
 c = "yank" # copy
@@ -204,10 +204,10 @@ Y = [ "goto_window_top", "extend_visual_line_up", "align_view_center" ]
 E = "goto_first_nonwhitespace"
 I = [ "goto_window_bottom", "extend_visual_line_down", "align_view_center" ]
 O = "goto_line_end"
-w = "extend_next_word_end"
-W = "extend_next_long_word_end"
-b = "extend_prev_word_start"
-B = "extend_prev_long_word_start"
+w = "extend_next_word_start"
+W = "extend_next_long_word_start"
+b = "extend_prev_word_end"
+B = "extend_prev_long_word_end"
 
 # text-manipulation
 c = "yank" # copy
