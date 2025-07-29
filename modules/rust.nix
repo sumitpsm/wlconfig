@@ -20,11 +20,7 @@
     ];
     variables = {
       PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-      RUST_BACKTRACE = 1;
       RUST_SRC_PATH = "${pkgs.rust-bin.stable.latest.default}/lib/rustlib/src/rust/library";
-    };
-    sessionVariables = {
-      PATH = [ "$PATH" "$HOME/.cargo/bin" ];
     };
   };
 }

@@ -4,7 +4,7 @@
   environment = {
     systemPackages = with pkgs; [
       helix zellij git
-      zoxide starship eza ripgrep unzip
+      zoxide eza ripgrep unzip
       yazi btop bash # gh
       nixd vscode-langservers-extracted
 

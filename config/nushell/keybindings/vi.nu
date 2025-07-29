@@ -43,6 +43,13 @@ $env.config.keybindings ++= [
     event: { edit: movetoend }
   }
   # {
+  #   name: search_history
+  #   modifier: control
+  #   keycode: char_h
+  #   mode: vi_insert
+  #   event: { send: searchhistory }
+  # }
+  # {
   #   name: find_next_char
   #   modifier: none
   #   keycode: char_f
