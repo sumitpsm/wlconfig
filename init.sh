@@ -49,7 +49,6 @@ mkdir -p $HOME/.local/share/nushell/
 check_symlink "scripts"                ".local/scripts"
 check_symlink "config/ssh_config"      ".ssh/config"
 check_symlink "config/.gitconfig"      ".gitconfig"
-check_symlink "config/starship.toml"   ".config/starship.toml"
 
 check_symlink "config/nushell"         ".config/nushell"
 check_symlink "config/helix"           ".config/helix"
@@ -90,7 +89,6 @@ check_root_symlink ".config/helix"         ".config/helix"
 check_root_symlink ".config/zellij"        ".config/zellij"
 check_root_symlink ".config/yazi"          ".config/yazi"
 check_root_symlink ".config/btop"          ".config/btop"
-check_root_symlink ".config/starship.toml" ".config/starship.toml"
 
 # download wallpapers
 read -n1 -rep "Would you like to download wallpapers [y/n]? " INPUT

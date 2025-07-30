@@ -1,35 +1,33 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nu
 
-FILE="$@"
-
-function set_theme() {
-  FPS=60
-  TYPE=$(echo -e "any\nany\nany\nany\nfade" | shuf -n1)
-  DURATION=1.5
-  BEZIER=".43,1.19,1,.4"
-  EFFECT="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
-
-  swww img "$1" $EFFECT
-  # wallust run -s "$1"
+# Function to set the wallpaper with swww
+def set_theme [file: path] {
+  let fps = 60
+  let type = if ((random int) mod 5) != 0 { "any" } else { "fade" }
+  let duration = 1.5
+  let bezier = ".43,1.19,1,.4"
+  ^swww img $file --transition-fps $fps --transition-type $type --transition-duration $duration --transition-bezier $bezier
 }
 
-if [[ -f $FILE ]]; then
-  set_theme "$FILE"
-elif [[ $FILE == "-r" ]]; then
-  # Set a random wallpaper
-  set_theme "$(find ~/media/wallpapers/ -type f -regex ".*\.\(png\|jpg\|jpeg\|webp\|gif\)" | shuf -n1)"
-else
-  # Get current focused monitor
-  CURRENT_MONITOR=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
+def main [file?: string, -r] {
+  if $file != null and ($file | path type) == "file" {
+    set_theme $file
+  } else if $r {
+    set_theme (ls ...(glob /home/sumit/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif}) | shuffle | first | get name)
+  } else {
+    # Get current focused monitor
+    let current_monitor = (hyprctl monitors | parse -r '^Monitor ([\w|-]+)[\s\S]*(focused:\syes)?' | get 0.capture0?)
 
-  # Construct the full path to the cache file
-  CACHE_FILE="$HOME/.cache/swww/$CURRENT_MONITOR"
+    if ($current_monitor | is-not-empty) {
+      # Construct the full path to the cache file
+      let cache_file = $"($env.HOME)/.cache/swww/($current_monitor)"
 
-  # Check if the cache file exists for the current monitor output
-  if [ -f "$CACHE_FILE" ]; then
-    # Get the wallpaper path from the cache file
-    WALLPAPER_PATH=$(grep -v 'Lanczos3' "$CACHE_FILE" | head -n 1)
-    sleep 1
-    swww img "$WALLPAPER_PATH" --transition-type fade --transition-duration 2
-  fi
-fi
+      # Check if the cache file exists and set the wallpaper
+      if ($cache_file | path exists) {
+        let wallpaper_path = (open $cache_file | lines | where $it !~ 'Lanczos3' | first)
+        sleep 1sec
+        ^swww img $wallpaper_path --transition-type fade --transition-duration 2
+      }
+    }
+  }
+}

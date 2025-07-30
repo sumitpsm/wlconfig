@@ -3,11 +3,10 @@ $env.config.table.mode = "rounded"
 $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 
-$env.PATH = $env.PATH | append $"($env.HOME)/.local/scripts"
-$env.EDITOR = "hx"
-$env.VISUAL = "hx"
-$env.SUDO_EDITOR = "hx"
-$env.RUST_BACKTRACE = 1
+# $env.PATH = $env.PATH | append $"($env.HOME)/.local/scripts"
+# $env.EDITOR = "hx"
+# $env.VISUAL = "hx"
+# $env.SUDO_EDITOR = "hx"
 
 alias c = clear
 alias l = eza -al --group-directories-first --icons
@@ -37,7 +36,7 @@ $env.PROMPT_COMMAND = { ||
     let git_status_output = (do -i { git status --porcelain })
     let git_status = if $git_status_output != "" {
       let untracked = ($git_status_output | lines | any { |line| $line =~ '^\?\?' })
-      let modified = ($git_status_output | lines | any { |line| $line =~ '^ M' })
+      let modified = ($git_status_output | lines | any { |line| $line =~ '^.M' })
       let staged = ($git_status_output | lines | any { |line| $line =~ '^[MADRC]' })
       let conflicts = ($git_status_output | lines | any { |line| $line =~ '^UU' })
       $" (ansi red)(if $conflicts {'⚠'})(if $staged {'+'})(if $modified {'!'})(if $untracked {'?'})(ansi purple)"
