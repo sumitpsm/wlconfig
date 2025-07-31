@@ -5,7 +5,6 @@
     ./boot.nix
     ./user.nix
     ./dev.nix
-    ./rust.nix
     ./networking.nix
     ./sound.nix
     ./usb.nix
@@ -14,6 +13,7 @@
 
     ./fonts.nix
     ./services
+    ./scripts
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

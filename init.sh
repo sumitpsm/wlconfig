@@ -46,7 +46,6 @@ mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
 mkdir -p $HOME/.local/share/nushell/
 
 # linking configs for the current user
-check_symlink "scripts"                ".local/scripts"
 check_symlink "config/ssh_config"      ".ssh/config"
 check_symlink "config/.gitconfig"      ".gitconfig"
 

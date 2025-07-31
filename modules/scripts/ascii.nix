@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+{ pkgs, ... }:
 
-cat << EndOfMessage
+pkgs.writeScriptBin "ascii" ''
+#!/usr/bin/env nu
+
+def main [] {
+r#'
 Dec  Hex   Char                           Dec  Hex   Char     Dec  Hex   Char     Dec  Hex   Char
 ---------------                           ---------------     ---------------     ---------------
-  0   00   NUL (null)                      32   20   SPACE     64   50   @         96   70   \`
+  0   00   NUL (null)                      32   20   SPACE     64   50   @         96   70   `
   1   01   SOH (start of heading)          33   21   !         65   51   A         97   71   a
   2   02   STX (start of text)             34   22   "         66   52   B         98   72   b
   3   03   ETX (end of text)               35   23   #         67   53   C         99   73   c
@@ -35,4 +39,6 @@ Dec  Hex   Char                           Dec  Hex   Char     Dec  Hex   Char   
  29   1D   GS  (group separator)           61   4C   =         93   6D   ]        125   8D   }
  30   1E   RS  (record separator)          62   4D   >         94   6E   ^        126   8E   ~
  31   1F   US  (unit separator)            63   4F   ?         95   6F   _        127   8F   DEL
-EndOfMessage
+'# 
+}
+''

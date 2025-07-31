@@ -3,10 +3,9 @@ $env.config.table.mode = "rounded"
 $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 
-# $env.PATH = $env.PATH | append $"($env.HOME)/.local/scripts"
-# $env.EDITOR = "hx"
-# $env.VISUAL = "hx"
-# $env.SUDO_EDITOR = "hx"
+$env.EDITOR = "hx"
+$env.VISUAL = "hx"
+$env.SUDO_EDITOR = "hx"
 
 alias c = clear
 alias l = eza -al --group-directories-first --icons
@@ -35,11 +34,13 @@ $env.PROMPT_COMMAND = { ||
   let git_branch_and_status = if $git_branch != "" {
     let git_status_output = (do -i { git status --porcelain })
     let git_status = if $git_status_output != "" {
-      let untracked = ($git_status_output | lines | any { |line| $line =~ '^\?\?' })
-      let modified = ($git_status_output | lines | any { |line| $line =~ '^.M' })
-      let staged = ($git_status_output | lines | any { |line| $line =~ '^[MADRC]' })
-      let conflicts = ($git_status_output | lines | any { |line| $line =~ '^UU' })
-      $" (ansi red)(if $conflicts {'⚠'})(if $staged {'+'})(if $modified {'!'})(if $untracked {'?'})(ansi purple)"
+      let s = ($git_status_output | lines | any { |line| $line =~ '^[MADRC]' }) # staged
+      let r = ($git_status_output | lines | any { |line| $line =~ '^R' }) # renamed
+      let m = ($git_status_output | lines | any { |line| $line =~ '^.M' }) # modified
+      let d = ($git_status_output | lines | any { |line| $line =~ '^[D| D]' }) # deleted
+      let u = ($git_status_output | lines | any { |line| $line =~ '^\?\?' }) # untracked
+      let c = ($git_status_output | lines | any { |line| $line =~ '^UU' }) # conflicts
+      $" (ansi red)(if $c {'⚠'})(if $s {'+'})(if $r {'='})(if $m {'!'})(if $d {'x'})(if $u {'?'})(ansi purple)"
     } else { "" }
     $"(ansi purple)\(($git_branch)($git_status))(ansi reset) "
   }

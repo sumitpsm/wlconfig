@@ -29,7 +29,6 @@
     asciinema asciinema-agg presenterm
   ];
   environment.sessionVariables = {
-    PATH = [ "$HOME/.local/scripts" ];
     EDITOR = "hx";
     VISUAL = "hx";
     SUDO_EDITOR = "hx";

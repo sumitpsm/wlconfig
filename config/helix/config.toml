@@ -3,7 +3,7 @@ theme = "dark_plus_plus"
 
 [editor]
 line-number = "relative"
-shell = ["nu", "-c"]
+shell = ["nu", "-l", "-c"]
 bufferline = "always"
 
 [editor.cursor-shape]
