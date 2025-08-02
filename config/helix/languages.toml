@@ -25,3 +25,11 @@ block-comment-tokens = [
 language-servers = [ "rust-analyzer" ]
 indent = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
+
+[language-server.nu-lsp]
+command = "nu"
+args = ["--lsp"]
+
+[[language]]
+name = "nu"
+language-servers = ["nu-lsp"]

@@ -3,10 +3,6 @@ $env.config.table.mode = "rounded"
 $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 
-$env.EDITOR = "hx"
-$env.VISUAL = "hx"
-$env.SUDO_EDITOR = "hx"
-
 alias c = clear
 alias l = eza -al --group-directories-first --icons
 alias la = eza -a --group-directories-first --icons
