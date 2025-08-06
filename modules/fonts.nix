@@ -2,6 +2,7 @@
 
 {
   fonts.packages = with pkgs; [
+    roboto-flex
     nerd-fonts.ubuntu-sans
     nerd-fonts.ubuntu-mono
     nerd-fonts.symbols-only

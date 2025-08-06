@@ -16,7 +16,7 @@ def main [file?: string, -r] {
   if $file != null and ($file | path type) == "file" {
     set_theme $file
   } else if $r {
-    set_theme (ls ...(glob /home/sumit/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif}) --exclude [**/.mobile/**] | shuffle | first | get name)
+    set_theme (ls ...(glob /home/sumit/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif} --exclude [**/.mobile/**]) | shuffle | first | get name)
   } else {
     # Get current focused monitor
     let current_monitor = (hyprctl monitors | parse -r '^Monitor ([\w|-]+)[\s\S]*(focused:\syes)?' | get 0.capture0?)
