@@ -17,10 +17,13 @@ def kmap [] {
   sudo kmonad -linfo ~/dev/colemaxx.kbd | save -f ~/.kmonad.log
 }
 
+def --env myfiles [] {
+  cd (udisksctl mount -b /dev/sda1 | str trim | parse "Mounted {device} at {dirpath}" | get dirpath.0)
+}
+
 source ./keybindings/vi.nu
 
-zoxide init nushell --cmd cd | save -f ($nu.data-dir | path join zoxide.nu)
-source ($nu.data-dir | path join zoxide.nu)
+zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
 
 # PROMPT CONFIGURATION
 $env.PROMPT_COMMAND = { ||

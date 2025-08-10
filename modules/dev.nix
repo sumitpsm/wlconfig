@@ -6,10 +6,11 @@
 
   environment.systemPackages = with pkgs; [
     # development utilities
-    helix git
+    helix git yazi btop # gh
     zoxide eza ripgrep unzip
-    zellij yazi btop # gh
+    zellij
     bash nixd vscode-langservers-extracted
+    # asciinema asciinema-agg presenterm
 
     rustup gcc pkg-config openssl
     # rust toolchains
@@ -24,14 +25,12 @@
       ];
     })
     (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default))
-
-    # extra utilities
-    asciinema asciinema-agg presenterm
   ];
   environment.sessionVariables = {
     EDITOR = "hx";
     VISUAL = "hx";
     SUDO_EDITOR = "hx";
+    PATH = [ "$HOME/.cargo/bin" ];
 
     # Rust specific environment variables
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
