@@ -13,7 +13,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    alacritty kitty # terminal emulators
+    kitty alacritty # terminal emulators
     kmonad # keyboard mapper
     brave # web browser
     obs-studio # screen recorder

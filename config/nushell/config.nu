@@ -10,36 +10,7 @@ alias la = eza -a --group-directories-first --icons
 alias todo = hx ~/gen/todo/*
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
-alias tmux = zellij
 alias lf = yazi
-alias btop = btop --force-utf
-
-def kmap [] {
-  sudo kmonad -linfo ~/dev/colemaxx.kbd | save -f ~/.kmonad.log
-}
-
-def --env myfiles [] {
-    # let partition = lsblk | lines | where { $in | str contains "931.5G" } | where { $in | str contains "part" } | split words | get 0.0
-    let partition = lsblk --json | from json | get blockdevices | where size == "931.5G" | get children.0.name.0
-    let result = udisksctl mount -b /dev/($partition) | complete
-    let dirpath: path = match $result.exit_code {
-        0 => {
-            $result.stdout
-            | str trim
-            | parse "Mounted {device} at {dirpath}"
-            | get 0.dirpath
-        },
-        _ => {
-            $result.stderr
-            | str trim
-            | split row ' '
-            | get 10
-            | parse "`{dirpath}'."
-            | get dirpath.0
-        }
-    }
-    cd $dirpath
-}
 
 zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
 

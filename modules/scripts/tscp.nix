@@ -9,7 +9,7 @@ pkgs.writeScriptBin "tscp" ''
 
 def main [] {
   print ""
-  for i in 0..16 {
+  for i in 0..256 {
     print -n $"(ansi -e $'38;5;($i)m')████(ansi reset) "
     if (($i + 1) mod 8) == 0 {
       print ""
