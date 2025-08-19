@@ -15,13 +15,15 @@ in
   environment.systemPackages = with pkgs; [
     kitty alacritty # terminal emulators
     kmonad # keyboard mapper
-    brave # web browser
+    tor-browser # tor network client
     obs-studio # screen recorder
     gimp # image editor
     gnome-calculator # calculator
     gnome-boxes # virtual machine manager
     nautilus # file manager
     gnome-disk-utility # disk manager
+    # blender # 3d modelling system
+    brave
     grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
     
     # yt-dlp

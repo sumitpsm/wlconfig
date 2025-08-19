@@ -11,6 +11,8 @@
 
 # env | parse '{key}={value}' | where key in $env_vars | each { |row| $env.$row.key = $row.value } | ignore
 
+alias btop = btop --force-utf
+
 def mux [] {
     kitten @ action set_tab_title "git"
     kitten @ action new_tab_with_cwd

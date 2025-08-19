@@ -1,8 +1,19 @@
-$env.config.show_banner = false
-$env.config.table.mode = "rounded"
-$env.config.buffer_editor = "hx"
-$env.config.edit_mode = "vi"
-source ./keybindings/vi.nu
+$env.config = {
+  show_banner: false
+  table.mode: "rounded"
+  buffer_editor: "hx"
+  edit_mode: "vi"
+  use_kitty_protocol: true
+  keybindings: [
+    { name: move_left                modifier: none keycode: char_e mode: vi_normal event: { send: Left } }
+    { name: move_down                modifier: none keycode: char_i mode: vi_normal event: { send: Down } }
+    { name: move_up                  modifier: none keycode: char_y mode: vi_normal event: { send: Up } }
+    { name: move_right               modifier: none keycode: char_o mode: vi_normal event: { send: Right } }
+    { name: move_line_start          modifier: shift keycode: char_e mode: vi_normal event: { edit: MoveToStart } }
+    { name: move_line_end            modifier: shift keycode: char_o mode: vi_normal event: { edit: MoveToEnd } }
+    { name: history_hint_complete    modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
+  ]
+}
 
 alias c = clear
 alias l = eza -al --group-directories-first --icons
@@ -25,7 +36,7 @@ $env.PROMPT_COMMAND = { ||
       let s = ($git_status_output | lines | any { |line| $line =~ '^[MADRC]' }) # staged
       let r = ($git_status_output | lines | any { |line| $line =~ '^R' }) # renamed
       let m = ($git_status_output | lines | any { |line| $line =~ '^.M' }) # modified
-      let d = ($git_status_output | lines | any { |line| $line =~ '^[D| D]' }) # deleted
+      let d = ($git_status_output | lines | any { |line| $line =~ '^[D|.D]' }) # deleted
       let u = ($git_status_output | lines | any { |line| $line =~ '^\?\?' }) # untracked
       let c = ($git_status_output | lines | any { |line| $line =~ '^UU' }) # conflicts
       $" (ansi red)(if $c {'⚠'})(if $s {'+'})(if $r {'='})(if $m {'!'})(if $d {'x'})(if $u {'?'})(ansi purple)"
