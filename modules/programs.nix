@@ -23,7 +23,7 @@ in
     nautilus # file manager
     gnome-disk-utility # disk manager
     # blender # 3d modelling system
-    brave
+    kdePackages.kdenlive firefox
     grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
     
     # yt-dlp

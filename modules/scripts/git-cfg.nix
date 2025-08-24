@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-pkgs.writeScriptBin "git-ms" ''
+pkgs.writeScriptBin "git-cfg" ''
 #!/usr/bin/env nu
 
 const ERROR = $"(ansi red)[ERROR](ansi reset)"

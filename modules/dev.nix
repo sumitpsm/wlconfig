@@ -8,7 +8,6 @@
     # development utilities
     helix git yazi btop # gh
     zoxide eza ripgrep unzip
-    zellij
     bash nixd vscode-langservers-extracted
     # asciinema asciinema-agg presenterm
 

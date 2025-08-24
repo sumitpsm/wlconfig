@@ -7,7 +7,7 @@ keymap = [
     # Tabs
     { on = "T",         run = "tab_create --current",        desc = "Create a new tab with CWD" },
     { on = "N",         run = "tab_switch -1 --relative",    desc = "Switch to the previous tab" },
-    { on = "N",         run = "tab_switch 1 --relative",     desc = "Switch to the next tab" },
+    { on = "H",         run = "tab_switch 1 --relative",     desc = "Switch to the next tab" },
     { on = "n",         run = "tab_swap -1",                 desc = "Swap current tab with previous tab" },
     { on = "h",         run = "tab_swap 1",                  desc = "Swap current tab with next tab" },
 
@@ -59,7 +59,6 @@ keymap = [
     { on = "g",         run = "search fd",                   desc = "Search files by name using fd" },
     { on = "G",         run = "search rg",                   desc = "Search files by content using ripgrep" },
     { on = "z",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
-    { on = "Z",         run = "plugin fzf",                  desc = "Jump to a directory or reveal a file using fzf" },
 
     # Sorting, Linemode and Copy
     { on = [ "<space>", "s" ], run = [ "sort size --reverse", "linemode size" ],         desc = "Sort by size (decending order)" },
@@ -86,7 +85,7 @@ keymap = [
     { on = [ "<space>", "/" ],  run = "copy path",                                       desc = "Copy the file path" },
     { on = [ "<space>", "d" ],  run = "copy dirname",                                    desc = "Copy the directory path" },
     { on = [ "<space>", "f" ],  run = "copy filename",                                   desc = "Copy the filename" },
-    { on = [ "<space>", "." ],  run = "copy name_without_ext",                           desc = "Copy the filename without extension" },
+    { on = [ "<space>", "F" ],  run = "copy name_without_ext",                           desc = "Copy the filename without extension" },
 
     { on = "w",         run = "tasks_show",                                              desc = "Show task manager" },
     { on = "$",         run = "shell --interactive",                                     desc = "Run a shell command" },

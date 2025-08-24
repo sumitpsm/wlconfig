@@ -1,6 +1,6 @@
 $env.config = {
   show_banner: false
-  table.mode: "rounded"
+  table: { mode: "rounded" }
   buffer_editor: "hx"
   edit_mode: "vi"
   use_kitty_protocol: true
