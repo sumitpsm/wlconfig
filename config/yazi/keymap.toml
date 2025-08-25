@@ -20,12 +20,10 @@ keymap = [
     { on = "I",                run = "arrow 50%",            desc = "Move cursor down half page" },
     { on = [ "<space>", "y" ], run = "arrow top",            desc = "Move cursor to the top" },
     { on = [ "<space>", "i" ], run = "arrow bot",            desc = "Move cursor to the bottom" },
-    { on = "u",                run = "back",                 desc = "Go back to the previous directory" },
-    { on = "U",                run = "forward",              desc = "Go forward to the next directory" },
-
-    # Seeking
     { on = "E",                run = "seek -8",              desc = "Seek up 8 units in the preview" },
     { on = "O",                run = "seek 8",               desc = "Seek down 8 units in the preview" },
+    { on = "u",                run = "back",                 desc = "Go back to the previous directory" },
+    { on = "U",                run = "forward",              desc = "Go forward to the next directory" },
 
     # Selection
     { on = "l",         run = [ "toggle", "arrow 1" ],       desc = "Toggle the current selection state" },
@@ -44,21 +42,21 @@ keymap = [
     { on = "C",         run = "unyank",                      desc = "Cancel the yank status" },
     { on = "p",         run = "paste",                       desc = "Paste yanked files" },
     { on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
-    { on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
-    { on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
-    #{ on = "",         run = "hardlink",                    desc = "Hardlink yanked files" },
     { on = "d",         run = "remove",                      desc = "Trash selected files" },
     #{ on = "D",        run = "remove --permanently",        desc = "Permanently delete selected files" },
     { on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
+    { on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
+    { on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
+    #{ on = "",         run = "hardlink",                    desc = "Hardlink yanked files" },
 
     # Search, Find and Filter
     { on = "m",         run = "find_arrow",                  desc = "Go to the next match" },
     { on = "M",         run = "find_arrow --previous",       desc = "Go to the previous match" },
-    { on = "S",         run = "find --smart",                desc = "Find next file" },
-    { on = "s",         run = "filter --smart",              desc = "Filter files" },
-    { on = "g",         run = "search fd",                   desc = "Search files by name using fd" },
-    { on = "G",         run = "search rg",                   desc = "Search files by content using ripgrep" },
-    { on = "z",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
+    { on = "F",         run = "find --smart",                desc = "Find next file" },
+    { on = "f",         run = "filter --smart",              desc = "Filter files" },
+    { on = "s",         run = "search fd",                   desc = "Search files by name using fd" },
+    { on = "S",         run = "search rg",                   desc = "Search files by content using ripgrep" },
+    { on = "G",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
 
     # Sorting, Linemode and Copy
     { on = [ "<space>", "s" ], run = [ "sort size --reverse", "linemode size" ],         desc = "Sort by size (decending order)" },
@@ -82,15 +80,25 @@ keymap = [
     { on = [ "<space>", "r" ], run = "sort natural --reverse",                           desc = "Sort reverse" },
     { on = [ "<space>", "R" ], run = "sort random --reverse=no",                         desc = "Sort randomly" },
 
-    { on = [ "<space>", "/" ],  run = "copy path",                                       desc = "Copy the file path" },
-    { on = [ "<space>", "d" ],  run = "copy dirname",                                    desc = "Copy the directory path" },
-    { on = [ "<space>", "f" ],  run = "copy filename",                                   desc = "Copy the filename" },
-    { on = [ "<space>", "F" ],  run = "copy name_without_ext",                           desc = "Copy the filename without extension" },
+    { on = [ "<space>", "/" ], run = "copy path",                                        desc = "Copy the file path" },
+    { on = [ "<space>", "d" ], run = "copy dirname",                                     desc = "Copy the directory path" },
+    { on = [ "<space>", "f" ], run = "copy filename",                                    desc = "Copy the filename" },
+    { on = [ "<space>", "F" ], run = "copy name_without_ext",                            desc = "Copy the filename without extension" },
 
-    { on = "w",         run = "tasks_show",                                              desc = "Show task manager" },
-    { on = "$",         run = "shell --interactive",                                     desc = "Run a shell command" },
-    { on = "W",         run = 'shell --orphan "wset $0"',                                desc = "Sets wallpaper" },
-    # { on = "", run = "cd --interactive", desc = "" },
+    { on = "w",                run = "tasks_show",                                       desc = "Show task manager" },
+    { on = "$",                run = "shell --interactive",                              desc = "Run a shell command" },
+    { on = "W",                run = 'shell --orphan "wset $0"',                         desc = "Sets wallpaper" },
+
+    # goto mode
+    { on = [ "<space>", "g" ], run = "cd --interactive",                                 desc = "Interactively move through directories" },
+    { on = [ "g", "h" ],       run = "cd /home/$USER",                                   desc = "Goto home" },
+    { on = [ "g", "c" ],       run = "cd /home/$USER/dev/main/nixos-config",             desc = "Goto nixos-config" },
+    { on = [ "g", "C" ],       run = "cd /home/$USER/.config",                           desc = "Goto xdg config home" },
+    { on = [ "g", "d" ],       run = "cd /home/$USER/Downloads",                         desc = "Goto Downloads" },
+    { on = [ "g", "g" ],       run = "cd /home/$USER/gen/.screenshots",                  desc = "Goto screenshots" },
+    { on = [ "g", "w" ],       run = "cd /home/$USER/media",                             desc = "Goto wallpapers" },
+    { on = [ "g", "m" ],       run = "cd /run/media/$USER/MYFILES",                      desc = "Goto MYFILES" },
+
     # { on = "", run = "reveal", desc = "" },
     # { on = "", run = "toggle", desc = "" },
     # { on = "", run = "toggle_all", desc = "" },

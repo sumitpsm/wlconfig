@@ -15,16 +15,20 @@ in
   environment.systemPackages = with pkgs; [
     kitty alacritty # terminal emulators
     kmonad # keyboard mapper
+    swayimg # image viewer
+    zathura # document viewer
+    mpv # video & audio player
     tor-browser # tor network client
     obs-studio # screen recorder
     gimp # image editor
     gnome-calculator # calculator
     gnome-boxes # virtual machine manager
-    nautilus # file manager
     gnome-disk-utility # disk manager
     # blender # 3d modelling system
-    kdePackages.kdenlive firefox
+
+    kdePackages.kdenlive
     grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
+    nautilus firefox
     
     # yt-dlp
     ffmpeg-full ytdlp-github # parabolic // for GUI

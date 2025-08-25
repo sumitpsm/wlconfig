@@ -9,7 +9,7 @@
     libnotify
     handbrake
 
-    # [shell] // zsh xonsh elvish ion fish powershell
+    # [shell] // dash bash zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux
     # [system-monitor] // htop bpytop glances iotop dool zenith sysstat
     # [system-monitor-gui] // gnome-system-monitor cpu-x
@@ -21,6 +21,10 @@
     # [web-music-client] // ytermusic ncspot yui-music youtube-tui
     # [documentation] // wiki-tui cht-sh
     # [theme-generator] // wallust pywal pywal16
+    # [terminal-graphics] // chafa timg
+    # [document-viewer] // papers
+    # [image-viewer] // loupe eog nomacs imv
+    # [video-player] // celluloid kdePackages.dragon
     # [file-manager] // kdePackages.dolphin xfce.thunar
     # [disk-manager] // gparted kdePackages.partitionmanager mmtui
     # [browser] // firefox chromium torbrowser *opera
@@ -29,12 +33,7 @@
     # [document] // libreoffice *wps
     # [misc] // youtube-music *discord *spotify
 
-    mpv # celluloid kdePackages.dragon
-    loupe eog
-    papers
     yad zenity
-    chafa timg # terminal graphics library
-
     # amfora
     # appimage-run usbutils
     # v4l-utils
