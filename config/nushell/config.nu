@@ -5,13 +5,14 @@ $env.config = {
   edit_mode: "vi"
   use_kitty_protocol: true
   keybindings: [
-    { name: move_left                modifier: none keycode: char_e mode: vi_normal event: { send: Left } }
-    { name: move_down                modifier: none keycode: char_i mode: vi_normal event: { send: Down } }
-    { name: move_up                  modifier: none keycode: char_y mode: vi_normal event: { send: Up } }
-    { name: move_right               modifier: none keycode: char_o mode: vi_normal event: { send: Right } }
-    { name: move_line_start          modifier: shift keycode: char_e mode: vi_normal event: { edit: MoveToStart } }
-    { name: move_line_end            modifier: shift keycode: char_o mode: vi_normal event: { edit: MoveToEnd } }
-    { name: history_hint_complete    modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
+    { name: move_left                  modifier: none keycode: char_e mode: vi_normal event: { send: Left } }
+    { name: move_down                  modifier: none keycode: char_i mode: vi_normal event: { send: Down } }
+    { name: move_up                    modifier: none keycode: char_y mode: vi_normal event: { send: Up } }
+    { name: move_right                 modifier: none keycode: char_o mode: vi_normal event: { send: Right } }
+    { name: move_line_start            modifier: shift keycode: char_e mode: vi_normal event: { edit: MoveToStart } }
+    { name: move_line_end              modifier: shift keycode: char_o mode: vi_normal event: { edit: MoveToEnd } }
+    { name: history_hint_complete      modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
+    { name: history_hint_word_complete modifier: control_shift keycode: backtab mode: vi_insert event: { send: HistoryHintWordComplete } }
   ]
 }
 

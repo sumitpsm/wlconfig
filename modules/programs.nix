@@ -2,12 +2,12 @@
 
 let
   ytdlp-github = pkgs.yt-dlp.overrideAttrs (oldAttrs: {
-    version = "2025.08.11";
+    version = "2025.08.22";
     src = pkgs.fetchFromGitHub {
       owner = "yt-dlp";
       repo = "yt-dlp";
-      rev = "2025.08.11";
-      sha256 = "sha256-j7x844MPPFdXYTJiiMnru3CE79A/6JdfJDdh8it9KsU=";
+      rev = "2025.08.22";
+      sha256 = "sha256-58Qj+Bt4GEGgWpqAuMVemixm5AUcqS+e2Sajoeun8KY=";
     };
   });
 in
@@ -18,17 +18,17 @@ in
     swayimg # image viewer
     zathura # document viewer
     mpv # video & audio player
-    tor-browser # tor network client
+    gnome-calculator # calculator
+    gnome-disk-utility # disk manager
     obs-studio # screen recorder
     gimp # image editor
-    gnome-calculator # calculator
     gnome-boxes # virtual machine manager
-    gnome-disk-utility # disk manager
+    tor-browser # tor network client
     # blender # 3d modelling system
 
-    kdePackages.kdenlive
+    kdePackages.kdenlive handbrake # video editor
     grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
-    nautilus firefox
+    firefox
     
     # yt-dlp
     ffmpeg-full ytdlp-github # parabolic // for GUI

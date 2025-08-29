@@ -25,7 +25,7 @@ def set_mail [email: string] {
 }
 
 def main [arg?: string] {
-  const main_email = "152054612+sumit-ftr@users.noreply.github.com"
+  const main_email = "152054612+sumitftr@users.noreply.github.com"
   const test_email = "142516692+sumit-modak@users.noreply.github.com"
 
   if ($arg | is-empty) {

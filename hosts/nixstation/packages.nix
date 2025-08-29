@@ -7,7 +7,6 @@
     ashell
     gnome-characters
     libnotify
-    handbrake
 
     # [shell] // dash bash zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux
@@ -25,7 +24,7 @@
     # [document-viewer] // papers
     # [image-viewer] // loupe eog nomacs imv
     # [video-player] // celluloid kdePackages.dragon
-    # [file-manager] // kdePackages.dolphin xfce.thunar
+    # [file-manager] // nautilus kdePackages.dolphin xfce.thunar
     # [disk-manager] // gparted kdePackages.partitionmanager mmtui
     # [browser] // firefox chromium torbrowser *opera
     # [theme-picker] // nwg-look libsForQt5.qt5ct
@@ -33,7 +32,7 @@
     # [document] // libreoffice *wps
     # [misc] // youtube-music *discord *spotify
 
-    yad zenity
+    # yad zenity
     # amfora
     # appimage-run usbutils
     # v4l-utils

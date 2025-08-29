@@ -95,7 +95,7 @@ keymap = [
     { on = [ "g", "c" ],       run = "cd /home/$USER/dev/main/nixos-config",             desc = "Goto nixos-config" },
     { on = [ "g", "C" ],       run = "cd /home/$USER/.config",                           desc = "Goto xdg config home" },
     { on = [ "g", "d" ],       run = "cd /home/$USER/Downloads",                         desc = "Goto Downloads" },
-    { on = [ "g", "g" ],       run = "cd /home/$USER/gen/.screenshots",                  desc = "Goto screenshots" },
+    { on = [ "g", "s" ],       run = "cd /home/$USER/gen/.screenshots",                  desc = "Goto screenshots" },
     { on = [ "g", "w" ],       run = "cd /home/$USER/media",                             desc = "Goto wallpapers" },
     { on = [ "g", "m" ],       run = "cd /run/media/$USER/MYFILES",                      desc = "Goto MYFILES" },
 

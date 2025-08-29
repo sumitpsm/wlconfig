@@ -5,6 +5,7 @@
     traceroute
     curl
     wireshark tcpdump # termshark // for TUI
+    # zap # web pentesting utility
   ];
 
   # wireshark configuration
