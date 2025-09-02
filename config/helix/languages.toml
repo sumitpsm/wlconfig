@@ -1,6 +1,7 @@
 [language-server.rust-analyzer]
 command = "rust-analyzer"
-config.command = "clippy"
+config.check.command = "clippy"
+config.cachePriming.enable = false
 config.inlayHints.bindingModeHints.enable = false
 config.inlayHints.closingBraceHints.minLines = 10
 config.inlayHints.closureReturnTypeHints.enable = "with_block"

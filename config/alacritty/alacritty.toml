@@ -1,6 +1,6 @@
 [general]
 working_directory = "None"
-import = [ "./ghostty-dark.toml" ]
+import = [ "./default-dark.toml" ]
 
 [window]
 padding = { x = 4, y = 0 }
