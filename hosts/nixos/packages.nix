@@ -7,6 +7,7 @@
     ashell
     gnome-characters
     libnotify
+    grim slurp hyprpicker kdePackages.kcolorchooser
 
     # notification client [libnotify]
     # character menu [gnome-characters]

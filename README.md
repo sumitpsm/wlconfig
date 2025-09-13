@@ -3,7 +3,7 @@
   nix-shell -p git
 ```
 ```sh
-  git clone https://github.com/sumit-ftr/nixos-config.git
+  git clone https://github.com/sumitftr/nixos-config.git
 ```
 ```sh
   cd nixos-config

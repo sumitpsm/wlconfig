@@ -13,25 +13,25 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    ffmpeg-full
+    ytdlp-github # video downloader // [parabolic]
+
     kitty alacritty # terminal emulators
-    kmonad # keyboard mapper
     swayimg # image viewer
     zathura # document viewer
-    mpv # video & audio player
+    mpv mpvScripts.mpris # video & audio player
     gnome-calculator # calculator
     gnome-disk-utility # disk manager
     obs-studio # screen recorder
-    gimp # image editor
+    gimp3 # image editor // [inkscape krita]
+    blender # 3d modelling system + video editor
     gnome-boxes # virtual machine manager
     tor-browser # tor network client
-    # blender # 3d modelling system
 
-    kdePackages.kdenlive handbrake # video editor
-    grim slurp hyprpicker kdePackages.kcolorchooser # screenshot + color picker
-    firefox
-    
-    # yt-dlp
-    ffmpeg-full ytdlp-github # parabolic // for GUI
+    # handbrake # video compressor
+    kmonad # keyboard mapper
+    playerctl
+    firefox # browser that supports live streams
   ];
   # programs.calls.enable = true;
 }
