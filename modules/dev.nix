@@ -2,11 +2,12 @@
 
 {
   programs.nano.enable = false;
+  documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [
     helix git yazi btop # gh
-    zoxide eza ripgrep unzip
-    bash nixd vscode-langservers-extracted
+    zoxide eza ripgrep unzip bash
+    nixd vscode-langservers-extracted man-pages
     # asciinema asciinema-agg presenterm
 
     gcc pkg-config openssl

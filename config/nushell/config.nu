@@ -19,7 +19,6 @@ $env.config = {
 alias c = clear
 alias l = eza -al --group-directories-first --icons
 alias la = eza -a --group-directories-first --icons
-alias todo = hx ~/gen/todo/*
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
 alias lf = yazi

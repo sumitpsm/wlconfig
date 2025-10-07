@@ -12,14 +12,16 @@
 # env | parse '{key}={value}' | where key in $env_vars | each { |row| $env.$row.key = $row.value } | ignore
 
 alias btop = btop --force-utf
+alias todo = hx ~/gen/todo/*
+alias stoicism = ^$env.EDITOR ...(ls ~/notes/stoicism/**/[0-9]*).name
 
-def mux [] {
-    kitten @ action set_tab_title "git"
-    kitten @ action new_tab_with_cwd
-    kitten @ action set_tab_title "run"
-    kitten @ action new_tab_with_cwd
-    kitten @ action set_tab_title "code"
-}
+# def mux [] {
+#     kitten @ action set_tab_title "git"
+#     kitten @ action new_tab_with_cwd
+#     kitten @ action set_tab_title "run"
+#     kitten @ action new_tab_with_cwd
+#     kitten @ action set_tab_title "code"
+# }
 
 def --env myfiles [] {
     # let partition = lsblk | lines | where { $in | str contains "931.5G" } | where { $in | str contains "part" } | split words | get 0.0

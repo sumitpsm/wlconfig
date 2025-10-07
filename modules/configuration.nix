@@ -14,7 +14,6 @@
     ./fonts.nix
     ./services
     ./scripts
-    ./zen.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
