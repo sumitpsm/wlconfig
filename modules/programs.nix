@@ -31,7 +31,6 @@ in
     # handbrake # video compressor
     kmonad # keyboard mapper
     playerctl
-    firefox # browser that supports live streams
   ];
   # programs.calls.enable = true;
 }
