@@ -8,6 +8,7 @@
     gnome-characters
     libnotify
     grim slurp hyprpicker kdePackages.kcolorchooser
+    playerctl
 
     # [shell] // dash bash zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux

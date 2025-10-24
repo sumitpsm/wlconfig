@@ -46,18 +46,22 @@ mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
 mkdir -p $HOME/.local/share/nushell/
 
 # linking configs for the current user
-check_symlink "config/ssh_config"      ".ssh/config"
-check_symlink "config/.gitconfig"      ".gitconfig"
+check_symlink "config/ssh_config"              ".ssh/config"
+check_symlink "config/.gitconfig"              ".gitconfig"
+check_symlink "config/GIMP/3.0/gimprc"         ".config/GIMP/3.0/gimprc"
+check_symlink "config/GIMP/3.0/sessionrc"      ".config/GIMP/3.0/sessionrc"
+check_symlink "config/GIMP/3.0/shortcutsrc"    ".config/GIMP/3.0/shortcutsrc"
+check_symlink "config/GIMP/3.0/toolrc"         ".config/GIMP/3.0/toolrc"
 
-check_symlink "config/nushell"         ".config/nushell"
-check_symlink "config/helix"           ".config/helix"
-check_symlink "config/zellij"          ".config/zellij"
-check_symlink "config/yazi"            ".config/yazi"
-check_symlink "config/btop"            ".config/btop"
-check_symlink "config/hypr"            ".config/hypr"
-check_symlink "config/alacritty"       ".config/alacritty"
-check_symlink "config/kitty"           ".config/kitty"
-check_symlink "config/gtk-3.0"         ".config/gtk-3.0"
+check_symlink "config/nushell"                 ".config/nushell"
+check_symlink "config/helix"                   ".config/helix"
+check_symlink "config/zellij"                  ".config/zellij"
+check_symlink "config/yazi"                    ".config/yazi"
+check_symlink "config/btop"                    ".config/btop"
+check_symlink "config/hypr"                    ".config/hypr"
+check_symlink "config/alacritty"               ".config/alacritty"
+check_symlink "config/kitty"                   ".config/kitty"
+check_symlink "config/gtk-3.0"                 ".config/gtk-3.0"
 
 # function for linking configs for the root user
 function check_root_symlink() {
