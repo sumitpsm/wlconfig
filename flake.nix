@@ -7,10 +7,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # kmonad = {
-    #   url = "github:kmonad/kmonad?dir=nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix&ref=dccd498de1ffbc221a3b95c29fb9ea70168673a6";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, ... } @inputs:
@@ -25,17 +25,7 @@
       modules = [
         ./modules/configuration.nix
         ./hosts/${hostname} { networking.hostName = hostname; }
-        # inputs.kmonad.nixosModules.default {
-        #   services.kmonad = {
-        #     enable = true;
-        #     keyboards = {
-        #       myKMonadOutput = {
-        #         device = "/dev/input/by-path/pci-0000:01:00.0-usbv2-0:5:1.0-event-kbd";
-        #         config = builtins.readFile /home/sumit/dev/colemaxx.kbd;
-        #       };
-        #     };
-        #   };
-        # }
+        inputs.kmonad.nixosModules.default
       ];
     });
   };

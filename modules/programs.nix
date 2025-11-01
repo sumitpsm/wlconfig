@@ -2,11 +2,11 @@
 
 let
   ytdlp-github = pkgs.yt-dlp.overrideAttrs (oldAttrs: {
-    version = "2025.10.14";
+    version = "2025.10.22";
     src = pkgs.fetchFromGitHub {
       owner = "yt-dlp";
       repo = "yt-dlp";
-      rev = "2025.10.14";
+      rev = "2025.10.22";
       sha256 = "sha256-x7vpuXUihlC4jONwjmWnPECFZ7xiVAOFSDUgBNvl+aA=";
     };
   });
@@ -29,7 +29,7 @@ in
 
     (inputs.zen-browser.packages.${system}.beta.override {}) # zen browser
     # handbrake # video compressor
-    kmonad # keyboard mapper
+    # kmonad # keyboard mapper
   ];
   # programs.calls.enable = true;
 }
