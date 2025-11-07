@@ -2,12 +2,31 @@
 
 {
   environment.systemPackages = with pkgs; [
-    hyprlock
+    # hyprlock
     fuzzel
-    ashell
+    # ashell
     gnome-characters
-    libnotify
+    # libnotify
     grim slurp hyprpicker kdePackages.kcolorchooser
+
+    quickshell  # Required for QML runtime
+    go          # For building DMS components
+    cava        # Audio visualization
+    cliphist    # Clipboard history
+    brightnessctl ddcutil
+    qt6.qtmultimedia
+    accountsservice
+    matugen     # Dynamic theming
+    gpu-screen-recorder
+    wlsunset
+    xdg-desktop-portal
+    evolution-data-server
+    app2unit
+    networkmanager
+    # lm-sensors
+    swappy
+    aubio
+    libqalculate
 
     # notification client [libnotify]
     # character menu [gnome-characters]

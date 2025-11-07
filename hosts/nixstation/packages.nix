@@ -19,11 +19,11 @@
     matugen     # Dynamic theming
     gpu-screen-recorder
     wlsunset
-    xdg-xdg-desktop-portal
+    xdg-desktop-portal
     evolution-data-server
     app2unit
     networkmanager
-    lm-sensors
+    # lm-sensors
     swappy
     aubio
     libqalculate
