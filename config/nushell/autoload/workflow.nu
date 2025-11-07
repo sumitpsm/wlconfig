@@ -24,7 +24,3 @@ def --env myfiles [] {
     }
     cd $dirpath
 }
-
-def kmap [] {
-  sudo kmonad -linfo ~/dev/colemaxx.kbd | save -f ~/.kmonad.log
-}

@@ -36,7 +36,7 @@ $env.PROMPT_COMMAND = { ||
       let s = ($git_status_output | lines | any { |line| $line =~ '^[MADRC]' }) # staged
       let r = ($git_status_output | lines | any { |line| $line =~ '^R' }) # renamed
       let m = ($git_status_output | lines | any { |line| $line =~ '^.M' }) # modified
-      let d = ($git_status_output | lines | any { |line| $line =~ '^[D|.D]' }) # deleted
+      let d = ($git_status_output | lines | any { |line| $line =~ '^[D|(.D)]' }) # deleted
       let u = ($git_status_output | lines | any { |line| $line =~ '^\?\?' }) # untracked
       let c = ($git_status_output | lines | any { |line| $line =~ '^UU' }) # conflicts
       $" (ansi red)(if $c {'⚠'})(if $s {'+'})(if $r {'='})(if $m {'!'})(if $d {'x'})(if $u {'?'})(ansi purple)"
