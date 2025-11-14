@@ -17,7 +17,7 @@ def main [file?: string] {
     set_theme $file
   } else {
     # sets a random wallpaper
-    set_theme (ls ...(glob /home/sumit/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif} --exclude [**/.mobile/**]) | shuffle | first | get name)
+    set_theme (ls ...(glob /home/sumit/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif}) | shuffle | first | get name)
 
     # # sets last used wallpaper
     # # Get current focused monitor

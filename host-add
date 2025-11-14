@@ -1,0 +1,99 @@
+#!/usr/bin/env nu
+
+# Color definitions
+const ERROR = $"(ansi red)[ERROR](ansi reset)"
+const OK = $"(ansi green)[OK](ansi reset)"
+const WARN = $"(ansi yellow)[WARN](ansi reset)"
+const INFO = $"(ansi blue)[INFO](ansi reset)"
+
+# Extract the hostname list from flake.nix
+def get_hostnames [] {
+  let content = open flake.nix | str trim
+  
+  # Find the list between [ and ]
+  let list_content = $content 
+    | parse --regex '(?s)nixpkgs\.lib\.genAttrs\s*\[\s*(.*?)\s*\]'
+    | get capture0.0
+  
+  # Parse each hostname (ignoring comments)
+  $list_content
+    | lines
+    | each { |line| 
+        $line | str trim | parse '"{hostname}"' | get hostname.0?
+      }
+    | where $it != null
+}
+
+# Generate the flake.nix by replacing only the hostname list
+def generate_flake_nix [hostnames: list<string>] {
+  let content = open flake.nix
+  let indent = "      "
+  let hostname_lines = $hostnames | each { |h| $"($indent)\"($h)\"" } | str join "\n"
+  
+  # Replace content between [ and ]
+  $content | str replace --regex '(?s)(\s*\[)\s*.*?\s*(\])' $"$1\n($hostname_lines)\n    $2"
+}
+
+# Add a new host to the flake
+def main [
+  hostname: string           # Hostname to add
+  ...description: string     # Optional description
+] {
+  let hostnames = get_hostnames
+  
+  # Check if hostname already exists
+  if $hostname in $hostnames {
+    print $"($ERROR) hostname (ansi red)($hostname)(ansi reset) is already present."
+    exit 1
+  }
+  
+  # Add hostname to list
+  let new_hostnames = $hostnames | append $hostname
+  
+  # Generate and save new flake.nix
+  generate_flake_nix $new_hostnames | save -f flake.nix
+  print $"($INFO) (ansi red)($hostname)(ansi reset) added to flake.nix"
+  
+  # Create host directory
+  let host_dir = $"./hosts/($hostname)"
+  mkdir $host_dir
+  
+  # Create default.nix
+  $"{ ... }:
+
+{
+  imports = [
+    ./hardware.nix
+    ./packages.nix
+  ];
+  system.stateVersion = \"25.11\";
+
+  # custom options
+  user = {
+    name = \"sumit\";
+    description = \"SumitModak\";
+    timeZone = \"Asia/Kolkata\";
+    locale = \"en_IN\";
+    kbdLayout = \"us\";
+  };
+  laptop.enable = false;
+  printing.enable = false;
+  autoCleanup.enable = false;
+}
+" | save -f $"($host_dir)/default.nix"
+  print $"($INFO) created (ansi green)($host_dir)/default.nix(ansi reset)"
+  
+  # Create hardware.nix
+  nixos-generate-config --show-hardware-config | save -f $"($host_dir)/hardware.nix"
+  print $"($INFO) created (ansi green)($host_dir)/hardware.nix(ansi reset)"
+  
+  # Create packages.nix
+  $"{ pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+  ];
+}
+" | save -f $"($host_dir)/packages.nix"
+  print $"($INFO) created (ansi green)($host_dir)/packages.nix(ansi reset)"
+}
