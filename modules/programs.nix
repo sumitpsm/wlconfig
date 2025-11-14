@@ -2,11 +2,11 @@
 
 let
   ytdlp-github = pkgs.yt-dlp.overrideAttrs (oldAttrs: {
-    version = "2025.10.22";
+    version = "2025.11.12";
     src = pkgs.fetchFromGitHub {
       owner = "yt-dlp";
       repo = "yt-dlp";
-      rev = "2025.10.22";
+      rev = "2025.11.12";
       sha256 = "sha256-x7vpuXUihlC4jONwjmWnPECFZ7xiVAOFSDUgBNvl+aA=";
     };
   });

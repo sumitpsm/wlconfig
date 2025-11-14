@@ -1,7 +1,11 @@
-Host main
+Host github
 Hostname github.com
-IdentityFile ~/.ssh/sumit
+IdentityFile ~/.ssh/github
 
-Host test
+Host gitlab
+Hostname gitlab.com
+IdentityFile ~/.ssh/gitlab
+
+Host old
 Hostname github.com
 IdentityFile ~/.ssh/sumit-modak

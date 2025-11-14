@@ -44,6 +44,7 @@ function check_symlink() {
 
 mkdir -p $HOME/.config/ $HOME/.local/ $HOME/.ssh/
 mkdir -p $HOME/.local/share/nushell/
+mkdir -p $HOME/.config/GIMP/3.0/
 
 # linking configs for the current user
 check_symlink "config/ssh_config"              ".ssh/config"

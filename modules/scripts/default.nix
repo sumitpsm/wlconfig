@@ -8,7 +8,7 @@
         # `import` should also work instead of `pkgs.callPackage`
         (pkgs.callPackage ./ascii.nix { inherit pkgs; })
         (pkgs.callPackage ./git-ls.nix { inherit pkgs; })
-        (pkgs.callPackage ./git-cfg.nix { inherit pkgs; })
+        (pkgs.callPackage ./gitc.nix { inherit pkgs; })
         (pkgs.callPackage ./rs.nix { inherit pkgs; })
         (pkgs.callPackage ./tscp.nix { inherit pkgs; })
         (pkgs.callPackage ./wset.nix { inherit pkgs; })
