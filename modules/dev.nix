@@ -7,11 +7,12 @@
   environment.systemPackages = with pkgs; [
     helix git yazi btop # gh
     zoxide eza ripgrep unzip bash
-    nixd vscode-langservers-extracted man-pages
     # asciinema asciinema-agg presenterm
 
     gcc pkg-config openssl
     rustc cargo clippy rustfmt rust-analyzer
+    nixd vscode-langservers-extracted man-pages
+    tailwindcss_4 tailwindcss-language-server
   ];
 
   environment.sessionVariables = {

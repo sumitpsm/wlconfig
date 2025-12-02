@@ -7,7 +7,7 @@ let
       owner = "yt-dlp";
       repo = "yt-dlp";
       rev = "2025.11.12";
-      sha256 = "sha256-x7vpuXUihlC4jONwjmWnPECFZ7xiVAOFSDUgBNvl+aA=";
+      sha256 = "sha256-Em8FLcCizSfvucg+KPuJyhFZ5MJ8STTjSpqaTD5xeKI=";
     };
   });
 in
@@ -27,7 +27,7 @@ in
     blender # 3d modelling system + video editor
     gnome-boxes # virtual machine manager
 
-    (inputs.zen-browser.packages.${system}.beta.override {}) # zen browser
+    (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.beta.override {}) # zen browser
     # handbrake # video compressor
     # kmonad # keyboard mapper
   ];
