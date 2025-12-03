@@ -6,7 +6,7 @@
     ./packages.nix
     ./../../modules/drivers/amd-drivers.nix
   ];
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 
   services.kmonad = {
     enable = true;
