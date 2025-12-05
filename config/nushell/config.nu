@@ -16,12 +16,29 @@ $env.config = {
   ]
 }
 
+# $env.config.menus ++= [{ 
+#   name: completion_menu, 
+#   type: { 
+#     layout: ide, 
+#     columns: 2, 
+#     col_width:15 
+#   }, 
+#   marker: "| ", 
+#   only_buffer_difference: false, 
+#   style: {
+#     text: green, 
+#     selected_text: green_reverse, 
+#     description_text: yellow
+#   }
+# }]
+
 alias c = clear
 alias l = eza -al --group-directories-first --icons
 alias la = eza -a --group-directories-first --icons
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
 alias lf = yazi
+alias btop = btop --force-utf
 
 zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
 
