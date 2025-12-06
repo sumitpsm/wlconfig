@@ -2,4 +2,5 @@
 	email = 152054612+sumitftr@users.noreply.github.com
 	name = Sumit Modak
 [alias]
-	lg = log --graph --oneline
+	s = status
+	graph = log --graph --oneline

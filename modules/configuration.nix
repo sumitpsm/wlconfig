@@ -20,9 +20,12 @@
   # nix.package = pkgs.nixVersions.nix_2_30;
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.qemu = {
+    package = pkgs.qemu_kvm;
+  };
   # virtualisation.spiceUSBRedirection.enable = true;
   users.users.${config.user.name}.extraGroups = [
-    "libvirtd" # for virtualization
+    "libvirtd" "kvm" # for virtualization
   ];
 
   # enables the polkit service

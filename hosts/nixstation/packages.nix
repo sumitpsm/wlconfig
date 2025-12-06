@@ -45,7 +45,7 @@
     # [image-viewer] // loupe eog nomacs imv
     # [video-player] // celluloid kdePackages.dragon
     # [file-manager] // nautilus kdePackages.dolphin xfce.thunar
-    # [disk-manager] // gparted kdePackages.partitionmanager mmtui
+    # [disk-manager] // gparted kdePackages.partitionmanager mmtui gnome-disk-utility
     # [browser] // firefox chromium torbrowser *opera
     # [theme-picker] // nwg-look libsForQt5.qt5ct
     # [video-editor] // kdePackages.kdenlive openshot-qt flowblade shotcut audacity *lightworks *davinci-resolve

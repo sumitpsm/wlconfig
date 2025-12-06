@@ -25,7 +25,7 @@ def extract [url: string] {
 def main [] {
     # Check if we're in a git repository
     if (git rev-parse --git-dir | complete | get exit_code) != 0 {
-        print $"($ERROR)Error: Not a git repository"
+        print $"($ERROR) Error: Not a git repository"
         exit 1
     }
 

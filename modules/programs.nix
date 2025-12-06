@@ -21,7 +21,6 @@ in
     zathura # document viewer
     mpv mpvScripts.mpris # video & audio player
     gnome-calculator # calculator
-    gnome-disk-utility # disk manager
     obs-studio # screen recorder
     gimp3 # image editor // [inkscape krita]
     blender # 3d modelling system + video editor
