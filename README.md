@@ -1,6 +1,6 @@
 ## Install Instructions
 ```sh
-  nix-shell -p git
+  nix-shell -p git nushell
 ```
 ```sh
   git clone https://github.com/sumitftr/nixos-config.git
