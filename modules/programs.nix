@@ -22,6 +22,7 @@ in
     mpv mpvScripts.mpris # video & audio player
     gnome-calculator # calculator
     obs-studio # screen recorder
+    drawy # diagram editor
     gimp3 # image editor // [inkscape krita]
     blender # 3d modelling system + video editor
     gnome-boxes # virtual machine manager
