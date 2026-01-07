@@ -1,6 +1,3 @@
-{ pkgs, ... }:
-
-pkgs.writeScriptBin "ascii" ''
 #!/usr/bin/env nu
 
 def main [] {
@@ -41,4 +38,3 @@ Dec  Hex   Char                           Dec  Hex   Char     Dec  Hex   Char   
  31   1F   US  (unit separator)            63   3F   ?         95   5F   _        127   7F   DEL
 '# 
 }
-''

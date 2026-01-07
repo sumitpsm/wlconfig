@@ -40,6 +40,7 @@ alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
 
+$env.PATH = $env.PATH | append ($nu.default-config-dir | path join scripts)
 zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
 
 # PROMPT CONFIGURATION

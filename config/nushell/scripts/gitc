@@ -1,6 +1,3 @@
-{ pkgs, ... }:
-
-pkgs.writeScriptBin "gitc" ''
 #!/usr/bin/env nu
 
 const ERROR = $"(ansi red)[ERROR](ansi reset)"
@@ -44,4 +41,3 @@ def main [] {
         print $"($ERROR) Failed to set email\n"
     }
 }
-''

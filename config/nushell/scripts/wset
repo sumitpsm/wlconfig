@@ -1,6 +1,3 @@
-{ pkgs, ... }:
-
-pkgs.writeScriptBin "wset" ''
 #!/usr/bin/env nu
 
 # Function to set the wallpaper with swww
@@ -34,4 +31,3 @@ def main [file?: string] {
     # }
   }
 }
-''

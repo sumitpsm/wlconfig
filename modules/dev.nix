@@ -12,7 +12,7 @@
     gcc pkg-config openssl
     rustc cargo clippy rustfmt rust-analyzer
     nixd vscode-langservers-extracted man-pages
-    tailwindcss_4 tailwindcss-language-server
+    # tailwindcss_4 tailwindcss-language-server
   ];
 
   environment.sessionVariables = {

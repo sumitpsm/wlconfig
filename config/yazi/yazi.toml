@@ -94,10 +94,9 @@ image_bound      = [ 0, 0 ]
 suppress_preload = false
 
 [plugin]
-
 fetchers = [
-	# Mimetype
-	{ id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
+  # mimetype
+  { id = "mime", url = "*", run = "mime.local", prio = "high" },
 ]
 preloaders = [
 	# Image

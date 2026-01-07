@@ -75,11 +75,22 @@
                     (show-button-bar "true"))))))
 (session-info "toplevel"
     (factory-entry "gimp-image-new-dialog")
-    (position 743 440))
+    (position 0 0)
+    (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-preferences-dialog")
     (position 392 352)
     (size 1137 749))
+(session-info "toplevel"
+    (factory-entry "gimp-file-open-dialog")
+    (position 0 0)
+    (size 1152 599)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-file-export-dialog")
+    (position 0 0)
+    (size 1152 599)
+    (monitor 0))
 
 (hide-docks no)
 (single-window-mode yes)

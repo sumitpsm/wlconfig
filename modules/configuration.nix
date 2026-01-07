@@ -13,11 +13,9 @@
 
     ./fonts.nix
     ./services
-    ./scripts
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # nix.package = pkgs.nixVersions.nix_2_30;
 
   virtualisation.libvirtd.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;

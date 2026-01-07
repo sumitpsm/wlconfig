@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     traceroute
-    curl
     wireshark tcpdump # termshark // for TUI
     # zap # web pentesting utility
   ];

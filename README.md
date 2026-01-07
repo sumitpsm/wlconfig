@@ -3,10 +3,10 @@
   nix-shell -p git nushell
 ```
 ```sh
-  git clone https://github.com/sumitftr/nixos-config.git
+  git clone https://github.com/sumitftr/nixos-config.git <YOUR_CONFIG_DIRECTORY>/nixos-config
 ```
 ```sh
-  cd nixos-config
+  cd <YOUR_CONFIG_DIRECTORY>/nixos-config
 ```
 > Add host by doing:
 ```sh
