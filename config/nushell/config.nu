@@ -1,8 +1,12 @@
 $env.config = {
-  show_banner: false
-  table: { mode: "rounded" }
   buffer_editor: "hx"
   edit_mode: "vi"
+  show_banner: false
+  completions: {
+    algorithm: "fuzzy"
+    sort: "smart"
+  }
+  table: { mode: "psql" }
   use_kitty_protocol: true
   keybindings: [
     { name: move_left                  modifier: none keycode: char_e mode: vi_normal event: { send: Left } }
@@ -15,22 +19,6 @@ $env.config = {
     { name: history_hint_word_complete modifier: control_shift keycode: backtab mode: vi_insert event: { send: HistoryHintWordComplete } }
   ]
 }
-
-# $env.config.menus ++= [{ 
-#   name: completion_menu, 
-#   type: { 
-#     layout: ide, 
-#     columns: 2, 
-#     col_width:15 
-#   }, 
-#   marker: "| ", 
-#   only_buffer_difference: false, 
-#   style: {
-#     text: green, 
-#     selected_text: green_reverse, 
-#     description_text: yellow
-#   }
-# }]
 
 alias c = clear
 alias l = eza -al --group-directories-first --icons

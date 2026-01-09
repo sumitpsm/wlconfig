@@ -34,3 +34,12 @@ args = ["--lsp"]
 [[language]]
 name = "nu"
 language-servers = ["nu-lsp"]
+
+[[language]]
+name = "markdown"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+language-servers = ["markdown-oxide"]
+auto-format = true
+
+[language-server.dprint-lsp]
+command = "markdown-oxide"

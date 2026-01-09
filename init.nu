@@ -16,6 +16,7 @@ const user_configs = [
     ["config/hypr",                 ".config/hypr"],
     ["config/kitty",                ".config/kitty"],
     ["config/alacritty",            ".config/alacritty"],
+    ["config/dprint",               ".config/dprint"],
     ["config/GIMP/3.0/gimprc",      ".config/GIMP/3.0/gimprc"],
     ["config/GIMP/3.0/sessionrc",   ".config/GIMP/3.0/sessionrc"],
     ["config/GIMP/3.0/shortcutsrc", ".config/GIMP/3.0/shortcutsrc"],
@@ -31,6 +32,7 @@ const root_configs = [
     [".config/nushell",             ".config/nushell"],
     [".config/helix",               ".config/helix"],
     [".config/yazi",                ".config/yazi"],
+    [".config/dprint",              ".config/dprint"],
     [".config/btop",                ".config/btop"],
     [".config/zellij",              ".config/zellij"],
 ]

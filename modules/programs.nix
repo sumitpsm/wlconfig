@@ -17,12 +17,11 @@ in
     ytdlp-github # video downloader // [parabolic]
 
     kitty alacritty # terminal emulators
-    swayimg # image viewer
     zathura # document viewer
     mpv mpvScripts.mpris # video & audio player
     gnome-calculator # calculator
     obs-studio # screen recorder
-    drawy # diagram editor
+    rnote # diagram editor // [drawy]
     gimp3 # image editor // [inkscape krita]
     blender # 3d modelling system + video editor
     gnome-boxes # virtual machine manager

@@ -17,4 +17,7 @@
       };
     };
   };
+
+  # [CUSTOM OPTIONS]
+  laptop.enable = false;
 }
