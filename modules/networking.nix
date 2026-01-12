@@ -15,11 +15,8 @@
   };
   users.users.${config.user.name}.extraGroups = [
     "wireshark"
+    "networkmanager"
   ];
-
-  # adds the sshd.service to path without enabling it
-  services.openssh.enable = true;
-  systemd.services.sshd.wantedBy = lib.mkForce [];
 
   networking = {
     networkmanager.enable = true;
@@ -30,6 +27,10 @@
       allowedUDPPorts = [];
     };
   };
+
+  # adds the sshd.service to path without enabling it
+  services.openssh.enable = true;
+  systemd.services.sshd.wantedBy = lib.mkForce [];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

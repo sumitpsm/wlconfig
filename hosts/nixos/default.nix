@@ -19,5 +19,5 @@
   };
 
   # [CUSTOM OPTIONS]
-  laptop.enable = false;
+  laptop.enable = true;
 }

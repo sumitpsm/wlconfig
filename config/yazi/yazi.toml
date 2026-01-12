@@ -81,3 +81,6 @@ prepend_rules = [
   { url = "*.epub", use = "view_doc" },
   { url = "*.html", use = ["open", "edit"] },
 ]
+append_rules = [
+	{ url = "*", use = ["edit", "open", "reveal"] },
+]

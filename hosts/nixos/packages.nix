@@ -22,7 +22,6 @@
     xdg-desktop-portal
     evolution-data-server
     app2unit
-    networkmanager
     # lm-sensors
     swappy
     aubio

@@ -46,10 +46,6 @@ in
     users.users.${cfg.name} = {
       isNormalUser = true;
       description = "${cfg.description}";
-      extraGroups = [
-        "networkmanager" # for networking
-        "wheel" # for sudo privileges
-      ];
       shell = pkgs.nushell;
       packages = [];
     };

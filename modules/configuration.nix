@@ -19,11 +19,12 @@
 
   virtualisation.libvirtd.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;
+
   users.users.${config.user.name}.extraGroups = [
     "libvirtd" # for virtualization
+    "wheel" # for sudo privileges
   ];
 
-  # enables the polkit service
   security.polkit.enable = true;
 
   users.users.root = {
