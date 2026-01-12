@@ -7,9 +7,6 @@ let
   };
 in
 {
-  # Display Manager
-  services.displayManager.gdm.enable = true;
-
   # Wayland Compositor (hyprland)
   programs.hyprland = {
     enable = true;
@@ -17,14 +14,22 @@ in
     withUWSM = true;
   };
 
+  systemd.user.targets.hyprland-session = {
+    description = "Hyprland compositor session";
+    documentation = [ "man:systemd.special(7)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+  };
+
   # Enabling session idling (hypridle)
   systemd.user.services.hypridle = {
     enable = true;
     description = "Hyprland's idle daemon";
     documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = [ "hyprland-session.target" ];
+    partOf = [ "hyprland-session.target" ];
+    after = [ "hyprland-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.hypridle}/bin/hypridle";
@@ -37,9 +42,9 @@ in
   systemd.user.services."swww-daemon" = {
     enable = true;
     description = "Wallpaper daemon";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = [ "hyprland-session.target" ];
+    partOf = [ "hyprland-session.target" ];
+    after = [ "hyprland-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.swww}/bin/swww-daemon";
@@ -48,28 +53,13 @@ in
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = false;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      # pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      common = {
-        default = [ "hyprland" ];
-        # "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      };
-    };
-  };
-
   # Enabling polkit agent (polkit-gnome-authentication-agent-1)
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     enable = true;
     description = "PolicyKit Gnome Authentication Agent";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = [ "hyprland-session.target" ];
+    wants = [ "hyprland-session.target" ];
+    after = [ "hyprland-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -79,6 +69,20 @@ in
     };
   };
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "hyprland" ];
+        # "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+    };
+  };
   systemd.user.services."xdg-document-portal".enable = false;
   systemd.user.services."xdg-permission-store".enable = false;
 

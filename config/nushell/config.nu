@@ -30,6 +30,10 @@ alias btop = btop --force-utf
 
 $env.PATH = $env.PATH | append ($nu.default-config-dir | path join scripts)
 zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
+# auto-start hyprland
+if (tty) == "/dev/tty1" {
+  exec uwsm start hyprland.desktop
+}
 
 # PROMPT CONFIGURATION
 $env.PROMPT_COMMAND = { ||
