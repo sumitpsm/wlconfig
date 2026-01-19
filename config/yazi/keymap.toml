@@ -43,8 +43,8 @@ keymap = [
     # Search, Find and Filter
     { on = "m",         run = "find_arrow",                  desc = "Go to the next match" },
     { on = "M",         run = "find_arrow --previous",       desc = "Go to the previous match" },
-    { on = "f",         run = "filter --smart",              desc = "Filter files" },
-    { on = "F",         run = "find --smart",                desc = "Find next file" },
+    { on = "f",         run = "find --smart",                desc = "Find next file" },
+    { on = "F",         run = "filter --smart",              desc = "Filter files" },
     { on = "s",         run = "search fd",                   desc = "Search files by name using fd" },
     { on = "S",         run = "search rg",                   desc = "Search files by content using ripgrep" },
     { on = "g",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },

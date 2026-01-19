@@ -29,8 +29,6 @@ Q = ":buffer-close!"
 z = ":write"
 Z = ":write!"
 v = "select_mode"
-"@" = "record_macro"
-"!" = "replay_macro"
 N = ":buffer-previous"
 H = ":buffer-next"
 
@@ -70,21 +68,23 @@ U = "redo"
 "=" = "surround_replace"
 "*" = "surround_delete"
 ">" = "switch_to_uppercase"
-"~" = "switch_case"
+"^" = "switch_case"
 "<" = "switch_to_lowercase"
 
+"@" = "record_macro"
+"!" = "replay_macro"
 n = [ "collapse_selection", "insert_mode" ]
-space.n = "open_above"
 h = [ "move_char_right", "insert_mode" ]
-space.h = "open_below"
-D = "select_register"
+space.j = "open_above"
+space.k = "open_below"
+space.n = "select_textobject_inner"
+space.h = "select_textobject_around"
 V = "match_brackets"
-"{" = "expand_selection"
-"}" = "shrink_selection"
+D = "select_register"
 
 # find & selection
-g = "file_picker" # Fd Search
-G = "global_search" # Ripgrep Search
+g = "file_picker" # recursive search
+G = "global_search" # ripgrep search
 s = "search"
 S = [ "search_selection", "search" ]
 M = "search_prev" # goto_prev_match
@@ -93,10 +93,10 @@ F = "extend_prev_char" # goto_prev_char
 f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
-
-j = "copy_selection_on_prev_line" # add cursor and selection above
+"?" = "rsearch"
+j = "copy_selection_on_prev_line"
 J = [ "add_newline_above", "move_visual_line_up" ]
-k = "copy_selection_on_next_line" # add cursor and selection below
+k = "copy_selection_on_next_line"
 K = [ "add_newline_below", "move_visual_line_down" ]
 l = "extend_line_below"
 L = [ "extend_line_up", "extend_to_line_bounds" ]
@@ -116,6 +116,8 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 # merge_selections
 # merge_consecutive_selections
 
+"~" = "command_palette"
+"#" = "jumplist_picker"
 space.y = "goto_file_start"
 space.i = "goto_file_end"
 space."." = "goto_last_modification"
@@ -124,7 +126,6 @@ space.Q = ":quit!"
 space.l = ":lsp-restart"
 space.L = ":lsp-stop"
 space.o = ":reload-all"
-space.O = ":config-reload"
 space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
@@ -136,8 +137,8 @@ space.e = "workspace_diagnostics_picker" ## Open workspace diagnostics picker (L
 space.E = "diagnostics_picker" ## Open document diagnostics picker (LSP)
 space.d = "goto_definition" ## Go to definition (LSP)
 space.D = "goto_type_definition" ## Go to type definition (LSP)
-space.s = "symbol_picker" ## Open document symbol picker (LSP)
-space.S = "workspace_symbol_picker" ## Open workspace symbol picker (LSP)
+space.s = "workspace_symbol_picker" ## Open workspace symbol picker (LSP)
+space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
@@ -159,18 +160,18 @@ space.f = [
   ':buffer-close! /tmp/files2open',
 ]
 
+"{" = "no_op"
+"}" = "no_op"
 "[".space = "no_op"
 "]".space = "no_op"
-space.F = "no_op"
-space.j = "no_op"
-space.g = "no_op"
+space."/" = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
-space.k = "no_op"
+space.g = "no_op"
+space.F = "no_op"
 space.Y = "no_op"
 space.P = "no_op"
 space.A-c = "no_op"
-space."/" = "no_op"
 "C-c" = "no_op"
 "C-i" = "no_op"
 "C-o" = "no_op"
@@ -180,10 +181,6 @@ space."/" = "no_op"
 "C-d" = "no_op"
 "C-u" = "no_op"
 "C-w" = "no_op"
-# window mode
-# insert mode
-# picker
-# prompt
 
 [keys.select]
 q = ":buffer-close"
@@ -191,8 +188,6 @@ Q = ":buffer-close!"
 z = ":write"
 Z = ":write!"
 v = "normal_mode"
-"@" = "record_macro"
-"!" = "replay_macro"
 N = ":buffer-previous"
 H = ":buffer-next"
 
@@ -232,19 +227,23 @@ U = "redo"
 "=" = "surround_replace"
 "*" = "surround_delete"
 ">" = "switch_to_uppercase"
-"~" = "switch_case"
+"^" = "switch_case"
 "<" = "switch_to_lowercase"
 
-space.n = "open_above"
-space.h = "open_below"
-D = "select_register"
+"@" = "record_macro"
+"!" = "replay_macro"
+n = [ "collapse_selection", "insert_mode" ]
+h = [ "move_char_right", "insert_mode" ]
+space.j = "open_above"
+space.k = "open_below"
+space.n = "select_textobject_inner"
+space.h = "select_textobject_around"
 V = "match_brackets"
-"{" = "expand_selection"
-"}" = "shrink_selection"
+D = "select_register"
 
 # find & selection
-g = "file_picker" # Fd Search
-G = "global_search" # Ripgrep Search
+g = "file_picker" # recursive search
+G = "global_search" # ripgrep search
 s = "search"
 S = [ "search_selection", "search" ]
 M = "search_prev" # goto_prev_match
@@ -253,12 +252,10 @@ F = "extend_prev_char" # goto_prev_char
 f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
-
-n = [ "normal_mode", "select_textobject_inner" ] # match inner
-h = [ "normal_mode", "select_textobject_around" ] # match outer
-j = "copy_selection_on_prev_line" # add cursor and selection above
+"?" = "rsearch"
+j = "copy_selection_on_prev_line"
 J = [ "add_newline_above", "move_visual_line_up" ]
-k = "copy_selection_on_next_line" # add cursor and selection below
+k = "copy_selection_on_next_line"
 K = [ "add_newline_below", "move_visual_line_down" ]
 l = "extend_line_below"
 L = [ "extend_line_up", "extend_to_line_bounds" ]
@@ -276,6 +273,8 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
 
+"~" = "command_palette"
+"#" = "jumplist_picker"
 space.y = "goto_file_start"
 space.i = "goto_file_end"
 space."." = "goto_last_modification"
@@ -284,7 +283,6 @@ space.Q = ":quit!"
 space.l = ":lsp-restart"
 space.L = ":lsp-stop"
 space.o = ":reload-all"
-space.O = ":config-reload"
 space.t = "align_view_top"
 space.m = "align_view_center"
 space.b = "align_view_bottom"
@@ -296,8 +294,8 @@ space.e = "workspace_diagnostics_picker" ## Open workspace diagnostics picker (L
 space.E = "diagnostics_picker" ## Open document diagnostics picker (LSP)
 space.d = "goto_definition" ## Go to definition (LSP)
 space.D = "goto_type_definition" ## Go to type definition (LSP)
-space.s = "symbol_picker" ## Open document symbol picker (LSP)
-space.S = "workspace_symbol_picker" ## Open workspace symbol picker (LSP)
+space.s = "workspace_symbol_picker" ## Open workspace symbol picker (LSP)
+space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
@@ -319,18 +317,18 @@ space.f = [
   ':buffer-close! /tmp/files2open',
 ]
 
+"{" = "no_op"
+"}" = "no_op"
 "[".space = "no_op"
 "]".space = "no_op"
-space.F = "no_op"
-space.j = "no_op"
-space.g = "no_op"
+space."/" = "no_op"
 space."?" = "no_op"
 space."'" = "no_op"
-space.k = "no_op"
+space.g = "no_op"
+space.F = "no_op"
 space.Y = "no_op"
 space.P = "no_op"
 space.A-c = "no_op"
-space."/" = "no_op"
 "C-c" = "no_op"
 "C-i" = "no_op"
 "C-o" = "no_op"

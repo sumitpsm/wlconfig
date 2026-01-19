@@ -5,8 +5,8 @@
   documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [
-    helix git yazi btop # gh
-    zoxide eza ripgrep unzip bash
+    helix git yazi opencode btop # gh
+    zoxide eza ripgrep zip unzip bash
     # asciinema asciinema-agg presenterm
 
     gcc pkg-config openssl

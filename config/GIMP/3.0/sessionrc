@@ -24,7 +24,7 @@
     (gimp-dock
         (side right)
         (book
-            (current-page 6)
+            (current-page 1)
             (dockable "gimp-color-editor"
                 (tab-style preview)
                 (aux-info
@@ -56,7 +56,7 @@
                 (aux-info
                     (show-button-bar "true"))))
         (book
-            (position 417)
+            (position 547)
             (current-page 0)
             (dockable "gimp-layer-list"
                 (tab-style icon)
@@ -89,7 +89,7 @@
 (session-info "toplevel"
     (factory-entry "gimp-file-export-dialog")
     (position 0 0)
-    (size 1152 599)
+    (size 1192 639)
     (monitor 0))
 
 (hide-docks no)
