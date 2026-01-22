@@ -1,5 +1,4 @@
-# theme = "base24"
-theme = "dark_plus_plus"
+theme = "base32-vscode"
 
 [editor]
 line-number = "relative"

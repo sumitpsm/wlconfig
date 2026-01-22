@@ -1,0 +1,179 @@
+# SYNTAX
+"attribute"                 = "cyan_frost"
+"comment"                   = "green_dim"
+"constant"                  = "cyan_bright"
+"constant.builtin"          = "blue"
+"constant.character"        = "orange"
+"constant.character.escape" = "yellow_alt"
+"constant.numeric"          = "green"
+"constructor"               = "cyan"
+"diff.delta"                = "blue_dim"
+"diff.minus"                = "red_bright"
+"diff.plus"                 = "green_alt"
+"function"                  = "yellow_bright"
+"function.builtin"          = "yellow_bright"
+"function.macro"            = "blue"
+"keyword"                   = "blue"
+"keyword.control"           = "purple"
+"keyword.directive"         = "purple"
+# "keyword.storage"         = ""    
+"label"                     = "blue"
+"module"                    = "cyan"
+"namespace"                 = "cyan"
+"operator"                  = "base10"
+"punctuation"               = "base10"
+"punctuation.delimiter"     = "base10"
+# "punctuation.bracket"     = ""
+"special"                   = "blue_bright"
+"string"                    = "orange"
+"string.regexp"             = "yellow_alt"
+"tag"                       = "blue"
+"type"                      = "cyan"
+"type.builtin"              = "cyan"
+"type.enum.variant"         = "cyan_bright"
+"variable"                  = "cyan_frost"
+"variable.builtin"          = "blue"
+"variable.other.member"     = "cyan_frost"
+"variable.parameter"        = "cyan_frost"
+
+# MARKUP
+"markup.heading"       = { fg = "blue", modifiers = ["bold"] }
+"markup.list"          = "blue_alt"
+"markup.bold"          = { modifiers = ["bold"] }
+"markup.italic"        = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.url"      = { underline.style= "line" }
+"markup.link.text"     = "orange"
+"markup.quote"         = "green_dim"
+"markup.raw"           = "orange"
+
+# UI
+"ui.background"              = { fg = "base10", bg = "base00" }
+"ui.window"                  = { bg = "base02" }
+"ui.popup"                   = { fg = "base10", bg = "base02" }
+"ui.help"                    = { fg = "base10", bg = "base02" }
+"ui.menu"                    = { fg = "base10", bg = "base02" }
+"ui.menu.selected"           = { bg = "blue_deep_alt" }
+"ui.cursor"                  = { fg = "base08", modifiers = ["reversed"] }
+"ui.cursor.primary"          = { fg = "base08", modifiers = ["reversed"] }
+"ui.cursor.match"            = { bg = "#3a3d41", underline.style = "line" }
+"ui.selection"               = { bg = "#3a3d41" }
+"ui.selection.primary"       = { bg = "blue_deep" }
+"ui.linenr"                  = { fg = "base06" }
+"ui.linenr.selected"         = { fg = "base09" }
+"ui.cursorline.primary"      = { bg = "base03" }
+"ui.statusline"              = { fg = "base12", bg = "blue_electric" }
+"ui.statusline.inactive"     = { fg = "base12", bg = "base02" }
+"ui.statusline.insert"       = { fg = "base12", bg = "yellow_alt" }
+"ui.statusline.select"       = { fg = "base12", bg = "magenta" }
+"ui.bufferline"              = { fg = "base10", bg = "base02" }
+"ui.bufferline.active"       = { fg = "base12", bg = "blue_electric" }
+"ui.bufferline.background"   = { bg = "base01" }
+"ui.text"                    = { fg = "base10" }
+"ui.text.focus"              = { fg = "base12" }
+"ui.text.directory"          = { fg = "blue" }
+"ui.text.inactive"           = { fg = "base06" }
+"ui.virtual.whitespace"      = { fg = "#3e3e3d" }
+"ui.virtual.wrap"            = { fg = "#3e3e3d" }
+"ui.virtual.ruler"           = { bg = "base04" }
+"ui.virtual.indent-guide"    = { fg = "base05" }
+"ui.virtual.inlay-hint"      = { fg = "base07"}
+"ui.virtual.jump-label"      = { fg = "yellow_alt", modifiers = ["bold"] }
+"ui.highlight.frameline"     = { bg = "#4b4b18" }
+"ui.debug.active"            = { fg = "#ffcc00" }
+"ui.debug.breakpoint"        = { fg = "#e51400" }
+"ui.picker.header.column"    = { underline.style = "line" }
+"ui.picker.header.column.active" = { fg ="base12", underline.style = "line" }
+"warning"                    = { fg = "yellow_alt" }
+"error"                      = { fg = "red" }
+"info"                       = { fg = "blue_bright" }
+"hint"                       = { fg = "base11" }
+"diagnostic.error".underline = { color = "red", style = "curl" }
+"diagnostic".underline       = { color = "yellow_alt", style = "curl" }
+
+[palette]
+# --- CORE NEUTRALS (13) ---
+base00         = "#000000" # dark_gray2
+base01         = "#1e1e1e" # background
+base02         = "#252526" # widget
+base03         = "#282828" # dark_gray3
+base04         = "#323232" # borders
+base05         = "#404040" # dark_gray4
+base06         = "#858585" # dark_gray
+base07         = "#8b949e" # dark_gray5
+base08         = "#a6a6a6" # cursor
+base09         = "#c6c6c6" # light_gray2
+base10         = "#d4d4d4" # text / light_gray
+base11         = "#eeeeee" # light_gray3
+base12         = "#ffffff" # white
+
+# --- REDS (2) ---
+red            = "#ff1212" # red
+red_bright     = "#f14c4c" # orange_red
+
+# --- ORANGES (1) ---
+orange         = "#ce9178" # orange
+
+# --- YELLOWS (3) ---
+yellow         = "#d7ba7d" # gold
+yellow_bright  = "#DCDCAA" # fn_declaration
+yellow_alt     = "#cca700" # gold2
+
+# --- GREENS (3) ---
+green          = "#b5cea8" # pale_green
+green_dim      = "#6A9955" # dark_green
+green_alt      = "#487e02" # dark_green2
+
+# --- CYANS (3) ---
+cyan           = "#4EC9B0" # type
+cyan_frost     = "#9cdcfe" # variable
+cyan_bright    = "#4fc1ff" # constant
+
+# --- BLUES (7) ---
+blue           = "#569cd6" # blue2
+blue_electric  = "#007acc" # blue
+blue_bright    = "#75beff" # light_blue
+blue_dim       = "#1b81a8" # blue4
+blue_alt       = "#6796e6" # blue3
+blue_deep      = "#264f78" # dark_blue
+blue_deep_alt  = "#094771" # dark_blue2
+
+# --- PURPLES (1) ---
+purple         = "#c586c0" # special
+
+# white = "#ffffff"
+# orange = "#ce9178"
+# gold = "#d7ba7d"
+# gold2 = "#cca700"
+# pale_green = "#b5cea8"
+# dark_green = "#6A9955"
+# dark_green2 = "#487e02"
+# light_gray = "#d4d4d4"
+# light_gray2 = "#c6c6c6"
+# light_gray3 = "#eeeeee"
+# dark_gray = "#858585"
+# dark_gray2 = "#000000"
+# dark_gray3 = "#282828"
+# dark_gray4 = "#404040"
+# dark_gray5 = "#8b949e"
+# blue = "#007acc"
+# blue2 = "#569CD6"
+# blue3 = "#6796E6"
+# blue4 = "#1b81a8"
+# light_blue = "#75beff"
+# dark_blue = "#264f78"
+# dark_blue2 = "#094771"
+# red = "#ff1212"
+# orange_red = "#f14c4c"
+
+# type = "#4EC9B0"
+# special = "#C586C0"
+# variable = "#9CDCFE"
+# fn_declaration = "#DCDCAA"
+# constant = "#4FC1FF"
+
+# background = "#1e1e1e"
+# text = "#d4d4d4"
+# cursor = "#a6a6a6"
+# widget = "#252526"
+# borders = "#323232"

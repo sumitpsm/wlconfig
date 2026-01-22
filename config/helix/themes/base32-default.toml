@@ -1,0 +1,117 @@
+# SYNTAX
+"attribute"                 = "orange_dim"
+"comment"                   = { fg = "base03_bright", modifiers = ["italic"] }
+"constant"                  = "yellow_dim"
+"constant.builtin"          = "orange_bright"
+"constant.character"        = "orange_dim"
+"constant.character.escape" = "magenta_bright"
+"constant.numeric"          = "orange_bright"
+"constructor"               = "blue_bright"
+"diff.delta"                = "yellow"
+"diff.minus"                = "red"
+"diff.plus"                 = "green"
+"function"                  = "blue_electric"
+"function.builtin"          = "blue_alt"
+"function.macro"            = "blue_bright"
+"keyword"                   = "purple"
+"keyword.control"           = "purple"
+"keyword.directive"         = "purple"
+"keyword.storage"           = "purple"
+"label"                     = "magenta_bright"
+"module"                    = "green_alt"
+"namespace"                 = "green_alt"
+"operator"                  = "cyan_dim"
+"punctuation"               = "base04"
+"punctuation.delimiter"     = "base04"
+"punctuation.bracket"       = "base04_dim"
+"special"                   = "magenta"
+"string"                    = "orange"
+"string.regexp"             = "orange_bright"
+"tag"                       = "red"
+"type"                      = "yellow"
+"type.builtin"              = "yellow_soft"
+"type.enum.variant"         = "yellow_alt"
+"variable"                  = "cyan_frost"
+"variable.builtin"          = "cyan_bright"
+"variable.other.member"     = "cyan_dim"
+"variable.parameter"        = "cyan_alt"
+
+# UI
+"ui.background"              = { fg = "base05", bg = "base00" }
+"ui.window"                  = { bg = "base01" }
+"ui.popup"                   = { fg = "base05", bg = "base01" }
+"ui.menu"                    = { fg = "base05", bg = "base01" }
+"ui.menu.selected"           = { fg = "base01", bg = "base04" }
+"ui.selection"               = { bg = "base02" }
+"ui.selection.primary"       = { bg = "base03" }
+"ui.cursor"                  = { fg = "base04", modifiers = ["reversed"] }
+"ui.cursor.primary"          = { fg = "base05", modifiers = ["reversed"] }
+"ui.cursor.match"            = { fg = "yellow", underline.style = "line" }
+"ui.linenr"                  = { fg = "base03", bg = "base00" }
+"ui.linenr.selected"         = { fg = "base07", bg = "base01", modifiers = ["bold"] }
+"ui.cursorline.primary"      = { bg = "base01" }
+"ui.statusline"              = { fg = "base04", bg = "base01" }
+"ui.statusline.insert"       = { fg = "base00", bg = "green" }
+"ui.statusline.select"       = { fg = "base00", bg = "magenta" }
+"ui.statusline.normal"       = { fg = "base04", bg = "base01" }
+"ui.bufferline"              = { fg = "base04", bg = "base01" }
+"ui.bufferline.active"       = { fg = "base07", bg = "base00", underline.style = "line" }
+"ui.text"                    = { fg = "base05" }
+"ui.text.focus"              = { fg = "base07" }
+"ui.virtual.whitespace"      = { fg = "base01_bright" }
+"ui.virtual.indent-guide"    = { fg = "base01_bright" }
+"ui.help"                    = { fg = "base05", bg = "base01" }
+
+[palette]
+# --- CORE NEUTRALS (11) ---
+base00        = "#101010"
+base01        = "#1c1e20"
+base01_bright = "#25282c"
+base02        = "#30343a"
+base03        = "#585858"
+base04_dim    = "#606060"
+base03_bright = "#707070"
+base04        = "#8a8a8a"
+base05        = "#c5c8c6"
+base06        = "#eaeaea"
+base07        = "#d0d0d0"
+
+# --- REDS (1) ---
+red           = "#cc6666"
+
+# --- ORANGES (3) ---
+orange        = "#ce9178"
+orange_bright = "#f0c674"
+orange_dim    = "#ac7b4b"
+
+# --- YELLOWS (4) ---
+yellow        = "#d0a664"
+yellow_soft   = "#e0c080"
+yellow_bright = "#e7c547"
+yellow_alt    = "#c5a35a"
+
+# --- GREENS (3) ---
+green         = "#b5bd68"
+green_bright  = "#b9ca4a"
+green_alt     = "#7a8a55"
+
+# --- CYANS (4) ---
+cyan          = "#8abeb7"
+cyan_frost    = "#99d1ce"
+cyan_bright   = "#70c0b1"
+cyan_dim      = "#5e8d87"
+cyan_alt      = "#447871"
+
+# --- BLUES (5) ---
+blue          = "#81a2be"
+blue_electric = "#88c0eb"
+blue_bright   = "#7aa6da"
+blue_dim      = "#5f819d"
+blue_alt      = "#4d6a85"
+
+# --- PURPLES (4) ---
+purple        = "#b294bb"
+purple_dim    = "#8e6f98"
+magenta       = "#c397d8"
+magenta_bright= "#d8b6e9"
+magenta_dim   = "#a07cad"
