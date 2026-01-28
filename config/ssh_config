@@ -6,6 +6,6 @@ Host gitlab
 Hostname gitlab.com
 IdentityFile ~/.ssh/gitlab
 
-Host old
+Host alt
 Hostname github.com
-IdentityFile ~/.ssh/sumit-modak
+IdentityFile ~/.ssh/alt

@@ -6,10 +6,10 @@
 
   environment.systemPackages = with pkgs; [
     helix git yazi opencode btop # gh
-    zoxide eza ripgrep zip unzip bash
+    zoxide eza ripgrep zip unzip p7zip
     # asciinema asciinema-agg presenterm
 
-    gcc pkg-config openssl
+    gcc pkg-config openssl bash
     rustc cargo clippy rustfmt rust-analyzer
     man-pages markdown-oxide dprint nixd
     # tailwindcss_4 tailwindcss-language-server vscode-langservers-extracted
@@ -24,7 +24,7 @@
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     RUST_BACKTRACE = 1;
-    PATH = [ "$HOME/.cargo/bin" ];
+    PATH = [];
   };
 
   environment.variables = {};

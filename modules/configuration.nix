@@ -7,7 +7,6 @@
     ./dev.nix
     ./networking.nix
     ./sound.nix
-    ./usb.nix
     ./wayland.nix
     ./programs.nix
 
@@ -30,4 +29,7 @@
   users.users.root = {
     shell = pkgs.nushell;
   };
+
+  services.udisks2.enable = true;
+  # services.udev.enable = true;
 }

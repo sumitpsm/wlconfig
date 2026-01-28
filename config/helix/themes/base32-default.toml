@@ -63,7 +63,6 @@
 "ui.help"                    = { fg = "base05", bg = "base01" }
 
 [palette]
-# --- CORE NEUTRALS (11) ---
 base00        = "#101010"
 base01        = "#1c1e20"
 base01_bright = "#25282c"

@@ -28,11 +28,13 @@ alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
 
-$env.PATH = $env.PATH | append ($nu.default-config-dir | path join scripts)
+$env.PATH = $env.PATH | prepend $"($nu.home-path)/.cargo/bin"
+$env.PATH = $env.PATH | append $"($nu.default-config-dir)/scripts"
 zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
+
 # auto-start hyprland
 if (tty) == "/dev/tty1" {
-  exec uwsm start hyprland.desktop
+  exec start-hyprland
 }
 
 # PROMPT CONFIGURATION
