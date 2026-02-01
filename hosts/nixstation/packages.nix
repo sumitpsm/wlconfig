@@ -13,7 +13,7 @@
     go          # For building DMS components
     cava        # Audio visualization
     cliphist    # Clipboard history
-    brightnessctl ddcutil
+    ddcutil
     qt6.qtmultimedia
     accountsservice
     matugen     # Dynamic theming
@@ -50,6 +50,7 @@
     # [video-editor] // kdePackages.kdenlive openshot-qt flowblade shotcut audacity *lightworks *davinci-resolve
     # [document] // libreoffice *wps
     # [misc] // youtube-music *discord *spotify
+    # [yt-dlp-frontend] // parabolic video-downloader
 
     # yad zenity amfora appimage-run usbutils v4l-utils nwg-displays lm_sensors gnome-maps gnome-clocks
   ];

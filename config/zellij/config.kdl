@@ -72,10 +72,10 @@ keybinds clear-defaults=true {
 
     //! Pane Mode
     shared_except "pane" "locked" {
-        bind "Ctrl p" { SwitchToMode "Pane"; }
+        bind "Ctrl s" { SwitchToMode "Pane"; }
     }
     pane {
-        bind "Ctrl p" { SwitchToMode "Normal"; }
+        bind "Ctrl s" { SwitchToMode "Normal"; }
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
         bind "f" { ToggleFloatingPanes; SwitchToMode "Normal"; }

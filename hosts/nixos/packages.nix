@@ -13,7 +13,7 @@
     go          # For building DMS components
     cava        # Audio visualization
     cliphist    # Clipboard history
-    brightnessctl ddcutil
+    ddcutil
     qt6.qtmultimedia
     accountsservice
     matugen     # Dynamic theming

@@ -25,6 +25,6 @@
   esc  q    w    c    p    b    z    j    l    u    y    '    -    bspc
   tab  a    r    s    t    g    ;    m    n    e    i    o    ret
   lsft x    f    d    k    /    =    v    h    ,    .    rsft
-  lalt lctl lmet         spc         rctl ralt caps pgup home end pgdn
+  lalt rctl lmet         spc         lctl ralt caps pgup home end pgdn
 )
 

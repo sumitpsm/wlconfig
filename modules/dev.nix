@@ -24,7 +24,7 @@
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     RUST_BACKTRACE = 1;
-    PATH = [];
+    # PATH = [];
   };
 
   environment.variables = {};
