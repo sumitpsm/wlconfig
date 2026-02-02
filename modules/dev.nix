@@ -5,13 +5,14 @@
   documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [
-    helix git yazi opencode btop # gh
-    zoxide eza ripgrep zip unzip p7zip
+    helix yazi opencode btop # gh
+    git ripgrep zoxide eza
+    ffmpeg-full zip unzip p7zip
     # asciinema asciinema-agg presenterm
 
     gcc pkg-config openssl bash
     rustc cargo clippy rustfmt rust-analyzer
-    man-pages markdown-oxide dprint nixd
+    man-pages dprint markdown-oxide nixd
     # tailwindcss_4 tailwindcss-language-server vscode-langservers-extracted
   ];
 

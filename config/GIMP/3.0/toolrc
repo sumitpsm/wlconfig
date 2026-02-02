@@ -14,7 +14,7 @@
             (visible yes))))
 (GimpToolGroup "tool group"
     (visible yes)
-    (active-tool "gimp-unified-transform-tool")
+    (active-tool "gimp-rotate-tool")
     (children
         (GimpToolInfo "gimp-unified-transform-tool"
             (icon-name "gimp-tool-unified-transform")
@@ -108,7 +108,7 @@
     (visible yes))
 (GimpToolGroup "tool group"
     (visible yes)
-    (active-tool "gimp-dodge-burn-tool")
+    (active-tool "gimp-convolve-tool")
     (children
         (GimpToolInfo "gimp-dodge-burn-tool"
             (icon-name "gimp-tool-dodge")
@@ -137,7 +137,7 @@
     (visible yes))
 (GimpToolGroup "tool group"
     (visible yes)
-    (active-tool "gimp-zoom-tool")
+    (active-tool "gimp-color-picker-tool")
     (children
         (GimpToolInfo "gimp-color-picker-tool"
             (icon-name "gimp-tool-color-picker")

@@ -2,10 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
-    ffmpeg-full
     yt-dlp
 
-    kitty alacritty # terminal emulators
     zathura # document viewer
     mpv mpvScripts.mpris # video & audio player
     gnome-boxes # virtual machine manager

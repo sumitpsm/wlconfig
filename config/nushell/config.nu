@@ -30,7 +30,7 @@ alias btop = btop --force-utf
 
 $env.PATH = (
     $env.PATH 
-    | append $"($nu.home-path)/.cargo/bin"
+    | append $"($nu.home-dir)/.cargo/bin"
     | append $"($nu.default-config-dir)/scripts"
     | uniq
 )

@@ -87,6 +87,7 @@ in
   systemd.user.services."xdg-permission-store".enable = false;
 
   environment.systemPackages = with pkgs; [
+    kitty wezterm alacritty # terminal emulators
     wl-clipboard # clipboard
     swww # wallpaper
     hypridle # idling daemon

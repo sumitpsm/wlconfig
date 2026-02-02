@@ -24,7 +24,7 @@
     (gimp-dock
         (side right)
         (book
-            (current-page 1)
+            (current-page 6)
             (dockable "gimp-color-editor"
                 (tab-style preview)
                 (aux-info
@@ -60,7 +60,7 @@
             (current-page 0)
             (dockable "gimp-layer-list"
                 (tab-style icon)
-                (preview-size 32)
+                (preview-size 24)
                 (aux-info
                     (show-button-bar "true")))
             (dockable "gimp-channel-list"
@@ -79,17 +79,28 @@
     (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-preferences-dialog")
-    (position 392 352)
-    (size 1137 749))
+    (position 0 0)
+    (size 1077 996)
+    (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-file-open-dialog")
     (position 0 0)
-    (size 1152 599)
+    (size 1192 639)
     (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-file-export-dialog")
     (position 0 0)
     (size 1192 639)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-file-save-dialog")
+    (position 0 0)
+    (size 1192 639)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-text-tool-dialog")
+    (position 0 0)
+    (size 956 996)
     (monitor 0))
 
 (hide-docks no)
