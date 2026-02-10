@@ -20,15 +20,15 @@ def "nu-complete git checkout" []: nothing -> list<string> {
         | each { |line| $line | str trim }
     )
 
-    # Get recent commit hashes
-    let commits: list<string> = (
-        ^git log --all --oneline
-        | lines
-        | each { |line| $line | split row ' ' | first }
-    )
+    # # Get recent commit hashes
+    # let commits: list<string> = (
+    #     ^git log --all --oneline
+    #     | lines
+    #     | each { |line| $line | split row ' ' | first }
+    # )
 
     # Combine all completion options and ensure uniqueness
-    ($local_branches ++ $remote_branches ++ $tags ++ $commits) | uniq
+    ($local_branches ++ $remote_branches ++ $tags) | uniq
 }
 
 # Register the git checkout command with autocompletion

@@ -14,7 +14,7 @@ const user_configs = [
     ["config/helix",                ".config/helix"],
     ["config/yazi",                 ".config/yazi"],
     ["config/hypr",                 ".config/hypr"],
-    ["config/wezterm",                ".config/wezterm"],
+    ["config/wezterm",              ".config/wezterm"],
     ["config/alacritty",            ".config/alacritty"],
     ["config/kitty",                ".config/kitty"],
     ["config/dprint",               ".config/dprint"],

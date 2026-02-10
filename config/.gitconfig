@@ -3,4 +3,4 @@
 	name = Sumit Modak
 [alias]
 	s = status
-	graph = log --graph --oneline
+	graph = log --graph --oneline --all

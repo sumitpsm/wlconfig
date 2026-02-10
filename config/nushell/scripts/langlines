@@ -1,0 +1,166 @@
+#!/usr/bin/env nu
+
+# Count lines of code in a git repository by language
+# Usage: loc.nu [path]
+def main [path?: string] {
+    # Use provided path or current directory
+    let repo_path = if ($path | is-empty) {
+        $env.PWD
+    } else {
+        $path
+    }
+
+    # Check if path exists
+    if not ($repo_path | path exists) {
+        print $"Error: Path '($repo_path)' does not exist"
+        return
+    }
+
+    # Change to repository directory
+    cd $repo_path
+
+    # Language configuration with extensions and GitHub colors
+    let languages = [
+        { name: "Rust",       exts: [".rs"],                    color: "#dea584" },
+        { name: "C",          exts: [".c", ".h"],               color: "#555555" },
+        { name: "C++",        exts: [".cpp", ".hpp", ".cc", ".cxx", ".hxx"], color: "#f34b7d" },
+        { name: "Zig",        exts: [".zig"],                   color: "#ec915c" },
+        { name: "Nushell",    exts: [".nu"],                    color: "#31507d" },
+        { name: "Nix",        exts: [".nix"],                   color: "#7e7eff" },
+        { name: "CSS",        exts: [".css"],                   color: "#563d7c" },
+        { name: "JavaScript", exts: [".js", ".jsx", ".mjs"],    color: "#f1e05a" },
+        { name: "Python",     exts: [".py"],                    color: "#3572A5" },
+        { name: "Bash",       exts: [".sh", ".bash"],           color: "#89e051" },
+        { name: "Lua",        exts: [".lua"],                   color: "#000080" },
+        { name: "Go",         exts: [".go"],                    color: "#00ADD8" },
+        { name: "TypeScript", exts: [".ts", ".tsx"],            color: "#3178c6" },
+        { name: "TOML",       exts: [".toml"],                  color: "#9c4221" },
+        { name: "JSON",       exts: [".json"],                  color: "#292929" },
+        { name: "Markdown",   exts: [".md", ".markdown"],       color: "#083fa1" },
+        { name: "YAML",       exts: [".yaml", ".yml"],          color: "#cb171e" },
+        { name: "HTML",       exts: [".html", ".htm"],          color: "#e34c26" },
+        { name: "XML",        exts: [".xml"],                   color: "#0060ac" },
+    ]
+
+    # Get all files tracked by git
+    let git_files = (git ls-files | lines)
+
+    # Initialize counters
+    mut lang_counts = {}
+    mut other_files = []
+    mut total_lines = 0
+
+    # Process each file
+    for file in $git_files {
+        if not ($file | path exists) {
+            continue
+        }
+
+        let ext = ($file | path parse | get extension)
+        let full_ext = $".($ext)"
+        
+        # Find matching language
+        let lang_match = ($languages | where { |lang| $full_ext in $lang.exts } | first)
+        
+        if ($lang_match | is-not-empty) {
+            # Count lines for known language
+            let line_count = (try { 
+                open --raw $file | lines | length 
+            } catch { 
+                0 
+            })
+            
+            if $line_count > 0 {
+                let lang_name = $lang_match.name
+                
+                $lang_counts = ($lang_counts | upsert $lang_name {|row|
+                    if ($lang_name in $row) {
+                        $row | get $lang_name | $in + $line_count
+                    } else {
+                        $line_count
+                    }
+                })
+                
+                $total_lines = $total_lines + $line_count
+            }
+        } else {
+            # Add to others if it has an extension and content
+            if ($ext | is-not-empty) {
+                let line_count = (try { 
+                    open --raw $file | lines | length 
+                } catch { 
+                    0 
+                })
+                if $line_count > 0 {
+                    $other_files = ($other_files | append { file: $file, ext: $full_ext, lines: $line_count })
+                    $total_lines = $total_lines + $line_count
+                }
+            }
+        }
+    }
+
+    # Group other files by extension
+    let other_counts = if ($other_files | is-not-empty) {
+        $other_files 
+        | group-by ext 
+        | transpose ext files 
+        | each { |row| 
+            { ext: $row.ext, lines: ($row.files | each { |f| $f.lines } | math sum) }
+        }
+        | sort-by -r lines
+    } else {
+        []
+    }
+
+    print ""
+
+    # Sort and display language counts (only non-zero)
+    let sorted_langs = ($lang_counts 
+        | transpose name lines 
+        | where lines > 0
+        | sort-by -r lines)
+
+    for lang in $sorted_langs {
+        let lang_config = ($languages | where name == $lang.name | first)
+        let color = $lang_config.color
+        let percentage = (($lang.lines / $total_lines) * 100 | math round -p 1)
+        
+        print $"(ansi $color)●(ansi reset) ($lang.name | fill -a l -c ' ' -w 15) (ansi green)($lang.lines | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) ($percentage)%"
+    }
+
+    # Display other languages if present
+    if ($other_counts | is-not-empty) {
+        let other_total = ($other_counts | each { |x| $x.lines } | math sum)
+        let percentage = (($other_total / $total_lines) * 100 | math round -p 1)
+        
+        print $"\n(ansi grey)●(ansi reset) Others          (ansi green)($other_total | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) ($percentage)%"
+        
+        # Show breakdown of other extensions
+        for ext in $other_counts {
+            let ext_percentage = (($ext.lines / $other_total) * 100 | math round -p 1)
+            print $"  (ansi grey)└─(ansi reset) ($ext.ext | fill -a l -c ' ' -w 12) (ansi light_gray)($ext.lines | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) ($ext_percentage)%"
+        }
+    }
+
+    # Calculate known formats total
+    let known_total = ($sorted_langs | each { |x| $x.lines } | math sum)
+    let other_total = if ($other_counts | is-not-empty) {
+        $other_counts | each { |x| $x.lines } | math sum
+    } else {
+        0
+    }
+    let known_percentage = (($known_total / $total_lines) * 100 | math round -p 1)
+    let other_percentage = (($other_total / $total_lines) * 100 | math round -p 1)
+
+    # Print summary breakdown
+    print $"\n(ansi cyan)───────────────────────────────────────(ansi reset)"
+    print $"(ansi cyan)Known formats(ansi reset)     (ansi green)($known_total | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) ($known_percentage)%"
+    if $other_total > 0 {
+        print $"(ansi cyan)Other formats(ansi reset)     (ansi green)($other_total | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) ($other_percentage)%"
+    }
+
+    # Print total
+    print $"(ansi cyan)═══════════════════════════════════════(ansi reset)"
+    print $"(ansi cyan)Total(ansi reset)             (ansi green)($total_lines | into string | fill -a r -c ' ' -w 8)(ansi reset) (ansi grey)│(ansi reset) 100.0%"
+    print $"(ansi cyan)═══════════════════════════════════════(ansi reset)\n"
+}

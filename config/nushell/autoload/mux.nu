@@ -4,7 +4,7 @@ def --env mux [
     let is_todo_closed = (kitten @ ls | from json | get tabs.0.0.title) != "todo"
     # Open todo tab once
     if $is_todo_closed {
-        kitten @ launch --type=tab --title=todo $env.EDITOR ...(ls ~/dev/todo/**/*).name
+        kitten @ launch --type=tab --title=todo $env.EDITOR ...($project_paths | each { $"($in)/TODO" } | where { path exists }) ...(ls ~/dev/todo*).name
     }
     
     # Process each project path

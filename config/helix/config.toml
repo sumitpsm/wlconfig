@@ -2,7 +2,7 @@ theme = "base32-vscode"
 
 [editor]
 line-number = "relative"
-shell = ["nu", "-l", "-c"]
+shell = ["nu", "-e"]
 bufferline = "always"
 
 [editor.cursor-shape]
@@ -32,7 +32,7 @@ N = ":buffer-previous"
 H = ":buffer-next"
 "`" = "select_register"
 "~" = "command_palette"
-"@" = "record_macro"
+"#" = "record_macro"
 "!" = "replay_macro"
 
 # movement
@@ -64,7 +64,7 @@ d = "delete_selection_noyank" # delete selection
 x = "delete_selection" # delete and copy selection
 X = [ "yank_to_clipboard", "delete_selection_noyank" ] # delete and copy selection to clipboard
 R = "replace_with_yanked" # delete selection and paste (replace)
-A = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
+D = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
 r = "replace" # replace character
 a = "change_selection_noyank" # delete selection & insert
 "backspace" = [ "move_char_left", "delete_selection_noyank" ]
@@ -72,6 +72,7 @@ u = "undo"
 U = "redo"
 "tab" =	"indent"
 "S-tab"	= "unindent"
+A = "changed_file_picker"
 
 "+" = "surround_add"
 "=" = "surround_replace"
@@ -88,14 +89,14 @@ g = "file_picker" # recursive search
 G = "global_search" # ripgrep search
 s = "search"
 S = [ "search_selection", "search" ]
+"/" = "select_regex"
+"?" = "rsearch"
 M = "search_prev" # goto_prev_match
 m = "search_next" # goto_next_match
 F = "extend_prev_char" # goto_prev_char
 f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
-"/" = "select_regex"
-"?" = "rsearch"
 j = "copy_selection_on_prev_line"
 k = "copy_selection_on_next_line"
 l = "extend_line_below"
@@ -113,7 +114,7 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
 "\\" = "merge_consecutive_selections"
-"#" = "save_selection"
+"V" = "save_selection"
 "{" = "jump_backward"
 "}" = "jump_forward"
 
@@ -159,8 +160,7 @@ space.f = [
   ':buffer-close! /tmp/files2open',
 ]
 
-"D" = "no_op"
-"V" = "no_op"
+"@" = "no_op"
 "$" = "no_op"
 "[" = "no_op"
 "]" = "no_op"
@@ -223,7 +223,7 @@ N = ":buffer-previous"
 H = ":buffer-next"
 "`" = "select_register"
 "~" = "command_palette"
-"@" = "record_macro"
+"#" = "record_macro"
 "!" = "replay_macro"
 
 # movement
@@ -255,7 +255,7 @@ d = "delete_selection_noyank" # delete selection
 x = "delete_selection" # delete and copy selection
 X = [ "yank_to_clipboard", "delete_selection_noyank" ] # delete and copy selection to clipboard
 R = "replace_with_yanked" # delete selection and paste (replace)
-A = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
+D = "replace_selections_with_clipboard" # delete selection and paste from clipboard (replace with clipboard)
 r = "replace" # replace character
 a = "change_selection_noyank" # delete selection & insert
 "backspace" = [ "move_char_left", "delete_selection_noyank" ]
@@ -263,6 +263,7 @@ u = "undo"
 U = "redo"
 "tab" =	"indent"
 "S-tab"	= "unindent"
+A = "changed_file_picker"
 
 "+" = "surround_add"
 "=" = "surround_replace"
@@ -279,14 +280,14 @@ g = "file_picker" # recursive search
 G = "global_search" # ripgrep search
 s = "search"
 S = [ "search_selection", "search" ]
+"/" = "select_regex"
+"?" = "rsearch"
 M = "search_prev" # goto_prev_match
 m = "search_next" # goto_next_match
 F = "extend_prev_char" # goto_prev_char
 f = "extend_next_char" # goto_next_char
 T = "extend_till_prev_char" # till_prev_char
 t = "extend_till_char" # till_next_char
-"/" = "select_regex"
-"?" = "rsearch"
 j = "copy_selection_on_prev_line"
 k = "copy_selection_on_next_line"
 l = "extend_line_below"
@@ -304,7 +305,7 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
 "\\" = "merge_consecutive_selections"
-"#" = "save_selection"
+"V" = "save_selection"
 "{" = "jump_backward"
 "}" = "jump_forward"
 
@@ -350,8 +351,7 @@ space.f = [
   ':buffer-close! /tmp/files2open',
 ]
 
-"D" = "no_op"
-"V" = "no_op"
+"@" = "no_op"
 "$" = "no_op"
 "[" = "no_op"
 "]" = "no_op"

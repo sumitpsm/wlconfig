@@ -35,7 +35,7 @@ keymap = [
     { on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
     { on = "p",         run = "paste",                       desc = "Paste yanked files" },
     { on = "d",         run = "remove",                      desc = "Trash selected files" },
-    { on = "k",         run = "unyank",                      desc = "Cancel the yank status" },
+    { on = "C",         run = "unyank",                      desc = "Cancel the yank status" },
     { on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
     { on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
     { on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },

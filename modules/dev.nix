@@ -12,8 +12,8 @@
 
     gcc pkg-config openssl bash
     rustc cargo clippy rustfmt rust-analyzer
-    man-pages dprint markdown-oxide nixd
-    # tailwindcss_4 tailwindcss-language-server vscode-langservers-extracted
+    man-pages dprint markdown-oxide nixd vscode-langservers-extracted
+    # tailwindcss_4 tailwindcss-language-server
   ];
 
   environment.sessionVariables = {
