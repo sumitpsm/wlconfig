@@ -40,7 +40,13 @@ Supported: Arch, openSUSE, Fedora, Debian, Gentoo, FreeBSD, Ubuntu, Void, Slackw
 
 ```sh
 git clone https://github.com/sumitftr/nixos-config.git <YOUR_CONFIG_DIRECTORY>/nixos-config
+```
+
+```sh
 cd <YOUR_CONFIG_DIRECTORY>/nixos-config
+```
+
+```sh
 ./distro.sh
 ```
 
@@ -48,20 +54,11 @@ This will:
 
 1. Install the Nix package manager (if not already installed)
 2. Configure Nix with flakes support
-3. Install all development tools (helix, yazi, git, rust toolchain, etc.)
+3. Install all development tools from ./modules/dev-tools.nix
 4. Link your configuration files
+5. Change your default shell to nushell
 
-After installation, restart your terminal or run:
-
-```sh
-source ~/.nix-profile/etc/profile.d/nix.sh
-```
-
-Then use nushell:
-
-```sh
-nu
-```
+After installation, log out and log back in to use nushell as your default shell.
 
 ## Note:
 

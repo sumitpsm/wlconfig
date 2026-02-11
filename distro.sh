@@ -80,23 +80,8 @@ detect_container() {
 # Change shell to nushell
 change_shell_to_nushell() {
     info "Changing default shell to nushell..."
-    
-    local nu_path
-    nu_path=$(which nu 2>/dev/null || echo "$HOME/.nix-profile/bin/nu")
-    
-    if [ ! -x "$nu_path" ]; then
-        warn "nushell not found at $nu_path"
-        return
-    fi
-    
-    # Change shell using chsh with sudo
-    if sudo chsh -s "$nu_path" "$USER"; then
-        ok "Default shell changed to nushell ($nu_path)"
-        info "You will need to log out and log back in for the change to take effect"
-    else
-        warn "Failed to change shell to nushell"
-        info "You can manually change it later with: chsh -s $nu_path"
-    fi
+    sudo chsh -s "$(which nu)" "$USER"
+    ok "Default shell changed to nushell"
 }
 
 # Install Nix
@@ -237,42 +222,19 @@ setup_nix_config() {
 # Install dev tools using Nix
 install_dev_tools() {
     info "Installing development tools..."
-    
-    # Get script directory
-    local script_dir
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    
-    # Check if flake.nix exists
-    if [ ! -f "$script_dir/flake.nix" ]; then
-        error "flake.nix not found in $script_dir"
-        exit 1
-    fi
-    
-    # Install dev-tools package
-    cd "$script_dir"
-    nix profile install .#dev-tools
-    
-    ok "Development tools installed successfully"
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    [ -f "$script_dir/flake.nix" ] || { error "flake.nix not found"; exit 1; }
+    cd "$script_dir" && nix profile install .#dev-tools
+    ok "Development tools installed"
 }
 
 # Link configurations using init.nu
 link_configs() {
     info "Linking configurations..."
-    
-    local script_dir
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    
-    # Check if init.nu exists
-    if [ ! -f "$script_dir/init.nu" ]; then
-        error "init.nu not found in $script_dir"
-        exit 1
-    fi
-    
-    # Run init.nu using nix run
-    cd "$script_dir"
-    nix run nixpkgs#nushell -- init.nu
-    
-    ok "Configurations linked successfully"
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    [ -f "$script_dir/init.nu" ] || { error "init.nu not found"; exit 1; }
+    cd "$script_dir" && nix run nixpkgs#nushell -- init.nu
+    ok "Configurations linked"
 }
 
 # Main function
