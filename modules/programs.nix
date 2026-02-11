@@ -2,8 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    yt-dlp
-
     zathura # document viewer
     mpv mpvScripts.mpris # video & audio player
     gnome-boxes # virtual machine manager

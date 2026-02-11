@@ -1,20 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, devTools, ... }:
 
 {
   programs.nano.enable = false;
   documentation.man.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    helix yazi opencode btop # gh
-    git ripgrep zoxide eza
-    ffmpeg-full zip unzip p7zip
-    # asciinema asciinema-agg presenterm
-
-    gcc pkg-config openssl bash
-    rustc cargo clippy rustfmt rust-analyzer
-    man-pages dprint markdown-oxide nixd vscode-langservers-extracted
-    # tailwindcss_4 tailwindcss-language-server
-  ];
+  environment.systemPackages = devTools;
 
   environment.sessionVariables = {
     EDITOR = "hx";
