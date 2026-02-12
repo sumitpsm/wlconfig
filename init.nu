@@ -85,18 +85,23 @@ def update_symlink [source: path, destination: path] {
     
     # Check if destination exists
     if ($destination | path exists) {
-        # Check if it's already a correct symlink
+        # Check if it's a symlink
         if ($destination | path type) == 'symlink' {
-            if $source == (ls -lD $destination | get target.0) {
+            let current_target = (ls -lD $destination | get target.0)
+            if $source == $current_target {
                 print $"($INFO) Already linked: ($destination)"
                 return
+            } else {
+                # Remove incorrect symlink without backup
+                print $"($WARN) Removing incorrect symlink: ($destination) -> ($current_target)"
+                rm $destination
             }
+        } else {
+            # Only backup if it's NOT a symlink (i.e., it's a regular file or directory)
+            let backup = $"($destination).bak"
+            print $"($WARN) Creating backup: ($backup)"
+            mv -f $destination $backup
         }
-        
-        # Backup existing file/directory
-        let backup = $"($destination).bak"
-        print $"($WARN) Creating backup: ($backup)"
-        mv -f $destination $backup
     }
     
     # Create symlink

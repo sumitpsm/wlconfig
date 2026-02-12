@@ -1,6 +1,4 @@
-## Install Instructions
-
-### NixOS
+## NixOS Install Instructions
 
 ```sh
 nix-shell -p git nushell
@@ -34,7 +32,7 @@ sudo nixos-rebuild switch --flake .#<HOSTNAME>
 ./init.nu
 ```
 
-### Other Linux Distributions
+## Install Instructions for other distributions
 
 Supported: Arch, openSUSE, Fedora, Debian, Gentoo, FreeBSD, Ubuntu, Void, Slackware, Alpine, Ximper, Solus
 
