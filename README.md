@@ -5,11 +5,11 @@ nix-shell -p git nushell
 ```
 
 ```sh
-git clone https://github.com/sumitftr/nixos-config.git <YOUR_CONFIG_DIRECTORY>/nixos-config
+git clone https://github.com/sumitftr/wayconfig.git <YOUR_CONFIG_DIRECTORY>/wayconfig
 ```
 
 ```sh
-cd <YOUR_CONFIG_DIRECTORY>/nixos-config
+cd <YOUR_CONFIG_DIRECTORY>/wayconfig
 ```
 
 > Add host by doing:
@@ -34,14 +34,14 @@ sudo nixos-rebuild switch --flake .#<HOSTNAME>
 
 ## Install Instructions for other distributions
 
-Supported: Arch, openSUSE, Fedora, Debian, Gentoo, FreeBSD, Ubuntu, Void, Slackware, Alpine, Ximper, Solus
+Supported: Ubuntu, Debian, Fedora, Arch, openSUSE, FreeBSD, Alpine, Gentoo, Void, Slackware, Solus, Ximper
 
 ```sh
-git clone https://github.com/sumitftr/nixos-config.git <YOUR_CONFIG_DIRECTORY>/nixos-config
+git clone https://github.com/sumitftr/wayconfig.git <YOUR_CONFIG_DIRECTORY>/wayconfig
 ```
 
 ```sh
-cd <YOUR_CONFIG_DIRECTORY>/nixos-config
+cd <YOUR_CONFIG_DIRECTORY>/wayconfig
 ```
 
 ```sh

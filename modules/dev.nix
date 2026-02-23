@@ -1,10 +1,16 @@
-{ pkgs, inputs, devTools, ... }:
+{ pkgs, devTools, ... }:
 
 {
   programs.nano.enable = false;
   documentation.man.enable = true;
 
-  environment.systemPackages = devTools;
+  environment.systemPackages = with pkgs; [
+    zip
+    unzip
+    p7zip
+    yt-dlp
+    opencode
+  ] ++ devTools;
 
   environment.sessionVariables = {
     EDITOR = "hx";

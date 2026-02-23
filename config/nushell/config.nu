@@ -20,11 +20,10 @@ $env.config = {
   ]
 }
 
+def l [] { ls -ma | sort-by type name } # eza -a --group-directories-first --icons
 alias c = clear
-alias l = eza -al --group-directories-first --icons
-alias la = eza -a --group-directories-first --icons
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
-alias template = ^wl-copy (open ~/dev/main/cses-problem-set/template.rs)
+alias template = ^wl-copy (open ~/dev/github/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
 

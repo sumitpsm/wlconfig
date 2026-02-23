@@ -87,11 +87,13 @@ in
   systemd.user.services."xdg-permission-store".enable = false;
 
   environment.systemPackages = with pkgs; [
-    kitty wezterm alacritty # terminal emulators
+    kitty alacritty # terminal emulators // wezterm
     wl-clipboard # clipboard
+    polkit_gnome # polkit agent
+    grim slurp hyprpicker 
+
     swww # wallpaper
     hypridle # idling daemon
-    polkit_gnome # polkit agent
 
     # themes
     gnome-themes-extra

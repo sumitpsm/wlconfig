@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # distro.sh - Setup script for Linux distributions
 # Supports: arch, opensuse, fedora, debian, gentoo, freebsd, ubuntu, void, slackware, alpine, ximper, solus, nixos
@@ -77,13 +77,6 @@ detect_container() {
     echo "no"
 }
 
-# Change shell to nushell
-change_shell_to_nushell() {
-    info "Changing default shell to nushell..."
-    sudo chsh -s "$(which nu)" "$USER"
-    ok "Default shell changed to nushell"
-}
-
 # Install Nix
 install_nix() {
     local distro=$1
@@ -108,57 +101,60 @@ install_nix() {
         info "No systemd detected: using single-user installation"
     fi
     
+    local warning="Failed to install some dependencies"
+
     # Install dependencies based on distro
     case "$distro" in
         alpine)
+            # doas apk add git bash
             info "Installing dependencies for Alpine..."
-            if command -v apk >/dev/null 2>&1; then
-                apk add --no-cache curl xz sudo || warn "Failed to install some dependencies"
-            fi
+            doas apk add curl xz sudo || warn $warning
+            doas adduser $USER wheel
+            doas addgroup $USER wheel
             ;;
         arch|manjaro)
             info "Installing dependencies for Arch..."
             if command -v pacman >/dev/null 2>&1; then
-                sudo pacman -Sy --noconfirm curl xz sudo || warn "Failed to install some dependencies"
+                sudo pacman -Sy --noconfirm curl xz sudo || warn $warning
             fi
             ;;
         debian|ubuntu|linuxmint|pop)
             info "Installing dependencies for Debian/Ubuntu..."
             if command -v apt-get >/dev/null 2>&1; then
-                sudo apt-get update
-                sudo apt-get install -y curl xz-utils sudo || warn "Failed to install some dependencies"
+                sudo apt update
+                sudo apt install -y curl xz-utils sudo || warn $warning
             fi
             ;;
         fedora|rhel|centos|rocky|almalinux)
             info "Installing dependencies for Fedora/RHEL..."
             if command -v dnf >/dev/null 2>&1; then
-                sudo dnf install -y curl xz sudo || warn "Failed to install some dependencies"
+                sudo dnf install -y curl xz sudo || warn $warning
             elif command -v yum >/dev/null 2>&1; then
-                sudo yum install -y curl xz sudo || warn "Failed to install some dependencies"
+                sudo yum install -y curl xz sudo || warn $warning
             fi
             ;;
         opensuse*)
             info "Installing dependencies for openSUSE..."
             if command -v zypper >/dev/null 2>&1; then
-                sudo zypper install -y curl xz sudo || warn "Failed to install some dependencies"
+                sudo zypper install -y curl xz sudo || warn $warning
             fi
             ;;
         gentoo)
             info "Installing dependencies for Gentoo..."
             if command -v emerge >/dev/null 2>&1; then
-                sudo emerge -v net-misc/curl app-arch/xz-utils || warn "Failed to install some dependencies"
+                sudo emerge -v net-misc/curl app-arch/xz-utils || warn $warning
             fi
             ;;
         void)
             info "Installing dependencies for Void..."
             if command -v xbps-install >/dev/null 2>&1; then
-                sudo xbps-install -Sy curl xz sudo || warn "Failed to install some dependencies"
+                sudo xbps-install -Sy curl xz sudo || warn $warning
             fi
             ;;
         solus)
             info "Installing dependencies for Solus..."
             if command -v eopkg >/dev/null 2>&1; then
-                sudo eopkg install -y curl xz sudo || warn "Failed to install some dependencies"
+                sudo eopkg install -y curl xz sudo || warn $warning
             fi
             ;;
         slackware)
@@ -169,7 +165,7 @@ install_nix() {
         freebsd)
             info "Installing dependencies for FreeBSD..."
             if command -v pkg >/dev/null 2>&1; then
-                sudo pkg install -y curl xz sudo || warn "Failed to install some dependencies"
+                sudo pkg install -y curl xz sudo || warn $warning
             fi
             ;;
         *)
@@ -258,7 +254,6 @@ main() {
     case "$distro" in
         nixos)
             info "NixOS detected - Nix is already installed and configured"
-            link_configs
             exit 0
             ;;
         arch|debian|fedora|gentoo|ubuntu|void|slackware|alpine|solus|opensuse*|freebsd|ximper)
@@ -276,7 +271,7 @@ main() {
         if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
             . "$HOME/.nix-profile/etc/profile.d/nix.sh"
         elif [ -f /etc/profile.d/nix.sh ]; then
-            . /etc/profile.d/nix.sh"
+            . /etc/profile.d/nix.sh
         fi
     else
         ok "Nix is already installed"
@@ -299,7 +294,15 @@ main() {
     link_configs
     
     # Change shell to nushell (automatic, no prompt)
-    change_shell_to_nushell
+    case "$distro" in
+        alpine)
+            doas chsh -s "$(which nu)" "$USER"
+            ;;
+        *)
+            sudo chsh -s "$(which nu)" "$USER"
+            ;;
+    esac
+    ok "Default shell changed to nushell"
     
     echo ""
     ok "Setup complete!"

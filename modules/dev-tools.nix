@@ -1,7 +1,7 @@
 # Dev tools package bundle
 # All development and terminal tools used across NixOS and non-NixOS systems
 
-{ pkgs, inputs }:
+{ pkgs }:
 
 let
   devTools = with pkgs; [
@@ -11,11 +11,10 @@ let
     git
     ripgrep
     zoxide
-    eza
     ffmpeg-full
-    zip
-    unzip
-    p7zip
+    imagemagick
+    exiftool
+    btop
 
     # Development tools
     gcc
@@ -33,12 +32,7 @@ let
     markdown-oxide
     vscode-langservers-extracted
 
-    # Miscellaneous tools
-    yt-dlp
-    opencode
-    btop
-    # tailwindcss_4 tailwindcss-language-server
-    # gh asciinema asciinema-agg presenterm
+    # gh tailwindcss_4 tailwindcss-language-server 
   ];
 in
 {

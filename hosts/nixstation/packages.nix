@@ -2,31 +2,28 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # hyprlock
     fuzzel
-    # ashell
     gnome-characters
-    # libnotify
-    grim slurp hyprpicker kdePackages.kcolorchooser
 
     quickshell  # Required for QML runtime
-    go          # For building DMS components
-    cava        # Audio visualization
-    cliphist    # Clipboard history
-    ddcutil
-    qt6.qtmultimedia
-    accountsservice
-    matugen     # Dynamic theming
-    gpu-screen-recorder
-    wlsunset
-    xdg-desktop-portal
-    evolution-data-server
-    app2unit
+    # go          # For building DMS components
+    # cava        # Audio visualization
+    # cliphist    # Clipboard history
+    # ddcutil
+    # qt6.qtmultimedia
+    # accountsservice
+    # matugen     # Dynamic theming
+    # gpu-screen-recorder
+    # wlsunset
+    # xdg-desktop-portal
+    # evolution-data-server
+    # app2unit
     # lm-sensors
-    swappy
-    aubio
-    libqalculate
+    # swappy
+    # aubio
+    # libqalculate
 
+    # [terminal-presentation] // asciinema asciinema-agg presenterm
     # [shell] // dash bash zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux
     # [system-monitor] // htop bpytop glances iotop dool zenith sysstat
@@ -51,8 +48,6 @@
     # [document] // libreoffice *wps
     # [misc] // youtube-music *discord *spotify
     # [yt-dlp-frontend] // parabolic video-downloader
-
-    # yad zenity amfora appimage-run usbutils v4l-utils nwg-displays lm_sensors gnome-maps gnome-clocks
   ];
 
   fonts.packages = with pkgs; [
