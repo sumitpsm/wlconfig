@@ -8,7 +8,7 @@
     gnome-calculator # calculator
     obs-studio # screen recorder
     gimp3 # image editor // [inkscape krita]
-    blender # 3d modelling system + video editor
+    # blender # 3d modelling system + video editor
 
     (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.beta.override {}) # zen browser
     # diagram editor // [drawy, rnote]

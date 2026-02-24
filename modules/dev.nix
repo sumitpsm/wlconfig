@@ -1,4 +1,4 @@
-{ inputs, pkgs, devTools, ... }:
+{ inputs, pkgs, lib, devTools, ... }:
 
 {
   programs.nano.enable = false;
@@ -47,4 +47,10 @@
   };
 
   environment.variables = {};
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_18;
+  };
+  systemd.services.postgresql.wantedBy = lib.mkForce [];
 }
