@@ -34,6 +34,46 @@ def generate_flake_nix [hostnames: list<string>] {
   $content | str replace --regex '(?s)(\s*\[)\s*.*?\s*(\])' $"$1\n($hostname_lines)\n    $2"
 }
 
+# Get system information
+def get_system_info [] {
+  # Get username from environment
+  let username = $env.USER
+  
+  # Get full name from /etc/passwd
+  let full_name = (
+    open /etc/passwd 
+    | lines 
+    | find $username
+    | first
+    | split column ":"
+    | get column4.0
+    | split column ","
+    | get column0.0
+  )
+  
+  # Get timezone from timedatectl show
+  let timezone = (
+    timedatectl show 
+    | lines 
+    | find "Timezone="
+    | first
+    | split row "="
+    | last
+  )  
+
+  # Get locale from environment (LANG variable)
+  let locale = (
+    $env.LANG? | default "en_US.UTF-8" | split row "." | first
+  )
+  
+  {
+    username: $username,
+    full_name: $full_name,
+    timezone: $timezone,
+    locale: $locale
+  }
+}
+
 # Add a new host to the flake
 def main [
   hostname: string           # Hostname to add
@@ -47,6 +87,13 @@ def main [
     exit 1
   }
   
+  # Get system information
+  let sys_info = get_system_info
+  print $"($INFO) Detected user: (ansi cyan)($sys_info.username)(ansi reset)"
+  print $"($INFO) Detected full name: (ansi cyan)($sys_info.full_name)(ansi reset)"
+  print $"($INFO) Detected timezone: (ansi cyan)($sys_info.timezone)(ansi reset)"
+  print $"($INFO) Detected locale: (ansi cyan)($sys_info.locale)(ansi reset)"
+  
   # Add hostname to list
   let new_hostnames = $hostnames | append $hostname
   
@@ -58,7 +105,7 @@ def main [
   let host_dir = $"./hosts/($hostname)"
   mkdir $host_dir
   
-  # Create default.nix
+  # Create default.nix with detected values
   $"{ ... }:
 
 {
@@ -70,10 +117,10 @@ def main [
 
   # custom options
   user = {
-    name = \"sumit\";
-    description = \"SumitModak\";
-    timeZone = \"Asia/Kolkata\";
-    locale = \"en_IN\";
+    name = \"($sys_info.username)\";
+    description = \"($sys_info.full_name)\";
+    timeZone = \"($sys_info.timezone)\";
+    locale = \"($sys_info.locale)\";
     kbdLayout = \"us\";
   };
   laptop.enable = false;

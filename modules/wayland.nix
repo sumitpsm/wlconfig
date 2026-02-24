@@ -22,37 +22,6 @@ in
     after = [ "graphical-session-pre.target" ];
   };
 
-  # Enabling session idling (hypridle)
-  systemd.user.services.hypridle = {
-    enable = true;
-    description = "Hyprland's idle daemon";
-    documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
-    wantedBy = [ "hyprland-session.target" ];
-    partOf = [ "hyprland-session.target" ];
-    after = [ "hyprland-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.hypridle}/bin/hypridle";
-      Restart = "on-failure";
-      # ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-  };
-
-  # Enabling wallpaper daemon (swww-daemon)
-  systemd.user.services."swww-daemon" = {
-    enable = true;
-    description = "Wallpaper daemon";
-    wantedBy = [ "hyprland-session.target" ];
-    partOf = [ "hyprland-session.target" ];
-    after = [ "hyprland-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.swww}/bin/swww-daemon";
-      Restart = "on-failure";
-      # ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-  };
-
   # Enabling polkit agent (polkit-gnome-authentication-agent-1)
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     enable = true;
@@ -90,10 +59,7 @@ in
     kitty alacritty # terminal emulators // wezterm
     wl-clipboard # clipboard
     polkit_gnome # polkit agent
-    grim slurp hyprpicker 
-
-    swww # wallpaper
-    hypridle # idling daemon
+    grim slurp hyprpicker
 
     # themes
     gnome-themes-extra

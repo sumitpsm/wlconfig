@@ -36,6 +36,8 @@ sudo nixos-rebuild switch --flake .#<HOSTNAME>
 
 Supported: Ubuntu, Debian, Fedora, Arch, openSUSE, FreeBSD, Alpine, Gentoo, Void, Slackware, Solus, Ximper
 
+> Install git (depends on which distribution you are)
+
 ```sh
 git clone https://github.com/sumitftr/wayconfig.git <YOUR_CONFIG_DIRECTORY>/wayconfig
 ```

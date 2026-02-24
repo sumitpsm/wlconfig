@@ -1,15 +1,37 @@
-{ pkgs, devTools, ... }:
+{ inputs, pkgs, devTools, ... }:
 
 {
   programs.nano.enable = false;
   documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Development tools
+    gcc
+    pkg-config
+    openssl
+    bash
+    rustc
+    cargo
+    clippy
+    rustfmt
+    rust-analyzer
+    man-pages
+    dprint
+    nixd
+    markdown-oxide
+    vscode-langservers-extracted
+
+    # Miscellaneous tools
+    ffmpeg-full
+    imagemagick
+    exiftool
     zip
     unzip
     p7zip
     yt-dlp
+
     opencode
+    # gh tailwindcss_4 tailwindcss-language-server 
   ] ++ devTools;
 
   environment.sessionVariables = {

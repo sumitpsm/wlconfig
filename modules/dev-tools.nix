@@ -1,38 +1,18 @@
 # Dev tools package bundle
 # All development and terminal tools used across NixOS and non-NixOS systems
 
-{ pkgs }:
+{ inputs, pkgs }:
 
 let
   devTools = with pkgs; [
     # Terminal tools
+    nushell
     helix
     yazi
     git
     ripgrep
     zoxide
-    ffmpeg-full
-    imagemagick
-    exiftool
     btop
-
-    # Development tools
-    gcc
-    pkg-config
-    openssl
-    bash
-    rustc
-    cargo
-    clippy
-    rustfmt
-    rust-analyzer
-    man-pages
-    dprint
-    nixd
-    markdown-oxide
-    vscode-langservers-extracted
-
-    # gh tailwindcss_4 tailwindcss-language-server 
   ];
 in
 {
