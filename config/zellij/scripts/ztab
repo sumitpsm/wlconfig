@@ -1,0 +1,55 @@
+#!/usr/bin/env nu
+
+# Usage: nu tab <tab_name>
+
+# Define tab order for proper positioning
+const TAB_ORDER = ["run" "git" "code" "files" "chat"]
+
+def main [target_tab: string] {
+    # Get current session name
+    let session = ($env.ZELLIJ_SESSION_NAME? | default "")
+    
+    if ($session | is-empty) {
+        exit 1
+    }
+    
+    # Get all tabs in current session
+    let tabs = (zellij action query-tab-names | lines)
+    
+    # Check if target tab exists
+    if ($target_tab in $tabs) {
+        # Tab exists, just switch to it
+        zellij action go-to-tab-name $target_tab
+    } else {
+        # Tab doesn't exist, need to create it
+    
+        let target_index = ($TAB_ORDER | enumerate | where item == $target_tab | get 0.index)
+        
+        # Check if any tabs exist that should come AFTER this one
+        let has_tabs_after = ($TAB_ORDER 
+            | skip ($target_index + 1)
+            | any {|t| $t in $tabs}
+        )
+    
+        if not $has_tabs_after {
+            # Simple case: just create at the end and switch
+            zellij action new-tab --name $target_tab
+            zellij action go-to-tab-name $target_tab
+        } else {
+            # Need to insert in the middle
+            let next_tab = ($TAB_ORDER 
+                | skip ($target_index + 1)
+                | where {|t| $t in $tabs}
+                | get 0
+            )
+        
+            # Switch to the next tab, create new tab (will be created to the right)
+            zellij action go-to-tab-name $next_tab
+            zellij action new-tab --name $target_tab
+        
+            # Move it left once to put it before the next_tab
+            zellij action move-tab "Left"
+            zellij action go-to-tab-name $target_tab
+        }
+    }
+}

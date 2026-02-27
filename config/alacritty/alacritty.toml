@@ -16,7 +16,8 @@ history = 10000
 multiplier = 3
 
 [font]
-normal = { family = "Dejavu Sans Mono", style = "Regular" }
+normal = { family = "Dejavu Sans Mono", style = "Regular" } 
+# normal = { family = "DejaVuSansM Nerd Font Mono", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
@@ -34,7 +35,7 @@ style.blinking = "Off"
 thickness = 0.20
 
 [terminal]
-# shell = "/run/current-system/sw/bin/bash"
+# shell = "/run/current-system/sw/bin/nu"
 
 [mouse]
 hide_when_typing = false

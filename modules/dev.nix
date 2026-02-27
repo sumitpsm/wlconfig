@@ -30,6 +30,7 @@
     p7zip
     yt-dlp
 
+    pgadmin4
     opencode
     # gh tailwindcss_4 tailwindcss-language-server 
   ] ++ devTools;
@@ -51,6 +52,10 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
+    enableTCPIP = true;
+    settings = {
+      port = 5432;
+    };
   };
   systemd.services.postgresql.wantedBy = lib.mkForce [];
 }

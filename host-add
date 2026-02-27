@@ -47,19 +47,17 @@ def get_system_info [] {
     | first
     | split column ":"
     | get column4.0
-    | split column ","
-    | get column0.0
   )
   
   # Get timezone from timedatectl show
   let timezone = (
     timedatectl show 
     | lines 
-    | find "Timezone="
+    | find -n "Timezone="
     | first
     | split row "="
     | last
-  )  
+  )
 
   # Get locale from environment (LANG variable)
   let locale = (

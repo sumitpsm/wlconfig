@@ -1,3 +1,17 @@
+def "nu-complete-mux" []: nothing -> list<string> {
+    let dev_dirs = (
+        ls ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* dev/test ~/dev/wl/* | get name
+    )
+    
+    let notes_dirs = (
+        ls ~/notes/* 
+        | where type == dir 
+        | get name
+    )
+    
+    ($dev_dirs | append $notes_dirs | each { str replace $env.HOME "~"})
+}
+
 def --env mux [
     ...project_paths: string@"nu-complete-mux"  # Accept multiple paths with '...'
 ] {
@@ -21,21 +35,4 @@ def --env mux [
         # Close the first tab (index 0)
         kitten @ close-tab --match=index:0
     }
-}
-
-def "nu-complete-mux" []: nothing -> list<string> {
-    let dev_dirs = (
-        ls ~/dev/*/* 
-        | where type == dir 
-        | where name !~ "dev/todo" and name !~ "dev/test"
-        | get name
-    )
-    
-    let notes_dirs = (
-        ls ~/notes/* 
-        | where type == dir 
-        | get name
-    )
-    
-    ($dev_dirs | append $notes_dirs | append "~/dev/test" | each { str replace $env.HOME "~"})
 }
