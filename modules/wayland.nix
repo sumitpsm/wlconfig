@@ -73,7 +73,6 @@ in
 
   fonts.packages = with pkgs; [
     nerd-fonts.dejavu-sans-mono
-    (pkgs.nerd-fonts.override { fonts = [ "dejavu-sans-mono" ]; })
   ];
 
   programs.dconf = {

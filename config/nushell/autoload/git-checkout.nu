@@ -34,5 +34,5 @@ def "nu-complete git checkout" []: nothing -> list<string> {
 # Register the git checkout command with autocompletion
 export extern "git checkout" [
     target?: string@"nu-complete git checkout"  # Branch, tag, or commit hash to check out
-    ...args: string                            # Additional arguments (e.g., -b for new branch)
+    ...args: string                             # Additional arguments (e.g., -b for new branch)
 ]

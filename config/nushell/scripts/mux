@@ -1,19 +1,7 @@
-def "nu-complete-mux" []: nothing -> list<string> {
-    let dev_dirs = (
-        ls ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* dev/test ~/dev/wl/* | get name
-    )
-    
-    let notes_dirs = (
-        ls ~/notes/* 
-        | where type == dir 
-        | get name
-    )
-    
-    ($dev_dirs | append $notes_dirs | each { str replace $env.HOME "~"})
-}
+#!/usr/bin/env nu
 
-def --env mux [
-    ...project_paths: string@"nu-complete-mux"  # Accept multiple paths with '...'
+def --env main [
+    ...project_paths: string@"nu-complete-project-dirs"
 ] {
     let is_todo_closed = (kitten @ ls | from json | get tabs.0.0.title) != "todo"
     # Open todo tab once
