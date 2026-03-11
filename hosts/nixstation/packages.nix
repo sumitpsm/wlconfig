@@ -25,6 +25,7 @@
     # aubio
     # libqalculate
 
+    # [network-monitor] // termshark bandwhich nethogs netscanner netwatch-tui
     # [terminal-presentation] // asciinema asciinema-agg presenterm
     # [shell] // dash bash zsh xonsh elvish ion fish powershell
     # [terminal-multiplexer] // mprocs tmux

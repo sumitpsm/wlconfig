@@ -23,6 +23,7 @@
 
     # Miscellaneous tools
     ffmpeg-full
+    # handbrake
     imagemagick
     exiftool
     zip
@@ -58,4 +59,5 @@
     };
   };
   systemd.services.postgresql.wantedBy = lib.mkForce [];
+  systemd.targets.postgresql.wantedBy = lib.mkForce [];
 }

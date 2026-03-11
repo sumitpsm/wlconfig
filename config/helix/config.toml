@@ -4,6 +4,8 @@ theme = "base32-vscode"
 line-number = "relative"
 shell = ["nu", "-e"]
 bufferline = "always"
+middle-click-paste = false
+mouse = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -34,6 +36,7 @@ H = ":buffer-next"
 "~" = "command_palette"
 "#" = "record_macro"
 "!" = "replay_macro"
+# C-w = window mode
 
 # movement
 y = "move_visual_line_up"
@@ -72,7 +75,6 @@ u = "undo"
 U = "redo"
 "tab" =	"indent"
 "S-tab"	= "unindent"
-A = "changed_file_picker"
 
 "+" = "surround_add"
 "=" = "surround_replace"
@@ -114,9 +116,10 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
 "\\" = "merge_consecutive_selections"
-"V" = "save_selection"
+space.v = "save_selection"
 "{" = "jump_backward"
 "}" = "jump_forward"
+A = "changed_file_picker"
 
 space.y = "goto_file_start"
 space.i = "goto_file_end"
@@ -142,11 +145,11 @@ space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
+space.w	= ":toggle soft-wrap.enable"
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
-# space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
+# space."=" = "format_selections" ## Format selection (LSP)
 # space.G	## Debug (experimental)
-# space.w	## Enter window mode
 space.f = [
   ':sh rm -f /tmp/files2open',
   ':set mouse false',
@@ -210,7 +213,6 @@ space."A-c" = "no_op"
 "C-s" = "no_op"
 "C-a" = "no_op"
 "C-x" = "no_op"
-"C-w" = "no_op"
 "C-c" = "no_op"
 
 [keys.select]
@@ -225,6 +227,7 @@ H = ":buffer-next"
 "~" = "command_palette"
 "#" = "record_macro"
 "!" = "replay_macro"
+# C-w = window mode
 
 # movement
 y = "extend_visual_line_up"
@@ -263,7 +266,6 @@ u = "undo"
 U = "redo"
 "tab" =	"indent"
 "S-tab"	= "unindent"
-A = "changed_file_picker"
 
 "+" = "surround_add"
 "=" = "surround_replace"
@@ -305,9 +307,10 @@ L = [ "extend_line_up", "extend_to_line_bounds" ]
 ")" = "rotate_selections_forward"
 "&" = [ "indent", "split_selection_on_newline", "trim_selections", "align_selections", "flip_selections", "delete_selection", "move_char_left", "move_prev_word_start", "replace_with_yanked" ]
 "\\" = "merge_consecutive_selections"
-"V" = "save_selection"
+space.v = "save_selection"
 "{" = "jump_backward"
 "}" = "jump_forward"
+A = "changed_file_picker"
 
 space.y = "goto_file_start"
 space.i = "goto_file_end"
@@ -333,11 +336,11 @@ space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
+space.w	= ":toggle soft-wrap.enable"
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
-# space."=" = "format_selections" ## Format selection (currently nonfunctional/disabled) (LSP)
+# space."=" = "format_selections" ## Format selection (LSP)
 # space.G	## Debug (experimental)
-# space.w	## Enter window mode
 space.f = [
   ':sh rm -f /tmp/files2open',
   ':set mouse false',
@@ -401,5 +404,4 @@ space."A-c" = "no_op"
 "C-s" = "no_op"
 "C-a" = "no_op"
 "C-x" = "no_op"
-"C-w" = "no_op"
 "C-c" = "no_op"

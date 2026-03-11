@@ -1,4 +1,35 @@
-def --env mnt [
+# Custom completion function for unmounted drives
+def "list-unmounted-drives" [] {
+    lsblk --json 
+    | from json 
+    | get blockdevices 
+    | where type == "disk"
+    | each { |disk|
+        if ($disk.children? | is-not-empty) {
+            $disk.children | each { |part|
+                {
+                    name: $part.name,
+                    size: $part.size,
+                    label: ($part.label? | default ""),
+                    mountpoint: ($part.mountpoint? | default "")
+                }
+            }
+        } else {
+            []
+        }
+    }
+    | flatten
+    | where mountpoint == ""
+    | each { |part|
+        let label_str = if ($part.label | is-empty) { "" } else { $" \(($part.label))" }
+        {
+            value: $part.name,
+            description: $"($part.size)($label_str)"
+        }
+    }
+}
+
+def --env main [
     drive?: string@"list-unmounted-drives"  # Autocomplete unmounted drives
 ] {
     # If no drive specified, show error
@@ -31,35 +62,4 @@ def --env mnt [
     
     print $"Changing directory to ($dirpath)"
     cd $dirpath
-}
-
-# Custom completion function for unmounted drives
-def "list-unmounted-drives" [] {
-    lsblk --json 
-    | from json 
-    | get blockdevices 
-    | where type == "disk"
-    | each { |disk|
-        if ($disk.children? | is-not-empty) {
-            $disk.children | each { |part|
-                {
-                    name: $part.name,
-                    size: $part.size,
-                    label: ($part.label? | default ""),
-                    mountpoint: ($part.mountpoint? | default "")
-                }
-            }
-        } else {
-            []
-        }
-    }
-    | flatten
-    | where mountpoint == ""
-    | each { |part|
-        let label_str = if ($part.label | is-empty) { "" } else { $" \(($part.label))" }
-        {
-            value: $part.name,
-            description: $"($part.size)($label_str)"
-        }
-    }
 }

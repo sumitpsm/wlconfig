@@ -17,6 +17,7 @@ $env.config = {
     { name: move_line_end              modifier: shift keycode: char_o mode: vi_normal event: { edit: MoveToEnd } }
     { name: history_hint_complete      modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
     { name: history_hint_word_complete modifier: control_shift keycode: backtab mode: vi_insert event: { send: HistoryHintWordComplete } }
+    { name: history_menu               modifier: control keycode: char_s mode: vi_insert event: { send: menu name: history_menu } }
   ]
 }
 
