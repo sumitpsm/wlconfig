@@ -90,15 +90,15 @@ keybinds clear-defaults=true {
             }
         }
         
-        bind "Ctrl f" {
-            Run "nu" "~/.config/zellij/scripts/ztab" "files" {
+        bind "Ctrl a" {
+            Run "nu" "~/.config/zellij/scripts/ztab" "chat" {
                 close_on_exit true
                 in_place true
             }
         }
-        
-        bind "Ctrl a" {
-            Run "nu" "~/.config/zellij/scripts/ztab" "chat" {
+
+        bind "Ctrl f" {
+            Run "nu" "~/.config/zellij/scripts/ztab" "files" {
                 close_on_exit true
                 in_place true
             }

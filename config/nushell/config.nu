@@ -18,6 +18,8 @@ $env.config = {
     { name: history_hint_complete      modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
     { name: history_hint_word_complete modifier: control_shift keycode: backtab mode: vi_insert event: { send: HistoryHintWordComplete } }
     { name: history_menu               modifier: control keycode: char_s mode: vi_insert event: { send: menu name: history_menu } }
+    { name: disable_ctrl_r             modifier: control keycode: char_r mode: [vi_normal, vi_insert] event: { send: none } }
+    { name: disable_ctrl_d             modifier: control keycode: char_d mode: [vi_normal, vi_insert] event: { send: none } }
   ]
 }
 
@@ -27,6 +29,7 @@ alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias template = ^wl-copy (open ~/dev/github/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
+def --env kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
 
 $env.PATH = (
     $env.PATH 

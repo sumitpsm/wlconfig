@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
@@ -56,7 +56,6 @@ in
   systemd.user.services."xdg-permission-store".enable = false;
 
   environment.systemPackages = with pkgs; [
-    inputs.wezterm.packages.${pkgs.system}.default
     kitty alacritty # terminal emulators
     wl-clipboard # clipboard
     polkit_gnome # polkit agent

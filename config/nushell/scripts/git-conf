@@ -6,7 +6,6 @@ const INFO = $"(ansi blue)[INFO](ansi reset)"
 const PROFILE = {
   "github": { "email": "152054612+sumitftr@users.noreply.github.com", "username": "sumitftr" },
   "gitlab": { "email": "22763302-sumitftr@users.noreply.gitlab.com", "username": "sumitftr" },
-  "test": { "email": "142516692+sumit-modak@users.noreply.github.com", "username": "sumit-modak" },
 }
 
 # extract domain and username from git URL
@@ -34,9 +33,6 @@ def main [] {
     } else if $values.domain == "gitlab" and $values.username == $PROFILE.gitlab.username {
         git config --local user.email $PROFILE.gitlab.email
         print $"($INFO) Your email has been set to `(ansi red)($PROFILE.gitlab.email)(ansi reset)`\n"
-    } else if $values.domain == "test" and $values.username == $PROFILE.test.username {
-        git config --local user.email $PROFILE.test.email
-        print $"($INFO) Your email has been set to `(ansi red)($PROFILE.test.email)(ansi reset)`\n"
     } else {
         print $"($ERROR) Failed to set email\n"
     }

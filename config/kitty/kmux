@@ -1,0 +1,54 @@
+#!/usr/bin/env nu
+
+def get-project-dirs []: nothing -> list<string> {
+    let project_dirs = (
+        (do -i { ls ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* ~/dev/test ~/dev/wl/* | get name })
+        | append (do -i { ls ~/notes/* | where type == dir | get name })
+    )
+    
+    ($project_dirs | each { str replace $env.HOME "~" })
+}
+
+def --env main [] {
+    # Get all project directories and let user select one with fuzzy finder
+    let project_path = (
+        get-project-dirs 
+        | input list --fuzzy "Select project:" 
+        | str replace "~" $env.HOME
+    )
+    
+    # Check if project_path is empty (user cancelled)
+    if ($project_path | is-empty) {
+        print "No project selected. Exiting."
+        return
+    }
+    
+    let is_todo_closed = (kitten @ ls | from json | get tabs.0.0.title) != "todo"
+    
+    # Open todo tab once
+    if $is_todo_closed {
+        let todo_files = (
+            [$"($project_path)/TODO"]
+            | where { path exists }
+            | append (ls ~/dev/todo* | get name)
+        )
+        
+        if not ($todo_files | is-empty) {
+            kitten @ launch --type=tab --title=todo $env.EDITOR ...$todo_files
+        }
+    }
+    
+    # Open three tabs for the selected project
+    kitten @ launch --type=tab --cwd=($project_path)
+    kitten @ launch --type=tab --cwd=($project_path)
+    kitten @ launch --type=tab --cwd=($project_path)
+    kitten @ launch --type=tab --cwd=($project_path)
+
+    if $is_todo_closed {
+        # Focus on the second tab (index 1)
+        kitten @ focus-tab --match=index:1
+    
+        # Close the first tab (index 0)
+        kitten @ close-tab --match=index:0
+    }
+}

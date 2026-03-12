@@ -1,7 +1,6 @@
 { inputs, pkgs, ... }:
 
 {
-  programs.sysdig.enable = true;
   environment.systemPackages = with pkgs; [
     zathura # document viewer
     mpv mpvScripts.mpris # video & audio player

@@ -3,7 +3,7 @@
 # Usage: nu tab <tab_name>
 
 # Define tab order for proper positioning
-const TAB_ORDER = ["run" "git" "code" "files" "chat"]
+const TAB_ORDER = ["run" "git" "code" "chat" "files"]
 
 def main [target_tab: string] {
     # Get current session name

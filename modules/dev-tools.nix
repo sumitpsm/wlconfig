@@ -8,7 +8,7 @@ let
     # Terminal tools
     nushell
     helix
-    # zellij
+    zellij
     yazi
     git
     ripgrep
