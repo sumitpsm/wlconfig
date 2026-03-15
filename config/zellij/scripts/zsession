@@ -1,0 +1,244 @@
+#!/usr/bin/env nu
+
+# Zellij session manager - manage and switch between Zellij sessions with keybindings
+
+let CSV_FILE = $"($env.HOME)/.local/state/terminal-sessions.csv"
+
+# Autocomplete function for project directories
+def "nu-complete-project-dirs" []: nothing -> list<string> {
+    let all_dirs = (
+        [$"($env.HOME)/.config" $"($env.HOME)/.local"]
+        | append (do -i { ls ~/dev/alt/* ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* ~/dev/wl/* | get name })
+        | append (do -i { ls ~/*/* ~/* | where type == dir and name !~ $'($env.HOME)/\.' | get name })
+        | append (do -i { ls $"/run/media/($env.USER)/*" | get name })
+    )
+    $all_dirs
+}
+
+# Get all active Zellij sessions
+def get-active-sessions [] {
+    let sessions = (do -i { zellij list-sessions } | complete)
+    if $sessions.exit_code != 0 {
+        return []
+    }
+    
+    $sessions.stdout 
+    | lines 
+    | where $it != "" 
+    | parse "{name}" 
+    | get name
+}
+
+# Initialize CSV file if it doesn't exist
+def ensure-csv-exists [] {
+    let state_dir = ($CSV_FILE | path dirname)
+    
+    if not ($CSV_FILE | path exists) {
+        "keybind,session_name,project_dir\n" | save $CSV_FILE
+    }
+}
+
+# Read bindings from CSV
+def read-bindings [] {
+    let content = (open $CSV_FILE)
+    if ($content | is-empty) {
+        return []
+    }
+    $content
+}
+
+# Write bindings to CSV
+def write-bindings [bindings: list] {
+    $bindings | to csv | save -f $CSV_FILE
+}
+
+# Get session name from project directory
+def get-session-name [dir: string] {
+    $dir | path basename
+}
+
+# Pick a session using fuzzy finder
+def "main pick" [] {
+    ensure-csv-exists
+    let active = (get-active-sessions)
+    let bindings = (read-bindings)
+    
+    # Get all project directories
+    let all_projects = (nu-complete-project-dirs | uniq)
+    
+    # Build the selection list with colors
+    mut choices = []
+    
+    # 1. Active sessions (green) - top priority
+    for session in $active {
+        let binding = ($bindings | where session_name == $session | first)
+        let bind_text = if ($binding | is-empty) { 
+            "" 
+        } else { 
+            $" [bind: (ansi yellow)($binding.keybind)(ansi reset)]" 
+        }
+        let display = $"(ansi green)($session)(ansi reset)($bind_text)"
+        $choices = ($choices | append {display: $display, session: $session, dir: null, active: true})
+    }
+    
+    # 2. Bound sessions (not active) - second priority
+    for bind in $bindings {
+        if $bind.session_name not-in $active {
+            let display = $"($bind.session_name) [bind: (ansi yellow)($bind.keybind)(ansi reset)]"
+            $choices = ($choices | append {display: $display, session: $bind.session_name, dir: $bind.project_dir, active: false})
+        }
+    }
+    
+    # 3. Rest of the projects (white) - last priority
+    for dir in $all_projects {
+        let sess_name = (get-session-name $dir)
+        # Skip if already in active or bindings
+        if $sess_name not-in $active and $sess_name not-in ($bindings | get session_name) {
+            let display = $"($sess_name)"
+            $choices = ($choices | append {display: $display, session: $sess_name, dir: $dir, active: false})
+        }
+    }
+    
+    # Show fuzzy picker
+    let selected = ($choices | get display | input list --fuzzy "Select session: ")
+    
+    if ($selected | is-empty) {
+        print "No session selected"
+        return
+    }
+    
+    # Find the selected choice
+    let choice = ($choices | where display == $selected | first)
+    
+    # Switch or create session
+    if $choice.active {
+        # Already active, just switch
+        zellij attach $choice.session
+    } else {
+        # Need to create session
+        let target_dir = if ($choice.dir != null) { $choice.dir } else {
+            # Try to find from autocomplete
+            let dirs = (nu-complete-project-dirs)
+            let matching = ($dirs | where ($it | path basename) == $choice.session)
+            if ($matching | is-empty) {
+                $env.HOME
+            } else {
+                $matching | first
+            }
+        }
+        
+        # Create session in the target directory
+        cd $target_dir
+        zellij attach --create $choice.session
+    }
+}
+
+# Switch to a session by keybind
+def "main switch" [] {
+    ensure-csv-exists
+    print -n "Enter keybind: "
+    let key = (input -n 1)
+    
+    let bindings = (read-bindings)
+    let binding = ($bindings | where keybind == $key | first)
+    
+    if ($binding | is-empty) {
+        print $"No session bound to key '($key)'"
+        return
+    }
+    
+    let active = (get-active-sessions)
+    
+    if $binding.session_name in $active {
+        # Session is active, just switch
+        zellij attach $binding.session_name
+    } else {
+        # Create session first, then switch
+        cd $binding.project_dir
+        zellij attach --create $binding.session_name
+    }
+}
+
+# Bind current session to a keybind
+def "main bind" [] {
+    ensure-csv-exists
+    # Get current session name
+    let session_name = $env.ZELLIJ_SESSION_NAME
+    if ($session_name | str trim | is-empty) {
+        print "Error: Not in a Zellij session"
+        return
+    }
+    
+    let current_dir = ($env.PWD)
+    
+    print -n "Enter keybind: "
+    let key = (input -n 1)
+    print ""
+    
+    mut bindings = (read-bindings)
+    
+    # Check if keybind already exists
+    let existing = ($bindings | where keybind == $key | first)
+    
+    if not ($existing | is-empty) {
+        print $"Warning: Key '($key)' is already bound to session '($existing.session_name)'"
+        print -n "Override? (y/n): "
+        let confirm = (input -n 1)
+        print ""
+        
+        if $confirm != "y" and $confirm != "Y" {
+            print "Cancelled"
+            return
+        }
+        
+        # Remove old binding
+        $bindings = ($bindings | where keybind != $key)
+    }
+    
+    # Add new binding
+    $bindings = ($bindings | append {keybind: $key, session_name: $session_name, project_dir: $current_dir})
+    
+    write-bindings $bindings
+    print $"Bound session '($session_name)' to key '($key)'"
+}
+
+# Unbind a session
+def "main unbind" [] {
+    ensure-csv-exists
+    let bindings = (read-bindings)
+    
+    if ($bindings | is-empty) {
+        print "No bindings to remove"
+        return
+    }
+    
+    # Create display list
+    let choices = ($bindings | each {|b| $"($b.keybind) -> ($b.session_name) (($b.project_dir))"})
+    
+    let selected = ($choices | input list --fuzzy "Select binding to remove: ")
+    
+    if ($selected | is-empty) {
+        print "No binding selected"
+        return
+    }
+    
+    # Extract keybind from selection
+    let key = ($selected | split row " -> " | first)
+    
+    # Remove binding
+    let new_bindings = ($bindings | where keybind != $key)
+    write-bindings $new_bindings
+    
+    print $"Removed binding for key '($key)'"
+}
+
+# Main entry point
+def main [] {
+    print "Zellij Session Manager"
+    print ""
+    print "Usage:"
+    print "  ms pick     - Pick and switch to a session (fuzzy finder)"
+    print "  ms switch   - Switch to a session by keybind"
+    print "  ms bind     - Bind current session to a keybind"
+    print "  ms unbind   - Unbind a session"
+}

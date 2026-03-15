@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-# Usage: nu tab <tab_name>
+# Usage: ztab <tab_name>
 
 # Define tab order for proper positioning
 const TAB_ORDER = ["run" "git" "code" "chat" "files"]
@@ -34,7 +34,6 @@ def main [target_tab: string] {
         if not $has_tabs_after {
             # Simple case: just create at the end and switch
             zellij action new-tab --name $target_tab
-            zellij action go-to-tab-name $target_tab
         } else {
             # Need to insert in the middle
             let next_tab = ($TAB_ORDER 

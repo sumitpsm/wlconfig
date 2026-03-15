@@ -9,11 +9,11 @@ let
     nushell
     helix
     zellij
-    yazi
     git
     ripgrep
-    zoxide
+    yazi
     btop
+    zoxide
   ];
 in
 {

@@ -44,7 +44,6 @@ keybinds clear-defaults=true {
         // Tab Manipulation
         bind "Ctrl t" { NewTab; SwitchToMode "Normal"; }
         bind "Ctrl q" { CloseFocus; SwitchToMode "Normal"; }
-        bind "Ctrl R" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
         // Shifting Focus
         bind "Ctrl y" { HalfPageScrollUp; }
@@ -56,6 +55,15 @@ keybinds clear-defaults=true {
         bind "Ctrl E" { MoveFocus "Left"; }
         bind "Ctrl I" { MoveFocus "Down"; }
         bind "Ctrl O" { MoveFocus "Right"; }
+
+        bind "Ctrl w" {
+            Run "nu" "-c" "ms switch" {
+                close_on_exit true
+                floating true
+                height "3"
+                y "47%"
+            }
+        }
 
         // Session Manager
         bind "Ctrl W" {
@@ -75,28 +83,24 @@ keybinds clear-defaults=true {
                 in_place true
             }
         }
-        
         bind "Ctrl g" {
             Run "nu" "~/.config/zellij/scripts/ztab" "git" {
                 close_on_exit true
                 in_place true
             }
         }
-        
         bind "Ctrl k" {
             Run "nu" "~/.config/zellij/scripts/ztab" "code" {
                 close_on_exit true
                 in_place true
             }
         }
-        
         bind "Ctrl a" {
             Run "nu" "~/.config/zellij/scripts/ztab" "chat" {
                 close_on_exit true
                 in_place true
             }
         }
-
         bind "Ctrl f" {
             Run "nu" "~/.config/zellij/scripts/ztab" "files" {
                 close_on_exit true
@@ -105,10 +109,6 @@ keybinds clear-defaults=true {
         }
     }
     normal { }
-    renametab {
-        bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
-    }
 
     //! Search Mode
     shared_except "scroll" "locked" {
@@ -117,6 +117,7 @@ keybinds clear-defaults=true {
     scroll {
         bind "Ctrl s" { SwitchToMode "Normal"; }
 
+        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
         bind "M" { Search "up"; }
         bind "m" { Search "down"; }
@@ -129,6 +130,10 @@ keybinds clear-defaults=true {
     entersearch {
         bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
         bind "Enter" { SwitchToMode "Scroll"; }
+    }
+    renametab {
+        bind "Ctrl c" { SwitchToMode "Normal"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
     }
 
     // shared_except {

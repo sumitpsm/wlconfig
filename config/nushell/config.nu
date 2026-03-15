@@ -1,32 +1,35 @@
 $env.config = {
   buffer_editor: "hx"
   edit_mode: "vi"
-  show_banner: false
-  completions: {
-    algorithm: "fuzzy"
-    sort: "smart"
-  }
   table: { mode: "psql" }
+  completions: { algorithm: "fuzzy" sort: "smart" }
+  show_banner: false
   use_kitty_protocol: true
-  keybindings: [
-    { name: move_left                  modifier: none keycode: char_e mode: vi_normal event: { send: Left } }
-    { name: move_down                  modifier: none keycode: char_i mode: vi_normal event: { send: Down } }
-    { name: move_up                    modifier: none keycode: char_y mode: vi_normal event: { send: Up } }
-    { name: move_right                 modifier: none keycode: char_o mode: vi_normal event: { send: Right } }
-    { name: move_line_start            modifier: shift keycode: char_e mode: vi_normal event: { edit: MoveToStart } }
-    { name: move_line_end              modifier: shift keycode: char_o mode: vi_normal event: { edit: MoveToEnd } }
-    { name: history_hint_complete      modifier: control keycode: tab mode: vi_insert event: { send: HistoryHintComplete } }
-    { name: history_hint_word_complete modifier: control_shift keycode: backtab mode: vi_insert event: { send: HistoryHintWordComplete } }
-    { name: history_menu               modifier: control keycode: char_s mode: vi_insert event: { send: menu name: history_menu } }
-    { name: disable_ctrl_r             modifier: control keycode: char_r mode: [vi_normal, vi_insert] event: { send: none } }
-    { name: disable_ctrl_d             modifier: control keycode: char_d mode: [vi_normal, vi_insert] event: { send: none } }
+  keybindings: [ # history_menu completion_menu ide_completion_menu help_menu
+    { name: move_left                  mode: vi_normal keycode: char_e  modifier: none          event: { send: Left } }
+    { name: move_down                  mode: vi_normal keycode: char_i  modifier: none          event: { send: Down } }
+    { name: move_up                    mode: vi_normal keycode: char_y  modifier: none          event: { send: Up } }
+    { name: move_right                 mode: vi_normal keycode: char_o  modifier: none          event: { send: Right } }
+    { name: move_line_start            mode: vi_normal keycode: char_e  modifier: shift         event: { edit: MoveToStart } }
+    { name: move_line_end              mode: vi_normal keycode: char_o  modifier: shift         event: { edit: MoveToEnd } }
+    { name: history_hint_complete      mode: vi_insert keycode: tab     modifier: control       event: { send: HistoryHintComplete } }
+    { name: history_hint_word_complete mode: vi_insert keycode: backtab modifier: control_shift event: { send: HistoryHintWordComplete } }
+    { name: history_menu               mode: vi_insert keycode: backtab modifier: shift         event: { send: menu name: history_menu } }
+    { name: disable_ctrl_r             mode: vi_insert keycode: char_r  modifier: control       event: { send: none } }
+    { name: disable_ctrl_a             mode: vi_insert keycode: char_a  modifier: control       event: { send: none } }
+    { name: disable_ctrl_d             mode: vi_insert keycode: char_d  modifier: control       event: { send: none } }
+    { name: disable_ctrl_j             mode: vi_insert keycode: char_j  modifier: control       event: { send: none } }
+    { name: disable_ctrl_o             mode: vi_insert keycode: char_o  modifier: control       event: { send: none } }
+    { name: disable_ctrl_q             mode: vi_insert keycode: char_q  modifier: control       event: { send: none } }
+    { name: disable_ctrl_w             mode: vi_insert keycode: char_w  modifier: control       event: { send: none } }
+    { name: disable_ctrl_shift_a       mode: vi_insert keycode: char_a  modifier: control_shift event: { send: none } }
+    { name: disable_alt_enter          mode: vi_insert keycode: enter   modifier: alt           event: { send: none } }
   ]
 }
 
 def l [] { ls -ma | sort-by type name } # eza -a --group-directories-first --icons
 alias c = clear
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
-alias template = ^wl-copy (open ~/dev/github/cses-problem-set/template.rs)
 alias lf = yazi
 alias btop = btop --force-utf
 def --env kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
