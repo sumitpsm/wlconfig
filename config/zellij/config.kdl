@@ -96,7 +96,7 @@ keybinds clear-defaults=true {
             }
         }
         bind "Ctrl a" {
-            Run "nu" "~/.config/zellij/scripts/ztab" "chat" {
+            Run "nu" "~/.config/zellij/scripts/ztab" "agent" {
                 close_on_exit true
                 in_place true
             }

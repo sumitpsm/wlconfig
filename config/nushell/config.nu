@@ -30,7 +30,7 @@ $env.config = {
 def l [] { ls -ma | sort-by type name } # eza -a --group-directories-first --icons
 alias c = clear
 alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
-alias lf = yazi
+alias f = yazi
 alias btop = btop --force-utf
 def --env kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
 

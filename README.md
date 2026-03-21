@@ -5,11 +5,11 @@ nix-shell -p git nushell
 ```
 
 ```sh
-git clone https://github.com/sumitftr/wayconfig.git <YOUR_CONFIG_DIRECTORY>/wayconfig
+git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 ```sh
-cd <YOUR_CONFIG_DIRECTORY>/wayconfig
+cd <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 > Add host by doing:
@@ -39,11 +39,11 @@ Supported: Ubuntu, Debian, Fedora, Arch, openSUSE, FreeBSD, Alpine, Gentoo, Void
 > Install git (depends on which distribution you are)
 
 ```sh
-git clone https://github.com/sumitftr/wayconfig.git <YOUR_CONFIG_DIRECTORY>/wayconfig
+git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 ```sh
-cd <YOUR_CONFIG_DIRECTORY>/wayconfig
+cd <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 ```sh

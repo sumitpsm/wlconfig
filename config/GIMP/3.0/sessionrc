@@ -85,22 +85,35 @@
 (session-info "toplevel"
     (factory-entry "gimp-file-open-dialog")
     (position 0 0)
-    (size 1192 639)
+    (size 956 998)
     (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-file-export-dialog")
     (position 0 0)
-    (size 1192 639)
+    (size 956 998)
     (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-file-save-dialog")
     (position 0 0)
-    (size 1192 639)
+    (size 956 998)
     (monitor 0))
 (session-info "toplevel"
     (factory-entry "gimp-text-tool-dialog")
     (position 0 0)
     (size 956 996)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-keyboard-shortcuts-dialog")
+    (position 0 0)
+    (size 901 299)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-toolbox-color-dialog")
+    (position 0 0)
+    (monitor 0))
+(session-info "toplevel"
+    (factory-entry "gimp-operation-tool-dialog")
+    (position 0 0)
     (monitor 0))
 
 (hide-docks no)

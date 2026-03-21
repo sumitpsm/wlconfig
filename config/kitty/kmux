@@ -13,7 +13,7 @@ def --env main [] {
     # Get all project directories and let user select one with fuzzy finder
     let project_path = (
         get-project-dirs 
-        | input list --fuzzy "Select project:" 
+        | input list --fuzzy 
         | str replace "~" $env.HOME
     )
     
