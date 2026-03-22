@@ -29,7 +29,7 @@ def "list-unmounted-drives" [] {
     }
 }
 
-def --env main [
+def --env mnt [
     drive?: string@"list-unmounted-drives"  # Autocomplete unmounted drives
 ] {
     # If no drive specified, show error

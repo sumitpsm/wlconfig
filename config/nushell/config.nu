@@ -33,6 +33,7 @@ alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
 alias f = yazi
 alias btop = btop --force-utf
 def --env kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
+def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
 
 $env.PATH = (
     $env.PATH 
