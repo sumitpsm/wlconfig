@@ -57,7 +57,7 @@ keybinds clear-defaults=true {
         bind "Ctrl O" { MoveFocus "Right"; }
 
         bind "Ctrl w" {
-            Run "nu" "-c" "ms switch" {
+            Run "nu" "~/.config/zellij/scripts/zsession" "switch" {
                 close_on_exit true
                 floating true
                 height "3"

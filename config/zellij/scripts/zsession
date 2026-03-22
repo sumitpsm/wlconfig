@@ -46,21 +46,51 @@ def write-csv [data: table] {
     $data | to csv | save -f $CSV_PATH
 }
 
-def zestty-call-plugin [payload: string, session: string = ""] {
-    let session_opt = if not ($session | is-empty) {
-        ["--session", $session]
+def zestty-call-plugin [payload: string, session?: string] {
+    let session_name = if $session != null {
+        $session
+    } else {
+        $env.ZELLIJ_SESSION_NAME? | default ""
+    }
+    
+    let session_opt = if ($session_name | is-not-empty) {
+        ["--session", $session_name]
     } else {
         []
     }
-    let args = [
-        ...$session_opt,
-        "pipe",
-        "--plugin", $PLUGIN_LOCATION,
-        "--plugin-configuration", $"default_layout=($DEFAULT_LAYOUT)",
-        "--",
-        $payload
-    ]
-    do -i { ^zellij ...$args } catch {}
+    
+    zellij ...$session_opt pipe --plugin $PLUGIN_LOCATION --plugin-configuration $"default_layout=($DEFAULT_LAYOUT)" -- $payload
+}
+
+def zestty-call-add-session-to-cycle [name: string] {
+    if ($name | is-empty) {
+        return
+    }
+    
+    # Background process to add session to cycle
+    nu -c $'
+        sleep 1sec
+        zellij --session ($name) pipe --plugin ($PLUGIN_LOCATION) --plugin-configuration "default_layout=($DEFAULT_LAYOUT)" -- "{ \"command\": \"add-session-to-cycle\" }"
+    ' | ignore
+}
+
+def zestty-call-switch-session [name: string, path?: string, layout?: string] {
+    if ($name | is-empty) {
+        exit-fail "Session name required!"
+    }
+    
+    mut options = $"{ \"command\": \"switch-session\", \"name\": \"($name)\""
+    
+    if $path != null and ($path | path exists) and ($path | path type) == "dir" {
+        $options = $options + $", \"path\": \"($path)\""
+    }
+    
+    if $layout != null and ($layout | is-not-empty) {
+        $options = $options + $", \"layout\": \"($layout)\""
+    }
+    
+    $options = $options + " }"
+    zestty-call-plugin $options
 }
 
 # Build the global session list by merging csv, zellij sessions, and project dirs
@@ -122,7 +152,7 @@ def global-session-list [] {
 
 # List all sessions (active, dead, deleted, absent)
 def "main list" [] {
-    global-session-list | table -t psql
+    global-session-list | where state != "absent" | table -t psql
 }
 
 # Attach to a session by name or fuzzy finder
@@ -144,7 +174,12 @@ def "main attach" [name?: string] {
     }
 
     if $entry.state == "active" or $entry.state == "dead" {
-        zestty-call-plugin $'{"command": "switch-session", "name": "($entry.name)", "path": "($entry.path)", "layout": "($entry.layout)"}'  $entry.name
+        if ($env.ZELLIJ? | default "1") == "0" {
+            zestty-call-switch-session $entry.name $entry.path $entry.layout
+        } else {
+            zestty-call-add-session-to-cycle $entry.name
+            exec zellij attach $entry.name
+        }
     } else {
         # Resolve path
         if $entry.path == null {
@@ -177,12 +212,14 @@ def "main attach" [name?: string] {
         # Check keybind conflict
         if not ($keybind_input | is-empty) {
             let existing = ($sessions | where keybind == $keybind_input | get 0?)
-            if not ($existing | is-empty ) {
+            if not ($existing | is-empty) {
                 print $"Warning: Key '($existing.keybind)' is already bound to session '($existing.name)'"
                 let confirm = (input -n 1 "Override? (y/n): ")
                 if $confirm == "y" or $confirm == "Y" {
                     $entry.keybind = $keybind_input
                 }
+            } else {
+                $entry.keybind = $keybind_input
             }
         }
 
@@ -197,9 +234,13 @@ def "main attach" [name?: string] {
         write-csv $updated_csv
 
         # Create session
-        cd $entry.path
-        zellij --session $entry.name --layout $entry.layout
-        zestty-call-plugin '{"command": "add-session-to-cycle"}'
+        if ($env.ZELLIJ? | default "1") == "0" {
+            zestty-call-switch-session $entry.name $entry.path $entry.layout
+        } else {
+            zestty-call-add-session-to-cycle $entry.name
+            cd $entry.path
+            exec zellij --session $entry.name --new-session-with-layout $entry.layout
+        }
     }
 }
 
@@ -208,14 +249,14 @@ def "main switch" [] {
     let csv_data = get-csv-data
     let key = (input -n 1 "Enter keybind: ")
 
-    let entry = ($csv_data | where keybind == $key)
+    let entry = ($csv_data | where keybind == $key | first)
 
     if ($entry | is-empty) {
         print $"No session bound to key '($key)'"
         return
     }
 
-    zestty-call-plugin $'{"command": "switch-session", "name": "($entry.name)", "path": "($entry.path)", "layout": "($entry.layout)"}' $entry.name
+    zestty-call-switch-session $entry.name $entry.path $entry.layout
 }
 
 # Bind current session to a keybind
