@@ -31,7 +31,7 @@ def get-csv-data [] {
     if not ($CSV_PATH | path exists) {
         "path,name,keybind,layout\n" | save $CSV_PATH
     }
-    open $CSV_PATH
+    open --raw $CSV_PATH | from csv
 }
 
 def is-inside-zellij [] {
@@ -76,14 +76,14 @@ def global-session-list [] {
         | where { |s| not ($s.name in $csv_names) }
         | each { |s| { path: null, name: $s.name, keybind: null, layout: $DEFAULT_LAYOUT } }
     )
-    if !($new_from_zellij | is-empty) {
+    if not ($new_from_zellij | is-empty) {
         $csv_data  = ($csv_data | append $new_from_zellij)
         write-csv $csv_data
     }
 
     # Build entries from CSV with state resolved from zellij sessions
     let csv_entries = (
-        $csv_names
+        $csv_data
         | each { |row|
             let zellij_match = ($zellij_sessions | where name == $row.name | get 0?)
             let state = if $zellij_match != null {
@@ -122,129 +122,91 @@ def global-session-list [] {
 
 # List all sessions (active, dead, deleted, absent)
 def "main list" [] {
-    global-session-list
+    global-session-list | table -t psql
 }
 
 # Attach to a session by name or fuzzy finder
 def "main attach" [name?: string] {
     let sessions = global-session-list
 
-    let entry = if ($name | is-empty) {
+    mut entry = if ($name | is-empty) {
         $sessions | input list --fuzzy
     } else {
         mut found = ($sessions | where name == $name | get 0?)
         if $found == null {
-            # Treat as absent with just a name hint
-            $found = { path: null, name: $name, keybind: null, layout: $DEFAULT_LAYOUT, state: "absent" }
+            $found = { path: null, name: $name, keybind: null, layout: null, state: "absent" }
         }
+        $found
+    }
+
+    if $entry == null {
+        exit 1
     }
 
     if $entry.state == "active" or $entry.state == "dead" {
         zestty-call-plugin $'{"command": "switch-session", "name": "($entry.name)", "path": "($entry.path)", "layout": "($entry.layout)"}'  $entry.name
     } else {
-        # deleted or absent — need to create the session
-        let csv_data = get-csv-data
-
         # Resolve path
-        print -n $"Enter path (default: ($entry.path)): "
-        let path_input = (input)
-        let resolved_path = if ($path_input | str trim | is-empty) {
-            $entry.path
-        } else {
-            $path_input | str trim
+        if $entry.path == null {
+            $entry.path = (input $"Enter path \(default: ($env.HOME)): " | str trim)
+            if ($entry.path | is-empty) {
+                $entry.path = $env.HOME
+            }
         }
 
         # Resolve name from basename, prompt to confirm/change
-        let basename = if ($resolved_path != null) {
-            $resolved_path | path basename
-        } else {
-            ""
-        }
-        let active_names = (get-zellij-sessions | get name)
+        $entry.name = ($entry.path | path basename)
+        let taken_names = ($sessions | get name | uniq)
 
-        mut resolved_name = ""
         loop {
-            print -n $"Enter session name (default: ($basename)): "
-            let name_input = (input)
-            let candidate = if ($name_input | str trim | is-empty) {
-                $basename
+            let name_input = (input $"Enter session name \(default: ($entry.name)): " | str trim)
+            if not ($name_input | is-empty) {
+                if ($name_input in $taken_names) {
+                    print $"Name '($name_input)' is already taken by an active session. Please choose another."
+                    continue
+                }
+                $entry.name = $name_input
             } else {
-                $name_input | str trim
-            }
-            if ($candidate in $active_names) {
-                print $"Name '($candidate)' is already taken by an active session. Please choose another."
-            } else {
-                $resolved_name = $candidate
                 break
             }
         }
 
         # Resolve keybind
-        print -n $"Enter keybind (default: none, press enter to skip): "
-        let keybind_input = (input -n 1)
-        print ""
-        let resolved_keybind = if ($keybind_input | str trim | is-empty) {
-            null
-        } else {
-            $keybind_input | str trim
-        }
+        let $keybind_input = (input -n 1 $"Enter keybind \(default: none, press enter to skip): " | str trim)
 
         # Check keybind conflict
-        let final_keybind = if ($resolved_keybind != null) {
-            let existing_kb = ($csv_data | where keybind == $resolved_keybind | get 0?)
-            if $existing_kb != null {
-                print $"Warning: Key '($resolved_keybind)' is already bound to session '($existing_kb.name)'"
-                print -n "Override? (y/n): "
-                let confirm = (input -n 1)
-                print ""
+        if not ($keybind_input | is-empty) {
+            let existing = ($sessions | where keybind == $keybind_input | get 0?)
+            if not ($existing | is-empty ) {
+                print $"Warning: Key '($existing.keybind)' is already bound to session '($existing.name)'"
+                let confirm = (input -n 1 "Override? (y/n): ")
                 if $confirm == "y" or $confirm == "Y" {
-                    $resolved_keybind
-                } else {
-                    null
+                    $entry.keybind = $keybind_input
                 }
-            } else {
-                $resolved_keybind
             }
-        } else {
-            null
         }
 
         # Resolve layout
-        print -n $"Enter layout (default: ($DEFAULT_LAYOUT)): "
-        let layout_input = (input)
-        let resolved_layout = if ($layout_input | str trim | is-empty) {
-            $DEFAULT_LAYOUT
-        } else {
-            $layout_input | str trim
+        $entry.layout = (input $"Enter layout \(default: ($DEFAULT_LAYOUT)): " | str trim)
+        if ($entry.layout | is-empty) {
+            $entry.layout = $DEFAULT_LAYOUT
         }
 
         # Remove old keybind entry if overriding
-        let cleaned_csv = if ($final_keybind != null) {
-            $csv_data | where keybind != $final_keybind
-        } else {
-            $csv_data
-        }
-
-        # Remove stale entry if name was already in CSV (deleted state)
-        let cleaned_csv2 = ($cleaned_csv | where name != $resolved_name)
-
-        # Add new entry to CSV
-        let new_entry = { path: $resolved_path, name: $resolved_name, keybind: $final_keybind, layout: $resolved_layout }
-        let updated_csv = ($cleaned_csv2 | append $new_entry)
+        let updated_csv = (get-csv-data | where keybind != $entry.keybind and name != $entry.name | append $entry)
         write-csv $updated_csv
 
-        # Add to cycle and switch
-        let safe_path = if $resolved_path == null { "" } else { $resolved_path | into string }
+        # Create session
+        cd $entry.path
+        zellij --session $entry.name --layout $entry.layout
         zestty-call-plugin '{"command": "add-session-to-cycle"}'
-        zestty-call-plugin $'{"command": "switch-session", "name": "($resolved_name)", "path": "($safe_path)", "layout": "($resolved_layout)"}' $resolved_name
     }
 }
 
 # Switch to a session by keybind
 def "main switch" [] {
     let csv_data = get-csv-data
-    print -n "Enter keybind: "
-    let key = (input -n 1)
+    let key = (input -n 1 "Enter keybind: ")
 
     let entry = ($csv_data | where keybind == $key)
 
@@ -261,18 +223,14 @@ def "main bind" [] {
     let csv_data = get-csv-data
     is-inside-zellij
 
-    print -n "Enter keybind: "
-    let key = (input -n 1)
-    print ""
+    let key = (input -n 1 "Enter keybind: ")
 
     # Check if keybind already exists
     let existing = ($csv_data | where keybind == $key)
 
     if not ($existing | is-empty) {
         print $"Warning: Key '($key)' is already bound to session '($existing.name)'"
-        print -n "Override? (y/n): "
-        let confirm = (input -n 1)
-        print ""
+        let confirm = (input -n 1 "Override? (y/n): ")
 
         if $confirm != "y" and $confirm != "Y" {
             print "Cancelled"
