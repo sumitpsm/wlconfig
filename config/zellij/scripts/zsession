@@ -69,7 +69,7 @@ def zestty-call-add-session-to-cycle [name: string] {
     
     # Background process to add session to cycle
     nu -c $'
-        sleep 1sec
+        sleep 0.2sec
         zellij --session ($name) pipe --plugin ($PLUGIN_LOCATION) --plugin-configuration "default_layout=($DEFAULT_LAYOUT)" -- "{ \"command\": \"add-session-to-cycle\" }"
     ' | ignore
 }
@@ -93,23 +93,10 @@ def zestty-call-switch-session [name: string, path?: string, layout?: string] {
     zestty-call-plugin $options
 }
 
-# Build the global session list by merging csv, zellij sessions, and project dirs
 def global-session-list [] {
-    mut csv_data = get-csv-data
+    let csv_data = get-csv-data
     let zellij_sessions = get-zellij-sessions
     let project_dirs = get-project-dirs
-
-    # Auto-add active/dead zellij sessions not in CSV
-    let csv_names = ($csv_data | get name)
-    let new_from_zellij = (
-        $zellij_sessions
-        | where { |s| not ($s.name in $csv_names) }
-        | each { |s| { path: null, name: $s.name, keybind: null, layout: $DEFAULT_LAYOUT } }
-    )
-    if not ($new_from_zellij | is-empty) {
-        $csv_data  = ($csv_data | append $new_from_zellij)
-        write-csv $csv_data
-    }
 
     # Build entries from CSV with state resolved from zellij sessions
     let csv_entries = (
@@ -122,11 +109,27 @@ def global-session-list [] {
                 "deleted"
             }
             {
-                path: $row.path,
+                path: ($row.path | str replace $env.HOME "~"),
                 name: $row.name,
                 keybind: $row.keybind,
                 layout: $row.layout,
                 state: $state
+            }
+        }
+    )
+
+    # Build entries from zellij sessions not in CSV
+    let csv_names = ($csv_data | get name)
+    let zellij_only_entries = (
+        $zellij_sessions
+        | where { |s| not ($s.name in $csv_names) }
+        | each { |s|
+            {
+                path: null,
+                name: $s.name,
+                keybind: null,
+                layout: $DEFAULT_LAYOUT,
+                state: $s.state
             }
         }
     )
@@ -138,7 +141,7 @@ def global-session-list [] {
         | where { |d| not ($d in $csv_paths) }
         | each { |d|
             {
-                path: $d,
+                path: ($d | str replace $env.HOME "~"),
                 name: null,
                 keybind: null,
                 layout: $DEFAULT_LAYOUT,
@@ -147,7 +150,7 @@ def global-session-list [] {
         }
     )
 
-    $csv_entries | append $dir_entries
+    $csv_entries | append $zellij_only_entries | append $dir_entries
 }
 
 # List all sessions (active, dead, deleted, absent)

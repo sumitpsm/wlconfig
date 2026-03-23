@@ -65,13 +65,15 @@ keybinds clear-defaults=true {
             }
         }
 
-        // Session Manager
         bind "Ctrl W" {
-            LaunchOrFocusPlugin "zellij:session-manager" {
+            Run "nu" "~/.config/zellij/scripts/zsession" "attach" {
+                close_on_exit true
                 floating true
-                move_to_focused_tab true
-            };
-            SwitchToMode "Normal"
+                height "75%"
+                width "75%"
+                x "12%"
+                y "12%"
+            }
         }
 
         // ============================================
@@ -126,6 +128,15 @@ keybinds clear-defaults=true {
         bind "W" { SearchToggleOption "WholeWord"; }
         bind "S" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
         bind "d" { Detach; }
+
+        // Session Manager
+        bind "Ctrl w" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
     }
     entersearch {
         bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
