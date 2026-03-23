@@ -22,9 +22,8 @@ def main [target_tab: string] {
         zellij action go-to-tab-name $target_tab
     } else {
         # Tab doesn't exist, need to create it
-    
-        let target_index = ($TAB_ORDER | enumerate | where item == $target_tab | get 0.index)
-        
+        let target_index = ($TAB_ORDER | enumerate | where item == $target_tab | get 0.index)        
+
         # Check if any tabs exist that should come AFTER this one
         let has_tabs_after = ($TAB_ORDER 
             | skip ($target_index + 1)

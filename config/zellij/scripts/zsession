@@ -43,7 +43,7 @@ def is-inside-zellij [] {
 
 # Write bindings to CSV
 def write-csv [data: table] {
-    $data | to csv | save -f $CSV_PATH
+    $data | select path name keybind layout | to csv | save -f $CSV_PATH
 }
 
 def zestty-call-plugin [payload: string, session?: string] {
@@ -78,6 +78,8 @@ def zestty-call-switch-session [name: string, path?: string, layout?: string] {
     if ($name | is-empty) {
         exit-fail "Session name required!"
     }
+
+    let path = $path | str replace "~" $env.HOME
     
     mut options = $"{ \"command\": \"switch-session\", \"name\": \"($name)\""
     
@@ -233,8 +235,7 @@ def "main attach" [name?: string] {
         }
 
         # Remove old keybind entry if overriding
-        let updated_csv = (get-csv-data | where keybind != $entry.keybind and name != $entry.name | append $entry)
-        write-csv $updated_csv
+        write-csv (get-csv-data | where keybind != $entry.keybind and name != $entry.name | append $entry)
 
         # Create session
         if ($env.ZELLIJ? | default "1") == "0" {
@@ -282,14 +283,20 @@ def "main bind" [] {
         }
 
         # Remove old binding
-        let updated = ($csv_data | where keybind != $key)
-        write-csv ($updated | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT})
+        write-csv (
+            $csv_data
+            | where keybind != $key
+            | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
+        )
         print $"Bound session '($env.ZELLIJ_SESSION_NAME)' to key '($key)'"
         return
     }
 
-    let updated = ($csv_data | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT})
-    write-csv $updated
+    write-csv (
+        $csv_data
+        | where name != $env.ZELLIJ_SESSION_NAME
+        | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
+    )
 
     print $"Bound session '($env.ZELLIJ_SESSION_NAME)' to key '($key)'"
 }

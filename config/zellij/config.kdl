@@ -32,9 +32,9 @@ plugins {
     // compact-bar { path "compact-bar"; }
 }
 
-env {
-    TERM "xterm-kitty yazi"
-}
+// env {
+//     TERM "xterm-kitty yazi"
+// }
 
 keybinds clear-defaults=true {
     shared_except "normal" "locked" {
