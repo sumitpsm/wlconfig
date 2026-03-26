@@ -3,11 +3,10 @@
 {
   environment.systemPackages = with pkgs; [
     fuzzel
-    gnome-characters
     swww # wallpaper
     hypridle # idling daemon
 
-    quickshell  # Required for QML runtime
+    quickshell
     # go          # For building DMS components
     # cava        # Audio visualization
     # cliphist    # Clipboard history

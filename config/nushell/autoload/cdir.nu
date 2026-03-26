@@ -9,3 +9,9 @@ def --env cdir [] {
     let selected = ($all_dirs | each { str replace $env.HOME "~" } | input list --fuzzy)
     cd $selected
 }
+
+def --env f [] {
+    let cwd_file = mktemp -t yazi-cwd.XXXXXX
+    yazi --cwd-file $cwd_file
+    cd (open $cwd_file | str trim)
+}

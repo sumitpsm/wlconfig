@@ -8,22 +8,23 @@ const INFO = $"(ansi blue)[INFO](ansi reset)"
 # user configs to link
 const user_configs = [
     ["source",                      "destination"];
-    ["config/ssh_config",           ".ssh/config"],
-    ["config/.gitconfig",           ".gitconfig"],
     ["config/nushell",              ".config/nushell"],
     ["config/helix",                ".config/helix"],
+    ["config/zellij",               ".config/zellij"],
+    ["config/ssh_config",           ".ssh/config"],
+    ["config/.gitconfig",           ".gitconfig"],
     ["config/yazi",                 ".config/yazi"],
     ["config/hypr",                 ".config/hypr"],
-    ["config/alacritty",            ".config/alacritty"],
     ["config/kitty",                ".config/kitty"],
+    ["config/alacritty",            ".config/alacritty"],
     ["config/dprint",               ".config/dprint"],
+    ["config/emojis.csv",           ".local/share/emojis.csv"],
     ["config/GIMP/3.0/gimprc",      ".config/GIMP/3.0/gimprc"],
     ["config/GIMP/3.0/sessionrc",   ".config/GIMP/3.0/sessionrc"],
     ["config/GIMP/3.0/shortcutsrc", ".config/GIMP/3.0/shortcutsrc"],
     ["config/GIMP/3.0/toolrc",      ".config/GIMP/3.0/toolrc"],
     ["config/gtk-3.0",              ".config/gtk-3.0"],
     ["config/btop",                 ".config/btop"],
-    ["config/zellij",               ".config/zellij"],
 ]
 
 # root configs to link
@@ -31,10 +32,10 @@ const root_configs = [
     ["source",                      "destination"];
     [".config/nushell",             ".config/nushell"],
     [".config/helix",               ".config/helix"],
+    [".config/zellij",              ".config/zellij"],
     [".config/yazi",                ".config/yazi"],
     [".config/dprint",              ".config/dprint"],
     [".config/btop",                ".config/btop"],
-    [".config/zellij",              ".config/zellij"],
 ]
 
 def main [] {
