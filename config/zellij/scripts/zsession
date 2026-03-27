@@ -6,12 +6,11 @@ const DEFAULT_LAYOUT = "compact"
 
 # Autocomplete function for project directories
 def get-project-dirs []: nothing -> list<string> {
-    let all_dirs = (
-        (do -i { ls ~/dev/alt/* ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* ~/dev/wl/* | get name })
-        | append (do -i { ls ~/notes/* | where type == dir | get name })
+    let project_dirs = (
+        do -i { ls ~/dev/*/* ~/notes/* | where type == dir | get name }
         | append (do -i { ls $"/run/media/($env.USER)/*" | get name })
     )
-    $all_dirs
+    $project_dirs
 }
 
 # Get all active and dead Zellij sessions with their state

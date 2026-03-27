@@ -2,10 +2,9 @@
 
 def get-project-dirs []: nothing -> list<string> {
     let project_dirs = (
-        (do -i { ls ~/dev/alt/* ~/dev/clone/* ~/dev/github/* ~/dev/gitlab/* ~/dev/test ~/dev/wl/* | get name })
-        | append (do -i { ls ~/notes/* | where type == dir | get name })
+        do -i { ls ~/dev/*/* ~/notes/* | where type == dir | get name }
+        | append (do -i { ls $"/run/media/($env.USER)/*" | get name })
     )
-    
     ($project_dirs | each { str replace $env.HOME "~" })
 }
 

@@ -25,11 +25,15 @@
     ffmpeg-full
     # handbrake
     imagemagick
-    exiftool
+    # exiftool
     zip
     unzip
     p7zip
     yt-dlp
+
+    dive
+    podman-tui
+    docker-compose
 
     pgadmin4
     opencode
@@ -49,6 +53,18 @@
   };
 
   environment.variables = {};
+
+  virtualisation.containers.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   services.postgresql = {
     enable = true;
