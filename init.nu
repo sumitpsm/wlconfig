@@ -48,10 +48,17 @@ def main [] {
         exit 1
     }
 
+    # get the real user's home directory (works with or without sudo)
+    let real_home = if "SUDO_USER" in $env {
+        ^getent passwd $env.SUDO_USER | split column ":" | get column5.0
+    } else {
+        $env.HOME
+    }
+
     # Link user configs
     for config in $user_configs {
         let source = $"($config_dir)/($config.source)"
-        let destination = $"($env.HOME)/($config.destination)"
+        let destination = $"($real_home)/($config.destination)"
     
         if ($source | path exists) {
             update_symlink $source $destination
@@ -63,7 +70,7 @@ def main [] {
     # link root configs if the script is running in sudo mode
     if (id -u | into int) == 0 {
         for config in $root_configs {
-            let source = $"($env.HOME)/($config.source)"
+            let source = $"($real_home)/($config.source)"
             let destination = $"/root/($config.destination)"
     
             if ($source | path exists) {

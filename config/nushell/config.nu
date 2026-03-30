@@ -46,6 +46,7 @@ if (tty) == "/dev/tty1" {
   zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
   exec start-hyprland
 }
+$env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
 
 # PROMPT CONFIGURATION
 $env.PROMPT_COMMAND = { ||

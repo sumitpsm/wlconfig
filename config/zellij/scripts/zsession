@@ -1,7 +1,6 @@
 #!/usr/bin/env nu
 
 let CSV_PATH = $"($env.HOME)/.local/state/terminal-sessions.csv"
-const PLUGIN_LOCATION = "file:~/dev/clone/zestty/target/wasm32-wasip1/release/zestty.wasm"
 const DEFAULT_LAYOUT = "compact"
 
 # Autocomplete function for project directories
@@ -43,55 +42,6 @@ def is-inside-zellij [] {
 # Write bindings to CSV
 def write-csv [data: table] {
     $data | select path name keybind layout | to csv | save -f $CSV_PATH
-}
-
-def zestty-call-plugin [payload: string, session?: string] {
-    let session_name = if $session != null {
-        $session
-    } else {
-        $env.ZELLIJ_SESSION_NAME? | default ""
-    }
-    
-    let session_opt = if ($session_name | is-not-empty) {
-        ["--session", $session_name]
-    } else {
-        []
-    }
-    
-    zellij ...$session_opt pipe --plugin $PLUGIN_LOCATION --plugin-configuration $"default_layout=($DEFAULT_LAYOUT)" -- $payload
-}
-
-def zestty-call-add-session-to-cycle [name: string] {
-    if ($name | is-empty) {
-        return
-    }
-    
-    # Background process to add session to cycle
-    nu -c $'
-        sleep 0.2sec
-        zellij --session ($name) pipe --plugin ($PLUGIN_LOCATION) --plugin-configuration "default_layout=($DEFAULT_LAYOUT)" -- "{ \"command\": \"add-session-to-cycle\" }"
-    ' | ignore
-}
-
-def zestty-call-switch-session [name: string, path?: string, layout?: string] {
-    if ($name | is-empty) {
-        exit-fail "Session name required!"
-    }
-
-    let path = $path | str replace "~" $env.HOME
-    
-    mut options = $"{ \"command\": \"switch-session\", \"name\": \"($name)\""
-    
-    if $path != null and ($path | path exists) and ($path | path type) == "dir" {
-        $options = $options + $", \"path\": \"($path)\""
-    }
-    
-    if $layout != null and ($layout | is-not-empty) {
-        $options = $options + $", \"layout\": \"($layout)\""
-    }
-    
-    $options = $options + " }"
-    zestty-call-plugin $options
 }
 
 def global-session-list [] {
@@ -179,9 +129,8 @@ def "main attach" [name?: string] {
 
     if $entry.state == "active" or $entry.state == "dead" {
         if ($env.ZELLIJ? | default "1") == "0" {
-            zestty-call-switch-session $entry.name $entry.path $entry.layout
+            zellij action switch-session $entry.name
         } else {
-            zestty-call-add-session-to-cycle $entry.name
             exec zellij attach $entry.name
         }
     } else {
@@ -238,9 +187,8 @@ def "main attach" [name?: string] {
 
         # Create session
         if ($env.ZELLIJ? | default "1") == "0" {
-            zestty-call-switch-session $entry.name $entry.path $entry.layout
+            zellij action switch-session $entry.name
         } else {
-            zestty-call-add-session-to-cycle $entry.name
             cd $entry.path
             exec zellij --session $entry.name --new-session-with-layout $entry.layout
         }
@@ -259,7 +207,11 @@ def "main switch" [] {
         return
     }
 
-    zestty-call-switch-session $entry.name $entry.path $entry.layout
+    if ($env.ZELLIJ? | default "1") == "0" {
+        zellij action switch-session $entry.name
+    } else {
+        zellij attach $entry.name
+    }
 }
 
 # Bind current session to a keybind
@@ -324,21 +276,6 @@ def "main unbind" [] {
     print $"Removed binding for key '($selected.keybind)'"
 }
 
-def "main previous" [] {
-    is-inside-zellij
-    zestty-call-plugin '{"command": "cycle-previous"}'
-}
-
-def "main next" [] {
-    is-inside-zellij
-    zestty-call-plugin '{"command": "cycle-next"}'
-}
-
-def "main last" [] {
-    is-inside-zellij
-    zestty-call-plugin '{"command": "cycle-back"}'
-}
-
 # Main entry point
 def main [] {
     print $"Zellij Session Manager
@@ -348,8 +285,5 @@ list       List all sessions \(active, dead, deleted, absent)
 attach     Pick and attach to a session \(fuzzy finder)
 switch     Switch to a session with a keybind
 bind       Bind current session to a keybind
-unbind     Unbind a session
-previous   Cycle to previous session
-next       Cycle to next session
-last       Cycle back to last session"
+unbind     Unbind a session"
 }
