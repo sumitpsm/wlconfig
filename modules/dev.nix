@@ -55,15 +55,34 @@
   environment.variables = {};
 
   virtualisation.containers.enable = true;
-
+  
   virtualisation.podman = {
     enable = true;
     defaultNetwork.settings.dns_enabled = true;
+    extraPackages = [ 
+      pkgs.crun
+      pkgs.runc
+      pkgs.kata-runtime
+      # pkgs.gvisor
+    ];
   };
-
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
+  
+  virtualisation.docker = {
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    daemon.settings = {
+      runtimes = {
+        crun = { path = "${pkgs.crun}/bin/crun"; };
+        runc = { path = "${pkgs.runc}/bin/runc"; };
+        kata = { path = "${pkgs.kata-runtime}/bin/kata-runtime"; };
+        gvisor = {
+          path = "${pkgs.gvisor}/bin/runsc";
+          runtimeArgs = [ "--platform=kvm" ];  # or "ptrace" if no KVM support
+        };
+      };
+    };
   };
 
   services.postgresql = {
