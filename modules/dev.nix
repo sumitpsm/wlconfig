@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, devTools, ... }:
+{ config, pkgs, lib, devTools, ... }:
 
 {
   programs.nano.enable = false;
@@ -32,7 +32,8 @@
     yt-dlp
 
     dive
-    podman-tui
+    nerdctl
+    podman-compose
     docker-compose
 
     pgadmin4
@@ -52,8 +53,9 @@
     # PATH = [];
   };
 
-  environment.variables = {};
-
+  users.users.${config.user.name}.extraGroups = ["libvirtd" "docker"];
+  virtualisation.libvirtd.enable = true;
+  # virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.containers.enable = true;
   
   virtualisation.podman = {
@@ -63,21 +65,15 @@
       pkgs.crun
       pkgs.runc
       pkgs.kata-runtime
-      # pkgs.gvisor
     ];
   };
   
   virtualisation.docker = {
-    rootless.enable = true;
+    enable = true;
     daemon.settings = {
       runtimes = {
         crun = { path = "${pkgs.crun}/bin/crun"; };
-        runc = { path = "${pkgs.runc}/bin/runc"; };
         kata = { path = "${pkgs.kata-runtime}/bin/kata-runtime"; };
-        gvisor = {
-          path = "${pkgs.gvisor}/bin/runsc";
-          runtimeArgs = [ "--platform=kvm" ];  # or "ptrace" if no KVM support
-        };
       };
     };
   };

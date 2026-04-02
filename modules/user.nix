@@ -49,6 +49,9 @@ in
       shell = pkgs.nushell;
       packages = [];
     };
+    users.users.root = {
+      shell = pkgs.nushell;
+    };
     services.xserver.xkb = {
       layout = "${cfg.kbdLayout}";
       variant = "";

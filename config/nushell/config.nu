@@ -27,13 +27,6 @@ $env.config = {
   ]
 }
 
-def l [] { ls -ma | sort-by type name } # eza -a --group-directories-first --icons
-alias c = clear
-alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
-alias btop = btop --force-utf
-def kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
-def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
-
 $env.PATH = (
     $env.PATH 
     | append $"($nu.home-dir)/.cargo/bin"
@@ -41,12 +34,19 @@ $env.PATH = (
     | uniq
 )
 
+alias c = clear
+alias btop = btop --force-utf
+def kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
+def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
+# def ip [...args] { ^ip --json ...$args | from json }
+# def bridge [...args] { ^bridge --json ...$args | from json }
+# $env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
+
 # auto-start hyprland
 if (tty) == "/dev/tty1" {
   zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
   exec start-hyprland
 }
-$env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
 
 # PROMPT CONFIGURATION
 $env.PROMPT_COMMAND = { ||

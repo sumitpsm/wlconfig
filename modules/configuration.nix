@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   imports = [ 
@@ -15,20 +15,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  virtualisation.libvirtd.enable = true;
-  # virtualisation.spiceUSBRedirection.enable = true;
-
-  users.users.${config.user.name}.extraGroups = [
-    "libvirtd" # for virtualization
-    "wheel" # for sudo privileges
-  ];
+  users.users.${config.user.name}.extraGroups = ["wheel"]; # for sudo privileges
 
   security.polkit.enable = true;
-
-  users.users.root = {
-    shell = pkgs.nushell;
-  };
-
   services.udisks2.enable = true;
   # services.udev.enable = true;
 }

@@ -14,3 +14,11 @@ def --env f [] {
     yazi --cwd-file $cwd_file
     cd (open $cwd_file | str trim)
 }
+
+# eza -a --group-directories-first --icons
+def l [] {
+    ls -ma
+    | sort-by { |it| $it.type != "dir" } name
+}
+
+alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
