@@ -17,10 +17,10 @@
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    devToolsLib = import ./modules/dev-tools.nix { inherit pkgs inputs; };
+    terminalLib = import ./modules/development/terminal.nix { inherit pkgs; };
   in
   {
-    packages.${system}.dev-tools = devToolsLib.dev-tools;
+    packages.${system}.terminal = terminalLib.terminal;
 
     nixosConfigurations = nixpkgs.lib.genAttrs
     [
@@ -28,7 +28,7 @@
       "nixstation"
     ] # do not change this manually
     (hostname: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; inherit (devToolsLib) devTools; system = "x86_64-linux"; };
+      specialArgs = { inherit inputs; inherit (terminalLib) terminal-tools; system = "x86_64-linux"; };
       modules = [
         ./modules/configuration.nix
         ./hosts/${hostname} { networking.hostName = hostname; }

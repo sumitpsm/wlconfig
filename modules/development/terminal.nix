@@ -1,29 +1,21 @@
 # Dev tools package bundle
 # All development and terminal tools used across NixOS and non-NixOS systems
 
-{ inputs, pkgs }:
+{ pkgs }:
 
 let
-  devTools = with pkgs; [
-    # Terminal tools
-    nushell
-    helix
-    zellij
-    git
-    ripgrep
-    yazi
-    btop
-    zoxide
+  terminal-tools = with pkgs; [
+    nushell helix zellij git ripgrep yazi btop zoxide
   ];
 in
 {
   # Export the package list for use in NixOS modules
-  inherit devTools;
+  inherit terminal-tools;
 
   # Build environment for non-NixOS systems
-  dev-tools = pkgs.buildEnv {
-    name = "dev-tools";
-    paths = devTools;
+  terminal = pkgs.buildEnv {
+    name = "terminal";
+    paths = terminal-tools;
     meta = {
       description = "Development tools bundle for non-NixOS systems";
     };

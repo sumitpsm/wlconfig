@@ -13,17 +13,18 @@
     # ddcutil
     # qt6.qtmultimedia
     # accountsservice
-    # matugen     # Dynamic theming
     # gpu-screen-recorder
     # wlsunset
     # xdg-desktop-portal
     # evolution-data-server
     # app2unit
     # lm-sensors
-    # swappy
     # aubio
     # libqalculate
+    # kdePackages.kcolorchooser
+    # yad zenity amfora appimage-run usbutils v4l-utils nwg-displays gnome-maps gnome-clocks
 
+    # [web-intercepter] // zap *burpsuite
     # [network-monitor] // termshark bandwhich nethogs netscanner netwatch-tui
     # [terminal-presentation] // asciinema asciinema-agg presenterm
     # [shell] // dash bash zsh xonsh elvish ion fish powershell
@@ -37,7 +38,7 @@
     # [git-tuis] // lazygit gitui tig ungit
     # [web-music-client] // ytermusic ncspot yui-music youtube-tui
     # [documentation] // wiki-tui cht-sh
-    # [theme-generator] // wallust pywal pywal16
+    # [theme-generator] // wallust pywal pywal16 matugen
     # [terminal-graphics] // chafa timg
     # [document-viewer] // papers
     # [image-viewer] // loupe eog nomacs imv

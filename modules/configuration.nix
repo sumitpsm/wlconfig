@@ -3,13 +3,13 @@
 {
   imports = [ 
     ./boot.nix
-    ./user.nix
-    ./dev.nix
-    ./networking.nix
-    ./sound.nix
-    ./wayland.nix
+    ./inspect.nix
     ./programs.nix
+    ./sound.nix
+    ./user.nix
+    ./wayland.nix
 
+    ./development
     ./services
   ];
 

@@ -2,9 +2,11 @@
 
 {
   environment.systemPackages = with pkgs; [
+    uutils-hostname # hostname-hostname-debian
+    exiftool
+    nftables
     traceroute
     wireshark
-    # zap # web pentesting utility
   ];
 
   # wireshark configuration
