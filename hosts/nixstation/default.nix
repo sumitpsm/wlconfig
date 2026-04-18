@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   imports = [
@@ -30,4 +30,10 @@
   # laptop.enable = false;
   # printing.enable = false;
   # autoCleanup.enable = false;
+
+  fileSystems."/run/media/${config.user.name}/MYFILES" = {
+    device = "/dev/disk/by-uuid/8518-E3D5";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
 }

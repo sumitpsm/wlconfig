@@ -28,7 +28,7 @@
       "nixstation"
     ] # do not change this manually
     (hostname: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; inherit (terminalLib) terminal-tools; system = "x86_64-linux"; };
+      specialArgs = { inherit inputs; inherit (terminalLib) terminal-tools; stdenv.hostPlatform.system = system; };
       modules = [
         ./modules/configuration.nix
         ./hosts/${hostname} { networking.hostName = hostname; }

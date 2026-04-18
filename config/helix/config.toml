@@ -2,7 +2,7 @@ theme = "base32-vscode"
 
 [editor]
 line-number = "relative"
-shell = ["nu", "-e"]
+# shell = ["nu", "-e"]
 bufferline = "always"
 middle-click-paste = false
 mouse = true

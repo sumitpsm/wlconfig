@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     fuzzel
-    swww # wallpaper
+    awww # wallpaper
     hypridle # idling daemon
 
     quickshell
@@ -24,6 +24,7 @@
     # kdePackages.kcolorchooser
     # yad zenity amfora appimage-run usbutils v4l-utils nwg-displays gnome-maps gnome-clocks
 
+    # [diagram-editor] // drawy rnote excalidraw tldraw
     # [web-intercepter] // zap *burpsuite
     # [network-monitor] // termshark bandwhich nethogs netscanner netwatch-tui
     # [terminal-presentation] // asciinema asciinema-agg presenterm
@@ -69,8 +70,8 @@
     };
   };
 
-  # Enabling wallpaper daemon (swww-daemon)
-  systemd.user.services."swww-daemon" = {
+  # Enabling wallpaper daemon (awww-daemon)
+  systemd.user.services."awww-daemon" = {
     enable = true;
     description = "Wallpaper daemon";
     wantedBy = [ "hyprland-session.target" ];
@@ -78,7 +79,7 @@
     after = [ "hyprland-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.swww}/bin/swww-daemon";
+      ExecStart = "${pkgs.awww}/bin/awww-daemon";
       Restart = "on-failure";
       # ConditionEnvironment = "WAYLAND_DISPLAY";
     };

@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     fuzzel
-    swww # wallpaper
+    awww # wallpaper
     hypridle # idling daemon
 
     quickshell
@@ -52,8 +52,8 @@
     };
   };
 
-  # Enabling wallpaper daemon (swww-daemon)
-  systemd.user.services."swww-daemon" = {
+  # Enabling wallpaper daemon (awww-daemon)
+  systemd.user.services."awww-daemon" = {
     enable = true;
     description = "Wallpaper daemon";
     wantedBy = [ "hyprland-session.target" ];
@@ -61,7 +61,7 @@
     after = [ "hyprland-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.swww}/bin/swww-daemon";
+      ExecStart = "${pkgs.awww}/bin/awww-daemon";
       Restart = "on-failure";
       # ConditionEnvironment = "WAYLAND_DISPLAY";
     };
