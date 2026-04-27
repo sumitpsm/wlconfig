@@ -36,7 +36,10 @@ play_vid = [
   { run = 'mpv --force-window %*',      orphan = true, for = "windows" }
 ]
 view_doc = [
-  { run = 'zathura "$@"',               orphan = true, for = "unix" }
+  { run = 'papers "$@"',                orphan = true, for = "unix" }
+]
+view_md = [
+  { run = 'ghostwriter "$@"',           orphan = true, for = "unix" }
 ]
 open = [
 	{ run = 'xdg-open "$1"',                             for = "linux" },
@@ -78,6 +81,7 @@ prepend_rules = [
   { url = "*.nu", use = "edit" },
   { url = "*.txt", use = "edit" },
   { url = "*.conf", use = "edit" },
+	{ url = "*.md", use = ["view_md", "edit"] },
   { url = "*.epub", use = "view_doc" },
   { url = "*.html", use = ["edit", "open"] },
   { url = "*.svg", use = ["edit", "open"] },

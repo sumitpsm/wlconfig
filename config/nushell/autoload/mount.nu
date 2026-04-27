@@ -1,5 +1,4 @@
-# Custom completion function for unmounted drives
-def "list-unmounted-drives" [] {
+def list-drives [] {
     lsblk --json 
     | from json 
     | get blockdevices 
@@ -20,28 +19,33 @@ def "list-unmounted-drives" [] {
     }
     | flatten
     | where mountpoint == ""
-    | each { |part|
-        let label_str = if ($part.label | is-empty) { "" } else { $" \(($part.label))" }
-        {
-            value: $part.name,
-            description: $"($part.size)($label_str)"
-        }
-    }
 }
 
-def --env mount-drive [
-    drive?: string@"list-unmounted-drives"  # Autocomplete unmounted drives
-] {
-    # If no drive specified, show error
-    if ($drive | is-empty) {
-        print "Please specify a drive. Press Ctrl+Space to see available drives."
+def --env mount-drive [] {
+    let drives = list-drives
+
+    if ($drives | is-empty) {
+        print "No unmounted drives found."
         return
     }
-    
-    # Mount the selected partition
+
+    let selection = $drives
+    | each { |part|
+        let label_str = if ($part.label | is-empty) { "" } else { $" · ($part.label)" }
+        $"($part.name)  ($part.size)($label_str)"
+    }
+    | input list --fuzzy
+
+    if ($selection | is-empty) {
+        print "No drive selected."
+        return
+    }
+
+    let drive = $selection | split row " " | first
+
     print $"Mounting /dev/($drive)..."
     let result = udisksctl mount -b $"/dev/($drive)" | complete
-    
+
     let dirpath = match $result.exit_code {
         0 => {
             $result.stdout
@@ -50,7 +54,6 @@ def --env mount-drive [
             | get 0.dirpath
         },
         _ => {
-            # Already mounted, extract path from error message
             $result.stderr
             | str trim
             | split row ' '
@@ -59,7 +62,7 @@ def --env mount-drive [
             | get dirpath.0
         }
     }
-    
+
     print $"Changing directory to ($dirpath)"
     cd $dirpath
 }

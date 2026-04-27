@@ -1,0 +1,50 @@
+# ── Movement ─────────────────────────────────────────────────
+y  back-line          # up
+i  forw-line          # down
+e  left-scroll        # left
+o  right-scroll       # right
+
+# ── Half-page scroll ─────────────────────────────────────────
+I  forw-scroll        # half-page down
+Y  back-scroll        # half-page up
+
+# ── Full-page scroll ─────────────────────────────────────────
+# space  forw-screen  # full-page down (default: space)
+# b      back-screen  # full-page up (default: b)
+
+# ── Go to start / end of file ────────────────────────────────
+g  goto-line          # go to line 1 (or N if prefixed)
+G  goto-end           # go to end of file
+
+# ── Search ───────────────────────────────────────────────────
+s  forw-search        # search forward
+S  back-search        # search backward
+
+# ── Repeat search ────────────────────────────────────────────
+m  repeat-search      # next match
+M  reverse-search     # prev match
+
+# ── Quit ─────────────────────────────────────────────────────
+q  quit
+Q  quit
+
+# ── Repaint ──────────────────────────────────────────────────
+R  repaint-flush      # repaint + flush buffers
+r  repaint            # repaint
+
+# ── Status line ──────────────────────────────────────────────
+=  status             # show file name, line, byte position
+
+# ── Disable keys that conflict with the above remaps ─────────
+# (less's defaults for e/y/j/k/g/G/n/N would shadow our bindings)
+j  noaction
+k  noaction
+n  noaction
+N  noaction
+
+#env
+# Pass raw ANSI color codes through (needed for git diff, grep --color, etc.)
+LESS = -R -i -s
+# -R  : raw ANSI colors
+# -i  : case-insensitive search
+# -s  : squeeze consecutive blank lines
