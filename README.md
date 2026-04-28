@@ -56,18 +56,20 @@ cd <YOUR_CONFIG_DIRECTORY>/wlconfig
 reboot
 ```
 
-> This will:
->
-> 1. Configure Nix with flakes support
-> 2. Install all development tools from ./modules/dev-tools.nix
-> 3. Link your configuration files
-> 4. Change your default shell to nushell
+> Configures Nix with flakes support
+> Installs all development tools from ./modules/dev-tools.nix
+> Links your configuration files
+> Changes your default shell to nushell
 
 ```sh
 ./setup.sh
 ```
 
-After installation, log out and log back in to use nushell as your default shell.
+> After installation, log out and log back in to use nushell as your default shell.
+
+```sh
+exit
+```
 
 ## Note:
 

@@ -31,13 +31,14 @@ $env.PATH = (
     $env.PATH 
     | append $"($nu.home-dir)/.cargo/bin"
     | append $"($nu.default-config-dir)/scripts"
+    | append $"($nu.home-dir)/.local/state/nix/profile/bin"
     | uniq
 )
 
 alias c = clear
 alias btop = btop --force-utf
 def kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
-def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
+def s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
 # def ip [...args] { ^ip --json ...$args | from json }
 # def bridge [...args] { ^bridge --json ...$args | from json }
 # $env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
@@ -45,7 +46,9 @@ def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$r
 # auto-start hyprland
 if (tty) == "/dev/tty1" {
   zoxide init nushell --cmd cd | save -f ($nu.user-autoload-dirs | path join zoxide.nu)
-  exec start-hyprland
+  if (which start-hyprland | is-not-empty) {
+    exec start-hyprland
+  }
 }
 
 # PROMPT CONFIGURATION
