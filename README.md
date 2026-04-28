@@ -46,17 +46,26 @@ git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlcon
 cd <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
+> Detects OS and installs the Nix package manager (if not installed)
+
 ```sh
-./distro.sh
+./nix.sh
 ```
 
-This will:
+```sh
+reboot
+```
 
-1. Install the Nix package manager (if not already installed)
-2. Configure Nix with flakes support
-3. Install all development tools from ./modules/dev-tools.nix
-4. Link your configuration files
-5. Change your default shell to nushell
+> This will:
+>
+> 1. Configure Nix with flakes support
+> 2. Install all development tools from ./modules/dev-tools.nix
+> 3. Link your configuration files
+> 4. Change your default shell to nushell
+
+```sh
+./setup.sh
+```
 
 After installation, log out and log back in to use nushell as your default shell.
 
