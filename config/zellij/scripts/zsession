@@ -150,10 +150,12 @@ def "main attach" [name?: string] {
             let name_input = (input $"Enter session name \(default: ($entry.name)): " | str trim)
             if not ($name_input | is-empty) {
                 if ($name_input in $taken_names) {
-                    print $"Name '($name_input)' is already taken by an active session. Please choose another."
+                    print $"Name '($name_input)' is already taken. Please choose another."
                     continue
+                } else {
+                    $entry.name = $name_input
+                    break
                 }
-                $entry.name = $name_input
             } else {
                 break
             }
@@ -165,9 +167,8 @@ def "main attach" [name?: string] {
         # Check keybind conflict
         if not ($keybind_input | is-empty) {
             let existing = ($sessions | where keybind == $keybind_input | get 0?)
-            if not ($existing | is-empty) {
-                print $"Warning: Key '($existing.keybind)' is already bound to session '($existing.name)'"
-                let confirm = (input -n 1 "Override? (y/n): ")
+            if (not ($existing | is-empty)) and ($existing.name != $entry.name) {
+                let confirm = (input -n 1 $"Warning: Key `($existing.keybind)` is already bound to `($existing.name)`. Override? (y/n): ")
                 if $confirm == "y" or $confirm == "Y" {
                     $entry.keybind = $keybind_input
                 }

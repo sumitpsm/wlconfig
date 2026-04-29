@@ -3,9 +3,9 @@
 {
   imports = [ 
     ./containerization.nix
-    ./dev.nix
     ./misc.nix
     ./postgres.nix
+    ./programming.nix
     ./virtualisation.nix
   ];
 }

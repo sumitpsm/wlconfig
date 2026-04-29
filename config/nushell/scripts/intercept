@@ -1,4 +1,6 @@
-def intercept [] {
+#!/usr/bin/env nu
+
+def main [] {
     let input_data = $in
     let temp_file = (mktemp -t intercept.XXXXXX)
     

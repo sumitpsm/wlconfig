@@ -36,7 +36,7 @@ sudo nixos-rebuild switch --flake .#<HOSTNAME>
 
 Supported: Ubuntu, Debian, Fedora, Arch, openSUSE, FreeBSD, Alpine, Gentoo, Void, Slackware, Solus, Ximper
 
-> Install git (depends on which distribution you are)
+> First Step: Install git (depends on which distribution you are)
 
 ```sh
 git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
@@ -56,10 +56,10 @@ cd <YOUR_CONFIG_DIRECTORY>/wlconfig
 reboot
 ```
 
-> Configures Nix with flakes support
-> Installs all development tools from ./modules/dev-tools.nix
-> Links your configuration files
-> Changes your default shell to nushell
+> Configures Nix with flakes support;
+> Installs all development tools from ./modules/dev-tools.nix;
+> Links your configuration files;
+> Changes your default shell to nushell;
 
 ```sh
 ./setup.sh

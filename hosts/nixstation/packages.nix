@@ -34,8 +34,8 @@
     # [documentation] // wiki-tui cht-sh
     # [terminal-graphics] // chafa timg
     # [theme-generator] // wallust pywal pywal16 matugen
-    # [network-monitor] // termshark bandwhich nethogs netscanner netwatch-tui
-    # [system-monitor-tui] // htop bpytop glances iotop dool zenith sysstat
+    # [network-monitor] // termshark sniffnet bandwhich nethogs netscanner netwatch-tui
+    # [system-monitor-tui] // htop bpytop glances iotop dool zenith sysstat sysdig
     # [system-monitor-gui] // gnome-system-monitor cpu-x
     # [disk-usage] // dua duf baobab ncdu dust dysk
     # [web-music-client] // ytermusic ncspot yui-music youtube-tui

@@ -16,7 +16,8 @@ warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 
 # Nix configuration content (system-level, not user-level)
-NIX_DAEMON_CONF_CONTENT="experimental-features = nix-command flakes
+NIX_DAEMON_CONF_CONTENT="build-users-group = nixbld
+experimental-features = nix-command flakes
 auto-optimise-store = true
 trusted-users = root $USER
 "
@@ -42,10 +43,9 @@ setup_nix_config() {
     if [ -f "$nix_conf_file" ]; then
         warn "Nix daemon config already exists at $nix_conf_file"
         warn "Backing up to $nix_conf_file.bak"
-        cp "$nix_conf_file" "$nix_conf_file.bak"
-    else
-        echo "$NIX_DAEMON_CONF_CONTENT" | sudo tee "$nix_conf_file"
+        sudo mv "$nix_conf_file" "$nix_conf_file.bak"
     fi
+    echo "$NIX_DAEMON_CONF_CONTENT" | sudo tee "$nix_conf_file"
     
     # Restart Nix daemon
     info "Restarting Nix daemon..."
@@ -112,7 +112,6 @@ main() {
     
     # Load distro info from cache
     . "$CACHE_FILE"
-    info "Detected distribution: $distro"
     
     # Handle different distributions
     case "$distro" in
