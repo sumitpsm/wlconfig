@@ -31,7 +31,7 @@ $env.PATH = (
     $env.PATH 
     | append $"($nu.home-dir)/.cargo/bin"
     | append $"($nu.default-config-dir)/scripts"
-    | append $"($nu.home-dir)/.local/state/nix/profile/bin"
+    | append $"($nu.home-dir)/.local/state/nix/profiles/profile/bin"
     | uniq
 )
 

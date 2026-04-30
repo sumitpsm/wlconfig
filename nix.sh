@@ -27,20 +27,22 @@ detect_distro() {
         echo "fedora"
     elif [ -f /etc/arch-release ]; then
         echo "arch"
-    elif [ -f /etc/gentoo-release ]; then
-        echo "gentoo"
     elif [ -f /etc/alpine-release ]; then
         echo "alpine"
+    elif [ -f /etc/opensuse-release ]; then
+        echo "opensuse"
+    elif [ -f /etc/gentoo-release ]; then
+        echo "gentoo"
     elif [ -f /etc/void-release ]; then
         echo "void"
-    elif [ -f /etc/solus-release ]; then
-        echo "solus"
-    elif [ -f /etc/freebsd-version ]; then
-        echo "freebsd"
     elif [ -f /etc/slackware-release ] || [ -f /etc/slackware-version ]; then
         echo "slackware"
+    elif [ -f /etc/solus-release ]; then
+        echo "solus"
     elif [ -f /etc/ximper-release ] || [ -f /etc/ximper ]; then
         echo "ximper"
+    elif [ -f /etc/freebsd-version ]; then
+        echo "freebsd"
     else
         echo "unknown"
     fi
@@ -108,16 +110,6 @@ install_nix() {
 
     info "Installing dependencies for $distro..."
     case "$distro" in
-        alpine)
-            doas apk add curl xz sudo bash || warn $warning
-            doas adduser $USER wheel
-            doas addgroup $USER wheel
-            ;;
-        arch|manjaro)
-            if command -v pacman >/dev/null 2>&1; then
-                sudo pacman -Sy --noconfirm curl xz || warn $warning
-            fi
-            ;;
         debian|ubuntu|linuxmint|pop)
             if command -v apt-get >/dev/null 2>&1; then
                 sudo apt update
@@ -130,6 +122,16 @@ install_nix() {
             elif command -v yum >/dev/null 2>&1; then
                 sudo yum install -y curl xz || warn $warning
             fi
+            ;;
+        arch|manjaro)
+            if command -v pacman >/dev/null 2>&1; then
+                sudo pacman -Sy --noconfirm curl xz || warn $warning
+            fi
+            ;;
+        alpine)
+            doas apk add curl xz sudo bash || warn $warning
+            doas adduser $USER wheel
+            doas addgroup $USER wheel
             ;;
         opensuse*)
             if command -v zypper >/dev/null 2>&1; then
@@ -146,16 +148,16 @@ install_nix() {
                 sudo xbps-install -Sy curl xz || warn $warning
             fi
             ;;
-        solus)
-            if command -v eopkg >/dev/null 2>&1; then
-                sudo eopkg install -y curl xz || warn $warning
-            fi
-            ;;
         slackware)
             if command -v slackpkg >/dev/null 2>&1; then
                 sudo slackpkg install curl xz || warn $warning
             elif command -v installpkg >/dev/null 2>&1; then
                 sudo installpkg curl xz || warn $warning
+            fi
+            ;;
+        solus)
+            if command -v eopkg >/dev/null 2>&1; then
+                sudo eopkg install -y curl xz || warn $warning
             fi
             ;;
         ximper)
@@ -214,7 +216,7 @@ main() {
 
     save_distro_info "$distro" "$is_container"
 
-    ok "Please reboot, then run ./setup.sh"
+    ok "Please restart the shell session, then run ./setup.sh"
 }
 
 main "$@"
