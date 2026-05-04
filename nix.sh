@@ -2,17 +2,11 @@
 
 set -e
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
 NC='\033[0m'
-
-error() { echo -e "${RED}[ERROR]${NC} $1"; }
-ok() { echo -e "${GREEN}[OK]${NC} $1"; }
-warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
-info() { echo -e "${BLUE}[INFO]${NC} $1"; }
+error() { echo -e "\033[0;31m[ERROR]${NC} $1"; } # RED
+ok() { echo -e "\033[0;32m[OK]${NC} $1"; }       # GREEN
+warn() { echo -e "\033[1;33m[WARN]${NC} $1"; }   # YELLOW
+info() { echo -e "\033[0;34m[INFO]${NC} $1"; }   # BLUE
 
 CACHE_FILE="$HOME/.cache/distro"
 
@@ -72,25 +66,24 @@ detect_container() {
     echo "no"
 }
 
+# Detect installation type based on environment
+detect_install_type() {
+    local is_container=$1
+    
+    if [ "$is_container" = "yes" ]; then
+        echo "single-user"
+    elif ! command -v systemctl >/dev/null 2>&1; then
+        echo "single-user"
+    else
+        echo "multi-user"
+    fi
+}
+
 # Install Nix
 install_nix() {
     local distro=$1
     local is_container=$2
-
-    info "Installing Nix package manager..."
-
-    local install_type="multi-user"
-
-    if [ "$distro" = "alpine" ]; then
-        install_type="single-user"
-        info "Alpine detected: using single-user installation"
-    elif [ "$is_container" = "yes" ]; then
-        install_type="single-user"
-        info "Container detected: using single-user installation"
-    elif ! command -v systemctl >/dev/null 2>&1; then
-        install_type="single-user"
-        info "No systemd detected: using single-user installation"
-    fi
+    local install_type=$3
 
     local warning="Failed to install some dependencies"
 
@@ -116,9 +109,11 @@ install_nix() {
             fi
             ;;
         alpine)
-            doas apk add curl xz sudo bash || warn $warning
+            doas apk add curl xz bash coreutils || warn $warning
             doas adduser $USER wheel
             doas addgroup $USER wheel
+            grep -qxF 'export PATH="$HOME/.local/state/nix/profiles/profile/bin:$PATH"' /etc/profile || \
+                echo 'export PATH="$HOME/.local/state/nix/profiles/profile/bin:$PATH"' | sudo tee -a /etc/profile
             ;;
         opensuse*)
             if command -v zypper >/dev/null 2>&1; then
@@ -169,58 +164,61 @@ install_nix() {
     fi
 }
 
-# Nix configuration content (system-level, not user-level)
-NIX_DAEMON_CONF_CONTENT="build-users-group = nixbld
+# Setup Nix configuration (system-wide for daemon, user-level for single-user)
+setup_nix_config() {
+    local install_type=$1
+    
+    info "Setting up Nix configuration for $install_type installation..."
+    
+    sudo mkdir -p /etc/nix
+
+    local nix_conf_file="/etc/nix/nix.conf"
+    local nix_conf_content
+    if [ "$install_type" = "multi-user" ]; then
+        nix_conf_content="build-users-group = nixbld
 experimental-features = nix-command flakes
 auto-optimise-store = true
 trusted-users = root $USER
 "
+    else # Single-user installation
+        nix_conf_content="experimental-features = nix-command flakes
+auto-optimise-store = true
+trusted-users = root $USER
+"
+    fi       
 
-# Setup Nix configuration (system-wide for daemon)
-setup_nix_config() {
-    info "Setting up Nix daemon configuration..."
-    
-    local nix_conf_file="/etc/nix/nix.conf"
-    
-    # Create directory
-    sudo mkdir -p /etc/nix
-    
     # Check if config already exists
     if [ -f "$nix_conf_file" ]; then
         warn "Nix daemon config already exists at $nix_conf_file"
         warn "Backing up to $nix_conf_file.bak"
         sudo mv "$nix_conf_file" "$nix_conf_file.bak"
     fi
-    echo "$NIX_DAEMON_CONF_CONTENT" | sudo tee "$nix_conf_file"
-    
-    # Restart Nix daemon
-    info "Restarting Nix daemon..."
-    sudo systemctl restart nix-daemon
-    
-    ok "Nix daemon configuration updated"
+    echo "$nix_conf_content" | sudo tee "$nix_conf_file" > /dev/null
+        
+    if [ "$install_type" = "multi-user" ]; then
+        info "Restarting Nix daemon..."
+        sudo systemctl restart nix-daemon
+        ok "Nix daemon configuration updated"
+    fi
 }
 
 # Save distro info to cache file
 save_distro_info() {
     local distro=$1
     local is_container=$2
+    local install_type=$3
 
     mkdir -p "$HOME/.cache"
     cat > "$CACHE_FILE" <<EOF
 distro=$distro
 container=$is_container
+install_type=$install_type
 EOF
 
     ok "Saved distro info to $CACHE_FILE"
 }
 
 main() {
-    # Check if we have sudo access
-    if ! sudo -v; then
-        error "sudo access required for execution"
-        exit 1
-    fi
-
     info "Nix Setup Script"
     info "================="
 
@@ -232,13 +230,15 @@ main() {
         info "Running in container"
     fi
 
+    local install_type=$(detect_install_type "$is_container")
+
     case "$distro" in
         nixos)
             info "NixOS detected - Nix is already installed"
             exit 0
             ;;
         unknown)
-            warn "Unknown distribution"
+            warn "Unsupported distribution"
             ;;
         *)
             info "Supported distribution: $distro"
@@ -248,15 +248,23 @@ main() {
     if command -v nix >/dev/null 2>&1; then
         ok "Nix is already installed"
     else
-        install_nix "$distro" "$is_container"
+        install_nix "$distro" "$is_container" "$install_type"
         ok "Installation complete!"
     fi
 
-    setup_nix_config
+    setup_nix_config "$install_type"
 
-    save_distro_info "$distro" "$is_container"
+    save_distro_info "$distro" "$is_container" "$install_type"
 
     ok "Please restart the shell session, then run ./setup.sh"
 }
+
+# Check if we have sudo access
+if command -v doas >/dev/null 2>&1; then
+    doas ln -s $(which doas) /usr/bin/sudo 2>/dev/null || warn "sudo is already linked"
+elif ! sudo -v; then
+    error "sudo access required for execution"
+    exit 1
+fi
 
 main "$@"
