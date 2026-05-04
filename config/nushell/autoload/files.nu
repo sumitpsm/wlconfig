@@ -9,9 +9,9 @@ def --env cdir [] {
     cd $selected
 }
 
-def --env f [] {
+def --env f [dir: path = "."] {
     let cwd_file = mktemp -t yazi-cwd.XXXXXX
-    yazi --cwd-file $cwd_file
+    yazi --cwd-file $cwd_file $dir
     cd (open $cwd_file | str trim)
 }
 

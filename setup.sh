@@ -15,44 +15,7 @@ ok() { echo -e "${GREEN}[OK]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 
-# Nix configuration content (system-level, not user-level)
-NIX_DAEMON_CONF_CONTENT="build-users-group = nixbld
-experimental-features = nix-command flakes
-auto-optimise-store = true
-trusted-users = root $USER
-"
-
 CACHE_FILE="$HOME/.cache/distro"
-
-# Setup Nix configuration (system-wide for daemon)
-setup_nix_config() {
-    info "Setting up Nix daemon configuration..."
-    
-    local nix_conf_file="/etc/nix/nix.conf"
-    
-    # Check if we have sudo access
-    if ! sudo -v; then
-        error "sudo access required for Nix daemon configuration"
-        exit 1
-    fi
-    
-    # Create directory
-    sudo mkdir -p /etc/nix
-    
-    # Check if config already exists
-    if [ -f "$nix_conf_file" ]; then
-        warn "Nix daemon config already exists at $nix_conf_file"
-        warn "Backing up to $nix_conf_file.bak"
-        sudo mv "$nix_conf_file" "$nix_conf_file.bak"
-    fi
-    echo "$NIX_DAEMON_CONF_CONTENT" | sudo tee "$nix_conf_file"
-    
-    # Restart Nix daemon
-    info "Restarting Nix daemon..."
-    sudo systemctl restart nix-daemon
-    
-    ok "Nix daemon configuration updated"
-}
 
 # Install dev tools using Nix
 install_dev_tools() {
@@ -211,6 +174,13 @@ main() {
     info "Wayland Setup Script"
     info "====================="
     
+    # Verify Nix is available
+    if ! command -v nix >/dev/null 2>&1; then
+        error "Nix command not found"
+        error "Please restart your terminal and run this script again"
+        exit 1
+    fi
+
     # Load distro info from cache
     . "$CACHE_FILE"
     
@@ -227,16 +197,6 @@ main() {
             info "Supported distribution: $distro"
             ;;
     esac
-    
-    # Verify Nix is available
-    if ! command -v nix >/dev/null 2>&1; then
-        error "Nix command not found"
-        error "Please restart your terminal and run this script again"
-        exit 1
-    fi
-    
-    # Setup Nix daemon configuration (must be before using Nix)
-    setup_nix_config
     
     # Install dev tools
     install_dev_tools

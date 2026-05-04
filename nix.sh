@@ -72,20 +72,6 @@ detect_container() {
     echo "no"
 }
 
-# Save distro info to cache file
-save_distro_info() {
-    local distro=$1
-    local is_container=$2
-
-    mkdir -p "$HOME/.cache"
-    cat > "$CACHE_FILE" <<EOF
-distro=$distro
-container=$is_container
-EOF
-
-    ok "Saved distro info to $CACHE_FILE"
-}
-
 # Install Nix
 install_nix() {
     local distro=$1
@@ -111,7 +97,8 @@ install_nix() {
     info "Installing dependencies for $distro..."
     case "$distro" in
         debian|ubuntu|linuxmint|pop)
-            if command -v apt-get >/dev/null 2>&1; then
+            if command -v apt >/dev/null 2>&1; then
+                sudo sed -i '/^deb cdrom:/s/^/# /' /etc/apt/sources.list
                 sudo apt update
                 sudo apt install -y curl xz-utils || warn $warning
             fi
@@ -182,7 +169,58 @@ install_nix() {
     fi
 }
 
+# Nix configuration content (system-level, not user-level)
+NIX_DAEMON_CONF_CONTENT="build-users-group = nixbld
+experimental-features = nix-command flakes
+auto-optimise-store = true
+trusted-users = root $USER
+"
+
+# Setup Nix configuration (system-wide for daemon)
+setup_nix_config() {
+    info "Setting up Nix daemon configuration..."
+    
+    local nix_conf_file="/etc/nix/nix.conf"
+    
+    # Create directory
+    sudo mkdir -p /etc/nix
+    
+    # Check if config already exists
+    if [ -f "$nix_conf_file" ]; then
+        warn "Nix daemon config already exists at $nix_conf_file"
+        warn "Backing up to $nix_conf_file.bak"
+        sudo mv "$nix_conf_file" "$nix_conf_file.bak"
+    fi
+    echo "$NIX_DAEMON_CONF_CONTENT" | sudo tee "$nix_conf_file"
+    
+    # Restart Nix daemon
+    info "Restarting Nix daemon..."
+    sudo systemctl restart nix-daemon
+    
+    ok "Nix daemon configuration updated"
+}
+
+# Save distro info to cache file
+save_distro_info() {
+    local distro=$1
+    local is_container=$2
+
+    mkdir -p "$HOME/.cache"
+    cat > "$CACHE_FILE" <<EOF
+distro=$distro
+container=$is_container
+EOF
+
+    ok "Saved distro info to $CACHE_FILE"
+}
+
 main() {
+    # Check if we have sudo access
+    if ! sudo -v; then
+        error "sudo access required for execution"
+        exit 1
+    fi
+
     info "Nix Setup Script"
     info "================="
 
@@ -213,6 +251,8 @@ main() {
         install_nix "$distro" "$is_container"
         ok "Installation complete!"
     fi
+
+    setup_nix_config
 
     save_distro_info "$distro" "$is_container"
 
