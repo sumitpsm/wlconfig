@@ -19,5 +19,6 @@
 
   security.polkit.enable = true;
   services.udisks2.enable = true;
-  # services.udev.enable = true;
+  systemd.oomd.enable = false;
+  systemd.services.systemd-machined.enable = false;
 }

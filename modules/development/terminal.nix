@@ -5,7 +5,7 @@
 
 let
   terminal-tools = with pkgs; [
-    nushell helix zellij git ripgrep yazi btop zoxide
+    nushell helix zellij ripgrep yazi btop zoxide
   ];
 in
 {

@@ -5,6 +5,7 @@
   documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [
+    git
     gcc
     pkg-config
     openssl

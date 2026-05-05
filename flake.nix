@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kmonad = {
-      url = "github:kmonad/kmonad?dir=nix&ref=dccd498de1ffbc221a3b95c29fb9ea70168673a6";
+      url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

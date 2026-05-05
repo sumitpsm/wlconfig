@@ -16,8 +16,8 @@ def --env f [dir: path = "."] {
 }
 
 # eza -a --group-directories-first --icons
-def l [] {
-    ls -ma
+def l [dir: path = "."] {
+    ls -ma $dir
     | sort-by { |it| $it.type != "dir" } name
 }
 

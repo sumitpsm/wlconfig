@@ -105,23 +105,16 @@ install_kmonad() {
     case "$init_system" in
         systemd)
             if [ ! -f /etc/modules-load.d/uinput.conf ]; then
-                echo "uinput" | sudo tee /etc/modules-load.d/uinput.conf
+                echo "uinput" | sudo tee /etc/modules-load.d/uinput.conf > /dev/null
             fi
             ;;
         openrc)
             if ! grep -q "^uinput$" /etc/modules 2>/dev/null; then
-                echo "uinput" | sudo tee -a /etc/modules
+                echo "uinput" | sudo tee -a /etc/modules > /dev/null
             fi
             ;;
         *)
-            # Generic approach for other init systems
-            if [ -f /etc/modules ]; then
-                if ! grep -q "^uinput$" /etc/modules; then
-                    echo "uinput" | sudo tee -a /etc/modules
-                fi
-            elif [ -d /etc/modules-load.d ]; then
-                echo "uinput" | sudo tee /etc/modules-load.d/uinput.conf
-            fi
+            echo "Init system not supported"
             ;;
     esac
 
@@ -290,20 +283,8 @@ link_configs() {
 
 setup_shell() {
     info "Setting up nushell as default shell..."
-    local distro=$1
     local nu_path="$(which nu)"
 
-    if [ "$distro" = "alpine" ]; then
-        sudo apk add linux-pam
-        sudo mkdir -p /etc/pam.d
-        sudo tee /etc/pam.d/chsh > /dev/null << 'EOF'
-auth       sufficient   pam_rootok.so
-auth       required     pam_unix.so
-account    required     pam_unix.so
-session    required     pam_unix.so
-EOF
-    fi
-    
     if [ -z "$nu_path" ]; then
         error "nushell (nu) not found in PATH"
         exit 1
@@ -318,7 +299,11 @@ EOF
     fi
     
     info "Changing default shell to nushell..."
-    sudo chsh -s "$nu_path" "$USER"
+    if command -v chsh >/dev/null; then
+        sudo chsh -s "$nu_path" "$USER"
+    else
+        sudo sed -i "/^$USER:/s|:[^:]*$|:$nu_path|" /etc/passwd
+    fi
 }
 
 main() {
@@ -365,7 +350,7 @@ main() {
 
     link_configs
     
-    setup_shell "$distro"
+    setup_shell
     
     ok "Setup complete!"
     info "Please log out and log back in to use nushell as your default shell"
