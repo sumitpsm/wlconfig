@@ -22,7 +22,6 @@
     vscode-langservers-extracted
 
     opencode
-    # gh tailwindcss_4 tailwindcss-language-server 
   ] ++ terminal-tools;
 
   environment.sessionVariables = {

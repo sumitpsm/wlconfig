@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  environment.systemPackages = [ pkgs.pgadmin4 ];
+  # environment.systemPackages = [ pkgs.pgadmin4 ];
 
   services.postgresql = {
     enable = true;

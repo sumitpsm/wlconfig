@@ -71,6 +71,9 @@ in
     '') # hyprcursor theme
   ];
 
+  # Enable fonts and refresh cache on rebuild
+  fonts.fontconfig.enable = true;
+
   fonts.packages = with pkgs; [
     nerd-fonts.dejavu-sans-mono
   ];

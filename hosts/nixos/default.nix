@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -18,6 +18,10 @@
     };
   };
 
-  # [CUSTOM OPTIONS]
-  laptop.enable = true;
+  # laptop specific
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+  ];
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true; # For GUI management
 }

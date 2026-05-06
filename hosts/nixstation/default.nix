@@ -27,7 +27,6 @@
   #   locale = "en_IN";
   #   kbdLayout = "us";
   # };
-  # laptop.enable = false;
   # printing.enable = false;
   # autoCleanup.enable = false;
 

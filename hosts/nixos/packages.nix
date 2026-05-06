@@ -33,9 +33,6 @@
     })
   ];
 
-  # Enable fonts and refresh cache on rebuild
-  fonts.fontconfig.enable = true;
-
   # Enabling session idling (hypridle)
   systemd.user.services.hypridle = {
     enable = true;

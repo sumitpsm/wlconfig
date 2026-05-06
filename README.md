@@ -57,15 +57,14 @@ exit
 ```
 
 > Configures Nix with flakes support;
-> Installs all development tools from ./modules/dev-tools.nix;
+> Installs all development tools from ./modules/development/terminal.nix;
+> Installs and sets up kmonad for keyboard mapping (optional);
 > Links your configuration files;
 > Changes your default shell to nushell;
 
 ```sh
 ./setup.sh
 ```
-
-> After installation, log out and log back in to use nushell as your default shell.
 
 ```sh
 exit

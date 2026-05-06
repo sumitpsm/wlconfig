@@ -48,6 +48,7 @@ in
       description = "${cfg.description}";
       shell = pkgs.nushell;
       packages = [];
+      extraGroups = ["wheel"]; # for sudo privileges
     };
     users.users.root = {
       shell = pkgs.nushell;

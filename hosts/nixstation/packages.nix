@@ -7,6 +7,7 @@
     hypridle # idling daemon
 
     quickshell
+    # gh tailwindcss_4 tailwindcss-language-server 
     # go          # For building DMS components
     # cava        # Audio visualization
     # cliphist    # Clipboard history

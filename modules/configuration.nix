@@ -1,21 +1,20 @@
-{ config, ... }:
+{ ... }:
 
 {
   imports = [ 
     ./boot.nix
-    ./inspect.nix
+    ./monitoring.nix
     ./programs.nix
     ./sound.nix
     ./user.nix
+    ./utilities.nix
     ./wayland.nix
 
     ./development
-    ./services
+    ./devices
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  users.users.${config.user.name}.extraGroups = ["wheel"]; # for sudo privileges
 
   security.polkit.enable = true;
   services.udisks2.enable = true;

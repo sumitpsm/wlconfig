@@ -277,7 +277,7 @@ link_configs() {
     info "Linking configurations..."
     local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     [ -f "$script_dir/init.nu" ] || { error "init.nu not found"; exit 1; }
-    cd "$script_dir" && nix run nixpkgs#nushell -- init.nu
+    cd "$script_dir" && $(which nu) init.nu
     ok "Configurations linked"
 }
 
