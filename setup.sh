@@ -277,7 +277,7 @@ link_configs() {
     info "Linking configurations..."
     local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     [ -f "$script_dir/init.nu" ] || { error "init.nu not found"; exit 1; }
-    cd "$script_dir" && $(which nu) init.nu
+    cd "$script_dir" && $(which nu) init.nu && sudo $(which nu) init.nu
     ok "Configurations linked"
 }
 
@@ -297,12 +297,32 @@ setup_shell() {
     else
         info "Shell already in /etc/shells"
     fi
+
+    mkdir -p $HOME/.local/share/nushell/vendor/autoload
+    tee $HOME/.local/share/nushell/vendor/autoload/env-vars.nu > /dev/null << EOF 
+# Environment Variables for Non-NixOS distributions
+
+\$env.PATH = (
+    \$env.PATH | append [
+        $"(\$nu.home-dir)/.local/state/nix/profiles/profile/bin"
+        "/nix/var/nix/profiles/default/bin"
+    ] | uniq
+)
+
+\$env.XDG_DATA_DIRS = [
+    $"(\$nu.home-dir)/.local/state/nix/profiles/profile/share"
+    "/nix/var/nix/profiles/default/share"
+    "/usr/share" "/usr/local/share"
+]
+EOF
     
     info "Changing default shell to nushell..."
     if command -v chsh >/dev/null; then
         sudo chsh -s "$nu_path" "$USER"
+        sudo chsh -s "$nu_path" root
     else
         sudo sed -i "/^$USER:/s|:[^:]*$|:$nu_path|" /etc/passwd
+        sudo sed -i "/^root:/s|:[^:]*$|:$nu_path|" /etc/passwd
     fi
 }
 
@@ -351,6 +371,8 @@ main() {
     link_configs
     
     setup_shell
+
+    sudo chown -R $USER:users ~
     
     ok "Setup complete!"
     info "Please log out and log back in to use nushell as your default shell"

@@ -28,12 +28,7 @@ $env.config = {
 }
 
 $env.PATH = (
-    $env.PATH | append [
-        $"($nu.home-dir)/.cargo/bin"
-        $"($nu.default-config-dir)/scripts"
-        $"($nu.home-dir)/.local/state/nix/profiles/profile/bin"
-        "/nix/var/nix/profiles/default/bin"
-    ] | uniq
+    $env.PATH | append [ $"($nu.home-dir)/.cargo/bin" $"($nu.default-config-dir)/scripts" ] | uniq
 )
 
 alias c = clear

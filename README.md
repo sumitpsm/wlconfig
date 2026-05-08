@@ -29,7 +29,7 @@ sudo nixos-rebuild switch --flake .#<HOSTNAME>
 > Link your configs by doing:
 
 ```sh
-./init.nu
+./init.nu && sudo ./init.nu
 ```
 
 ## Install Instructions for other distributions
