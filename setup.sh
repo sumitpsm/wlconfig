@@ -298,8 +298,7 @@ setup_shell() {
         info "Shell already in /etc/shells"
     fi
 
-    mkdir -p $HOME/.local/share/nushell/vendor/autoload
-    tee $HOME/.local/share/nushell/vendor/autoload/env-vars.nu > /dev/null << EOF 
+    tee $HOME/.config/nushell/env.nu > /dev/null << EOF 
 # Environment Variables for Non-NixOS distributions
 
 \$env.PATH = (

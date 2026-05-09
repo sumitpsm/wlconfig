@@ -20,6 +20,7 @@ const user_configs = [
     ["config/alacritty",            ".config/alacritty"],
     ["config/dprint",               ".config/dprint"],
     ["config/emojis.csv",           ".local/share/emojis.csv"],
+    ["config/emotes.csv",           ".local/share/emotes.csv"],
     ["config/GIMP/3.0/gimprc",      ".config/GIMP/3.0/gimprc"],
     ["config/GIMP/3.0/sessionrc",   ".config/GIMP/3.0/sessionrc"],
     ["config/GIMP/3.0/shortcutsrc", ".config/GIMP/3.0/shortcutsrc"],

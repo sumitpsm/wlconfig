@@ -1,4 +1,5 @@
 config/nushell/history.txt
+config/nushell/env.nu
 config/gtk-3.0/dank-colors.css
 config/kitty/dank-theme.conf
 config/yazi/plugins

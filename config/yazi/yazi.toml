@@ -38,9 +38,6 @@ play_vid = [
 view_doc = [
   { run = 'papers "$@"',                orphan = true, for = "unix" }
 ]
-view_md = [
-  { run = 'ghostwriter "$@"',           orphan = true, for = "unix" }
-]
 open = [
 	{ run = 'xdg-open "$1"',                             for = "linux" },
 	{ run = 'open "$@"',                                 for = "macos" },
@@ -81,7 +78,7 @@ prepend_rules = [
   { url = "*.nu", use = "edit" },
   { url = "*.txt", use = "edit" },
   { url = "*.conf", use = "edit" },
-	{ url = "*.md", use = ["view_md", "edit"] },
+	{ url = "*.md", use = ["edit"] },
   { url = "*.epub", use = "view_doc" },
   { url = "*.html", use = ["edit", "open"] },
   { url = "*.svg", use = ["edit", "open"] },

@@ -31,19 +31,16 @@ def --env mount-drive [] {
         return
     }
 
-    let selection = $drives | input list --fuzzy
+    let drive_info = $drives | input list --fuzzy
 
-    if ($selection | is-empty) {
+    if ($drive_info | is-empty) {
         print "No drive selected."
         return
     }
 
-    let drive = $selection | split row " " | first
-    let drive_info = $drives | where name == $drive | first
-
     let dirpath = if (not $drive_info.is_mounted) {
-        print $"Mounting /dev/($drive)..."
-        let result = udisksctl mount -b $"/dev/($drive)" | complete
+        print $"Mounting /dev/($drive_info.name)..."
+        let result = udisksctl mount -b $"/dev/($drive_info.name)" | complete
 
         let dirpath = match $result.exit_code {
             0 => {

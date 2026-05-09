@@ -13,6 +13,7 @@ def --env f [dir: path = "."] {
     let cwd_file = mktemp -t yazi-cwd.XXXXXX
     yazi --cwd-file $cwd_file $dir
     cd (open $cwd_file | str trim)
+    rm $cwd_file
 }
 
 # eza -a --group-directories-first --icons

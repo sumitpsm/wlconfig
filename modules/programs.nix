@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    kdePackages.ghostwriter papers # markdown and document viewer
+    papers # document viewer
     mpv mpvScripts.mpris # video & audio player
     obs-studio obs-cli # screen recorder
     gimp3 # image editor // [inkscape krita]
