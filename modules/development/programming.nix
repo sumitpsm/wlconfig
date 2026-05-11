@@ -20,8 +20,6 @@
     nixd
     markdown-oxide
     vscode-langservers-extracted
-
-    opencode
   ] ++ terminal-tools;
 
   environment.sessionVariables = {

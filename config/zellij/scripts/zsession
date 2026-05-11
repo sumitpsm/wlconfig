@@ -1,21 +1,24 @@
 #!/usr/bin/env nu
 
+$env.config = ($env.config | merge { table: { mode: psql } })
 let CSV_PATH = $"($env.HOME)/.local/state/terminal-sessions.csv"
 const DEFAULT_LAYOUT = "compact"
 
 # Autocomplete function for project directories
 def get-project-dirs []: nothing -> list<string> {
-    let project_dirs = (
-        do -i { ls ~/dev/*/* ~/notes/* | where type == dir | get name }
-        | append (do -i { ls $"/run/media/($env.USER)/*" | get name })
-    )
-    $project_dirs
+    [
+        (do -i { ls ~/dev/*/* | where type == dir | get name })
+        (do -i { ls ~/notes/* | where type == dir | get name })
+        (do -i { ls $"/run/media/($env.USER)/*" | get name })
+    ]
+    | flatten
+    | compact
 }
 
 # Get all active and dead Zellij sessions with their state
 # Returns a list of records with name and state
 def get-zellij-sessions [] {
-    zellij list-sessions --no-formatting
+    zellij list-sessions --no-formatting err> /dev/null
     | lines
     | each { |line|
         let is_dead = ($line | str contains "(EXITED - attach to resurrect)")
@@ -106,7 +109,7 @@ def global-session-list [] {
 
 # List all sessions (active, dead, deleted, absent)
 def "main list" [] {
-    global-session-list | where state != "absent" | table -t psql
+    global-session-list | where state != "absent"
 }
 
 # Attach to a session by name or fuzzy finder

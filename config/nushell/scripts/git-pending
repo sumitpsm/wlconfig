@@ -16,6 +16,8 @@ def main [repodir: path = ".."] {
         print $"(ansi yellow_bold)($cwd)/($dir)(ansi reset)"
         git status -s
         print ""
+      } else {
+        git pull origin | complete | get stdout | if $in != "Already up to date.\n" { print $in }
       }
     }
   }
