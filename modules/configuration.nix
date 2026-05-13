@@ -3,6 +3,7 @@
 {
   imports = [ 
     ./boot.nix
+    ./daemons.nix
     ./monitoring.nix
     ./programs.nix
     ./sound.nix
@@ -16,8 +17,13 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  security.polkit.enable = true;
-  services.udisks2.enable = true;
-  systemd.oomd.enable = false;
-  systemd.services.systemd-machined.enable = false;
+  security.sudo.enable = false;
+  security.sudo-rs = {
+    enable = true;
+    wheelNeedsPassword = true;
+    execWheelOnly = true;   
+    extraConfig = ''
+      Defaults !pwfeedback
+    '';
+  };
 }

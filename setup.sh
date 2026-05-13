@@ -301,6 +301,10 @@ setup_shell() {
     tee $HOME/.config/nushell/env.nu > /dev/null << EOF 
 # Environment Variables for Non-NixOS distributions
 
+\$env.EDITOR = "hx"
+\$env.VISUAL = "hx"
+\$env.SUDO_EDITOR = "hx"
+
 \$env.PATH = (
     \$env.PATH | append [
         $"(\$nu.home-dir)/.local/state/nix/profiles/profile/bin"

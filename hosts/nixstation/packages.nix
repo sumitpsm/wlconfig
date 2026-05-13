@@ -57,6 +57,8 @@
     # [web-intercepter] // zap *burpsuite
   ];
 
+  # programs.calls.enable = true;
+
   # Enabling session idling (hypridle)
   systemd.user.services.hypridle = {
     enable = true;

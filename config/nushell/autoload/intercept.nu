@@ -1,6 +1,4 @@
-#!/usr/bin/env nu
-
-def main [] {
+def intercept [] {
     let input_data = $in
     let temp_file = (mktemp -t intercept.XXXXXX)
     
@@ -11,7 +9,7 @@ def main [] {
     hx $temp_file
     
     # Read modified content and clean up
-    let output = (open $temp_file)
+    let output = (open --raw $temp_file)
     rm $temp_file
     
     $output

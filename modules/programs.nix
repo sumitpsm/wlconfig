@@ -1,6 +1,8 @@
 { inputs, pkgs, ... }:
 
 {
+  programs.virt-manager.enable = true;
+
   environment.systemPackages = with pkgs; [
     papers # document viewer
     mpv mpvScripts.mpris # video & audio player
@@ -11,5 +13,4 @@
     (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.beta.override {}) # zen browser
     # kmonad # keyboard mapper
   ];
-  # programs.calls.enable = true;
 }
