@@ -1,7 +1,6 @@
 #!/usr/bin/env nu
 
 # Count lines of code in a git repository by language
-# Usage: loc.nu [path]
 def main [path?: string] {
     # Use provided path or current directory
     let repo_path = if ($path | is-empty) {
@@ -21,25 +20,41 @@ def main [path?: string] {
 
     # Language configuration with extensions and GitHub colors
     let languages = [
-        { name: "Rust",       exts: [".rs"],                    color: "#dea584" },
         { name: "C",          exts: [".c", ".h"],               color: "#555555" },
-        { name: "C++",        exts: [".cpp", ".hpp", ".cc", ".cxx", ".hxx"], color: "#f34b7d" },
+        { name: "C++",        exts: [".cpp", ".hpp", ".hh", ".cc", ".cxx", ".hxx"], color: "#f34b7d" },
+        { name: "Rust",       exts: [".rs"],                    color: "#dea584" },
         { name: "Zig",        exts: [".zig"],                   color: "#ec915c" },
+        { name: "Odin",       exts: [".odin"],                  color: "#60AFFE" },
+        { name: "Shell",      exts: [".sh"],                    color: "#89e051" },
+        { name: "Bash",       exts: [".bash"],                  color: "#89e051" },
+        { name: "Zsh",        exts: [".zsh"],                   color: "#89e051" },
+        { name: "Fish",       exts: [".fish"],                  color: "#4aae47" },
         { name: "Nushell",    exts: [".nu"],                    color: "#31507d" },
-        { name: "Nix",        exts: [".nix"],                   color: "#7e7eff" },
+        { name: "PowerShell", exts: [".ps1", ".psm1", ".psd1"], color: "#012456" },
+        { name: "HTML",       exts: [".html", ".htm"],          color: "#e34c26" },
         { name: "CSS",        exts: [".css"],                   color: "#563d7c" },
         { name: "JavaScript", exts: [".js", ".jsx", ".mjs"],    color: "#f1e05a" },
-        { name: "Python",     exts: [".py"],                    color: "#3572A5" },
-        { name: "Bash",       exts: [".sh", ".bash"],           color: "#89e051" },
+        { name: "Python",     exts: [".py"],                    color: "#e38c00" },
         { name: "Lua",        exts: [".lua"],                   color: "#000080" },
-        { name: "Go",         exts: [".go"],                    color: "#00ADD8" },
+        { name: "Go",         exts: [".go"],                    color: "#00add8" },
         { name: "TypeScript", exts: [".ts", ".tsx"],            color: "#3178c6" },
-        { name: "TOML",       exts: [".toml"],                  color: "#9c4221" },
+        { name: "Ruby",       exts: [".rb"],                    color: "#701516" },
+        { name: "Perl",       exts: [".pl", ".pm"],             color: "#0298c3" },
+        { name: "Lua",        exts: [".lua"],                   color: "#000080" },
+        { name: "Swift",      exts: [".swift"],                 color: "#f05138" },
+        { name: "Scala",      exts: [".scala", ".sc"],          color: "#c22d40" },
+        { name: "Gleam",      exts: [".gleam"],                 color: "#ffaff3" },
+        { name: "Erlang",     exts: [".erl", ".hrl"],           color: "#b83998" },
+        { name: "Haskell",    exts: [".hs"],                    color: "#5e5086" },
+        { name: "Elixir",     exts: [".ex", ".exs"],            color: "#6e4a7e" },
+        { name: "Nix",        exts: [".nix"],                   color: "#7e7eff" },
         { name: "JSON",       exts: [".json"],                  color: "#292929" },
-        { name: "Markdown",   exts: [".md", ".markdown"],       color: "#083fa1" },
         { name: "YAML",       exts: [".yaml", ".yml"],          color: "#cb171e" },
-        { name: "HTML",       exts: [".html", ".htm"],          color: "#e34c26" },
+        { name: "TOML",       exts: [".toml"],                  color: "#9c4221" },
         { name: "XML",        exts: [".xml"],                   color: "#0060ac" },
+        { name: "CSV",        exts: [".csv"],                   color: "#237346" },
+        { name: "SQL",        exts: [".sql"],                   color: "#336790" },
+        { name: "Markdown",   exts: [".md", ".markdown"],       color: "#083fa1" },
     ]
 
     # Get all files tracked by git
