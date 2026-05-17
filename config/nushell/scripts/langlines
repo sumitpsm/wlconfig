@@ -55,6 +55,10 @@ def main [path?: string] {
         { name: "CSV",        exts: [".csv"],                   color: "#237346" },
         { name: "SQL",        exts: [".sql"],                   color: "#336790" },
         { name: "Markdown",   exts: [".md", ".markdown"],       color: "#083fa1" },
+        { name: "GLSL",       exts: [".glsl", ".vert", ".frag", ".geom", ".comp", ".tesc", ".tese"], color: "#5686a5" },
+        { name: "HLSL",       exts: [".hlsl", ".fx", ".fxh"],   color: "#aace60" },
+        { name: "MSL",        exts: [".metal"],                 color: "#8f14e9" },
+        { name: "WGSL",       exts: [".wgsl"],                  color: "#1a5e9a" },
     ]
 
     # Get all files tracked by git

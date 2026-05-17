@@ -113,7 +113,7 @@ def "main list" [] {
 }
 
 # Attach to a session by name or fuzzy finder
-def "main attach" [name?: string] {
+def --env "main attach" [name?: string] {
     let sessions = global-session-list
 
     mut entry = if ($name | is-empty) {
@@ -191,7 +191,7 @@ def "main attach" [name?: string] {
 
         # Create session
         if ($env.ZELLIJ? | default "1") == "0" {
-            zellij action switch-session $entry.name
+            zellij action switch-session $entry.name --cwd $entry.path
         } else {
             cd $entry.path
             exec zellij --session $entry.name --new-session-with-layout $entry.layout

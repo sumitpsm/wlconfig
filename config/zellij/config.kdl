@@ -10,7 +10,7 @@ scroll_back_editor "/run/current-system/sw/bin/hx"
 styled_underlines true
 session_serialization true
 pane_viewport_serialization false
-scrollback_lines_to_serialize 40
+scrollback_lines_to_serialize 0
 serialization_interval 1024 // seconds ~ 17 minutes
 disable_session_metadata false
 stacked_resize true
@@ -26,7 +26,7 @@ ui {
 
 plugins {
     tab-bar { path "tab-bar"; }
-    session-manager { path "session-manager"; }
+    // session-manager { path "session-manager"; }
     // status-bar { path "status-bar"; }
     // strider { path "strider"; }
     // compact-bar { path "compact-bar"; }

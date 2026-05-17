@@ -9,7 +9,6 @@
     gcc
     pkg-config
     openssl
-    bash
     rustc
     cargo
     clippy
@@ -20,6 +19,8 @@
     nixd
     markdown-oxide
     vscode-langservers-extracted
+
+    bash
   ] ++ terminal-tools;
 
   environment.sessionVariables = {

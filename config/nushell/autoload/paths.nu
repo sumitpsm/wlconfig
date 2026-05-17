@@ -22,4 +22,9 @@ def l [dir: path = "."] {
     | sort-by { |it| $it.type != "dir" } name
 }
 
-alias trash = rm -rfv ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*
+def trash [] {
+    let items = ls -a ~/.local/share/Trash/files ~/.local/share/Trash/info | get name
+    if ($items | is-not-empty) {
+        rm -rv ...$items
+    }
+}

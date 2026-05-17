@@ -320,9 +320,9 @@ setup_shell() {
 EOF
     
     info "Changing default shell to nushell..."
-    if command -v chsh >/dev/null; then
-        sudo chsh -s "$nu_path" "$USER"
-        sudo chsh -s "$nu_path" root
+    if command -v usermod >/dev/null; then
+        sudo usermod -s "$nu_path" "$USER"
+        sudo usermod -s "$nu_path" root
     else
         sudo sed -i "/^$USER:/s|:[^:]*$|:$nu_path|" /etc/passwd
         sudo sed -i "/^root:/s|:[^:]*$|:$nu_path|" /etc/passwd

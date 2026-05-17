@@ -34,7 +34,7 @@ $env.PATH = (
 alias c = clear
 alias btop = btop --force-utf
 def kmux [] { ^$"($nu.home-dir)/.config/kitty/kmux" }
-def s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
+def --env s [...rest] { ^$"($nu.home-dir)/.config/zellij/scripts/zsession" ...$rest }
 # def ip [...args] { ^ip --json ...$args | from json }
 # def bridge [...args] { ^bridge --json ...$args | from json }
 # $env.DOCKER_HOST = $"unix://($env.XDG_RUNTIME_DIR)/docker.sock"
