@@ -309,6 +309,7 @@ setup_shell() {
     \$env.PATH | append [
         $"(\$nu.home-dir)/.local/state/nix/profiles/profile/bin"
         "/nix/var/nix/profiles/default/bin"
+        $"(\$nu.home-dir)/.local/bin"
     ] | uniq
 )
 

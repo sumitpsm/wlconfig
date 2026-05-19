@@ -3,6 +3,7 @@
 const ERROR = $"(ansi red)[ERROR](ansi reset)"
 const INFO = $"(ansi blue)[INFO](ansi reset)"
 
+const NAME = "Sumit Modak"
 const PROFILE = {
   "github": { "email": "152054612+sumitftr@users.noreply.github.com", "username": "sumitftr" },
   "gitlab": { "email": "22763302-sumitftr@users.noreply.gitlab.com", "username": "sumitftr" },
@@ -28,9 +29,11 @@ def main [] {
     let values = extract (git remote get-url origin | str trim)
 
     if $values.domain == "github" and $values.username == $PROFILE.github.username {
+        git config --local user.name $NAME
         git config --local user.email $PROFILE.github.email
         print $"($INFO) Your email has been set to `(ansi red)($PROFILE.github.email)(ansi reset)`\n"
     } else if $values.domain == "gitlab" and $values.username == $PROFILE.gitlab.username {
+        git config --local user.name $NAME
         git config --local user.email $PROFILE.gitlab.email
         print $"($INFO) Your email has been set to `(ansi red)($PROFILE.gitlab.email)(ansi reset)`\n"
     } else {

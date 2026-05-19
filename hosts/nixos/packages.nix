@@ -33,34 +33,18 @@
     })
   ];
 
-  # Enabling session idling (hypridle)
-  systemd.user.services.hypridle = {
+  programs.dconf = {
     enable = true;
-    description = "Hyprland's idle daemon";
-    documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
-    wantedBy = [ "hyprland-session.target" ];
-    partOf = [ "hyprland-session.target" ];
-    after = [ "hyprland-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.hypridle}/bin/hypridle";
-      Restart = "on-failure";
-      # ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-  };
-
-  # Enabling wallpaper daemon (awww-daemon)
-  systemd.user.services."awww-daemon" = {
-    enable = true;
-    description = "Wallpaper daemon";
-    wantedBy = [ "hyprland-session.target" ];
-    partOf = [ "hyprland-session.target" ];
-    after = [ "hyprland-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.awww}/bin/awww-daemon";
-      Restart = "on-failure";
-      # ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
+    profiles.user.databases = [{
+      settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          gtk-theme = "Adwaita-dark";
+          icon-theme = "Adwaita";
+          cursor-theme = "Notwaita-Black";
+          cursor-size = "24";
+        };
+      };
+    }];
   };
 }

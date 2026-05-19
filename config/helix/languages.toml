@@ -43,3 +43,8 @@ auto-format = true
 
 [language-server.dprint-lsp]
 command = "markdown-oxide"
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = ["--column-width", "128"] }
+auto-format = true

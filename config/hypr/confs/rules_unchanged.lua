@@ -1,0 +1,82 @@
+hl.config({
+  general = {
+    gaps_workspaces = 100, -- gaps between workspaces. Stacks with gaps_out.
+    resize_on_border = true, -- enables resizing windows by clicking and dragging on borders and gaps
+    extend_border_grab_area = 15, -- extends the area around the border where you can click and drag on only used when general:resize_on_border is on.
+
+    allow_tearing = false, -- master switch for allowing tearing to occur. See the Tearing page.
+  }
+})
+
+hl.config({
+  dwindle = {
+    permanent_direction_override = false, -- if enabled, makes the preselect direction persist until either this mode is turned off, another direction is specified, or a non-direction is specified (anything other than l,r,u/t,d/b)
+  }
+})
+
+hl.config({
+  master = {
+    allow_small_split = false, -- enable adding additional master windows in a horizontal split style
+    new_on_active = none, -- before, after: place new window relative to the focused window; none: place new window according to the value of new_on_top.
+  }
+})
+
+hl.config({
+  decoration = {
+    -- border_part_of_window = true, -- whether the window border should be a part of the window
+
+    -- screen_shader = [[Empty]], -- a path to a custom shader to be applied at the end of rendering. See examples/screenShader.frag for an example.
+
+    shadow = {
+      sharp = false, -- if enabled, will make the shadows sharp, akin to an infinite render power
+      ignore_window = true, -- if true, the shadow will not be rendered behind the window itself, only around it
+      -- offset = [0, 0], -- shadow’s rendering offset
+    }
+  }
+})
+
+hl.config({
+  group = {
+    groupbar = {
+      render_titles = true, -- whether to render titles in the group bar decoration
+      stacked = false, -- render the groupbar as a vertical stack
+      -- font_weight_active = normal, -- font weight of active groupbar title
+      -- font_weight_inactive = normal, -- font weight of inactive groupbar title
+      -- indicator_gap = 0, -- height of gap between groupbar indicator and title	
+      -- text_offset = 0, -- adjust vertical position for titles
+      -- keep_upper_gap = true, -- add or remove upper gap
+    }
+  }
+})
+
+hl.config({
+  cursor = {
+    -- warp_on_toggle_special = 0, -- Move the cursor to the last focused window when toggling a special workspace. Options: 0 (Disabled), 1 (Enabled), 2 (Force - ignores cursor:no_warps option)	
+    no_warps = false, -- if true, will not warp the cursor in many cases (focusing, keybinds, etc)
+    warp_back_after_non_mouse_input = false, -- Warp the cursor back to where it was after using a non-mouse input to move it, and then returning back to mouse
+  }
+})
+
+hl.config({
+  binds = {
+    drag_threshold = 0, -- Movement threshold in pixels for window dragging and c/g bind flags. 0 to disable and grab on mousedown.
+    hide_special_on_workspace_change = false, -- If enabled, changing the active workspace (including to itself) will hide the special workspace on the monitor where the newly active workspace resides.
+  }
+})
+
+###########################################################
+
+-- decoration {
+--     shadow {
+--         enabled = true
+--         range = 4
+--         render_power = 3
+--         color = rgba(1a1a1aee)
+--     }
+--     blur {
+--         enabled = true
+--         size = 3
+--         passes = 1
+--         vibrancy = 0.1696
+--     }
+-- }
