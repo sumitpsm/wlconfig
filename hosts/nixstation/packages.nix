@@ -2,26 +2,25 @@
 
 {
   environment.systemPackages = with pkgs; [
-    fuzzel
+    wldash # app launcher
     awww # wallpaper
-    hypridle # idling daemon
+    swaylock # screen lock
+    swayidle # idling daemon
+    grim slurp # screenshot
+    hyprpicker # color picker
 
-    quickshell
     # gh tailwindcss_4 tailwindcss-language-server 
+    # quickshell
     # go          # For building DMS components
-    # cava        # Audio visualization
     # cliphist    # Clipboard history
     # ddcutil
     # qt6.qtmultimedia
     # accountsservice
     # gpu-screen-recorder
-    # wlsunset
-    # xdg-desktop-portal
     # evolution-data-server
     # app2unit
     # lm-sensors
     # aubio
-    # libqalculate
     # kdePackages.kcolorchooser
     # yad zenity amfora appimage-run usbutils v4l-utils nwg-displays gnome-maps gnome-clocks
 

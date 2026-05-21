@@ -2,11 +2,12 @@
 
 {
   environment.systemPackages = with pkgs; [
-    fuzzel
+    wldash # app launcher
     awww # wallpaper
-    hypridle # idling daemon
-
-    quickshell
+    swaylock # screen lock
+    swayidle # idling daemon
+    grim slurp # screenshot
+    hyprpicker # color picker
   ];
 
   fonts.packages = with pkgs; [

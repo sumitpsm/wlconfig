@@ -9,7 +9,7 @@ for i, key in ipairs(ws_keys) do
 end
 
 -- Cycle layouts: scrolling -> dwindle -> master -> monocle
-hl.bind(main_mod .. " + CTRL + SHIFT + A", function()
+hl.bind(main_mod .. " + SHIFT + A", function()
     local current = hl.get_config("general:layout")
     local cycle = { scrolling = "dwindle", dwindle = "master", master = "monocle", monocle = "scrolling" }
     local next = cycle[current]

@@ -1,62 +1,71 @@
 hl.config({
-  misc = {
-    font_family = Sans, -- Set the global default font to render the text including debug fps/notification, config error messages and etc., selected from system fonts.
-    disable_autoreload = false, -- If true, the config will not reload automatically on save, and instead needs to be reloaded with hyprctl reload. Might save on battery.
-    mouse_move_enables_dpms = true, -- If DPMS is set to off, wake up the monitors if the mouse moves.
-    key_press_enables_dpms = true, -- If DPMS is set to off, wake up the monitors if a key is pressed.
-    middle_click_paste = false, -- whether to enable middle-click-paste (aka primary selection)
-    close_special_on_empty = true, -- close the special workspace if the last window is removed
-    on_focus_under_fullscreen = 2, -- if there is a fullscreen or maximized window, decide whether a tiled window requested to focus should replace it, stay behind or disable the fullscreen/maximized state. 0 - ignore focus request (keep focus on fullscreen window), 1 - takes over, 2 - unfullscreen/unmaximize [0/1/2]
-    exit_window_retains_fullscreen = false, -- if true, closing a fullscreen window makes the next focused window fullscreen
-    background_color = 0x000000, -- change the background color. (requires enabled disable_hyprland_logo)
-    always_follow_on_dnd = true, -- Will make mouse focus follow the mouse when drag and dropping. Recommended to leave it enabled, especially for people using focus follows mouse at 0.
-    enable_swallow = true, -- Enable window swallowing
-    -- swallow_regex = ^(kitty)$, -- The class regex to be used for windows that should be swallowed (usually, a terminal). To know more about the list of regex which can be used use this cheatsheet.
-    -- swallow_exception_regex = ^()$, -- The title regex to be used for windows that should not be swallowed by the windows specified in swallow_regex (e.g. wev). The regex is matched against the parent (e.g. Kitty) window’s title on the assumption that it changes to whatever process it’s running.
-    layers_hog_keyboard_focus = true, -- If true, will make keyboard-interactive layers keep their focus on mouse move (e.g. wofi, bemenu)
-    focus_on_activate = false, -- Whether Hyprland should focus an app that requests to be focused (an activate request)
+    misc = {
+        font_family = Sans, -- Set the global default font to render the text including debug fps/notification, config error messages and etc., selected from system fonts.
+        disable_autoreload = false, -- If true, the config will not reload automatically on save, and instead needs to be reloaded with hyprctl reload. Might save on battery.
+        mouse_move_enables_dpms = true, -- If DPMS is set to off, wake up the monitors if the mouse moves.
+        key_press_enables_dpms = true, -- If DPMS is set to off, wake up the monitors if a key is pressed.
+        middle_click_paste = false, -- whether to enable middle-click-paste (aka primary selection)
+        close_special_on_empty = true, -- close the special workspace if the last window is removed
+        on_focus_under_fullscreen = 2, -- if there is a fullscreen or maximized window, decide whether a tiled window requested to focus should replace it, stay behind or disable the fullscreen/maximized state. 0 - ignore focus request (keep focus on fullscreen window), 1 - takes over, 2 - unfullscreen/unmaximize [0/1/2]
+        exit_window_retains_fullscreen = false, -- if true, closing a fullscreen window makes the next focused window fullscreen
+        background_color = 0x3C3C3C, -- change the background color. (requires enabled disable_hyprland_logo)
+        always_follow_on_dnd = true, -- Will make mouse focus follow the mouse when drag and dropping. Recommended to leave it enabled, especially for people using focus follows mouse at 0.
+        enable_swallow = true, -- Enable window swallowing
+        swallow_regex = "^(kitty)$", -- The class regex to be used for windows that should be swallowed (usually, a terminal). To know more about the list of regex which can be used use this cheatsheet.
+        swallow_exception_regex = "^()$", -- The title regex to be used for windows that should not be swallowed by the windows specified in swallow_regex (e.g. wev). The regex is matched against the parent (e.g. Kitty) window’s title on the assumption that it changes to whatever process it’s running.
+        layers_hog_keyboard_focus = true, -- If true, will make keyboard-interactive layers keep their focus on mouse move (e.g. wofi, bemenu)
+        focus_on_activate = false, -- Whether Hyprland should focus an app that requests to be focused (an activate request)
 
-    vrr =	2, -- controls the VRR (Adaptive Sync) of your monitors. 0 - off, 1 - on, 2 - fullscreen only, 3 - fullscreen with video or game content type [0/1/2/3]
-    mouse_move_focuses_monitor = true, -- Whether mouse moving into a different monitor should focus it
-    render_unfocused_fps = 24, -- the maximum limit for renderunfocused windows’ fps in the background (see also Window-Rules - renderunfocused)
-    lockdead_screen_delay = 1000, -- the delay in ms after the lockdead screen appears if the lock screen did not appear after a lock event occurred
+        vrr =	2, -- controls the VRR (Adaptive Sync) of your monitors. 0 - off, 1 - on, 2 - fullscreen only, 3 - fullscreen with video or game content type [0/1/2/3]
+        mouse_move_focuses_monitor = true, -- Whether mouse moving into a different monitor should focus it
+        render_unfocused_fps = 24, -- the maximum limit for renderunfocused windows’ fps in the background (see also Window-Rules - renderunfocused)
+        lockdead_screen_delay = 1000, -- the delay in ms after the lockdead screen appears if the lock screen did not appear after a lock event occurred
 
-    disable_splash_rendering = false, -- disables the Hyprland splash rendering. (requires a monitor reload to take effect)
-    splash_font_family = Sans, -- Changes the font used to render the splash text, selected from system fonts (requires a monitor reload to take effect).
-    ["col.splash"] = 0xffffffff, -- Changes the color of the splash text (requires a monitor reload to take effect).
-    allow_session_lock_restore = true, -- if true, will allow you to restart a lockscreen app in case it crashes (red screen of death)
-    enable_anr_dialog = true, -- whether to enable the ANR (app not responding) dialog when your apps hang
-    anr_missed_pings = 1, -- number of missed pings before showing the ANR dialog
+        disable_splash_rendering = false, -- disables the Hyprland splash rendering. (requires a monitor reload to take effect)
+        splash_font_family = Sans, -- Changes the font used to render the splash text, selected from system fonts (requires a monitor reload to take effect).
+        ["col.splash"] = 0xffffffff, -- Changes the color of the splash text (requires a monitor reload to take effect).
+        allow_session_lock_restore = true, -- if true, will allow you to restart a lockscreen app in case it crashes (red screen of death)
+        enable_anr_dialog = true, -- whether to enable the ANR (app not responding) dialog when your apps hang
+        anr_missed_pings = 1, -- number of missed pings before showing the ANR dialog
 
-    disable_xdg_env_checks = true, -- disable the warning if XDG environment is externally managed
-    disable_hyprland_guiutils_check = true, -- disable the warning if hyprland-qtutils is not installed
-    disable_hyprland_logo = true, -- disables the random Hyprland logo / anime girl background. :(
-    force_default_wallpaper = 2, -- Enforce any of the 3 default wallpapers. Setting this to 0 or 1 disables the anime background. -1 means “random”. [-1/0/1/2]
-    animate_mouse_windowdragging = false, -- If true, will animate windows being dragged by mouse, note that this can cause weird behavior on some curves
-    animate_manual_resizes = false, -- If true, will animate manual window resizes/moves
-    initial_workspace_tracking = 1, -- if enabled, windows will open on the workspace they were invoked on. 0 - disabled, 1 - single-shot, 2 - persistent (all children too)
-  }
+        disable_xdg_env_checks = true, -- disable the warning if XDG environment is externally managed
+        disable_hyprland_guiutils_check = true, -- disable the warning if hyprland-qtutils is not installed
+        disable_hyprland_logo = true, -- disables the random Hyprland logo / anime girl background. :(
+        force_default_wallpaper = 2, -- Enforce any of the 3 default wallpapers. Setting this to 0 or 1 disables the anime background. -1 means “random”. [-1/0/1/2]
+        animate_mouse_windowdragging = false, -- If true, will animate windows being dragged by mouse, note that this can cause weird behavior on some curves
+        animate_manual_resizes = false, -- If true, will animate manual window resizes/moves
+        initial_workspace_tracking = 1, -- if enabled, windows will open on the workspace they were invoked on. 0 - disabled, 1 - single-shot, 2 - persistent (all children too)
+    }
 })
+
+hl.config({
+    binds = {
+        pass_mouse_when_bound = false, -- if disabled, will not pass the mouse events to apps / dragging windows around if a keybind has been triggered.
+        scroll_event_delay = 300, -- in ms, how many ms to wait after a scroll event to allow passing another one for the binds.
+        workspace_back_and_forth = false, -- If enabled, an attempt to switch to the currently focused workspace will instead switch to the previous workspace. Akin to i3’s auto_back_and_forth.
+        allow_workspace_cycles = false, -- If enabled, workspaces don’t forget their previous workspace, so cycles can be created by switching to the first workspace in a sequence, then endlessly going to the previous workspace.
+        workspace_center_on = 0, -- Whether switching workspaces should center the cursor on the workspace (0) or on the last active window for that workspace (1)	
+        focus_preferred_method = 0, -- sets the preferred focus finding method when using focuswindow/movewindow/etc with a direction. 0 - history (recent have priority), 1 - length (longer shared edges have priority)	
+        ignore_group_lock = false, -- If enabled, dispatchers like moveintogroup, moveoutofgroup and movewindoworgroup will ignore lock per group.
+        movefocus_cycles_fullscreen = false, -- If enabled, when on a fullscreen window, movefocus will cycle fullscreen, if not, it will move the focus in a direction.
+        movefocus_cycles_groupfirst = false, -- If enabled, when in a grouped window, movefocus will cycle windows in the groups first, then at each ends of tabs, it’ll move on to other windows/groups
+        disable_keybind_grabbing = false, -- If enabled, apps that request keybinds to be disabled (e.g. VMs) will not be able to do so.
+        window_direction_monitor_fallback = true, -- If enabled, moving a window or focus over the edge of a monitor with a direction will move it to the next monitor in that direction.
+        allow_pin_fullscreen = false, -- If enabled, Allow fullscreen to pinned windows, and restore their pinned status afterwards
+    }
+})
+
+hl.config({
+    xwayland = {
+        enabled = false
+    }
+})
+
+--#=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=
 
 hl.config({
   binds = {
-    pass_mouse_when_bound = false, -- if disabled, will not pass the mouse events to apps / dragging windows around if a keybind has been triggered.
-    scroll_event_delay = 300, -- in ms, how many ms to wait after a scroll event to allow passing another one for the binds.
-    workspace_back_and_forth = false, -- If enabled, an attempt to switch to the currently focused workspace will instead switch to the previous workspace. Akin to i3’s auto_back_and_forth.
-    allow_workspace_cycles = false, -- If enabled, workspaces don’t forget their previous workspace, so cycles can be created by switching to the first workspace in a sequence, then endlessly going to the previous workspace.
-    workspace_center_on = 0, -- Whether switching workspaces should center the cursor on the workspace (0) or on the last active window for that workspace (1)	
-    focus_preferred_method = 0, -- sets the preferred focus finding method when using focuswindow/movewindow/etc with a direction. 0 - history (recent have priority), 1 - length (longer shared edges have priority)	
-    ignore_group_lock = false, -- If enabled, dispatchers like moveintogroup, moveoutofgroup and movewindoworgroup will ignore lock per group.
-    movefocus_cycles_fullscreen = false, -- If enabled, when on a fullscreen window, movefocus will cycle fullscreen, if not, it will move the focus in a direction.
-    movefocus_cycles_groupfirst = false, -- If enabled, when in a grouped window, movefocus will cycle windows in the groups first, then at each ends of tabs, it’ll move on to other windows/groups
-    disable_keybind_grabbing = false, -- If enabled, apps that request keybinds to be disabled (e.g. VMs) will not be able to do so.
-    window_direction_monitor_fallback = true, -- If enabled, moving a window or focus over the edge of a monitor with a direction will move it to the next monitor in that direction.
-    allow_pin_fullscreen = false, -- If enabled, Allow fullscreen to pinned windows, and restore their pinned status afterwards
-  }
-})
-
-hl.config({
-  xwayland = {
-    enabled = false
+    drag_threshold = 0, -- Movement threshold in pixels for window dragging and c/g bind flags. 0 to disable and grab on mousedown.
+    hide_special_on_workspace_change = false, -- If enabled, changing the active workspace (including to itself) will hide the special workspace on the monitor where the newly active workspace resides.
   }
 })

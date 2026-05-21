@@ -11,9 +11,9 @@ hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 --! MONITORS
-hl.monitor({ output = "eDP-1",     mode = "1920x1080", position = "auto", scale = "auto" })
-hl.monitor({ output = "HDMI-A-1",  mode = "1920x1080", position = "auto", scale = "auto" })
-hl.monitor({ output = "Virtual-1", mode = "1920x1000", position = "auto", scale = "auto" })
+hl.monitor({ output = "eDP-1",     mode = "1920x1080", position = "auto", scale = "1" })
+hl.monitor({ output = "HDMI-A-1",  mode = "1920x1080", position = "auto", scale = "1" })
+hl.monitor({ output = "Virtual-1", mode = "1920x1000", position = "auto", scale = "1" })
 
 --! AUTOSTART
 hl.on("hyprland.start", function()
@@ -22,8 +22,7 @@ hl.on("hyprland.start", function()
     hl.dispatch(hl.dsp.exec_cmd("hyprctl setcursor Notwaita-Black 24"))
     --
     hl.dispatch(hl.dsp.exec_cmd("awww-daemon"))
-    hl.dispatch(hl.dsp.exec_cmd("hypridle"))
-    hl.dispatch(hl.dsp.exec_cmd("qs -c noctalia-shell"))
+    hl.dispatch(hl.dsp.exec_cmd("swayidle -w timeout 270 'brightnessctl -s set 10' resume 'brightnessctl -r' timeout 300 'pidof swaylock || swaylock -f -c 3c3c3c' timeout 330 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on; brightnessctl -r' timeout 1200 'systemctl suspend' before-sleep 'pidof swaylock || swaylock -f -c 3c3c3c' after-resume 'hyprctl dispatch dpms on'"))
     hl.dispatch(hl.dsp.exec_cmd("systemctl start --user polkit-gnome-authentication-agent-1"))
     hl.dispatch(hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/nushell/scripts/wset"))
 end)
@@ -34,10 +33,9 @@ dofile(hypr_dir .. "/animations/default.lua")
 --! CONFIGURATION
 dofile(hypr_dir .. "/confs/general.lua")
 dofile(hypr_dir .. "/confs/layout.lua")
-dofile(hypr_dir .. "/confs/colors.lua")
 dofile(hypr_dir .. "/confs/misc.lua")
+dofile(hypr_dir .. "/confs/group.lua")
 dofile(hypr_dir .. "/confs/input.lua")
-dofile(hypr_dir .. "/confs/cursor.lua")
 
 --! KEYBINDINGS
 dofile(hypr_dir .. "/keybinds/windows.lua")
@@ -46,11 +44,3 @@ dofile(hypr_dir .. "/keybinds/external.lua")
 
 --! RULES
 dofile(hypr_dir .. "/rules/window.lua")
-
---#=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=
-
--- hl.on("hyprland.start", function()
---     -- hl.dsp.exec_cmd("ashell --config-path " .. os.getenv("HOME") .. "/.config/ashell/config.toml")
---     -- hl.dsp.exec_cmd("qs -c dms")
---     -- hl.dsp.exec_cmd("qs -c caelestia")
--- end)

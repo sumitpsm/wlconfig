@@ -18,7 +18,6 @@ in
     kitty alacritty # terminal emulators
     wl-clipboard # clipboard
     polkit_gnome # polkit agent
-    grim slurp hyprpicker
 
     # themes
     gnome-themes-extra
