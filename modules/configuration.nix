@@ -2,10 +2,9 @@
 
 {
   imports = [ 
+    ./audit.nix
     ./boot.nix
     ./daemons.nix
-    ./monitoring.nix
-    ./programs.nix
     ./sound.nix
     ./user.nix
     ./utilities.nix

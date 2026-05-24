@@ -6,6 +6,7 @@
     exiftool
     nftables
     traceroute
+    wireshark
   ];
 
   # wireshark configuration

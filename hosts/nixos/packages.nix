@@ -6,8 +6,6 @@
     awww # wallpaper
     swaylock # screen lock
     swayidle # idling daemon
-    grim slurp # screenshot
-    hyprpicker # color picker
   ];
 
   fonts.packages = with pkgs; [

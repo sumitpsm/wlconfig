@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   NotwaitaBlackCursorTheme = builtins.fetchTarball {
@@ -15,9 +15,18 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    kitty alacritty # terminal emulators
+    kitty alacritty # terminal emulators // [ghostty foot wezterm]
     wl-clipboard # clipboard
+    wl-screenrec # screen recorder // [obs-studio obs-cli]
+    grim slurp # screenshot
+    hyprpicker # color picker
+    mpv mpvScripts.mpris # video & audio player
+    # image editor // [gimp3 inkscape krita graphite]
+    # video editor // [kdenlive]
+    # 3d modelling system + // [blender]
+    papers # document viewer
     polkit_gnome # polkit agent
+    (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.beta.override {}) # browser
 
     # themes
     gnome-themes-extra
@@ -28,6 +37,8 @@ in
       ln -s ${NotwaitaBlackCursorTheme} $out/share/icons/Notwaita-Black
     '') # hyprcursor theme
   ];
+
+  programs.virt-manager.enable = true;
 
   xdg.portal = {
     enable = true;

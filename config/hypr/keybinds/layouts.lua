@@ -28,7 +28,7 @@ end)
 -- hl.bind(main_mod .. " + ",        hl.dsp.window.cycle_next("tiled"))      -- cycle next, tiled windows only
 
 -- Scrolling
--- hl.bind(main_mod .. " + ",        hl.dsp.layout("fit active"))            -- fit active window to screen
+hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.layout("fit active"))            -- fit active window to screen
 -- hl.bind(main_mod .. " + ",        hl.dsp.layout("fit all"))               -- fit all columns to screen
 -- hl.bind(main_mod .. " + ",        hl.dsp.layout("fit visible"))           -- resize width of all window evenly
 -- hl.bind(main_mod .. " + ",        hl.dsp.layout("fit tobeg"))             -- fit all left columns evenly to screen wrt active column

@@ -6,8 +6,6 @@
     awww # wallpaper
     swaylock # screen lock
     swayidle # idling daemon
-    grim slurp # screenshot
-    hyprpicker # color picker
 
     # gh tailwindcss_4 tailwindcss-language-server 
     # quickshell

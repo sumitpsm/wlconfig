@@ -37,7 +37,7 @@ hl.bind(main_mod .. " + SHIFT + L",        hl.dsp.exec_cmd("hyprctl dispatch wor
 
 -- Fullscreen
 hl.bind(main_mod .. " + CTRL + L",         hl.dsp.window.fullscreen())
-hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.window.pseudo())
+-- hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.window.pseudo())
 
 -- Groups
 -- hl.bind(main_mod .. " + ?", hl.dsp.group.toggle())                             -- create/destroy group from active window

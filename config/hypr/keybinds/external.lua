@@ -2,8 +2,9 @@ local main_mod = "SUPER"
 
 hl.bind(main_mod .. " + Return", hl.dsp.exec_cmd("kitty"))
 hl.bind(main_mod .. " + SHIFT + Return", hl.dsp.exec_cmd("alacritty --hold --command zellij options --session-serialization false --on-force-close quit"))
-hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd("[workspace 2 silent] zen-beta -P Default"))
+hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd("[workspace 2 silent] zen-beta -P default"))
 hl.bind(main_mod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("[workspace 3 silent] zen-beta -P alternate"))
+hl.bind(main_mod .. " + CTRL + SPACE", hl.dsp.exec_cmd("[workspace 4 silent] zen-beta -P dopamine"))
 
 hl.bind(main_mod .. " + Tab", hl.dsp.exec_cmd("pgrep wldash && pkill wldash || wldash"))
 hl.bind(main_mod .. " + SHIFT + Tab", hl.dsp.exec_cmd("[float on; pin on; size 1920 1080] kitty --class emote-picker nu -c \"open ~/.local/share/emojis.csv | input list --fuzzy | get emoji | wl-copy\""))

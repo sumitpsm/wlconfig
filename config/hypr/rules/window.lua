@@ -31,6 +31,8 @@ hl.window_rule({ match = { class = "org.inkscape.Inkscape" },                   
 hl.window_rule({ match = { title = "Calculator" }, float = true, center = true })
 
 -- Zen Browser
+hl.window_rule({ match = { class = "zen-beta", title = "Zen - Choose User Profile" }, float = true, center = true })
+hl.window_rule({ match = { class = "zen-beta", title = "Developer Tools.*" }, tile = true })
 hl.window_rule({ match = { title = "Save Image" },  float = true, center = true, size = { "70%", "70%" } })
 hl.window_rule({ match = { title = "File Upload" }, float = true, center = true, size = { "70%", "70%" } })
 

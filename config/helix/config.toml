@@ -36,7 +36,6 @@ H = ":buffer-next"
 "~" = "command_palette"
 "#" = "record_macro"
 "!" = "replay_macro"
-# C-w = window mode
 
 # movement
 y = "move_visual_line_up"
@@ -145,7 +144,8 @@ space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
-space.w	= ":toggle soft-wrap.enable"
+space.W	= ":toggle soft-wrap.enable"
+# space.w	= ## window mode
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
 # space."=" = "format_selections" ## Format selection (LSP)
@@ -227,7 +227,6 @@ H = ":buffer-next"
 "~" = "command_palette"
 "#" = "record_macro"
 "!" = "replay_macro"
-# C-w = window mode
 
 # movement
 y = "extend_visual_line_up"
@@ -336,7 +335,8 @@ space.S = "symbol_picker" ## Open document symbol picker (LSP)
 space.r = "rename_symbol" ## Rename symbol (LSP)
 space.R = "select_references_to_symbol_under_cursor" ## Select symbol references (LSP)
 space.a = "code_action" ## Apply code action (LSP)
-space.w	= ":toggle soft-wrap.enable"
+space.W	= ":toggle soft-wrap.enable"
+# space.w	= ## window mode
 # space.r = "goto_reference" ## Go to references (LSP)
 # space.R = "goto_implementation" ## Go to implementation (LSP)
 # space."=" = "format_selections" ## Format selection (LSP)
