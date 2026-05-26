@@ -17,7 +17,7 @@ in
   environment.systemPackages = with pkgs; [
     kitty alacritty # terminal emulators // [ghostty foot wezterm]
     wl-clipboard # clipboard
-    wl-screenrec # screen recorder // [obs-studio obs-cli]
+    wf-recorder # screen recorder // [obs-studio obs-cli wl-screenrec]
     grim slurp # screenshot
     hyprpicker # color picker
     mpv mpvScripts.mpris # video & audio player

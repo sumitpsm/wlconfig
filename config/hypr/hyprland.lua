@@ -24,7 +24,7 @@ hl.on("hyprland.start", function()
     hl.dispatch(hl.dsp.exec_cmd("awww-daemon"))
     hl.dispatch(hl.dsp.exec_cmd("swayidle -w timeout 270 'brightnessctl -s set 10' resume 'brightnessctl -r' timeout 300 'pidof swaylock || swaylock -f -c 3c3c3c' timeout 330 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on; brightnessctl -r' timeout 1200 'systemctl suspend' before-sleep 'pidof swaylock || swaylock -f -c 3c3c3c' after-resume 'hyprctl dispatch dpms on'"))
     hl.dispatch(hl.dsp.exec_cmd("systemctl start --user polkit-gnome-authentication-agent-1"))
-    hl.dispatch(hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/nushell/scripts/wset"))
+    hl.dispatch(hl.dsp.exec_cmd("nu $HOME/.config/hypr/scripts/wset.nu"))
 end)
 
 --! ANIMATIONS

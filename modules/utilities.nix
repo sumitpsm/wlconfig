@@ -2,9 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
+    imagemagick
     ffmpeg-full
     # handbrake
-    imagemagick
     yt-dlp
   ];
 }

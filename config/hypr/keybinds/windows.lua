@@ -31,21 +31,22 @@ hl.bind(main_mod .. " + CTRL + SHIFT + I", hl.dsp.window.move({ direction = "r" 
 hl.bind(main_mod .. " + Q", hl.dsp.window.close())
 hl.bind(main_mod .. " + SHIFT + Q", hl.dsp.exit())
 
--- Float
-hl.bind(main_mod .. " + L",                hl.dsp.window.float({ action = "toggle" }))
-hl.bind(main_mod .. " + SHIFT + L",        hl.dsp.exec_cmd("hyprctl dispatch workspaceopt allfloat"))
-
 -- Fullscreen
-hl.bind(main_mod .. " + CTRL + L",         hl.dsp.window.fullscreen())
--- hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.window.pseudo())
+hl.bind(main_mod .. " + L",         hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }))
+hl.bind(main_mod .. " + SHIFT + L", hl.dsp.window.fullscreen_state({ internal = 1, client = 0, action = "toggle" }))
+
+-- Float
+hl.bind(main_mod .. " + CTRL + L",         hl.dsp.window.float({ action = "toggle" }))
+hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.window.pseudo({ action = "toggle" }))
+-- hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch workspaceopt allfloat"))
 
 -- Groups
--- hl.bind(main_mod .. " + ?", hl.dsp.group.toggle())                             -- create/destroy group from active window
--- hl.bind(main_mod .. " + ?", hl.dsp.group.lock())                               -- toggle lock on active group
--- hl.bind(main_mod .. " + ?", hl.dsp.group.lock_all())                           -- toggle global group lock (all groups)
--- hl.bind(main_mod .. " + ?", hl.dsp.window.move_into_group({ direction = "left" })) -- absorb window in direction into group
--- hl.bind(main_mod .. " + ?", hl.dsp.window.move({ workspace = 1, move_into_or_create_group = true })) -- move + merge into group (0.55+)
--- hl.bind(main_mod .. " + ?", hl.dsp.window.deny_from_group())                   -- prevent window from ever joining a group
+hl.bind(main_mod .. " + M",              hl.dsp.group.toggle())                         -- create/destroy group from active window
+hl.bind(main_mod .. " + SHIFT + M",      hl.dsp.group.lock())                           -- toggle lock on active group
+hl.bind(main_mod .. " + comma",          hl.dsp.group.prev())                           -- switch to the previous window in a group
+hl.bind(main_mod .. " + period",         hl.dsp.group.next())                           -- switch to the next window in a group
+hl.bind(main_mod .. " + SHIFT + comma",  hl.dsp.group.move_window({ forward = false })) -- move a window backward in a group
+hl.bind(main_mod .. " + SHIFT + period", hl.dsp.group.move_window({ forward = true }))  -- move a window forward in a group
 
 -- Zoom
 hl.bind(main_mod .. " + SHIFT + mouse_down", function()

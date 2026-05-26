@@ -165,13 +165,13 @@ def --env "main attach" [name?: string] {
         }
 
         # Resolve keybind
-        let $keybind_input = (input -n 1 $"Enter keybind \(default: none, press enter to skip): " | str trim)
+        let $keybind_input = (input -n 1 $"Enter keybind \(default: none, press enter to skip): ")
 
         # Check keybind conflict
-        if not ($keybind_input | is-empty) {
+        if ($keybind_input | is-not-empty) {
             let existing = ($sessions | where keybind == $keybind_input | get 0?)
-            if (not ($existing | is-empty)) and ($existing.name != $entry.name) {
-                let confirm = (input -n 1 $"Warning: Key `($existing.keybind)` is already bound to `($existing.name)`. Override? (y/n): ")
+            if ($existing | is-not-empty) and ($existing.name != $entry.name) {
+                let confirm = (input -n 1 $"Warning: Key `($existing.keybind)` is already bound to `($existing.name)`. Override? \(y/n): ")
                 if $confirm == "y" or $confirm == "Y" {
                     $entry.keybind = $keybind_input
                 }
@@ -181,10 +181,8 @@ def --env "main attach" [name?: string] {
         }
 
         # Resolve layout
+        $entry.layout = $DEFAULT_LAYOUT
         $entry.layout = (input $"Enter layout \(default: ($DEFAULT_LAYOUT)): " | str trim)
-        if ($entry.layout | is-empty) {
-            $entry.layout = $DEFAULT_LAYOUT
-        }
 
         # Remove old keybind entry if overriding
         write-csv (get-csv-data | where keybind != $entry.keybind and name != $entry.name | append $entry)
@@ -225,8 +223,10 @@ def "main bind" [] {
 
     let key = (input -n 1 "Enter keybind: ")
 
+    let starting_path = ($env.PWD | str replace $env.HOME "~")
+
     # Check if keybind already exists
-    let existing = ($csv_data | where keybind == $key)
+    let existing = ($csv_data | where keybind == $key | get 0?)
 
     if not ($existing | is-empty) {
         print $"Warning: Key '($key)' is already bound to session '($existing.name)'"
@@ -240,8 +240,8 @@ def "main bind" [] {
         # Remove old binding
         write-csv (
             $csv_data
-            | where keybind != $key
-            | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
+            | where keybind != $key and name != $env.ZELLIJ_SESSION_NAME
+            | append {path: $starting_path, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
         )
         print $"Bound session '($env.ZELLIJ_SESSION_NAME)' to key '($key)'"
         return
@@ -249,8 +249,8 @@ def "main bind" [] {
 
     write-csv (
         $csv_data
-        | where name != $env.ZELLIJ_SESSION_NAME
-        | append {path: $env.PWD, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
+        | where name != $env.ZELLIJ_SESSION_NAME and keybind != $key
+        | append {path: $starting_path, name: $env.ZELLIJ_SESSION_NAME, keybind: $key, layout: $DEFAULT_LAYOUT}
     )
 
     print $"Bound session '($env.ZELLIJ_SESSION_NAME)' to key '($key)'"
