@@ -1,0 +1,128 @@
+#!/usr/bin/env nu
+
+# git-switch-detach — navigate forward in git history
+#
+# Usage:
+#   git-switch-detach <steps>
+#
+# If multiple paths exist at the target step, an interactive list is shown.
+
+def main [
+    steps: int = 1  # number of commits to move forward (default: 1)
+] {
+    if $steps < 1 {
+        error make { msg: "Steps must be a positive integer." }
+    }
+
+    let head = (git rev-parse HEAD)
+
+    # Get all commits that are descendants of HEAD across all refs.
+    # "HEAD.." means: reachable from any ref, excluding anything reachable from HEAD.
+    # --ancestry-path is intentionally omitted: it requires a two-sided range (A..B)
+    # and errors when HEAD itself is the bottom (i.e. "HEAD..").
+    let raw = (
+        git log --all --pretty=format:"%H|%P|%s|%an|%ad" --date=short $"($head).."
+            | lines
+            | where { |l| ($l | str trim | str length) > 0 }
+    )
+
+    if ($raw | is-empty) {
+        print $"(ansi green)Already at the tip — no commits ahead of HEAD.(ansi reset)"
+        return
+    }
+
+    # Parse each line into a record
+    let commits = (
+        $raw | each { |line|
+            let parts = ($line | split row "|")
+            {
+                hash:    ($parts | get 0),
+                parents: ($parts | get 1 | split row " " | where { |p| ($p | str length) > 0 }),
+                message: ($parts | get 2),
+                author:  ($parts | get 3),
+                date:    ($parts | get 4),
+            }
+        }
+    )
+
+    # Build a child map: parent_hash -> [child_hash, ...]
+    # This reverses the parent pointers so we can walk forward.
+    mut child_map: record = {}
+    for c in $commits {
+        for p in $c.parents {
+            let existing = ($child_map | get --optional $p)
+            if ($existing == null) {
+                $child_map = ($child_map | insert $p [$c.hash])
+            } else {
+                $child_map = ($child_map | upsert $p ($existing | append $c.hash))
+            }
+        }
+    }
+
+    # Snapshot into immutable binding so closures can capture it
+    let child_map_snap = $child_map
+
+    # BFS from HEAD, walking `steps` levels forward
+    mut frontier = [$head]
+    mut current_step = 0
+
+    while $current_step < $steps {
+        let next_level = (
+            $frontier | each { |h|
+                let children = ($child_map_snap | get --optional $h)
+                if ($children == null) { [] } else { $children }
+            } | flatten | uniq
+        )
+
+        if ($next_level | is-empty) {
+            print $"(ansi yellow)Only ($current_step) commit\(s\) ahead of HEAD \(you asked for ($steps)\).(ansi reset)"
+            break
+        }
+
+        $frontier = $next_level
+        $current_step = $current_step + 1
+    }
+
+    # Resolve which commit to check out
+    let target_hash = if ($frontier | length) == 1 {
+        $frontier | first
+    } else {
+        # Multiple candidates — show picker
+        let candidates = (
+            $frontier | each { |h|
+                let info = ($commits | where { |c| $c.hash == $h } | first)
+
+                # Find branch names that point at this commit
+                let branch_names = (
+                    git branch --all --points-at $h
+                        | lines
+                        | each { |b| $b | str trim | str replace --regex "^\\* " "" }
+                        | where { |b| ($b | str length) > 0 }
+                )
+                let branches_str = if ($branch_names | is-empty) {
+                    ""
+                } else {
+                    let joined = ($branch_names | str join ", ")
+                    $" \(($joined)\)"
+                }
+
+                {
+                    display: $"($h | str substring 0..7)  ($info.date)  ($info.author)  ($info.message)($branches_str)",
+                    hash: $h
+                }
+            }
+        )
+
+        print $"(ansi cyan)Multiple paths exist ($current_step) commit\(s\) ahead — pick one:(ansi reset)"
+        let chosen = ($candidates | get display | input list --fuzzy "Select commit:")
+        let matched = ($candidates | where { |c| $c.display == $chosen } | first)
+        $matched.hash
+    }
+
+    # Show what we're about to do
+    let info = ($commits | where { |c| $c.hash == $target_hash } | first)
+    let short = ($target_hash | str substring 0..7)
+    print $"(ansi cyan)Switching to(ansi reset) (ansi yellow)($short)(ansi reset) — ($info.message)"
+
+    git switch --detach $target_hash
+}

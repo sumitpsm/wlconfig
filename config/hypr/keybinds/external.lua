@@ -24,7 +24,7 @@ hl.bind(main_mod .. " + CTRL + R",         hl.dsp.exec_cmd("nu " .. record_scrip
 hl.bind(main_mod .. " + CTRL + SHIFT + R", hl.dsp.exec_cmd("nu " .. record_script .. " video"))
 
 hl.bind(main_mod .. " + Tab", hl.dsp.exec_cmd("pgrep wldash && pkill wldash || wldash"))
-hl.bind(main_mod .. " + SHIFT + Tab", hl.dsp.exec_cmd("[float on; pin on; monitor_w*1 monitor_h*1] kitty --class emote-picker nu -c \"open ~/.local/share/emojis.csv | input list --fuzzy | get emoji | wl-copy\""))
+hl.bind(main_mod .. " + SHIFT + Tab", hl.dsp.exec_cmd("[float on; pin on; monitor_w*1 monitor_h*1] kitten quick-access-terminal -o edge=center nu -c \"open ~/.local/share/emojis.csv | select emoji name category | input list --fuzzy | get emoji | wl-copy\""))
 hl.bind(main_mod .. " + CTRL + Tab", hl.dsp.exec_cmd("pidof swaylock || swaylock -f -c 3c3c3c --indicator-radius 128 --indicator-thickness 32"))
 
 hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("nu $HOME/.config/hypr/scripts/wset.nu"))
