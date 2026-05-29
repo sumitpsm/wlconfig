@@ -5,7 +5,7 @@ nix-shell -p git nushell
 ```
 
 ```sh
-git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
+git clone https://github.com/apeliked/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 ```sh
@@ -39,7 +39,7 @@ Supported: Ubuntu, Debian, Fedora, Arch, Alpine, openSUSE, FreeBSD, Gentoo, Void
 > First Step: Install git (depends on distribution's package manager)
 
 ```sh
-git clone https://github.com/sumitftr/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
+git clone https://github.com/apeliked/wlconfig.git <YOUR_CONFIG_DIRECTORY>/wlconfig
 ```
 
 ```sh

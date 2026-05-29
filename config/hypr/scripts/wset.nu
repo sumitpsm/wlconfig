@@ -13,7 +13,6 @@ def main [file?: string] {
   if $file != null and ($file | path type) == "file" {
     set_theme $file
   } else {
-    sleep 1sec
     # sets a random wallpaper
     set_theme (ls ...(glob ($env.HOME)/media/wallpapers/**/*.{png,jpg,jpeg,webp,gif}) | shuffle | first | get name)
 

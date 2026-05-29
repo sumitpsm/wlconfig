@@ -5,8 +5,8 @@ const INFO = $"(ansi blue)[INFO](ansi reset)"
 
 const NAME = "Sumit Modak"
 const PROFILE = {
-  "github": { "email": "152054612+sumitftr@users.noreply.github.com", "username": "sumitftr" },
-  "gitlab": { "email": "22763302-sumitftr@users.noreply.gitlab.com", "username": "sumitftr" },
+  "github": { "email": "152054612+apeliked@users.noreply.github.com", "username": "apeliked" },
+  "gitlab": { "email": "22763302-apeliked@users.noreply.gitlab.com", "username": "apeliked" },
 }
 
 # extract domain and username from git URL

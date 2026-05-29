@@ -28,8 +28,8 @@ hl.bind(main_mod .. " + CTRL + SHIFT + E", hl.dsp.window.move({ direction = "d" 
 hl.bind(main_mod .. " + CTRL + SHIFT + I", hl.dsp.window.move({ direction = "r" }))
 
 -- Close Window
-hl.bind(main_mod .. " + Q", hl.dsp.window.close())
-hl.bind(main_mod .. " + SHIFT + Q", hl.dsp.exit())
+hl.bind(main_mod .. " + Z", hl.dsp.window.close())
+hl.bind(main_mod .. " + SHIFT + Z", hl.dsp.exit())
 
 -- Fullscreen
 hl.bind(main_mod .. " + L",         hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }))
@@ -41,8 +41,8 @@ hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.window.pseudo({ action = "togg
 -- hl.bind(main_mod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch workspaceopt allfloat"))
 
 -- Groups
-hl.bind(main_mod .. " + M",              hl.dsp.group.toggle())                         -- create/destroy group from active window
-hl.bind(main_mod .. " + SHIFT + M",      hl.dsp.group.lock())                           -- toggle lock on active group
+hl.bind(main_mod .. " + minus",          hl.dsp.group.toggle())                         -- create/destroy group from active window
+hl.bind(main_mod .. " + SHIFT + minus",  hl.dsp.group.lock({ action = "toggle" }))      -- toggle lock on active group
 hl.bind(main_mod .. " + comma",          hl.dsp.group.prev())                           -- switch to the previous window in a group
 hl.bind(main_mod .. " + period",         hl.dsp.group.next())                           -- switch to the next window in a group
 hl.bind(main_mod .. " + SHIFT + comma",  hl.dsp.group.move_window({ forward = false })) -- move a window backward in a group

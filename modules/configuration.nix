@@ -5,6 +5,7 @@
     ./audit.nix
     ./boot.nix
     ./daemons.nix
+    ./disabled.nix
     ./sound.nix
     ./user.nix
     ./utilities.nix

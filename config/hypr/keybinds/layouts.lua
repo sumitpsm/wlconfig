@@ -1,29 +1,12 @@
 local main_mod = "SUPER"
 
 -- Workspaces
-local ws_keys = { "W", "C", "P", "B", "G", "K", "D", "F", "X", "Z" }
+local ws_keys = { "Q", "W", "C", "P", "B", "G", "K", "D", "F", "X" }
 for i, key in ipairs(ws_keys) do
     hl.bind(main_mod .. " + " .. key,               hl.dsp.focus({ workspace = i }))
     hl.bind(main_mod .. " + SHIFT + " .. key,       hl.dsp.window.move({ workspace = i }))
     hl.bind(main_mod .. " + CTRL + " .. key,        hl.dsp.window.move({ workspace = i, silent = true }))
 end
-
--- Cycle layouts: scrolling -> dwindle -> master -> monocle
-hl.bind(main_mod .. " + SHIFT + A", function()
-    local current = hl.get_config("general:layout")
-    local cycle = { scrolling = "dwindle", dwindle = "master", master = "monocle", monocle = "scrolling" }
-    local next = cycle[current]
-    if not next then
-        return
-    end
-    hl.config({ general = { layout = next } })
-    hl.notification.create({
-        text    = " Layout: " .. next,
-        timeout = 2000,
-        icon    = "ok",
-    })
-end)
-
 
 -- hl.bind(main_mod .. " + ",              hl.dsp.window.cycle_next("tiled"))      -- cycle next, tiled windows only
 

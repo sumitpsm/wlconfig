@@ -25,7 +25,7 @@ in
     # video editor // [kdenlive]
     # 3d modelling system + // [blender]
     papers # document viewer
-    polkit_gnome # polkit agent
+    hyprpolkitagent # polkit agent
     (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.beta.override {}) # browser
 
     # themes
@@ -57,16 +57,16 @@ in
   systemd.user.services."xdg-document-portal".enable = false;
   systemd.user.services."xdg-permission-store".enable = false;
 
-  # Enabling polkit agent (polkit-gnome-authentication-agent-1)
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+  # Enabling polkit agent
+  systemd.user.services.hyprpolkitagent = {
     enable = true;
-    description = "PolicyKit Gnome Authentication Agent";
+    description = "hyprpolkitagent";
     wantedBy = [ "graphical-session.target" ];
     wants = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
       Restart = "on-failure";
       RestartSec = 1;
       TimeoutStopSec = 10;

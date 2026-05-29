@@ -1,7 +1,6 @@
 { pkgs, terminal-tools, ... }:
 
 {
-  programs.nano.enable = false;
   documentation.man.enable = true;
 
   environment.systemPackages = with pkgs; [

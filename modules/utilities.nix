@@ -2,9 +2,14 @@
 
 {
   environment.systemPackages = with pkgs; [
-    imagemagick
+    # imagemagick
     ffmpeg-full
     # handbrake
     yt-dlp
+    # gzip
+    # xz
+    # bzip2
+    # zstd
+    # p7zip
   ];
 }

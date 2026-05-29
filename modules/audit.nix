@@ -2,11 +2,12 @@
 
 {
   environment.systemPackages = with pkgs; [
-    uutils-hostname # hostname-hostname-debian
-    exiftool
-    nftables
+    iproute2
     traceroute
+    nftables
     wireshark
+    bintools
+    exiftool
   ];
 
   # wireshark configuration
