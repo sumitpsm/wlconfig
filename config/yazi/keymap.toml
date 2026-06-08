@@ -45,8 +45,8 @@ keymap = [
     { on = "M",         run = "find_arrow --previous",       desc = "Go to the previous match" },
     { on = "f",         run = "find --smart",                desc = "Find next file" },
     { on = "F",         run = "filter --smart",              desc = "Filter files" },
-    { on = "s",         run = "search fd",                   desc = "Search files by name using fd" },
-    { on = "S",         run = "search rg",                   desc = "Search files by content using ripgrep" },
+    { on = "s",         run = "search --via=fd",             desc = "Search files by name using fd" },
+    { on = "S",         run = "search --via=rg",             desc = "Search files by content using ripgrep" },
     { on = "g",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
     { on = "G",         run = "cd --interactive",            desc = "Interactively move through directories" },
 

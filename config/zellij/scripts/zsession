@@ -105,6 +105,17 @@ def global-session-list [] {
     )
 
     $csv_entries | append $zellij_only_entries | append $dir_entries
+    | insert _order {|row|
+        match $row.state {
+            "active"  => 0
+            "dead"    => 1
+            "deleted" => 2
+            "absent"  => 3
+            _         => 4
+        }
+    }
+    | sort-by _order
+    | reject _order
 }
 
 # List all sessions (active, dead, deleted, absent)

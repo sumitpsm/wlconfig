@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +33,7 @@
       modules = [
         ./modules/configuration.nix
         ./hosts/${hostname} { networking.hostName = hostname; }
+        { nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ]; }
         inputs.kmonad.nixosModules.default
       ];
     });
