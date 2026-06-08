@@ -12,6 +12,7 @@
   };
 
   programs.nano.enable = false;
+  programs.command-not-found.enable = false;
 
   systemd.oomd.enable = false;
   systemd.services.systemd-machined.enable = false;

@@ -9,11 +9,11 @@
     pkg-config
     openssl
     rust-bin.stable.latest.default
+    rust-bin.stable.latest.rust-analyzer
     man-pages
     dprint
     nixd
     markdown-oxide
-    vscode-langservers-extracted
 
     bash
   ] ++ terminal-tools;

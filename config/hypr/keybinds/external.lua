@@ -2,7 +2,6 @@ local main_mod = "SUPER"
 
 hl.bind(main_mod .. " + Return", hl.dsp.exec_cmd("kitty"))
 hl.bind(main_mod .. " + SHIFT + Return", hl.dsp.exec_cmd("alacritty --hold --command zellij options --session-serialization false --on-force-close quit"))
-hl.bind(main_mod .. " + CTRL + Return", hl.dsp.exec_cmd("[float on; size monitor_w*0.7 monitor_h*0.7; center on] alacritty"))
 
 hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd("[workspace 3 silent] zen-beta -P default"))
 hl.bind(main_mod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("[workspace 4 silent] zen-beta -P alternate"))
@@ -13,9 +12,9 @@ hl.bind(main_mod .. " + SHIFT + Tab", hl.dsp.exec_cmd("pidof swaylock || swayloc
 -- SUPER + CTRL + Tab
 -- SUPER + CTRL + SHIFT + Tab
 
-hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("[float on; pin on; size monitor_w*1 monitor_h*1] alacritty --command nu -c \"open ~/.local/share/emojis.csv | select emoji name category | input list --fuzzy | get emoji | wl-copy\""))
+hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("[float on; size monitor_w*0.7 monitor_h*0.7; center on] alacritty"))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
--- SUPER + CTRL + A
+hl.bind(main_mod .. " + CTRL + A", hl.dsp.exec_cmd("[float on; pin on; size monitor_w*1 monitor_h*1] alacritty --command nu -c \"open ~/.local/share/emojis.csv | select emoji name category | input list --fuzzy | get emoji | wl-copy\""))
 -- SUPER + CTRL + SHIFT + A
 
 -- SUPER + R

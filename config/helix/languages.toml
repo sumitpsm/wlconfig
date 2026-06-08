@@ -1,14 +1,3 @@
-[language-server.rust-analyzer]
-command = "rust-analyzer"
-config.check.command = "clippy"
-config.cachePriming.enable = false
-config.inlayHints.bindingModeHints.enable = false
-config.inlayHints.closingBraceHints.minLines = 10
-config.inlayHints.closureReturnTypeHints.enable = "with_block"
-config.inlayHints.discriminantHints.enable = "fieldless"
-config.inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-config.inlayHints.typeHints.hideClosureInitialization = false
-
 [[language]]
 name = "rust"
 scope = "source.rust"
@@ -27,21 +16,44 @@ language-servers = [ "rust-analyzer" ]
 indent = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
 
-[language-server.nu-lsp]
-command = "nu"
-args = ["--lsp"]
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+config.check.command = "clippy"
+config.cachePriming.enable = false
+config.inlayHints.bindingModeHints.enable = false
+config.inlayHints.closingBraceHints.minLines = 10
+config.inlayHints.closureReturnTypeHints.enable = "with_block"
+config.inlayHints.discriminantHints.enable = "fieldless"
+config.inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+config.inlayHints.typeHints.hideClosureInitialization = false
 
 [[language]]
 name = "nu"
 language-servers = ["nu-lsp"]
 
+[language-server.nu-lsp]
+command = "nu"
+args = ["--lsp"]
+
+[[language]]
+name = "nix"
+scope = "source.nix"
+injection-regex = "nix"
+file-types = ["nix"]
+shebangs = []
+comment-token = "#"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = [ "nixd", "nil" ]
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "nixfmt" }
+
 [[language]]
 name = "markdown"
 formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
-language-servers = ["markdown-oxide"]
+language-servers = [ "markdown-oxide" ]
 auto-format = true
 
-[language-server.dprint-lsp]
+[language-server.markdown-oxide]
 command = "markdown-oxide"
 
 [[language]]
